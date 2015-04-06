@@ -47,10 +47,14 @@ class Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $options ) {
 
 		$this->lti_seo = $plugin_name;
 		$this->version = $version;
+		$this->admin_dir_url = plugin_dir_url( __FILE__ );
+		$this->admin_dir = dirname( __FILE__ );
+		$this->options = $options;
+
 
 	}
 
@@ -72,7 +76,7 @@ class Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->lti_seo, plugin_dir_url( __FILE__ ) . 'css/lti-seo-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->lti_seo, $this->admin_dir_url . 'css/admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -95,8 +99,23 @@ class Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->lti_seo, plugin_dir_url( __FILE__ ) . 'js/lti-seo-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->lti_seo, $this->admin_dir_url . 'js/admin.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	public function admin_menu(){
+		add_options_page( ltint('LTI SEO Settings'), ltint('LTI SEO'), 'manage_options', 'lti-seo-options', [$this,'options_page'] );
+	}
+
+	function plugin_actions( $links, $file ) {
+		if( $file == 'lti-wp-seo/lti-wp-seo.php' && function_exists( "admin_url" ) ) {
+			array_unshift( $links, '<a href="' . admin_url( 'options-general.php?page=lti-seo-options' ) . '">' . ltint( 'Settings' ) . '</a>' );
+		}
+		return $links;
+	}
+
+	function options_page(){
+		include $this->admin_dir.'/partials/admin-settings-panel.php';
 	}
 
 }

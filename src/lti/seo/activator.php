@@ -1,5 +1,7 @@
 <?php namespace Lti\Seo;
 
+use Lti\Seo\LTI_SEO;
+
 /**
  * Fired during plugin activation
  *
@@ -18,11 +20,12 @@ class Activator {
 	 */
 	public static function activate() {
 		$stored_options = get_option("lti_seo_options");
-
 		if (empty($stored_options)) {
-//			$this->options = $settings->defaults;
-//			update_option("lti_seo_options", $this->options);
+			$options = Settings::get_defaults();
+			update_option("lti_seo_options", $options);
 		}
+
+		return $stored_options;
 	}
 
 }

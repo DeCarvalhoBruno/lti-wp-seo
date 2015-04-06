@@ -12,7 +12,7 @@ class AdminTest extends WP_UnitTestCase {
     private $admin;
 
     function setUp(){
-        $this->instance = LTI_SEO::getInstance();
+        $this->instance = LTI_SEO::get_instance();
     }
 
 	function testInit() {
@@ -26,7 +26,8 @@ class AdminTest extends WP_UnitTestCase {
 
 	function testActivation(){
 		require_once plugin_dir_path( __FILE__ ) . '../src/lti/seo/activator.php';
-		Activator::activate();
+		print_r(Activator::activate());
+
 	}
 }
 

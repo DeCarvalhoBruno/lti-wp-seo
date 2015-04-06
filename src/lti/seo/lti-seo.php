@@ -60,6 +60,8 @@ class LTI_SEO {
 
 	public static $instance;
 
+	private $defaults;
+
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -72,12 +74,12 @@ class LTI_SEO {
 	public function __construct() {
 
 		$this->name = 'lti-seo';
-		$this->version = '1.0.0';
 
-		$this->defaults = [
-			'version' => '1.0.0',
-			'site_description' => ''
-		];
+		$stored_options = get_option("lti_seo_options");
+		if($stored_options===false){
+			$stored_options = null;
+		}
+		$this->defaults = new Settings($stored_options);
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -86,11 +88,15 @@ class LTI_SEO {
 
 	}
 
-	public static function getInstance() {
+	public static function get_instance() {
 		if (!isset(self::$instance)) {
 			self::$instance = new static();
 		}
 		return self::$instance;
+	}
+
+	public function get_defaults(){
+		return $this->defaults;
 	}
 
 	/**
@@ -115,24 +121,24 @@ class LTI_SEO {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'seo/loader.php';
+		require_once plugin_dir_path( ( __FILE__ ) ) . 'loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'seo/i18n.php';
+		require_once plugin_dir_path( ( __FILE__ ) ) . 'i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'seo/admin/admin.php';
+		require_once plugin_dir_path( __FILE__ ) . 'admin/admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'seo/public/public.php';
+		require_once plugin_dir_path( __FILE__ ) . 'public/public.php';
 
 		$this->loader = new Loader();
 
@@ -151,7 +157,6 @@ class LTI_SEO {
 
 		$plugin_i18n = new i18n();
 		$plugin_i18n->set_domain( $this->get_plugin_name() );
-
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
@@ -165,10 +170,13 @@ class LTI_SEO {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version(), $this->get_defaults() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'admin_menu' );
+		$this->loader->add_filter('plugin_action_links', $plugin_admin, 'plugin_actions', 10, 2);
+
 
 	}
 
@@ -227,5 +235,16 @@ class LTI_SEO {
 	public function get_version() {
 		return $this->version;
 	}
+
+	public static function activate() {
+		require_once plugin_dir_path( __FILE__ ) . 'activator.php';
+		Activator::activate();
+	}
+
+	public static function deactivate() {
+		require_once plugin_dir_path( __FILE__ ) . 'deactivator.php';
+		Deactivator::deactivate();
+	}
+
 
 }

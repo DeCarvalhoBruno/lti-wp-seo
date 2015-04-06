@@ -30,26 +30,12 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+require_once(plugin_dir_path( __FILE__ ) . 'src/lti/seo/helpers.php');
+require_once(plugin_dir_path( __FILE__ ) . 'src/lti/seo/settings.php');
+require_once(plugin_dir_path( __FILE__ ) . 'src/lti/seo/lti-seo.php');
 
-function activate_lti_seo() {
-	require_once plugin_dir_path( __FILE__ ) . 'src/lti/seo/activator.php';
-	Activator::activate();
-}
+register_activation_hook( __FILE__, ['Lti\Seo\LTI_SEO','activate']);
+register_deactivation_hook( __FILE__, ['Lti\Seo\LTI_SEO','deactivate']);
 
-function deactivate_lti_seo() {
-	require_once plugin_dir_path( __FILE__ ) . 'src/lti/seo/deactivator.php';
-	Deactivator::deactivate();
-}
-
-add_action('activate_lti-wp-seo', 'activate_lti_seo');
-add_action('deactivate_lti-wp-seo', 'deactivate_lti_seo');
-
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'src/lti/seo/lti-seo.php';
-
-$plugin = LTI_SEO::getInstance();
+$plugin = LTI_SEO::get_instance();
 $plugin->run();

@@ -12,5 +12,16 @@
  * @subpackage lti-seo/admin/partials
  */
 ?>
+<div>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<h2><?php echo ltint('LTI SEO Settings'); ?></h2>
+</div>
+
+<?php print_r($this->options); ?>
+	<div>
+<form accept-charset="utf-8" method="POST">
+
+
+</form>
+
+</div>
