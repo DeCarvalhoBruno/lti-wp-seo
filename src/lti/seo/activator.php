@@ -24,8 +24,6 @@ class Activator {
 			$options = Settings::get_defaults();
 			update_option("lti_seo_options", $options);
 		}
-
-		return $stored_options;
 	}
 
 }

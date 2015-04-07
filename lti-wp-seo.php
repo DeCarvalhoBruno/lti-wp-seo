@@ -30,12 +30,10 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require_once(plugin_dir_path( __FILE__ ) . 'src/lti/seo/helpers.php');
-require_once(plugin_dir_path( __FILE__ ) . 'src/lti/seo/settings.php');
 require_once(plugin_dir_path( __FILE__ ) . 'src/lti/seo/lti-seo.php');
 
-register_activation_hook( __FILE__, ['Lti\Seo\LTI_SEO','activate']);
-register_deactivation_hook( __FILE__, ['Lti\Seo\LTI_SEO','deactivate']);
+register_activation_hook( __FILE__, array('Lti\Seo\LTI_SEO','activate'));
+register_deactivation_hook( __FILE__, array('Lti\Seo\LTI_SEO','deactivate'));
 
 $plugin = LTI_SEO::get_instance();
 $plugin->run();

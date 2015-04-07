@@ -1,0 +1,16 @@
+/**
+Admin options page
+options-general.php?page=lti-seo-options
+*/
+
+.form-group-submit {
+    position: relative;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.button-group-submit {
+    margin: 0 auto;
+    width: 300px;
+    text-align: center;
+}

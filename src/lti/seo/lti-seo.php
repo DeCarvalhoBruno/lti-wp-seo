@@ -1,5 +1,6 @@
 <?php namespace Lti\Seo;
 
+require_once plugin_dir_path( __FILE__ ) . 'settings.php';
 
 /**
  * The file that defines the core plugin class
@@ -60,7 +61,7 @@ class LTI_SEO {
 
 	public static $instance;
 
-	private $defaults;
+	private $settings;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -75,11 +76,10 @@ class LTI_SEO {
 
 		$this->name = 'lti-seo';
 
-		$stored_options = get_option("lti_seo_options");
-		if($stored_options===false){
-			$stored_options = null;
+		$this->settings = get_option("lti_seo_options");
+		if($this->settings===false){
+			$this->settings = new Settings(null);
 		}
-		$this->defaults = new Settings($stored_options);
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -95,8 +95,8 @@ class LTI_SEO {
 		return self::$instance;
 	}
 
-	public function get_defaults(){
-		return $this->defaults;
+	public function get_settings(){
+		return $this->settings;
 	}
 
 	/**
@@ -116,7 +116,7 @@ class LTI_SEO {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-
+		require_once plugin_dir_path( __FILE__ ) . 'helpers.php';
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
@@ -170,12 +170,17 @@ class LTI_SEO {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version(), $this->get_defaults() );
+		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version(), $this->get_settings() );
 
+		//register_setting( 'lti_seo_options', 'lti_seo_options', array($plugin_admin,'sanitize') );
+		//$this->loader->register_setting( 'lti_seo_options52', 'lti_seo_options', array($plugin_admin,'sanitize' ));
+
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_setting' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'admin_menu' );
 		$this->loader->add_filter('plugin_action_links', $plugin_admin, 'plugin_actions', 10, 2);
+		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_meta_boxes');
 
 
 	}
