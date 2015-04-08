@@ -17,7 +17,7 @@ class AdminTest extends WP_UnitTestCase {
 
 	public function setUp() {
 		$this->instance = LTI_SEO::get_instance();
-		$this->admin = new Admin( $this->instance->get_plugin_name(), $this->instance->get_version(), $this->instance->get_settings() );
+		$this->admin = new Admin( $this->instance->get_plugin_name(), $this->instance->get_version(), $this->instance->get_settings(),dirname( plugin_dir_path( __FILE__ ) ) );
 	}
 
 	public function testInit() {

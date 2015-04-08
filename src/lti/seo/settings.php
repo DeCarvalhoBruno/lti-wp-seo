@@ -4,7 +4,15 @@
 class Defaults {
 	public $values = array(
 		array( "version", 'Text', '1.0.0' ),
-		array( 'sitewide_keywords', 'Text', "" ),
+		array( 'global_keywords', 'Text', "" ),
+		array( 'canonical_urls', 'Checkbox', false ),
+		array( 'keyword_cat', 'Checkbox', false ),
+		array( 'keyword_tag', 'Checkbox', false ),
+		array( 'meta_description', 'Checkbox', false ),
+		array( 'open_graph', 'Checkbox', false ),
+		array( 'frontpage_description', 'Checkbox', false ),
+		array( 'frontpage_description_text', 'Text', false ),
+
 		//array( 'checkbox_type', 'Checkbox', false ),
 		//array( 'opt_type', 'Radio', array( '1', '2' => 'default', '3' ) )
 	);
@@ -25,20 +33,19 @@ class Settings {
 		}
 	}
 
-	public function __get( $name ) {
-		if ( isset( $this->$name ) ) {
-			return $this->$name;
-		}
-
-		return null;
-	}
-
 	public static function get_defaults() {
 		return new static();
 	}
 
 	public function save( Array $values = array() ) {
 		return new Settings((object)$values);
+	}
+
+	public function value($value){
+		if(isset($this->{$value})){
+			return $this->{$value}->value;
+		}
+		return null;
 	}
 }
 

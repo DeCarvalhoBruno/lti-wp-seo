@@ -1,19 +1,5 @@
 <?php namespace Lti\Seo;
 
-require_once plugin_dir_path( __FILE__ ) . 'settings.php';
-
-/**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    lti-seo
- * @subpackage lti-seo/includes
- */
 
 /**
  * The core plugin class.
@@ -37,7 +23,7 @@ class LTI_SEO {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      \Lti\SEO\Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      \Lti\SEO\Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -46,7 +32,7 @@ class LTI_SEO {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $LTI_SEO;
 
@@ -55,13 +41,22 @@ class LTI_SEO {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
 
 	public static $instance;
 
+	/**
+	 * @var \Lti\Seo\Settings
+	 */
 	private $settings;
+
+	public $plugin_path;
+	/**
+	 * @var \Lti\Seo\Admin
+	 */
+	public $plugin_admin;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -73,12 +68,14 @@ class LTI_SEO {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
+		require_once plugin_dir_path( __FILE__ ) . 'settings.php';
+		$this->name        = 'lti-wp-seo';
+		$this->plugin_path = dirname( dirname( dirname( plugin_dir_path( __FILE__ ) ) ) );
 
-		$this->name = 'lti-seo';
+		$this->settings = get_option( "lti_seo_options" );
 
-		$this->settings = get_option("lti_seo_options");
-		if($this->settings===false){
-			$this->settings = new Settings(null);
+		if ( $this->settings === false ) {
+			$this->settings = new Settings( null );
 		}
 
 		$this->load_dependencies();
@@ -89,13 +86,14 @@ class LTI_SEO {
 	}
 
 	public static function get_instance() {
-		if (!isset(self::$instance)) {
+		if ( ! isset( self::$instance ) ) {
 			self::$instance = new static();
 		}
+
 		return self::$instance;
 	}
 
-	public function get_settings(){
+	public function get_settings() {
 		return $this->settings;
 	}
 
@@ -112,8 +110,6 @@ class LTI_SEO {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
-	 * @access   private
 	 */
 	private function load_dependencies() {
 		require_once plugin_dir_path( __FILE__ ) . 'helpers.php';
@@ -138,7 +134,7 @@ class LTI_SEO {
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'public/public.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/frontend.php';
 
 		$this->loader = new Loader();
 
@@ -169,20 +165,25 @@ class LTI_SEO {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
-		$plugin_admin = new Admin( $this->get_plugin_name(), $this->get_version(), $this->get_settings() );
+		$this->plugin_admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path );
 
 		//register_setting( 'lti_seo_options', 'lti_seo_options', array($plugin_admin,'sanitize') );
 		//$this->loader->register_setting( 'lti_seo_options52', 'lti_seo_options', array($plugin_admin,'sanitize' ));
 
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_setting' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'admin_menu' );
-		$this->loader->add_filter('plugin_action_links', $plugin_admin, 'plugin_actions', 10, 2);
-		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_meta_boxes');
+		$this->loader->add_action( 'admin_init', $this->plugin_admin, 'register_setting' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $this->plugin_admin, 'admin_menu' );
+		$this->loader->add_filter( 'plugin_action_links', $this->plugin_admin, 'plugin_actions', 10, 2 );
+		$this->loader->add_action( 'add_meta_boxes', $this->plugin_admin, 'add_meta_boxes' );
+		$this->loader->add_action( 'save_post', $this->plugin_admin, 'save_post', 10, 3 );
+	}
 
-
+	/**
+	 * @return \Lti\Seo\Admin
+	 */
+	public function get_admin() {
+		return $this->plugin_admin;
 	}
 
 	/**
@@ -194,11 +195,14 @@ class LTI_SEO {
 	 */
 	private function define_public_hooks() {
 
-//		$plugin_public = new LTI_SEO_Public( $this->get_plugin_name(), $this->get_version() );
-//
-//		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-//		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->plugin_frontend = new Frontend( $this->get_plugin_name(), $this->get_version() );
 
+		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
+
+		if ( $this->settings->canonical_urls->value === true ) {
+			$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'rel_canonical' );
+		}
+		//$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head' );
 	}
 
 	/**

@@ -8,7 +8,14 @@
  */
 ?>
 <div>
-	<?php print_r($this->settings); ?>
+	<br/>
+	<?php echo ltiopt('sitewide_keywords') ?>
 	<br/>
 	<?php print_r(get_post_type( $post->ID )); ?>
 	<br/><br/>
+</div>
+<div>
+	<div class="form-group">
+
+	</div>
+</div>

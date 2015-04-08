@@ -7,28 +7,30 @@ class Admin {
 	private $settings;
 	private $unsupported_post_types = array( 'attachment' );
 
-	public function __construct( $plugin_name, $version, Settings $settings ) {
+	public function __construct( $plugin_name, $version, Settings $settings, $plugin_path ) {
 
-		$this->lti_seo       = $plugin_name;
-		$this->version       = $version;
-		$this->admin_dir_url = plugin_dir_url( __FILE__ );
-		$this->admin_dir     = dirname( __FILE__ );
-		$this->settings      = $settings;
+		$this->plugin_name    = $plugin_name;
+		$this->version        = $version;
+		$this->admin_dir_url  = plugin_dir_url( __FILE__ );
+		$this->admin_dir      = dirname( __FILE__ );
+		$this->plugin_dir     = $plugin_path;
+		$this->plugin_dir_url = plugin_dir_url( $plugin_path . '/index.php' );
+		$this->settings       = $settings;
 	}
 
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->lti_seo, $this->admin_dir_url . 'css/lti_seo.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/css/lti_seo_admin.css', array(), $this->version,
+			'all' );
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->lti_seo, $this->admin_dir_url . 'js/admin.js', array( 'jquery' ), $this->version,
+		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/js/lti_seo_admin.js', array( 'jquery' ), $this->version,
 			false );
-
 	}
 
 	public function admin_menu() {
 		add_options_page( ltint( 'LTI SEO Settings' ), ltint( 'LTI SEO' ), 'manage_options', 'lti-seo-options',
-			[ $this, 'options_page' ] );
+			array( $this, 'options_page' ) );
 	}
 
 	public function plugin_actions( $links, $file ) {
@@ -48,7 +50,6 @@ class Admin {
 				//error message;
 			}
 		}
-		print_r( $_POST );
 		include $this->admin_dir . '/partials/options-page.php';
 	}
 
@@ -60,6 +61,10 @@ class Admin {
 		unset( $data['_wpnonce'], $data['option_page'], $data['_wp_http_referer'] );
 		$this->settings = $this->settings->save( $data );
 		update_option( 'lti_seo_options', $this->settings );
+//		echo "after save<pre>";
+//		print_r($this->settings);
+//		echo "</pre>";
+		
 	}
 
 	public function add_meta_boxes() {
@@ -83,8 +88,28 @@ class Admin {
 
 	public function get_supported_post_types() {
 		$post_types = get_post_types( array( 'public' => true, 'show_ui' => true ) );
+
 		return array_diff( $post_types, $this->unsupported_post_types );
 	}
 
+	/**
+	 * @return \Lti\Seo\Settings
+	 */
+	public function get_settings(){
+		return $this->settings;
+	}
 
+	/**
+	 * @param int $post_ID
+	 * @param \WP_Post $post
+	 * @param int $update
+	 */
+	public function save_post( $post_ID, $post, $update){
+
+		//print_r($post);
+		$f = new \stdClass();
+		$f->titties = "round";
+		update_post_meta($post_ID,'lti_seo_meta',$f);
+
+	}
 }
