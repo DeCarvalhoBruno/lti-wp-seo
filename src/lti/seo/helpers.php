@@ -26,3 +26,13 @@ function ltichk( $value ) {
 		return null;
 	}
 }
+
+function ltirad( $key, $currentValue ) {
+	$storedValue = ltiopt( $key );
+	if ( $storedValue == $currentValue ) {
+		return 'checked="checked"';
+	} else {
+		return null;
+	}
+}
+

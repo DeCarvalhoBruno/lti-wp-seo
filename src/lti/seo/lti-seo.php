@@ -136,6 +136,7 @@ class LTI_SEO {
 		 */
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/frontend.php';
 
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/json_ld.php';
 		$this->loader = new Loader();
 
 	}
@@ -195,9 +196,10 @@ class LTI_SEO {
 	 */
 	private function define_public_hooks() {
 
-		$this->plugin_frontend = new Frontend( $this->get_plugin_name(), $this->get_version() );
+		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings );
 
 		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
+		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head', 10 );
 
 		if ( $this->settings->canonical_urls->value === true ) {
 			$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'rel_canonical' );

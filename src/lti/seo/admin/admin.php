@@ -19,13 +19,15 @@ class Admin {
 	}
 
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/css/lti_seo_admin.css', array(), $this->version,
+		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/css/lti_seo_admin.css', array('thickbox'), $this->version,
 			'all' );
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/js/lti_seo_admin.js', array( 'jquery' ), $this->version,
+		wp_enqueue_media();
+		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/js/lti_seo_admin.js', array( 'jquery'), $this->version,
 			false );
+		wp_localize_script( $this->plugin_name, 'lti_seo_i8n', array('use_img'=>ltint('Use image')) );
 	}
 
 	public function admin_menu() {
@@ -46,6 +48,7 @@ class Admin {
 		if ( isset( $_POST['lti_seo_token'] ) ) {
 			if ( wp_verify_nonce( $_POST['lti_seo_token'], 'lti_seo_options' ) !== false ) {
 				$this->validate_input( $_POST );
+				print_r($_POST);
 			} else {
 				//error message;
 			}
@@ -106,10 +109,8 @@ class Admin {
 	 */
 	public function save_post( $post_ID, $post, $update){
 
-		//print_r($post);
-		$f = new \stdClass();
-		$f->titties = "round";
-		update_post_meta($post_ID,'lti_seo_meta',$f);
+//		$f = new \stdClass();
+//		update_post_meta($post_ID,'lti_seo_meta',$f);
 
 	}
 }
