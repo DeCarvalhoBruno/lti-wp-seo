@@ -15,7 +15,7 @@ function ltint( $text, $domain = 'lti-seo' ) {
 function ltiopt( $value ) {
 	$admin = \Lti\Seo\LTI_SEO::get_instance()->get_admin();
 
-	return $admin->get_settings()->value( $value );
+	return $admin->get_settings()->get( $value );
 }
 
 function ltichk( $value ) {
@@ -36,3 +36,6 @@ function ltirad( $key, $currentValue ) {
 	}
 }
 
+function generate_meta($type,$type_value,$content){
+	return sprintf('<meta %s="%s" content="%s"/>',$type,$type_value,$content);
+}

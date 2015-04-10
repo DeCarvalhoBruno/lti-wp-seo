@@ -1,6 +1,5 @@
 <?php namespace Lti\Seo;
 
-
 /**
  * The core plugin class.
  *
@@ -10,9 +9,6 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
- * @package    lti-seo
- * @subpackage lti-seo/includes
  * @author     Your Name <email@example.com>
  */
 class LTI_SEO {
@@ -21,7 +17,6 @@ class LTI_SEO {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.0.0
 	 * @access   protected
 	 * @var      \Lti\SEO\Loader $loader Maintains and registers all hooks for the plugin.
 	 */
@@ -30,7 +25,6 @@ class LTI_SEO {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
 	 * @access   protected
 	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
@@ -39,7 +33,6 @@ class LTI_SEO {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
 	 * @access   protected
 	 * @var      string $version The current version of the plugin.
 	 */
@@ -57,6 +50,8 @@ class LTI_SEO {
 	 * @var \Lti\Seo\Admin
 	 */
 	public $plugin_admin;
+	public $plugin_frontend;
+	private $helper;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -65,7 +60,6 @@ class LTI_SEO {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.0.0
 	 */
 	public function __construct() {
 		require_once plugin_dir_path( __FILE__ ) . 'settings.php';
@@ -77,7 +71,6 @@ class LTI_SEO {
 		if ( $this->settings === false ) {
 			$this->settings = new Settings( null );
 		}
-
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -96,6 +89,11 @@ class LTI_SEO {
 	public function get_settings() {
 		return $this->settings;
 	}
+
+	public function get_helper() {
+		return $this->helper;
+	}
+
 
 	/**
 	 * Load the required dependencies for this plugin.
@@ -137,7 +135,11 @@ class LTI_SEO {
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/frontend.php';
 
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/json_ld.php';
+		require_once plugin_dir_path( __FILE__ ) . 'wordpress_helper.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/open_graph.php';
 		$this->loader = new Loader();
+		$this->helper = new Wordpress_Helper($this->settings);
+
 
 	}
 
@@ -147,7 +149,6 @@ class LTI_SEO {
 	 * Uses the lti-seo_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -162,14 +163,10 @@ class LTI_SEO {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
 		$this->plugin_admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path );
-
-		//register_setting( 'lti_seo_options', 'lti_seo_options', array($plugin_admin,'sanitize') );
-		//$this->loader->register_setting( 'lti_seo_options52', 'lti_seo_options', array($plugin_admin,'sanitize' ));
 
 		$this->loader->add_action( 'admin_init', $this->plugin_admin, 'register_setting' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles' );
@@ -191,20 +188,18 @@ class LTI_SEO {
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function define_public_hooks() {
 
-		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings );
+		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings, $this->helper);
 
 		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
-		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head', 10 );
 
-		if ( $this->settings->canonical_urls->value === true ) {
+		if ( $this->settings->get('canonical_urls') === true ) {
 			$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'rel_canonical' );
 		}
-		//$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head' );
+		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head', 10 );
 	}
 
 	/**
@@ -220,7 +215,6 @@ class LTI_SEO {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
@@ -230,7 +224,6 @@ class LTI_SEO {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
 	 * @return    \Lti\Seo\Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {

@@ -37,6 +37,7 @@
 
 		<form id="flseo" accept-charset="utf-8" method="POST"
 		      action="<?php echo admin_url( 'options-general.php?page=lti-seo-options' ); ?>">
+			<?php echo wp_nonce_field( 'lti_seo_options', 'lti_seo_token' ); ?>
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="tab_general">
 					<div class="form-group">
@@ -70,23 +71,23 @@
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-							<label>Generate keywords
-								<input type="checkbox" name="generate_keywords"
-								       id="generate_keywords" <?php echo ltichk( 'generate_keywords' ); ?>/>
+							<label>Keyword Support
+								<input type="checkbox" name="keyword_support"
+								       id="keyword_support" <?php echo ltichk( 'keyword_support' ); ?>/>
 							</label>
 
-							<div class="checkbox-group">
-								<label for="keyword_cat">Based on categories
-									<input type="checkbox" name="keyword_cat" id="keyword_cat"/>
-								</label>
-								<label for="keyword_tag">Based on tags
-									<input type="checkbox" name="keyword_tag" id="keyword_tag"/>
-								</label>
-							</div>
+<!--							<div class="checkbox-group">-->
+<!--								<label for="cat_based_keywords">Based on categories-->
+<!--									<input type="checkbox" name="cat_based_keywords" id="cat_based_keywords"/>-->
+<!--								</label>-->
+<!--								<label for="tag_based_keywords">Based on tags-->
+<!--									<input type="checkbox" name="tag_based_keywords" id="tag_based_keywords"/>-->
+<!--								</label>-->
+<!--							</div>-->
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
-								<p>Generate a list of keywords automatically.</p>
+								<p>Add support for keywords.</p>
 							</div>
 						</div>
 					</div>
@@ -105,7 +106,6 @@
 							</div>
 						</div>
 					</div>
-					<?php echo wp_nonce_field( 'lti_seo_options', 'lti_seo_token' ); ?>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_frontpage">
 					<div class="form-group">
@@ -134,12 +134,15 @@
 								</label>
 
 								<div class="input-group">
-									<label><input name="jsonld_entity_type"
+									<label>
+										<input name="jsonld_entity_type"
 									              type="radio" <?php echo ltirad( 'jsonld_entity_type', 'person' ); ?>
-									              value="person"/>Person</label>
+									              value="person"/>Person
+									</label>
 									<label><input name="jsonld_entity_type"
 									              type="radio" <?php echo ltirad( 'jsonld_entity_type',
-											'organization' ); ?> value="organization"/>Organization</label>
+											'organization' ); ?> value="organization"/>Organization
+									</label>
 								</div>
 								<div class="input-group">
 									<label for="jsonld_type_name">Name
@@ -149,10 +152,15 @@
 								</div>
 								<div class="input-group file-selector">
 									<label for="jsonld_img">Logo</label>
-									<input id="upload_image" type="text" size="36" name="jsonld_type_logo_url"
+									<input id="jsonld_img" class="upload_image" type="text" readonly="readonly"
+									       name="jsonld_type_logo_url"
 									       value="<?php echo ltiopt( 'jsonld_type_logo_url' ); ?>"/>
-									<input class="button-primary" id="upload_image_button" type="button"
+									<input id="jsonld_img_button" class="upload_image_button button-primary"
+									       type="button"
 									       value="<?php echo ltint( 'Choose image' ); ?>"/>
+									<input id="jsonld_img_id" type="hidden"
+									       name="jsonld_type_logo_id"
+									       value="<?php echo ltiopt( 'jsonld_type_logo_id' ); ?>"/>
 								</div>
 							</div>
 							<div class="form-help-container">
@@ -206,7 +214,7 @@
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<label for="jsonld_website_info">Website Information (JSON-LD)
+								<label for="jsonld_website_info">Website info
 									<input type="checkbox" name="jsonld_website_info"
 									       id="jsonld_website_info" <?php echo ltichk( 'jsonld_website_info' ); ?>/>
 								</label>
@@ -217,6 +225,32 @@
 								</div>
 							</div>
 						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<label for="meta_description">Social media image
+								</label>
+
+								<div class="input-group file-selector">
+									<label for="og_frontpage_img_url">Image</label>
+									<input id="og_frontpage_img_url" type="text" name="og_frontpage_img_url"
+									       value="<?php echo ltiopt( 'jsonld_type_logo_url' ); ?>" readonly="readonly"/>
+									<input id="og_frontpage_img_url_button" class="button-primary upload_image_button"
+									       type="button"
+									       value="<?php echo ltint( 'Choose image' ); ?>"/>
+									<input id="og_frontpage_img_url_id" type="hidden"
+									       name="og_frontpage_img_id"
+									       value="<?php echo ltiopt( 'og_frontpage_img_id' ); ?>"/>
+								</div>
+							</div>
+							<div class="form-help-container">
+								<div class="form-help">
+									<p>If the "Open Graph Support" checkbox is ticked (see "Social" tab), will add type,
+										site_name, title, url, description (if one is provided), and locale Open Graph
+										tags to the front page. If an Image is provided, an extra image
+										tag will be added.</p>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="tab_social">
@@ -224,7 +258,7 @@
 						<div class="input-group">
 							<div class="checkbox">
 								<label for="meta_description">Open Graph support
-									<input type="checkbox" name="open_graph" id="open_graph"/>
+									<input type="checkbox" name="open_graph_support" id="open_graph_support" <?php echo ltichk( 'open_graph_support' ); ?> />
 								</label>
 							</div>
 						</div>

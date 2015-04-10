@@ -24,12 +24,6 @@ class JSON_LD {
 	 */
 	public function __construct( $settings ) {
 		$this->options = $settings;
-
-		add_action( 'lti_seo_head', array( $this, 'json_ld' ), 90 );
-		add_action( 'lti_seo_json_ld', array( $this, 'json_entity' ), 10 );
-		if($this->options->value('jsonld_website_info')){
-			add_action( 'lti_seo_json_ld', array( $this, 'internal_search' ), 20 );
-		}
 	}
 
 	/**
@@ -59,13 +53,13 @@ class JSON_LD {
 	 */
 	private function organization() {
 		$output = '';
-		if ( ! is_null( $this->options->value( 'jsonld_type_name' ) ) ) {
+		if ( ! is_null( $this->options->get( 'jsonld_type_name' ) ) ) {
 			$output = '{ "@context": "http://schema.org",
 			"@type": "Organization",
-			"name": "' . esc_attr( $this->options->value( 'jsonld_type_name' ) ) . '",
-			"url": "' . home_url() . '",';
-			if ( ! is_null( $this->options->value( 'jsonld_type_logo_url' ) ) ) {
-				$output .= '"logo": "' . esc_url( $this->options->value( 'jsonld_type_logo_url' ) ) . '"';
+			"name": "' .  $this->options->get( 'jsonld_type_name' ) . '",
+			"url": "' . $this->options->get( 'wp_home_url') . '",';
+			if ( ! is_null( $this->options->get( 'jsonld_type_logo_url' ) ) ) {
+				$output .= '"logo": "' . esc_url( $this->options->get( 'jsonld_type_logo_url' ) ) . '"';
 			}
 			if ( ! empty( $this->profiles ) ) {
 				$output .= '",sameAs": [' . $this->profiles . ']';
@@ -89,11 +83,11 @@ class JSON_LD {
 	 */
 	private function person() {
 		$output = '';
-		if ( ! is_null( $this->options->value( 'jsonld_type_name' ) ) ) {
+		if ( ! is_null( $this->options->get( 'jsonld_type_name' ) ) ) {
 			$output = '{ "@context": "http://schema.org",
 			"@type": "Person",
-			"name": "' . esc_attr( $this->options->value( 'jsonld_type_name' ) ) . '",
-			"url": "' . home_url() . '"';
+			"name": "' . $this->options->get( 'jsonld_type_name' ) . '",
+			"url": "' . $this->options->get( 'wp_home_url') . '"';
 
 			if ( ! empty( $this->profiles ) ) {
 				$output .= '",sameAs": [' . $this->profiles . ']';
@@ -118,7 +112,7 @@ class JSON_LD {
 	public function json_entity() {
 		$this->fetch_social_profiles();
 
-		switch ( $this->options->value( 'jsonld_entity_type' ) ) {
+		switch ( $this->options->get( 'jsonld_entity_type' ) ) {
 			case 'organization':
 				$output = $this->organization();
 				break;
@@ -127,7 +121,7 @@ class JSON_LD {
 				break;
 		}
 		if ( isset( $output ) ) {
-			return $this->json_ld_output( $output );
+			$this->json_ld_output( $output );
 		}
 	}
 
@@ -149,14 +143,13 @@ class JSON_LD {
 			'account_pinterest',
 		);
 		foreach ( $social_profiles as $profile ) {
-			if ( ! is_null( $this->options->value( $profile ) ) ) {
-				$profiles[] = $this->options->value( $profile );
+			if ( ! is_null( $this->options->get( $profile ) ) ) {
+				$profiles[] = $this->options->get( $profile );
 			}
 		}
 
 		if ( ! empty( $profiles ) ) {
 			$profiles_out = '"' . implode( '","', $profiles ) . '"';
-
 			$this->profiles = rtrim( $profiles_out, ',' );
 		}
 	}
@@ -176,7 +169,7 @@ class JSON_LD {
 		if ( apply_filters( 'disable_lti_seo_json_ld_search', false ) === true ) {
 			return;
 		}
-		$home_url = trailingslashit( home_url() );
+		$home_url = trailingslashit( $this->options->get( 'wp_home_url') );
 
 		/**
 		 * Filter: 'lti_seo_json_ld_search_url' - Allows filtering of the search URL for WP SEO
@@ -190,15 +183,16 @@ class JSON_LD {
 		 *
 		 * @api string $output The output of the function.
 		 */
-		$output = apply_filters( 'lti_seo_json_ld_search_output', '{ "@context": "http://schema.org",
+		$output = apply_filters( 'lti_seo_json_ld_search_output', sprintf('{ "@context": "http://schema.org",
 			"@type": "WebSite",
-			"url": "' . $home_url . '",
+			"url": "%s",
 			"potentialAction": {
 				"@type": "SearchAction",
-				"target": "' . $search_url . '",
+				"target": "%s",
 				"query-input": "required name=search_term"
 				}
-			}' );
+			}',$home_url, $search_url));
+
 		$this->json_ld_output( $output );
 	}
 

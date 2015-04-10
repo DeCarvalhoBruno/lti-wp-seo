@@ -2,55 +2,20 @@
     'use strict';
 
     $(document).ready(function () {
-        //var frontpage_description = $('#frontpage_description');
-        //
-        //if (frontpage_description.length) {
-        //    if (typeof frontpage_description.attr("checked") === "undefined") {
-        //        $('#frontpage_description_text').attr("disabled", "disabled");
-        //    }
-        //
-        //    frontpage_description.click(function () {
-        //        if (this.checked) {
-        //            $('#frontpage_description_text').removeAttr("disabled");
-        //        } else {
-        //            $('#frontpage_description_text').attr("disabled", "disabled");
-        //        }
-        //    });
-        //}
-        //
-        //var generate_keywords = $('#generate_keywords');
-        //if (generate_keywords.length) {
-        //    if (typeof generate_keywords.attr("checked") === "undefined") {
-        //        $('.checkbox-group').find('input[type="checkbox"]').attr("disabled", "disabled");
-        //    }
-        //
-        //    generate_keywords.click(function () {
-        //        if (this.checked) {
-        //            $('.checkbox-group').find('input[type="checkbox"]').removeAttr("disabled");
-        //        } else {
-        //            $('.checkbox-group').find('input[type="checkbox"]').attr("disabled", "disabled");
-        //        }
-        //    });
-        //}
-
         //Thank you http://www.webmaster-source.com/2013/02/06/using-the-wordpress-3-5-media-uploader-in-your-plugin-or-theme/
-        //for this snippet
-        var custom_uploader;
-        $('#upload_image_button').click(function (e) {
+        $('.upload_image_button').click(function (e) {
             var target_id = $(this).attr('id').replace(/_button$/,'');
             e.preventDefault();
-            if (custom_uploader) {
-                custom_uploader.open();
-                return;
-            }
-            custom_uploader = wp.media.frames.file_frame = wp.media({
+
+            var custom_uploader = wp.media.frames.file_frame = wp.media({
                 title   : lti_seo_i8n.use_img,
-                button  : { text: lti_seo_i8n.use_img },
-                multiple: false
+                button  : { text: lti_seo_i8n.use_img }
             });
             custom_uploader.on('select', function () {
                 var attachment = custom_uploader.state().get('selection').first().toJSON();
+                //We grab the attachment URL for display and we stash away the ID to retrieve image information if needed.
                 $('#'+target_id).val(attachment.url);
+                $('#'+target_id+"_id").val(attachment.id);
             });
             custom_uploader.open();
         });
