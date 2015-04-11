@@ -134,9 +134,11 @@ class LTI_SEO {
 		 */
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/frontend.php';
 
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/json_ld.php';
 		require_once plugin_dir_path( __FILE__ ) . 'wordpress_helper.php';
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/open_graph.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/json_ld.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/generic.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/open_graph.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/twitter_cards.php';
 		$this->loader = new Loader();
 		$this->helper = new Wordpress_Helper($this->settings);
 
@@ -194,7 +196,8 @@ class LTI_SEO {
 
 		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings, $this->helper);
 
-		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
+		//$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
+		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'head', 0 );
 
 		if ( $this->settings->get('canonical_urls') === true ) {
 			$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'rel_canonical' );

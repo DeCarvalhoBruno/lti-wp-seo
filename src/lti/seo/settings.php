@@ -9,9 +9,10 @@ class Defaults {
 		array( 'keyword_support', 'Checkbox' ),
 		array( 'meta_description', 'Checkbox' ),
 		array( 'open_graph_support', 'Checkbox' ),
-		array( 'og_frontpage_img_id', 'Text' ),
 		array( 'frontpage_description', 'Checkbox' ),
 		array( 'frontpage_description_text', 'Text' ),
+		array( 'frontpage_social_img_url', 'Url' ),
+		array( 'frontpage_social_img_id', 'Text' ),
 		array( 'jsonld_website_info', 'Checkbox' ),
 		array( 'jsonld_org_info', 'Checkbox' ),
 		array(
@@ -22,6 +23,13 @@ class Defaults {
 		array( 'jsonld_type_name', 'Text' ),
 		array( 'jsonld_type_logo_url', 'Url' ),
 		array( 'jsonld_type_logo_id', 'Text' ),
+		array( 'twitter_card_support', 'Checkbox' ),
+		array( 'twitter_handle', 'Text' ),
+		array(
+			'twitter_card_type',
+			'Radio',
+			array( 'default' => 'summary', 'choice' => array( 'summary', 'summary_img' ) )
+		),
 		array( 'account_facebook', 'Url' ),
 		array( 'account_twitter', 'Url' ),
 		array( 'account_gplus', 'Url' ),

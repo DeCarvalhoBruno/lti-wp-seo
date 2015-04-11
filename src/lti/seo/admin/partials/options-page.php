@@ -76,14 +76,14 @@
 								       id="keyword_support" <?php echo ltichk( 'keyword_support' ); ?>/>
 							</label>
 
-<!--							<div class="checkbox-group">-->
-<!--								<label for="cat_based_keywords">Based on categories-->
-<!--									<input type="checkbox" name="cat_based_keywords" id="cat_based_keywords"/>-->
-<!--								</label>-->
-<!--								<label for="tag_based_keywords">Based on tags-->
-<!--									<input type="checkbox" name="tag_based_keywords" id="tag_based_keywords"/>-->
-<!--								</label>-->
-<!--							</div>-->
+							<!--							<div class="checkbox-group">-->
+							<!--								<label for="cat_based_keywords">Based on categories-->
+							<!--									<input type="checkbox" name="cat_based_keywords" id="cat_based_keywords"/>-->
+							<!--								</label>-->
+							<!--								<label for="tag_based_keywords">Based on tags-->
+							<!--									<input type="checkbox" name="tag_based_keywords" id="tag_based_keywords"/>-->
+							<!--								</label>-->
+							<!--							</div>-->
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
@@ -136,8 +136,8 @@
 								<div class="input-group">
 									<label>
 										<input name="jsonld_entity_type"
-									              type="radio" <?php echo ltirad( 'jsonld_entity_type', 'person' ); ?>
-									              value="person"/>Person
+										       type="radio" <?php echo ltirad( 'jsonld_entity_type', 'person' ); ?>
+										       value="person"/>Person
 									</label>
 									<label><input name="jsonld_entity_type"
 									              type="radio" <?php echo ltirad( 'jsonld_entity_type',
@@ -231,15 +231,16 @@
 								</label>
 
 								<div class="input-group file-selector">
-									<label for="og_frontpage_img_url">Image</label>
-									<input id="og_frontpage_img_url" type="text" name="og_frontpage_img_url"
-									       value="<?php echo ltiopt( 'jsonld_type_logo_url' ); ?>" readonly="readonly"/>
-									<input id="og_frontpage_img_url_button" class="button-primary upload_image_button"
+									<label for="frontpage_social_img">Image</label>
+									<input id="frontpage_social_img" type="text" name="frontpage_social_img_url"
+									       value="<?php echo ltiopt( 'frontpage_social_img_url' ); ?>"
+									       readonly="readonly"/>
+									<input id="frontpage_social_img_button" class="button-primary upload_image_button"
 									       type="button"
 									       value="<?php echo ltint( 'Choose image' ); ?>"/>
-									<input id="og_frontpage_img_url_id" type="hidden"
-									       name="og_frontpage_img_id"
-									       value="<?php echo ltiopt( 'og_frontpage_img_id' ); ?>"/>
+									<input id="frontpage_social_img_id" type="hidden"
+									       name="frontpage_social_img_id"
+									       value="<?php echo ltiopt( 'frontpage_social_img_id' ); ?>"/>
 								</div>
 							</div>
 							<div class="form-help-container">
@@ -258,7 +259,8 @@
 						<div class="input-group">
 							<div class="checkbox">
 								<label for="meta_description">Open Graph support
-									<input type="checkbox" name="open_graph_support" id="open_graph_support" <?php echo ltichk( 'open_graph_support' ); ?> />
+									<input type="checkbox" name="open_graph_support"
+									       id="open_graph_support" <?php echo ltichk( 'open_graph_support' ); ?> />
 								</label>
 							</div>
 						</div>
@@ -276,6 +278,40 @@
 										image from the media library.
 									</li>
 								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+								<div class="checkbox">
+									<label for="meta_description">Twitter Cards support
+										<input type="checkbox" name="twitter_card_support"
+										       id="twitter_card_support" <?php echo ltichk( 'twitter_card_support' ); ?> />
+									</label>
+								</div>
+									<div class="input-group">
+										<label>
+											<input name="twitter_card_type"
+											       type="radio" <?php echo ltirad( 'twitter_card_type', 'summary' ); ?>
+											       value="summary"/>Summary card
+										</label>
+										<label>
+											<input name="twitter_card_type"
+											       type="radio" <?php echo ltirad( 'twitter_card_type',
+												'summary_img' ); ?>
+											       value="summary_img"/>Summary card with large image
+										</label>
+										<label for="twitter_handle">Twitter username
+											<input type="text" name="twitter_handle" id="twitter_handle"
+											       value="<?php echo ltiopt( 'twitter_handle' ); ?>" placeholder="@username"/>
+										</label>
+									</div>
+
+						</div>
+						<div class="form-help-container">
+							<div class="form-help">
+								<p></p>
 							</div>
 						</div>
 					</div>

@@ -19,15 +19,17 @@ class Admin {
 	}
 
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/css/lti_seo_admin.css', array('thickbox'), $this->version,
+		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/css/lti_seo_admin.css',
+			array( 'thickbox' ), $this->version,
 			'all' );
 	}
 
 	public function enqueue_scripts() {
 		wp_enqueue_media();
-		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/js/lti_seo_admin.js', array( 'jquery'), $this->version,
+		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/js/lti_seo_admin.js', array( 'jquery' ),
+			$this->version,
 			false );
-		wp_localize_script( $this->plugin_name, 'lti_seo_i8n', array('use_img'=>ltint('Use image')) );
+		wp_localize_script( $this->plugin_name, 'lti_seo_i8n', array( 'use_img' => ltint( 'Use image' ) ) );
 	}
 
 	public function admin_menu() {
@@ -48,7 +50,7 @@ class Admin {
 		if ( isset( $_POST['lti_seo_token'] ) ) {
 			if ( wp_verify_nonce( $_POST['lti_seo_token'], 'lti_seo_options' ) !== false ) {
 				$this->validate_input( $_POST );
-				print_r($_POST);
+				print_r( $_POST );
 			} else {
 				//error message;
 			}
@@ -67,7 +69,7 @@ class Admin {
 //		echo "after save<pre>";
 //		print_r($this->settings);
 //		echo "</pre>";
-		
+
 	}
 
 	public function add_meta_boxes() {
@@ -98,7 +100,7 @@ class Admin {
 	/**
 	 * @return \Lti\Seo\Settings
 	 */
-	public function get_settings(){
+	public function get_settings() {
 		return $this->settings;
 	}
 
@@ -107,7 +109,7 @@ class Admin {
 	 * @param \WP_Post $post
 	 * @param int $update
 	 */
-	public function save_post( $post_ID, $post, $update){
+	public function save_post( $post_ID, $post, $update ) {
 
 //		$f = new \stdClass();
 //		update_post_meta($post_ID,'lti_seo_meta',$f);

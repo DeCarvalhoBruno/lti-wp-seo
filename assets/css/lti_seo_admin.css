@@ -57,7 +57,7 @@ options-general.php?page=lti-seo-options
     }
 
     #flseo .input-group > .input-group {
-        margin: 0px 0 10px 10px;
+        margin: 0 0 10px 10px;
         font-size:0.9em;
         font-weight: normal;
         clear: both;
@@ -65,7 +65,7 @@ options-general.php?page=lti-seo-options
     }
 
     #flseo .input-group > .input-group label {
-        margin: 0px 0 10px 10px;
+        margin: 0 0 10px 10px;
     }
 
     #flseo .input-group > .input-group.file-selector input[type="text"] {
@@ -76,6 +76,18 @@ options-general.php?page=lti-seo-options
     #flseo .input-group > .input-group.file-selector input[type="button"] {
         width: 50%;
         margin: 10px auto 0;
+        background-color: #1aa55f;
+        border: 1px solid #16894f;
+    }
+
+    #flseo .input-group > .input-group.file-selector input[type="button"]:hover {
+        width: 50%;
+        margin: 10px auto 0;
+        background-color: #16864d;
+        border: 1px solid #16894f;
+    }
+
+    .input-group.file-selector button {
     }
 
     #flseo .form-help-container {
@@ -212,7 +224,7 @@ options-general.php?page=lti-seo-options
         /*margin-right: 2px;*/
         line-height: 1.42857143;
         /*border: 1px solid transparent;*/
-        border-radius: 0 0 4px 4px;
+        border-radius: 0 0 6px 6px;
         text-decoration: none;
         color: #000001;
         background-color: #FFA500;

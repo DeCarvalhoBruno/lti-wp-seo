@@ -36,6 +36,10 @@ function ltirad( $key, $currentValue ) {
 	}
 }
 
-function generate_meta($type,$type_value,$content){
+function lti_generate_meta($type,$type_value,$content){
 	return sprintf('<meta %s="%s" content="%s"/>',$type,$type_value,$content);
+}
+
+function lti_iso8601_date( $mysqldate ) {
+	return mysql2date( 'c', $mysqldate );
 }

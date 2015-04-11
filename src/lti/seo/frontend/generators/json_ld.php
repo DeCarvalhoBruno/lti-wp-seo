@@ -1,4 +1,4 @@
-<?php namespace Lti\Seo;
+<?php namespace Lti\Seo\Generators;
 
 /**
  * Class JSON_LD
@@ -6,7 +6,7 @@
  * Outputs JSON LD schema code
  *
  */
-class JSON_LD {
+class Frontpage_JSON_LD {
 
 	/**
 	 * @var \Lti\Seo\Settings
@@ -20,7 +20,7 @@ class JSON_LD {
 	private $profiles = array();
 
 	/**
-	 * Class constructor
+	 * @param \Lti\Seo\Settings $settings
 	 */
 	public function __construct( $settings ) {
 		$this->options = $settings;
