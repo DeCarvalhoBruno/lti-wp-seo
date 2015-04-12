@@ -136,7 +136,7 @@ class LTI_SEO {
 
 		require_once plugin_dir_path( __FILE__ ) . 'wordpress_helper.php';
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/json_ld.php';
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/generic.php';
+		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/generic_meta_tag.php';
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/open_graph.php';
 		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/twitter_cards.php';
 		$this->loader = new Loader();

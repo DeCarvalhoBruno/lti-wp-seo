@@ -87,9 +87,6 @@ options-general.php?page=lti-seo-options
         border: 1px solid #16894f;
     }
 
-    .input-group.file-selector button {
-    }
-
     #flseo .form-help-container {
         position:relative;
         background-color: #ffffff;
@@ -168,59 +165,59 @@ options-general.php?page=lti-seo-options
 
 
 
-    .nav {
+    #lti_seo_wrapper .nav {
         margin: 0;
         padding: 0;
         list-style: none;
     }
-    .nav > li {
+    #lti_seo_wrapper .nav > li {
         position: relative;
         display: block;
     }
-    .nav > li > a {
+    #lti_seo_wrapper .nav > li > a {
         position: relative;
         display: block;
         padding: 10px 15px;
     }
-    .nav > li > a:hover,
-    .nav > li > a:focus {
+    #lti_seo_wrapper .nav > li > a:hover,
+    #lti_seo_wrapper .nav > li > a:focus {
         text-decoration: none;
         background-color: #ffd414;
     }
-    .nav > li.disabled > a {
+    #lti_seo_wrapper .nav > li.disabled > a {
         color: #777777;
     }
-    .nav > li.disabled > a:hover,
-    .nav > li.disabled > a:focus {
+    #lti_seo_wrapper .nav > li.disabled > a:hover,
+    #lti_seo_wrapper .nav > li.disabled > a:focus {
         color: #777777;
         text-decoration: none;
         background-color: transparent;
         cursor: not-allowed;
     }
-    .nav .open > a,
-    .nav .open > a:hover,
-    .nav .open > a:focus {
+    #lti_seo_wrapper .nav .open > a,
+    #lti_seo_wrapper .nav .open > a:hover,
+    #lti_seo_wrapper .nav .open > a:focus {
         background-color: #ffa500;
         border-color: #337ab7;
     }
-    .nav .nav-divider {
+    #lti_seo_wrapper .nav .nav-divider {
         height: 1px;
         margin: 9px 0;
         overflow: hidden;
         background-color: #e5e5e5;
     }
 
-    .nav-tabs {
+    #lti_seo_wrapper .nav-tabs {
         /*border-bottom: 1px solid #dddddd;*/
         width:100%;
         margin: 0 20px;
     }
-    .nav-tabs > li {
+    #lti_seo_wrapper .nav-tabs > li {
         float: left;
         margin-bottom: -1px;
         font-size: 1.2em;
     }
-    .nav-tabs > li > a {
+    #lti_seo_wrapper .nav-tabs > li > a {
         /*margin-right: 2px;*/
         line-height: 1.42857143;
         /*border: 1px solid transparent;*/
@@ -230,39 +227,39 @@ options-general.php?page=lti-seo-options
         background-color: #FFA500;
 
     }
-    .nav-tabs > li > a:hover {
+    #lti_seo_wrapper .nav-tabs > li > a:hover {
         /*border-color: #eeeeee #eeeeee #dddddd;*/
     }
-    .nav-tabs > li.active > a,
-    .nav-tabs > li.active > a:hover,
-    .nav-tabs > li.active > a:focus {
+    #lti_seo_wrapper .nav-tabs > li.active > a,
+    #lti_seo_wrapper .nav-tabs > li.active > a:hover,
+    #lti_seo_wrapper .nav-tabs > li.active > a:focus {
         color: #fff;
         background-color: #774d00;
         /*border: 1px solid #dddddd;*/
         border-top-color: transparent;
         cursor: default;
     }
-    .nav-tabs.nav-justified {
+    #lti_seo_wrapper .nav-tabs.nav-justified {
         width: 100%;
         border-bottom: 0;
     }
-    .nav-tabs.nav-justified > li {
+    #lti_seo_wrapper .nav-tabs.nav-justified > li {
         float: none;
     }
-    .nav-tabs.nav-justified > li > a {
+    #lti_seo_wrapper .nav-tabs.nav-justified > li > a {
         text-align: center;
         margin-bottom: 5px;
     }
-    .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+    #lti_seo_wrapper .nav-tabs.nav-justified > .dropdown .dropdown-menu {
         top: auto;
         left: auto;
     }
     @media (min-width: 768px) {
-        .nav-tabs.nav-justified > li {
+        #lti_seo_wrapper .nav-tabs.nav-justified > li {
             display: table-cell;
             width: 1%;
         }
-        .nav-tabs.nav-justified > li > a {
+        #lti_seo_wrapper .nav-tabs.nav-justified > li > a {
             margin-bottom: 0;
         }
     }
@@ -270,19 +267,19 @@ options-general.php?page=lti-seo-options
         margin-right: 0;
         border-radius: 4px;
     }
-    .nav-tabs.nav-justified > .active > a,
-    .nav-tabs.nav-justified > .active > a:hover,
-    .nav-tabs.nav-justified > .active > a:focus {
+    #lti_seo_wrapper .nav-tabs.nav-justified > .active > a,
+    #lti_seo_wrapper .nav-tabs.nav-justified > .active > a:hover,
+    #lti_seo_wrapper .nav-tabs.nav-justified > .active > a:focus {
         border: 1px solid #dddddd;
     }
     @media (min-width: 768px) {
-        .nav-tabs.nav-justified > li > a {
+        #lti_seo_wrapper .nav-tabs.nav-justified > li > a {
             border-bottom: 1px solid #dddddd;
             border-radius: 4px 4px 0 0;
         }
-        .nav-tabs.nav-justified > .active > a,
-        .nav-tabs.nav-justified > .active > a:hover,
-        .nav-tabs.nav-justified > .active > a:focus {
+        #lti_seo_wrapper .nav-tabs.nav-justified > .active > a,
+        #lti_seo_wrapper .nav-tabs.nav-justified > .active > a:hover,
+        #lti_seo_wrapper .nav-tabs.nav-justified > .active > a:focus {
             border-bottom-color: #ffffff;
         }
     }
@@ -301,108 +298,108 @@ options-general.php?page=lti-seo-options
     /*color: #ffffff;*/
     /*background-color: #337ab7;*/
     /*}*/
-    .nav-stacked > li {
+    #lti_seo_wrapper .nav-stacked > li {
         float: none;
     }
-    .nav-stacked > li + li {
+    #lti_seo_wrapper .nav-stacked > li + li {
         margin-top: 2px;
         margin-left: 0;
     }
-    .nav-justified {
+    #lti_seo_wrapper .nav-justified {
         width: 100%;
     }
-    .nav-justified > li {
+    #lti_seo_wrapper .nav-justified > li {
         float: none;
     }
-    .nav-justified > li > a {
+    #lti_seo_wrapper .nav-justified > li > a {
         text-align: center;
         margin-bottom: 5px;
     }
-    .nav-justified > .dropdown .dropdown-menu {
+    #lti_seo_wrapper .nav-justified > .dropdown .dropdown-menu {
         top: auto;
         left: auto;
     }
     @media (min-width: 768px) {
-        .nav-justified > li {
+        #lti_seo_wrapper .nav-justified > li {
             display: table-cell;
             width: 1%;
         }
-        .nav-justified > li > a {
+        #lti_seo_wrapper .nav-justified > li > a {
             margin-bottom: 0;
         }
     }
-    .nav-tabs-justified {
+    #lti_seo_wrapper .nav-tabs-justified {
         border-bottom: 0;
     }
-    .nav-tabs-justified > li > a {
+    #lti_seo_wrapper .nav-tabs-justified > li > a {
         margin-right: 0;
         border-radius: 4px;
     }
-    .nav-tabs-justified > .active > a,
-    .nav-tabs-justified > .active > a:hover,
-    .nav-tabs-justified > .active > a:focus {
+    #lti_seo_wrapper .nav-tabs-justified > .active > a,
+    #lti_seo_wrapper .nav-tabs-justified > .active > a:hover,
+    #lti_seo_wrapper .nav-tabs-justified > .active > a:focus {
         border: 1px solid #dddddd;
     }
     @media (min-width: 768px) {
-        .nav-tabs-justified > li > a {
+        #lti_seo_wrapper .nav-tabs-justified > li > a {
             border-bottom: 1px solid #dddddd;
             border-radius: 4px 4px 0 0;
         }
-        .nav-tabs-justified > .active > a,
-        .nav-tabs-justified > .active > a:hover,
-        .nav-tabs-justified > .active > a:focus {
+        #lti_seo_wrapper .nav-tabs-justified > .active > a,
+        #lti_seo_wrapper .nav-tabs-justified > .active > a:hover,
+        #lti_seo_wrapper .nav-tabs-justified > .active > a:focus {
             border-bottom-color: #ffffff;
         }
     }
-    .tab-content > .tab-pane {
+    #lti_seo_wrapper .tab-content > .tab-pane {
         display: none;
     }
-    .tab-content > .active {
+    #lti_seo_wrapper .tab-content > .active {
         display: block;
     }
 
-    .clearfix:before,
-    .clearfix:after,
-    .nav:before,
-    .nav:after {
+    #lti_seo_wrapper .clearfix:before,
+    #lti_seo_wrapper .clearfix:after,
+    #lti_seo_wrapper .nav:before,
+    #lti_seo_wrapper .nav:after {
         content: " ";
         display: table;
     }
-    .clearfix:after,
-    .nav:after {
+    #lti_seo_wrapper .clearfix:after,
+    #lti_seo_wrapper .nav:after {
         clear: both;
     }
-    .center-block {
+    #lti_seo_wrapper .center-block {
         display: block;
         margin-left: auto;
         margin-right: auto;
     }
-    .pull-right {
+    #lti_seo_wrapper .pull-right {
         float: right !important;
     }
-    .pull-left {
+    #lti_seo_wrapper .pull-left {
         float: left !important;
     }
-    .hide {
+    #lti_seo_wrapper .hide {
         display: none !important;
     }
-    .show {
+    #lti_seo_wrapper .show {
         display: block !important;
     }
-    .invisible {
+    #lti_seo_wrapper .invisible {
         visibility: hidden;
     }
-    .text-hide {
+    #lti_seo_wrapper .text-hide {
         font: 0/0 a;
         color: transparent;
         text-shadow: none;
         background-color: transparent;
         border: 0;
     }
-    .hidden {
+    #lti_seo_wrapper .hidden {
         display: none !important;
     }
-    .affix {
+    #lti_seo_wrapper .affix {
         position: fixed;
     }
 
@@ -425,7 +422,7 @@ options-general.php?page=lti-seo-options
 
     }
 
-    .nav-tabs {
+    #lti_seo_wrapper .nav-tabs {
         /*border-bottom: 1px solid #dddddd;*/
         width:65%;
         margin-left:100px;

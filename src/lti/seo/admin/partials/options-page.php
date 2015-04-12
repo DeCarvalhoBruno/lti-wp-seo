@@ -9,7 +9,7 @@
 <!--<div id="lseo-header">-->
 <!--<div id="lseo-header-img"></div>-->
 
-<div>
+<div id="lti_seo_wrapper">
 
 	<?php echo $this->plugin_dir_url ?>
 	<br/>

@@ -42,7 +42,8 @@ class Frontend {
 			add_action( 'lti_seo_head', array( $og, 'get_tags' ), 10 );
 		}
 
-		$twitter_class = sprintf( $class_pattern, $this->helper->page_type(), "Twitter_Card" );
+
+		$twitter_class = sprintf( $class_pattern, $this->helper->page_post_format(), "Twitter_Card" );
 
 		if ( $this->settings->get( 'twitter_card_support' ) === true && class_exists( $twitter_class ) ) {
 			$twitter = new $twitter_class( $this->helper, $this->settings->get( 'twitter_card_type' ), $this->helper->get_twitter_handle() );
@@ -58,7 +59,7 @@ class Frontend {
 			add_action( 'lti_seo_json_ld', array( $json_ld, 'json_entity' ), 10 );
 			}
 			if ( $this->settings->get( 'jsonld_website_info' ) ) {
-				add_action( 'lti_seo_json_ld', array( $json_ld, 'internal_search' ), 20 );
+				add_action( 'lti_seo_json_ld', array( $json_ld, 'website_tag' ), 20 );
 			}
 			add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ), 90 );
 		}

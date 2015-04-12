@@ -85,6 +85,15 @@ class Wordpress_Helper {
 		return $this->page_type;
 	}
 
+	public function page_post_format() {
+		$post_type = get_post_format();
+		if ( $post_type !== false&&$this->page_type()!="Frontpage" ) {
+			return sprintf( "%s_%s", $this->page_type(), ucfirst( $post_type ) );
+		}
+
+		return $this->page_type();
+	}
+
 	/**
 	 * Is this the homepage AND does it show posts?
 	 *
@@ -129,7 +138,7 @@ class Wordpress_Helper {
 	public function get_canonical_url() {
 		if ( is_null( $this->current_url ) ) {
 			$link = "";
-			if(is_singular()){
+			if ( is_singular() ) {
 				$link = get_permalink();
 			} elseif ( is_search() ) {
 				$link = get_search_link();
@@ -168,16 +177,16 @@ class Wordpress_Helper {
 		return $this->current_url;
 	}
 
-	public function get_twitter_handle(){
-		if($this->page_type()=="frontpage"){
+	public function get_twitter_handle() {
+		if ( $this->page_type() == "Frontpage" ) {
 			return $this->options->get( 'twitter_handle' );
-		}else{
+		} else {
 			//get author twitter info from profile
 			return null;
 		}
 	}
 
-	public function get_social_images( $mode = "", $number=-1 ) {
+	public function get_social_images( $mode = "", $number = - 1 ) {
 		/**
 		 * Allow filtering of the open graph image size
 		 *
@@ -188,7 +197,8 @@ class Wordpress_Helper {
 		$image_size = apply_filters( 'lti_seo_image_size_index', 'full' );
 		$data       = array();
 
-		$image_data = $this->get_img( get_post_thumbnail_id( $this->get_post_info( 'ID' ) ), $image_size );
+		$image_data = $this->get_img( get_post_thumbnail_id( ), $image_size );
+
 		if ( ! is_null( $image_data ) ) {
 			$data[] = $image_data;
 		}
@@ -211,12 +221,32 @@ class Wordpress_Helper {
 				}
 				break;
 			case "all":
-				if($number==-1){
+				if ( $number == - 1 ) {
 					$nb_img = $number;
-				}else{
-					$nb_img = $number-count( $data );
+				} else {
+					$nb_img = $number - count( $data );
 				}
-				$data = array_merge($data,$this->get_attached_post_images( $nb_img ));
+				$img = array();
+				if ( $this->page_post_format() == "Singular_Gallery" ) {
+					$tmp = get_post_gallery_images();
+					if ( ! empty( $tmp ) ) {
+						$tmp = array_slice($tmp,0,4);
+
+						$i=0;
+						foreach ( $tmp as $gallery_img ) {
+							$image_data             = new \stdClass();
+							$image_data->url        = $gallery_img;
+							$image_data->properties = array();
+							$img[]                  = $image_data;
+						}
+					}
+				} else {
+					$img = $this->get_attached_post_images( $nb_img );
+				}
+				if ( ! empty( $img ) ) {
+					$data = array_merge( $data, $img );
+
+				}
 				break;
 		}
 
@@ -229,13 +259,13 @@ class Wordpress_Helper {
 
 	public function get_attached_post_images( $limit = - 1 ) {
 		$args = array(
-			'numberposts' => $limit,
-			'post_parent' => $this->get_post_info( 'ID' ),
-			'post_type'   => 'attachment',
-			'post_status' => 'inherit',
-			'order'       => 'ASC',
+			'numberposts'    => $limit,
+			'post_parent'    => get_queried_object_id(),
+			'post_type'      => 'attachment',
+			'post_status'    => 'inherit',
+			'order'          => 'ASC',
 			'post_mime_type' => 'image',
-			'orderby'     => 'menu_order ID'
+			'orderby'        => 'menu_order ID'
 		);
 
 		$images = get_children( $args );

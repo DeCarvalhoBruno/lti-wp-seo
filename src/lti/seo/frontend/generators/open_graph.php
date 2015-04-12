@@ -1,6 +1,6 @@
 <?php namespace Lti\Seo\Generators;
 
-class Open_Graph extends GenericTagMaker {
+class Open_Graph extends GenericMetaTag {
 
 	protected $meta_tag_name_attribute = "property";
 
@@ -35,6 +35,8 @@ class Open_Graph extends GenericTagMaker {
 
 class Frontpage_Open_Graph extends Open_Graph implements CanMakeHeaderTags {
 
+	protected $image_retrieval_mode = "with_main_image";
+
 	public function make_tags() {
 		$og = array();
 
@@ -44,7 +46,7 @@ class Frontpage_Open_Graph extends Open_Graph implements CanMakeHeaderTags {
 		$og['url']         = esc_url_raw( $this->helper->get_canonical_url() );
 		$og['description'] = esc_attr( $this->helper->get_site_description() );
 		$og['locale']      = esc_attr( get_bloginfo( 'language' ) );
-		$og['image']       = $this->helper->get_social_images( "all" );
+		$og['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
 
 		return compact( 'og' );
 	}
@@ -53,6 +55,8 @@ class Frontpage_Open_Graph extends Open_Graph implements CanMakeHeaderTags {
 }
 
 class Singular_Open_Graph extends Frontpage_Open_Graph implements CanMakeHeaderTags {
+
+	protected $image_retrieval_mode = "all";
 
 	public function make_tags() {
 		$og = array();
@@ -63,8 +67,7 @@ class Singular_Open_Graph extends Frontpage_Open_Graph implements CanMakeHeaderT
 		$og['url']         = esc_url_raw( $this->helper->get_canonical_url() );
 		$og['description'] = esc_attr( $this->helper->get_site_description() );
 		$og['locale']      = esc_attr( get_bloginfo( 'language' ) );
-		$og['image']       = $this->helper->get_social_images( "all" );
-
+		$og['image']       = $this->helper->get_social_images($this->image_retrieval_mode, $this->number_images );
 		$article['published_time'] = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_date' ) ) );
 		$article['modified_time']  = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_modified' ) ) );
 		$article['author']         = $this->helper->get_author_url();

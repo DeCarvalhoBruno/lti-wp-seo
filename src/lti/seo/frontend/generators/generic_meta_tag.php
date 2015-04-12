@@ -16,11 +16,15 @@ interface CanMakeHeaderTags {
 	public function generate_tag( $name, $property, $content );
 }
 
-abstract class GenericTagMaker {
+abstract class GenericMetaTag {
 
 	protected $tags;
 
 	protected $meta_tag_name_attribute = "name";
+
+	protected $image_retrieval_mode = "fallback";
+
+	protected $number_images = -1;
 
 	public function __construct( Wordpress_Helper $helper ) {
 		$this->helper = $helper;
