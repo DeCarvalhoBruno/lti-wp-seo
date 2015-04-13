@@ -1,5 +1,4 @@
-<?php namespace Lti\Seo;
-
+<?php namespace Lti\Seo\Plugin;
 
 class Defaults {
 	public $values = array(
@@ -7,10 +6,15 @@ class Defaults {
 		array( 'global_keywords', 'Text' ),
 		array( 'canonical_urls', 'Checkbox' ),
 		array( 'keyword_support', 'Checkbox' ),
+		array( 'keyword_tag_based', 'Checkbox' ),
+		array( 'keyword_cat_based', 'Checkbox' ),
 		array( 'meta_description', 'Checkbox' ),
 		array( 'open_graph_support', 'Checkbox' ),
+		array( 'facebook_publisher', 'Url' ),
 		array( 'frontpage_description', 'Checkbox' ),
 		array( 'frontpage_description_text', 'Text' ),
+		array( 'frontpage_keyword', 'Checkbox' ),
+		array( 'frontpage_keyword_text', 'Text' ),
 		array( 'frontpage_social_img_url', 'Url' ),
 		array( 'frontpage_social_img_id', 'Text' ),
 		array( 'jsonld_website_info', 'Checkbox' ),
@@ -24,12 +28,13 @@ class Defaults {
 		array( 'jsonld_type_logo_url', 'Url' ),
 		array( 'jsonld_type_logo_id', 'Text' ),
 		array( 'twitter_card_support', 'Checkbox' ),
-		array( 'twitter_handle', 'Text' ),
+		array( 'twitter_publisher', 'Text' ),
 		array(
 			'twitter_card_type',
 			'Radio',
 			array( 'default' => 'summary', 'choice' => array( 'summary', 'summary_img' ) )
 		),
+		array( 'gplus_publisher', 'Url' ),
 		array( 'account_facebook', 'Url' ),
 		array( 'account_twitter', 'Url' ),
 		array( 'account_gplus', 'Url' ),
@@ -40,7 +45,7 @@ class Defaults {
 	);
 }
 
-class Settings {
+class Plugin_Settings {
 	public function __construct( $settings = array() ) {
 
 		$defaults = new Defaults();
@@ -50,7 +55,8 @@ class Settings {
 			if ( isset( $settings->{$value[0]} ) && ! is_object( $settings->{$value[0]} ) ) {
 				$storedValue = $settings->{$value[0]};
 			}
-			$className = "Lti\\Seo\\Field_" . $value[1];
+			$className = __NAMESPACE__."\\Field_" . $value[1];
+
 			if ( isset( $value[2] ) ) {
 				$this->{$value[0]} = new $className( $storedValue, $value[2] );
 			} else {
@@ -60,11 +66,11 @@ class Settings {
 	}
 
 	public static function get_defaults() {
-		return new static();
+		return new self();
 	}
 
 	public function save( Array $values = array() ) {
-		return new Settings( (object) $values );
+		return new Plugin_Settings( (object) $values );
 	}
 
 	public function get( $value ) {
@@ -76,68 +82,8 @@ class Settings {
 	}
 
 	public function set( $key, $value, $type = "Text" ) {
-		$className    = "Lti\\Seo\\Field_" . $type;
+	$className    = __NAMESPACE__ . $type;
 		$this->{$key} = new $className( $value );
 	}
 }
 
-abstract class Fields {
-	public function __construct( $value, $default = "" ) {
-		if ( $value ) {
-			$this->value = $value;
-		} else {
-			$this->value = $default;
-		}
-	}
-}
-
-class Field_Checkbox extends Fields {
-	public function __construct( $value, $default = false ) {
-		$this->value = ( $value === true || (int) $value === 1 || $value === "true" || $value === 'on' ) ? true : $default;
-	}
-}
-
-class Field_Radio extends Fields {
-
-	public function __construct( $value, $default = "" ) {
-		if ( is_array( $default ) ) {
-			$defaults = array_flip( $default['choice'] );
-			if ( $value ) {
-				if ( isset( $defaults[ $value ] ) ) {
-					$this->value = $value;
-				} else {
-					$this->value = $default['default'];
-				}
-			} else {
-				$this->value = $default['default'];
-			}
-		} else {
-			$this->value = null;
-		}
-	}
-}
-
-class Field_Text extends Fields {
-	public function __construct( $value, $default = "" ) {
-		if ( $value ) {
-			$this->value = esc_attr( $value );
-		} else {
-			$this->value = $default;
-		}
-	}
-}
-
-class Field_String extends Fields {
-
-}
-
-class Field_Url extends Fields {
-	public function __construct( $value, $default = "" ) {
-		if ( $value && ! filter_var( $value, FILTER_VALIDATE_URL ) === false ) {
-			$this->value = $value;
-		} else {
-			$this->value = $default;
-		}
-	}
-
-}

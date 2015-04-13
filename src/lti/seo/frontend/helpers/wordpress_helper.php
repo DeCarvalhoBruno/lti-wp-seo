@@ -1,6 +1,6 @@
-<?php namespace Lti\Seo;
+<?php namespace Lti\Seo\Helpers;
 
-class Wordpress_Helper {
+class Wordpress_Helper extends Helper implements ICanHelp {
 
 	private $is_home_posts_page;
 	private $is_home_static_page;
@@ -10,17 +10,19 @@ class Wordpress_Helper {
 	private $current_url;
 	private $page_description;
 	private $page_type;
-	/**
-	 * @var \WP_Post
-	 */
-	private $post_info;
-	/**
-	 * @var \Lti\Seo\Settings
-	 */
-	private $options;
+	private $post_id;
 
-	public function __construct( $options ) {
-		$this->options = $options;
+	/**
+	 * @var \Lti\Seo\Plugin\Plugin_Settings
+	 */
+	protected $settings;
+
+	public function __construct( $settings ) {
+		parent::__construct( $settings );
+	}
+
+	public function init() {
+		$this->page_type();
 	}
 
 	public function get_site_name() {
@@ -33,8 +35,8 @@ class Wordpress_Helper {
 
 	public function get_site_description() {
 		if ( is_null( $this->page_description ) ) {
-			if ( $this->options->get( 'frontpage_description' ) ) {
-				$this->page_description = $this->options->get( 'frontpage_description' );
+			if ( $this->page_type()==="Frontpage" ) {
+				$this->page_description = $this->settings->get( 'frontpage_description_text' );
 			} else {
 				$this->page_description = get_bloginfo( 'description' );
 			}
@@ -52,9 +54,9 @@ class Wordpress_Helper {
 	}
 
 	public function get_post_info( $key ) {
-		$post = get_queried_object();
-		if ( ! is_null( $post ) ) {
-			return $post->{$key};
+		$field = get_post_field( $key, $this->post_id, 'raw' );
+		if ( ! empty( $field ) ) {
+			return $field;
 		}
 
 		return null;
@@ -73,6 +75,7 @@ class Wordpress_Helper {
 				$this->page_type = "Frontpage";
 			} elseif ( is_singular() ) {
 				$this->page_type = 'Singular';
+				$this->post_id   = $this->get_post_info( 'ID' );
 			} elseif ( is_category() || is_tag() || is_tax() ) {
 				$this->page_type = "Catagax";
 			} elseif ( is_author() ) {
@@ -87,7 +90,7 @@ class Wordpress_Helper {
 
 	public function page_post_format() {
 		$post_type = get_post_format();
-		if ( $post_type !== false&&$this->page_type()!="Frontpage" ) {
+		if ( $post_type !== false && $this->page_type() != "Frontpage" ) {
 			return sprintf( "%s_%s", $this->page_type(), ucfirst( $post_type ) );
 		}
 
@@ -169,7 +172,7 @@ class Wordpress_Helper {
 					}
 				}
 			} elseif ( is_attachment() ) {
-				$link = wp_get_attachment_url( $this->get_post_info( 'ID' ) );
+				$link = wp_get_attachment_url( $this->post_id );
 			}
 			$this->current_url = $link;
 		}
@@ -179,7 +182,7 @@ class Wordpress_Helper {
 
 	public function get_twitter_handle() {
 		if ( $this->page_type() == "Frontpage" ) {
-			return $this->options->get( 'twitter_handle' );
+			return $this->settings->get( 'twitter_handle' );
 		} else {
 			//get author twitter info from profile
 			return null;
@@ -197,7 +200,7 @@ class Wordpress_Helper {
 		$image_size = apply_filters( 'lti_seo_image_size_index', 'full' );
 		$data       = array();
 
-		$image_data = $this->get_img( get_post_thumbnail_id( ), $image_size );
+		$image_data = $this->get_img( get_post_thumbnail_id(), $image_size );
 
 		if ( ! is_null( $image_data ) ) {
 			$data[] = $image_data;
@@ -206,7 +209,7 @@ class Wordpress_Helper {
 		switch ( $mode ) {
 			case "fallback":
 				if ( empty( $data ) ) {
-					$img_id     = $this->options->get( 'frontpage_social_img_id' );
+					$img_id     = $this->settings->get( 'frontpage_social_img_id' );
 					$image_data = $this->get_img( $img_id, $image_size );
 					if ( ! is_null( $image_data ) ) {
 						$data[] = $image_data;
@@ -214,7 +217,7 @@ class Wordpress_Helper {
 				}
 				break;
 			case "with_main_image":
-				$img_id     = $this->options->get( 'frontpage_social_img_id' );
+				$img_id     = $this->settings->get( 'frontpage_social_img_id' );
 				$image_data = $this->get_img( $img_id, $image_size );
 				if ( ! is_null( $image_data ) ) {
 					$data[] = $image_data;
@@ -230,9 +233,9 @@ class Wordpress_Helper {
 				if ( $this->page_post_format() == "Singular_Gallery" ) {
 					$tmp = get_post_gallery_images();
 					if ( ! empty( $tmp ) ) {
-						$tmp = array_slice($tmp,0,4);
+						$tmp = array_slice( $tmp, 0, 4 );
 
-						$i=0;
+						$i = 0;
 						foreach ( $tmp as $gallery_img ) {
 							$image_data             = new \stdClass();
 							$image_data->url        = $gallery_img;
@@ -299,6 +302,32 @@ class Wordpress_Helper {
 		}
 
 		return null;
+	}
+
+	public function get_tagcat() {
+		$keywords = array();
+		if ( $this->page_type() == "Frontpage" ) {
+			$keywords = explode( ",", $this->settings->get( 'frontpage_keyword_text' ) );
+		} else {
+			if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
+				$keywords = $this->extract_array_object_value(get_the_category($this->post_id),'cat_name') ;
+			}
+			if ( $this->settings->get( 'keyword_tag_based' ) === true ) {
+				$keywords = array_merge($keywords,$this->extract_array_object_value(get_the_tags($this->post_id),'name'));
+			}
+		}
+		return array_unique($keywords);
+	}
+
+	private function extract_array_object_value($values,$field){
+		$vals = array();
+		if(is_array($values)){
+			foreach($values as $value){
+				$vals[] = $value->{$field};
+			}
+		}
+		return $vals;
+
 	}
 
 }

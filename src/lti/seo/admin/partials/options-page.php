@@ -11,13 +11,6 @@
 
 <div id="lti_seo_wrapper">
 
-	<?php echo $this->plugin_dir_url ?>
-	<br/>
-	<?php print_r( ltiopt( 'version' ) ); ?>
-	<br/>
-	<?php print_r( $this->get_supported_post_types() ); ?>
-	<br/><br/>
-
 	<div class="lti-seo-title">
 		<h2><?php echo ltint( 'LTI SEO Settings' ); ?></h2>
 	</div>
@@ -58,9 +51,28 @@
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-							<label for="global_keywords">Site-wide keywords</label>
-							<textarea name="global_keywords"
-							          id="global_keywords"><?php echo ltiopt( 'global_keywords' ); ?></textarea>
+							<label>Keyword Support
+								<input type="checkbox" name="keyword_support"
+								       id="keyword_support" <?php echo ltichk( 'keyword_support' ); ?>/>
+							</label>
+
+							<div class="checkbox-group">
+								<label for="keyword_cat_based">Based on categories
+									<input type="checkbox" name="keyword_cat_based"
+									       id="keyword_cat_based" <?php echo ltichk( 'keyword_cat_based' ); ?>/>
+								</label>
+								<label for="keyword_tag_based">Based on tags
+									<input type="checkbox" name="keyword_tag_based"
+									       id="keyword_tag_based" <?php echo ltichk( 'keyword_tag_based' ); ?>/>
+								</label>
+							</div>
+							<div class="form-group">
+								<div class="input-group">
+									<label for="global_keywords">Site-wide keywords</label>
+								<textarea name="global_keywords"
+								          id="global_keywords"><?php echo ltiopt( 'global_keywords' ); ?></textarea>
+								</div>
+							</div>
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
@@ -71,31 +83,10 @@
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-							<label>Keyword Support
-								<input type="checkbox" name="keyword_support"
-								       id="keyword_support" <?php echo ltichk( 'keyword_support' ); ?>/>
-							</label>
-
-							<!--							<div class="checkbox-group">-->
-							<!--								<label for="cat_based_keywords">Based on categories-->
-							<!--									<input type="checkbox" name="cat_based_keywords" id="cat_based_keywords"/>-->
-							<!--								</label>-->
-							<!--								<label for="tag_based_keywords">Based on tags-->
-							<!--									<input type="checkbox" name="tag_based_keywords" id="tag_based_keywords"/>-->
-							<!--								</label>-->
-							<!--							</div>-->
-						</div>
-						<div class="form-help-container">
-							<div class="form-help">
-								<p>Add support for keywords.</p>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="input-group">
 							<div class="checkbox">
 								<label for="meta_description">Description meta tag support
-									<input type="checkbox" name="meta_description" id="meta_description"/>
+									<input type="checkbox" name="meta_description"
+									       id="meta_description" <?php echo ltichk( 'meta_description' ); ?>/>
 								</label>
 							</div>
 						</div>
@@ -120,6 +111,21 @@
 						<div class="form-help-container">
 							<div class="form-help">
 								<p>Adds your own description meta tag that will be applied to the front page.</p>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<label for="frontpage_keyword">Keywords
+								<input type="checkbox" name="frontpage_keyword"
+								       id="frontpage_keyword" <?php echo ltichk( 'frontpage_keyword' ); ?>/>
+							</label>
+							<textarea name="frontpage_keyword_text"
+							          id="frontpage_keyword_text"><?php echo ltiopt( 'frontpage_keyword_text' ); ?></textarea>
+						</div>
+						<div class="form-help-container">
+							<div class="form-help">
+								<p>Adds your own keyword meta tag that will be applied to the front page.</p>
 							</div>
 						</div>
 					</div>
@@ -263,6 +269,10 @@
 									       id="open_graph_support" <?php echo ltichk( 'open_graph_support' ); ?> />
 								</label>
 							</div>
+							<label for="facebook_publisher">Facebook publisher URL
+								<input type="text" name="facebook_publisher" id="facebook_publisher"
+								       value="<?php echo ltiopt( 'facebook_publisher' ); ?>" placeholder="https://www.facebook.com/publisher"/>
+							</label>
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
@@ -284,29 +294,42 @@
 
 					<div class="form-group">
 						<div class="input-group">
-								<div class="checkbox">
-									<label for="meta_description">Twitter Cards support
-										<input type="checkbox" name="twitter_card_support"
-										       id="twitter_card_support" <?php echo ltichk( 'twitter_card_support' ); ?> />
-									</label>
-								</div>
-									<div class="input-group">
-										<label>
-											<input name="twitter_card_type"
-											       type="radio" <?php echo ltirad( 'twitter_card_type', 'summary' ); ?>
-											       value="summary"/>Summary card
-										</label>
-										<label>
-											<input name="twitter_card_type"
-											       type="radio" <?php echo ltirad( 'twitter_card_type',
-												'summary_img' ); ?>
-											       value="summary_img"/>Summary card with large image
-										</label>
-										<label for="twitter_handle">Twitter username
-											<input type="text" name="twitter_handle" id="twitter_handle"
-											       value="<?php echo ltiopt( 'twitter_handle' ); ?>" placeholder="@username"/>
-										</label>
-									</div>
+							<div class="checkbox">
+								<label for="meta_description">Twitter Cards support
+									<input type="checkbox" name="twitter_card_support"
+									       id="twitter_card_support" <?php echo ltichk( 'twitter_card_support' ); ?> />
+								</label>
+							</div>
+							<div class="input-group">
+								<label>
+									<input name="twitter_card_type"
+									       type="radio" <?php echo ltirad( 'twitter_card_type', 'summary' ); ?>
+									       value="summary"/>Summary card
+								</label>
+								<label>
+									<input name="twitter_card_type"
+									       type="radio" <?php echo ltirad( 'twitter_card_type',
+										'summary_img' ); ?>
+									       value="summary_img"/>Summary card with large image
+								</label>
+								<label for="twitter_publisher">Twitter publisher username
+									<input type="text" name="twitter_publisher" id="twitter_publisher"
+									       value="<?php echo ltiopt( 'twitter_publisher' ); ?>" placeholder="@publisher"/>
+								</label>
+							</div>
+
+						</div>
+						<div class="form-help-container">
+							<div class="form-help">
+								<p></p>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<label for="gplus_publisher">Google+ publisher URL</label>
+								<input type="text" name="gplus_publisher" id="gplus_publisher"
+								       value="<?php echo ltiopt( 'gplus_publisher' ); ?>" placeholder="https://plus.google.com/+Editor/"/>
 
 						</div>
 						<div class="form-help-container">

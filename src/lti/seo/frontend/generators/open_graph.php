@@ -33,7 +33,7 @@ class Open_Graph extends GenericMetaTag {
 
 }
 
-class Frontpage_Open_Graph extends Open_Graph implements CanMakeHeaderTags {
+class Frontpage_Open_Graph extends Open_Graph implements ICanMakeHeaderTags {
 
 	protected $image_retrieval_mode = "with_main_image";
 
@@ -54,7 +54,7 @@ class Frontpage_Open_Graph extends Open_Graph implements CanMakeHeaderTags {
 
 }
 
-class Singular_Open_Graph extends Frontpage_Open_Graph implements CanMakeHeaderTags {
+class Singular_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeaderTags {
 
 	protected $image_retrieval_mode = "all";
 

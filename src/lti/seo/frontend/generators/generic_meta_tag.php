@@ -1,14 +1,10 @@
 <?php namespace Lti\Seo\Generators;
 
-use Lti\Seo\Wordpress_Helper;
+use Lti\Seo\Helpers\ICanHelp;
+use Lti\Seo\Plugin\Plugin_Settings;
 
-/**
- * Interface CanMakeHeaderTags
- *
- *
- * @package Lti\Seo\Generators
- */
-interface CanMakeHeaderTags {
+
+interface ICanMakeHeaderTags {
 	public function get_tags();
 
 	public function make_tags();
@@ -26,8 +22,23 @@ abstract class GenericMetaTag {
 
 	protected $number_images = -1;
 
-	public function __construct( Wordpress_Helper $helper ) {
+	/**
+	 * @var ICanHelp|\Lti\Seo\Helpers\Wordpress_Helper
+	 */
+	protected $helper;
+
+	/**
+	 * @var \Lti\Seo\Plugin\Plugin_Settings
+	 */
+	protected $settings;
+
+	/**
+	 * @param ICanHelp $helper
+	 * @param Plugin_Settings $settings
+	 */
+	public function __construct( ICanHelp $helper, Plugin_Settings $settings ) {
 		$this->helper = $helper;
+		$this->settings = $settings;
 		$this->tags   = $this->make_tags();
 	}
 

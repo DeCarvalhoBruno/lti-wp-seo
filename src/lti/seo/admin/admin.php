@@ -1,5 +1,8 @@
 <?php namespace Lti\Seo;
 
+use Lti\Seo\Plugin\Plugin_Settings;
+use Lti\Seo\Plugin\Postbox_Values;
+
 class Admin {
 
 	private $plugin_name;
@@ -7,7 +10,7 @@ class Admin {
 	private $settings;
 	private $unsupported_post_types = array( 'attachment' );
 
-	public function __construct( $plugin_name, $version, Settings $settings, $plugin_path ) {
+	public function __construct( $plugin_name, $version, Plugin_Settings $settings, $plugin_path ) {
 
 		$this->plugin_name    = $plugin_name;
 		$this->version        = $version;
@@ -65,6 +68,7 @@ class Admin {
 	public function validate_input( $data ) {
 		unset( $data['_wpnonce'], $data['option_page'], $data['_wp_http_referer'] );
 		$this->settings = $this->settings->save( $data );
+
 		update_option( 'lti_seo_options', $this->settings );
 //		echo "after save<pre>";
 //		print_r($this->settings);
@@ -88,7 +92,13 @@ class Admin {
 	}
 
 	public function metadata_box( \WP_Post $post ) {
+		$content = get_post_meta( $post->ID, "lti_seo", true );
+		print_r($content);
 		include $this->admin_dir . '/partials/posts-box.php';
+	}
+
+	public function box(){
+
 	}
 
 	public function get_supported_post_types() {
@@ -98,10 +108,14 @@ class Admin {
 	}
 
 	/**
-	 * @return \Lti\Seo\Settings
+	 * @return \Lti\Seo\Plugin\Plugin_Settings
 	 */
 	public function get_settings() {
 		return $this->settings;
+	}
+
+	public function set_settings($settings) {
+		$this->settings = $settings;
 	}
 
 	/**
@@ -110,9 +124,9 @@ class Admin {
 	 * @param int $update
 	 */
 	public function save_post( $post_ID, $post, $update ) {
-
-//		$f = new \stdClass();
-//		update_post_meta($post_ID,'lti_seo_meta',$f);
+		if(isset($_POST['lti_seo'])){
+			update_post_meta($post_ID,'lti_seo',new Postbox_Values((object)$_POST['lti_seo']));
+		}
 
 	}
 }

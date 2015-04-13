@@ -90,14 +90,14 @@ class JSON_LD {
 
 class Frontpage_JSON_LD extends JSON_LD{
 	/**
-	 * @var \Lti\Seo\Settings
+	 * @var \Lti\Seo\Plugin\Plugin_Settings
 	 */
 	public $options = array();
 
 	private $profiles = array();
 
 	/**
-	 * @param \Lti\Seo\Settings $settings
+	 * @param \Lti\Seo\Plugin\Plugin_Settings $settings
 	 */
 	public function __construct( $settings ) {
 		$this->options = $settings;

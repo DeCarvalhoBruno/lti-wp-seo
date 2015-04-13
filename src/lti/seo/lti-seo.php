@@ -1,16 +1,8 @@
 <?php namespace Lti\Seo;
 
-/**
- * The core plugin class.
- *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
- *
- * @author     Your Name <email@example.com>
- */
+use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Plugin\Plugin_Settings;
+
 class LTI_SEO {
 
 	/**
@@ -41,10 +33,11 @@ class LTI_SEO {
 	public static $instance;
 
 	/**
-	 * @var \Lti\Seo\Settings
+	 * @var \Lti\Seo\Plugin\Plugin_Settings
 	 */
 	private $settings;
 
+	private $file_path;
 	public $plugin_path;
 	/**
 	 * @var \Lti\Seo\Admin
@@ -62,15 +55,17 @@ class LTI_SEO {
 	 *
 	 */
 	public function __construct() {
-		require_once plugin_dir_path( __FILE__ ) . 'settings.php';
+		$this->file_path = plugin_dir_path( __FILE__ );
+		require_once $this->file_path . 'plugin/form_fields.php';
+		require_once $this->file_path . 'plugin/plugin.php';
 		$this->name        = 'lti-wp-seo';
-		$this->plugin_path = dirname( dirname( dirname( plugin_dir_path( __FILE__ ) ) ) );
-
-		$this->settings = get_option( "lti_seo_options" );
+		$this->plugin_path = dirname( dirname( dirname( $this->file_path ) ) );
+		$this->settings    = get_option( "lti_seo_options" );
 
 		if ( $this->settings === false ) {
-			$this->settings = new Settings( null );
+			$this->settings = new Plugin_Settings( null );
 		}
+
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -95,54 +90,21 @@ class LTI_SEO {
 	}
 
 
-	/**
-	 * Load the required dependencies for this plugin.
-	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - lti-seo_Loader. Orchestrates the hooks of the plugin.
-	 * - lti-seo_i18n. Defines internationalization functionality.
-	 * - lti-seo_Admin. Defines all hooks for the admin area.
-	 * - lti-seo_Public. Defines all hooks for the public side of the site.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
-	 *
-	 */
 	private function load_dependencies() {
-		require_once plugin_dir_path( __FILE__ ) . 'helpers.php';
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		require_once plugin_dir_path( ( __FILE__ ) ) . 'loader.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		require_once plugin_dir_path( ( __FILE__ ) ) . 'i18n.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		require_once plugin_dir_path( __FILE__ ) . 'admin/admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/frontend.php';
-
-		require_once plugin_dir_path( __FILE__ ) . 'wordpress_helper.php';
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/json_ld.php';
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/generic_meta_tag.php';
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/open_graph.php';
-		require_once plugin_dir_path( __FILE__ ) . 'frontend/generators/twitter_cards.php';
+		require_once $this->file_path . 'helper.php';
+		require_once $this->file_path . 'frontend/helpers/generic_helper.php';
+		require_once $this->file_path . 'loader.php';
+		require_once $this->file_path . 'i18n.php';
+		require_once $this->file_path . 'admin/admin.php';
+		require_once $this->file_path . 'frontend/frontend.php';
+		require_once $this->file_path . 'plugin/postbox.php';
+		require_once $this->file_path . 'frontend/helpers/wordpress_helper.php';
+		require_once $this->file_path . 'frontend/generators/json_ld.php';
+		require_once $this->file_path . 'frontend/generators/generic_meta_tag.php';
+		require_once $this->file_path . 'frontend/generators/open_graph.php';
+		require_once $this->file_path . 'frontend/generators/twitter_cards.php';
+		require_once $this->file_path . 'frontend/generators/keywords.php';
 		$this->loader = new Loader();
-		$this->helper = new Wordpress_Helper($this->settings);
-
-
 	}
 
 	/**
@@ -194,15 +156,16 @@ class LTI_SEO {
 	 */
 	private function define_public_hooks() {
 
-		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings, $this->helper);
+		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings,
+			new Wordpress_Helper( $this->settings ) );
 
 		//$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
 		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'head', 0 );
 
-		if ( $this->settings->get('canonical_urls') === true ) {
+		if ( $this->settings->get( 'canonical_urls' ) === true ) {
 			$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'rel_canonical' );
 		}
-		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head', 10 );
+		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head', 0 );
 	}
 
 	/**

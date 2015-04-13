@@ -1,32 +1,17 @@
-/**
-Admin options page
-options-general.php?page=lti-seo-options
-*/
+/*****************************************************************************************************
+                                    PLUGIN OPTIONS
+                                        options-general.php?page=lti-seo-options
+******************************************************************************************************/
+
 @media (min-width: 300px) {
     .lti-seo-title {
         background-color: #FFA500;
-        padding:10px;
-        border-radius: 3px;
+        padding:10px 25px;
+        /*border-radius: 3px;*/
         border: 1px solid transparent;
-        width: 95%;
-        margin: 0 auto;
+        width: 100%;
+        margin-left: -20px;
     }
-    /*#lseo-header {*/
-        /*width:90%;*/
-        /*margin: 0 auto;*/
-        /*background-color: #EC7D2C;*/
-        /*border-radius: 10px;*/
-
-    /*}*/
-
-    /*#lseo-header-img {*/
-        /*background-image: url('../img/icon-256x256.png');*/
-        /*background-repeat: no-repeat;*/
-        /*background-size: contain;*/
-        /*width: 200px;*/
-        /*height: 200px;*/
-        /*margin: 0 auto;*/
-    /*}*/
 
     #flseo{
         position: relative;
@@ -112,6 +97,10 @@ options-general.php?page=lti-seo-options
         display: block;
         font-weight: bold;
         font-size: 1.2em;
+    }
+
+    #flseo label >input {
+        font-weight: normal;
     }
 
     #flseo .input-group input, .input-group textarea {
@@ -428,11 +417,41 @@ options-general.php?page=lti-seo-options
         margin-left:100px;
 
     }
-
 }
 
 
+/*****************************************************************************************************
+                                    POST BOX
+                                        post.php
+******************************************************************************************************/
 
 
+#plseo .form-group {
+    position: relative;
+    display: block;
+    width: 95%;
+    overflow: hidden;
+    margin: 5px auto;
+    /*border: 1px solid #e7e7e7;*/
+    padding: 5px;
+    /*border-radius: 3px;*/
+}
 
+#plseo .input-group {
+    display: block;
+    width: 95%;
+    margin: 0 auto;
+}
+
+#plseo label {
+    margin: 0 0 5px 3px;
+    display: block;
+    font-weight: bold;
+    /*font-size: 1.2em;*/
+}
+
+#plseo input {
+    display: block;
+    width: 95%;
+}
 

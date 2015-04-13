@@ -1,6 +1,7 @@
 <?php namespace Lti\Seo\Generators;
 
-use Lti\Seo\Wordpress_Helper;
+use Lti\Seo\Helpers\ICanHelp;
+use Lti\Seo\Plugin\Plugin_Settings;
 
 
 class Twitter_Card extends GenericMetaTag {
@@ -8,10 +9,9 @@ class Twitter_Card extends GenericMetaTag {
 	protected $type;
 	protected $tags;
 
-	public function __construct( Wordpress_Helper $helper, $type = "summary", $handle = null ) {
-		$this->type   = $type;
-		$this->handle = $handle;
-		parent::__construct( $helper );
+	public function __construct( ICanHelp $helper, Plugin_Settings $settings, $type = "summary" ) {
+		//$this->type = $type;
+		parent::__construct( $helper, $settings);
 	}
 
 	public function get_tags() {
@@ -52,19 +52,20 @@ class Twitter_Card extends GenericMetaTag {
 
 }
 
-class Frontpage_Twitter_Card extends Twitter_Card implements CanMakeHeaderTags {
+class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags {
 
 	protected $image_retrieval_mode = "fallback";
 
-	protected $number_images = -1;
+	protected $number_images = - 1;
 
 	public function make_tags() {
-		$twitter = array();
-
+		$twitter         = array();
+		$handle          = $this->helper->get_twitter_handle();
 		$twitter['card'] = $this->type;
-		if ( ! is_null( $this->handle ) ) {
-			$twitter['site']    = $this->handle;
-			$twitter['creator'] = $this->handle;
+
+		if ( ! is_null( $handle ) ) {
+			$twitter['site']    = $handle;
+			$twitter['creator'] = $handle;
 		}
 		$twitter['title']       = esc_attr( $this->helper->get_title() );
 		$twitter['url']         = esc_url_raw( $this->helper->get_canonical_url() );
@@ -87,18 +88,17 @@ class Singular_Gallery_Twitter_Card extends Singular_Twitter_Card {
 
 	protected $type = "gallery";
 
-	public function __construct( Wordpress_Helper $helper, $handle = null ) {
-		$this->handle = $handle;
-		parent::__construct( $helper, $this->type, $handle );
+	public function __construct( ICanHelp $helper, Plugin_Settings $settings ) {
+		parent::__construct( $helper, $settings, $this->type );
 	}
 
 	protected function process_images( $img ) {
 		$meta = "";
-		$i=0;
+		$i    = 0;
 		if ( is_array( $img ) ) {
 			foreach ( $img as $image ) {
 				unset( $image->properties['type'] );
-				$meta .= $this->generate_tag( $this->meta_tag_name_attribute, 'twitter:image'.$i++, $image->url );
+				$meta .= $this->generate_tag( $this->meta_tag_name_attribute, 'twitter:image' . $i ++, $image->url );
 				foreach ( $image->properties as $key => $val ) {
 					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, sprintf( 'twitter:image:%s', $key ),
 						$val );
