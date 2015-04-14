@@ -4,7 +4,7 @@ class Open_Graph extends GenericMetaTag {
 
 	protected $meta_tag_name_attribute = "property";
 
-	public function get_tags() {
+	public function display_tags() {
 		$img = $this->tags['og']['image'];
 		unset( $this->tags['og']['image'] );
 

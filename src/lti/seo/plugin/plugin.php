@@ -3,11 +3,23 @@
 class Defaults {
 	public $values = array(
 		array( "version", 'Text', '1.0.0' ),
-		array( 'global_keywords', 'Text' ),
 		array( 'canonical_urls', 'Checkbox' ),
 		array( 'keyword_support', 'Checkbox' ),
 		array( 'keyword_tag_based', 'Checkbox' ),
 		array( 'keyword_cat_based', 'Checkbox' ),
+		array( 'robots_support', 'Checkbox' ),
+		array( 'robots_noindex', 'Checkbox', false, true ),
+		array( 'robots_nofollow', 'Checkbox', false, true ),
+		array( 'robots_noodp', 'Checkbox', false, true ),
+		array( 'robots_noydir', 'Checkbox', false, true ),
+		array( 'robots_noarchive', 'Checkbox', false, true ),
+		array( 'robots_nosnippet', 'Checkbox', false, true ),
+		array( 'robots_date_based', 'Checkbox' ),
+		array( 'robots_cat_based', 'Checkbox' ),
+		array( 'robots_tag_based', 'Checkbox' ),
+		array( 'robots_author_based', 'Checkbox' ),
+		array( 'robots_search_based', 'Checkbox' ),
+		array( 'robots_notfound_based', 'Checkbox' ),
 		array( 'meta_description', 'Checkbox' ),
 		array( 'open_graph_support', 'Checkbox' ),
 		array( 'facebook_publisher', 'Url' ),
@@ -51,16 +63,18 @@ class Plugin_Settings {
 		$defaults = new Defaults();
 
 		foreach ( $defaults->values as $value ) {
+			$valueIsTracked = ( isset( $value[3] ) ) ? true : false;
+
 			$storedValue = null;
 			if ( isset( $settings->{$value[0]} ) && ! is_object( $settings->{$value[0]} ) ) {
 				$storedValue = $settings->{$value[0]};
 			}
-			$className = __NAMESPACE__."\\Field_" . $value[1];
+			$className = __NAMESPACE__ . "\\Field_" . $value[1];
 
 			if ( isset( $value[2] ) ) {
-				$this->{$value[0]} = new $className( $storedValue, $value[2] );
+				$this->{$value[0]} = new $className( $storedValue, $value[2], $valueIsTracked );
 			} else {
-				$this->{$value[0]} = new $className( $storedValue );
+				$this->{$value[0]} = new $className( $storedValue, null, $valueIsTracked );
 			}
 		}
 	}
@@ -82,8 +96,25 @@ class Plugin_Settings {
 	}
 
 	public function set( $key, $value, $type = "Text" ) {
-	$className    = __NAMESPACE__ . $type;
+		$className    = __NAMESPACE__ . "\\Field_" . $type;
 		$this->{$key} = new $className( $value );
+	}
+
+	public function compare( $values ) {
+		$changed       = array();
+		$currentValues = get_object_vars( $this );
+		$oldValues     = get_object_vars( $values );
+
+		foreach ( $currentValues as $key => $value ) {
+			if ( $value->isTracked ) {
+				if ( isset( $oldValues[ $key ] ) && $oldValues[ $key ]->value != $value->value ) {
+					$changed[ $key ] = $value->value;
+				}
+			}
+		}
+
+		return $changed;
+
 	}
 }
 

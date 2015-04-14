@@ -66,6 +66,7 @@ class LTI_SEO {
 			$this->settings = new Plugin_Settings( null );
 		}
 
+
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -104,7 +105,9 @@ class LTI_SEO {
 		require_once $this->file_path . 'frontend/generators/open_graph.php';
 		require_once $this->file_path . 'frontend/generators/twitter_cards.php';
 		require_once $this->file_path . 'frontend/generators/keywords.php';
+		require_once $this->file_path . 'frontend/generators/robots.php';
 		$this->loader = new Loader();
+		$this->helper = new Wordpress_Helper( $this->settings );
 	}
 
 	/**
@@ -130,7 +133,7 @@ class LTI_SEO {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-		$this->plugin_admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path );
+		$this->plugin_admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path, $this->helper );
 
 		$this->loader->add_action( 'admin_init', $this->plugin_admin, 'register_setting' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles' );
@@ -157,7 +160,7 @@ class LTI_SEO {
 	private function define_public_hooks() {
 
 		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings,
-			new Wordpress_Helper( $this->settings ) );
+			$this->helper);
 
 		//$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
 		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'head', 0 );

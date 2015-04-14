@@ -14,7 +14,7 @@ class Twitter_Card extends GenericMetaTag {
 		parent::__construct( $helper, $settings);
 	}
 
-	public function get_tags() {
+	public function display_tags() {
 		$img = $this->tags['twitter']['image'];
 		unset( $this->tags['twitter']['image'] );
 

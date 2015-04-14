@@ -1,5 +1,7 @@
 <?php namespace Lti\Seo;
 
+use Lti\Seo\Generators\Singular_Keyword;
+use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Plugin_Settings;
 use Lti\Seo\Plugin\Postbox_Values;
 
@@ -7,10 +9,28 @@ class Admin {
 
 	private $plugin_name;
 	private $version;
+	/**
+	 * @var \Lti\Seo\Plugin\Plugin_Settings
+	 */
 	private $settings;
+	/**
+	 * @var \Lti\Seo\Plugin\Postbox_Values
+	 */
+	private $box_values;
 	private $unsupported_post_types = array( 'attachment' );
+	private $current_page = "options-general";
+	/**
+	 * @var \Lti\Seo\Helpers\Wordpress_Helper
+	 */
+	private $helper;
 
-	public function __construct( $plugin_name, $version, Plugin_Settings $settings, $plugin_path ) {
+	public function __construct(
+		$plugin_name,
+		$version,
+		Plugin_Settings $settings,
+		$plugin_path,
+		ICanHelp $helper
+	) {
 
 		$this->plugin_name    = $plugin_name;
 		$this->version        = $version;
@@ -19,6 +39,7 @@ class Admin {
 		$this->plugin_dir     = $plugin_path;
 		$this->plugin_dir_url = plugin_dir_url( $plugin_path . '/index.php' );
 		$this->settings       = $settings;
+		$this->helper         = $helper;
 	}
 
 	public function enqueue_styles() {
@@ -67,7 +88,16 @@ class Admin {
 
 	public function validate_input( $data ) {
 		unset( $data['_wpnonce'], $data['option_page'], $data['_wp_http_referer'] );
+
+		$oldSettings    = $this->settings;
 		$this->settings = $this->settings->save( $data );
+
+		if ( $this->settings != $oldSettings ) {
+			$changed = $this->settings->compare( $oldSettings );
+			if ( ! empty( $changed ) ) {
+				$this->helper->update_global_post_fields( $changed );
+			}
+		}
 
 		update_option( 'lti_seo_options', $this->settings );
 //		echo "after save<pre>";
@@ -92,13 +122,23 @@ class Admin {
 	}
 
 	public function metadata_box( \WP_Post $post ) {
-		$content = get_post_meta( $post->ID, "lti_seo", true );
-		print_r($content);
+		$this->box_values = get_post_meta( $post->ID, "lti_seo", true );
+
+		if ( empty( $this->box_values ) ) {
+			$this->box_values = new Postbox_Values( array() );
+		}
+
+		if(is_null($this->box_values->get('keywords'))){
+			$f = new Singular_Keyword($this->helper, $this->settings, $post->ID);
+			$this->box_values->set('keywords_suggestion', $f->get_tags());
+		}
+
+		if(is_null($this->box_values->get('description'))){
+			$this->box_values->set('description_suggestion', $this->settings->get('frontpage_description_text'));
+		}
+
+		$this->set_current_page( 'post-edit' );
 		include $this->admin_dir . '/partials/posts-box.php';
-	}
-
-	public function box(){
-
 	}
 
 	public function get_supported_post_types() {
@@ -110,13 +150,15 @@ class Admin {
 	/**
 	 * @return \Lti\Seo\Plugin\Plugin_Settings
 	 */
-	public function get_settings() {
+	public function get_form_values() {
+		switch ( $this->current_page ) {
+			case "post-edit":
+				return $this->box_values;
+		}
+
 		return $this->settings;
 	}
 
-	public function set_settings($settings) {
-		$this->settings = $settings;
-	}
 
 	/**
 	 * @param int $post_ID
@@ -124,9 +166,17 @@ class Admin {
 	 * @param int $update
 	 */
 	public function save_post( $post_ID, $post, $update ) {
-		if(isset($_POST['lti_seo'])){
-			update_post_meta($post_ID,'lti_seo',new Postbox_Values((object)$_POST['lti_seo']));
+		if ( isset( $_POST['lti_seo'] ) ) {
+			update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $_POST['lti_seo'] ) );
 		}
 
+	}
+
+	public function set_current_page( $page ) {
+		$this->current_page = $page;
+	}
+
+	public function get_settings(){
+		return $this->settings;
 	}
 }

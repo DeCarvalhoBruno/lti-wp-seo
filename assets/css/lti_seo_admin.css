@@ -9,7 +9,6 @@
         padding:10px 25px;
         /*border-radius: 3px;*/
         border: 1px solid transparent;
-        width: 100%;
         margin-left: -20px;
     }
 
@@ -50,7 +49,7 @@
     }
 
     #flseo .input-group > .input-group label {
-        margin: 0 0 10px 10px;
+        margin: 10px 0 10px 10px;
     }
 
     #flseo .input-group > .input-group.file-selector input[type="text"] {
@@ -133,6 +132,10 @@
         font-size: 1em;
     }
 
+    #flseo .input-group .checkbox-group label {
+        margin-left: 20px;
+    }
+
     #flseo .input-group .checkbox {
         margin-top: 25px;
     }
@@ -149,6 +152,16 @@
 
     #flseo ul > li {
         margin-left: 2em;
+    }
+
+    #flseo .char-counter.danger {
+        font-weight: bold;
+        color: #d80000;
+    }
+
+    #flseo .char-counter {
+        font-weight: normal;
+        color: #000000;
     }
 
 
@@ -272,21 +285,7 @@
             border-bottom-color: #ffffff;
         }
     }
-    /*.nav-pills > li {*/
-    /*float: left;*/
-    /*}*/
-    /*.nav-pills > li > a {*/
-    /*border-radius: 4px;*/
-    /*}*/
-    /*.nav-pills > li + li {*/
-    /*margin-left: 2px;*/
-    /*}*/
-    /*.nav-pills > li.active > a,*/
-    /*.nav-pills > li.active > a:hover,*/
-    /*.nav-pills > li.active > a:focus {*/
-    /*color: #ffffff;*/
-    /*background-color: #337ab7;*/
-    /*}*/
+
     #lti_seo_wrapper .nav-stacked > li {
         float: none;
     }
@@ -404,6 +403,10 @@
         width: 45%;
     }
 
+    /*#flseo .form-group .form-group .input-group {*/
+        /*width: 100%;*/
+    /*}*/
+
 
     #flseo .form-help-container {
         width: 45%;
@@ -453,5 +456,38 @@
 #plseo input {
     display: block;
     width: 95%;
+}
+
+#plseo .checkbox-group label {
+    margin: 5px 0 3px 10px;
+    display: block;
+    font-weight: normal;
+}
+
+#plseo .input-group textarea {
+    border-radius: 3px;
+    max-width: 100%;
+}
+
+#plseo .input-group input[type="checkbox"] {
+    float: right;
+    margin:0.4em 25% 0 2%;
+    width: 5%;
+}
+
+#plseo .input-group input[type="radio"] {
+    float: right;
+    margin: 0.4em 25% 0 2%;
+    width: 5%;
+}
+
+#plseo .char-counter.danger {
+    font-weight: bold;
+    color: #d80000;
+}
+
+#plseo .char-counter {
+    font-weight: normal;
+    color: #000000;
 }
 

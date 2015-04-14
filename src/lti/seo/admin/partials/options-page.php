@@ -32,6 +32,11 @@
 		      action="<?php echo admin_url( 'options-general.php?page=lti-seo-options' ); ?>">
 			<?php echo wp_nonce_field( 'lti_seo_options', 'lti_seo_token' ); ?>
 			<div class="tab-content">
+				<?php
+				/***********************************************************************************************
+				 *                                  GENERAL TAB
+				 ***********************************************************************************************/
+				?>
 				<div role="tabpanel" class="tab-pane active" id="tab_general">
 					<div class="form-group">
 						<div class="input-group">
@@ -51,7 +56,7 @@
 					</div>
 					<div class="form-group">
 						<div class="input-group">
-							<label>Keyword Support
+							<label>Keywords tag
 								<input type="checkbox" name="keyword_support"
 								       id="keyword_support" <?php echo ltichk( 'keyword_support' ); ?>/>
 							</label>
@@ -66,11 +71,80 @@
 									       id="keyword_tag_based" <?php echo ltichk( 'keyword_tag_based' ); ?>/>
 								</label>
 							</div>
-							<div class="form-group">
-								<div class="input-group">
-									<label for="global_keywords">Site-wide keywords</label>
-								<textarea name="global_keywords"
-								          id="global_keywords"><?php echo ltiopt( 'global_keywords' ); ?></textarea>
+						</div>
+						<div class="form-help-container">
+							<div class="form-help">
+								<p>A list of comma delimited words (i.e "cats, dogs, elephants") that will be added
+									before the keywords for all selected post types.</p>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<label>Robots tag
+								<input type="checkbox" name="robots_support"
+								       id="robots_support" <?php echo ltichk( 'robots_support' ); ?>/>
+							</label>
+
+							<div class="input-group">
+								<label>Attributes to apply</label>
+
+								<div class="checkbox-group">
+									<label for="robots_noindex">NOINDEX
+										<input type="checkbox" name="robots_noindex"
+										       id="robots_noindex" <?php echo ltichk( 'robots_noindex' ); ?>/>
+									</label>
+									<label for="robots_nofollow">NOFOLLOW
+										<input type="checkbox" name="robots_nofollow"
+										       id="robots_nofollow" <?php echo ltichk( 'robots_nofollow' ); ?>/>
+									</label>
+									<label for="robots_noodp">NOODP
+										<input type="checkbox" name="robots_noodp"
+										       id="robots_noodp" <?php echo ltichk( 'robots_noodp' ); ?>/>
+									</label>
+									<label for="robots_noydir">NOYDIR
+										<input type="checkbox" name="robots_noydir"
+										       id="robots_noydir" <?php echo ltichk( 'robots_noydir' ); ?>/>
+									</label>
+									<label for="robots_noarchive">NOARCHIVE
+										<input type="checkbox" name="robots_noarchive"
+										       id="robots_noarchive" <?php echo ltichk( 'robots_noarchive' ); ?>/>
+									</label>
+									<label for="robots_nosnippet">NOSNIPPET
+										<input type="checkbox" name="robots_nosnippet"
+										       id="robots_nosnippet" <?php echo ltichk( 'robots_nosnippet' ); ?>/>
+									</label>
+								</div>
+								</label>
+							</div>
+							<div class="input-group">
+								<label>Applied to</label>
+
+								<div class="checkbox-group">
+									<label for="robots_date_based">Date archives
+										<input type="checkbox" name="robots_date_based"
+										       id="robots_date_based" <?php echo ltichk( 'robots_date_based' ); ?>/>
+									</label>
+									<label for="robots_cat_based">Categories
+										<input type="checkbox" name="robots_cat_based"
+										       id="robots_cat_based" <?php echo ltichk( 'robots_cat_based' ); ?>/>
+									</label>
+									<label for="robots_tag_based">Tags
+										<input type="checkbox" name="robots_tag_based"
+										       id="robots_tag_based" <?php echo ltichk( 'robots_tag_based' ); ?>/>
+									</label>
+									<label for="robots_author_based">Author pages
+										<input type="checkbox" name="robots_author_based"
+										       id="robots_author_based" <?php echo ltichk( 'robots_author_based' ); ?>/>
+									</label>
+									<label for="robots_search_based">Searches
+										<input type="checkbox" name="robots_search_based"
+										       id="robots_search_based" <?php echo ltichk( 'robots_search_based' ); ?>/>
+									</label>
+									<label for="robots_notfound_based">"Not found" page
+										<input type="checkbox" name="robots_notfound_based"
+										       id="robots_notfound_based" <?php echo ltichk( 'robots_notfound_based' ); ?>/>
+									</label>
 								</div>
 							</div>
 						</div>
@@ -98,6 +172,11 @@
 						</div>
 					</div>
 				</div>
+				<?php
+				/***********************************************************************************************
+				 *                                      FRONTPAGE TAB
+				 ***********************************************************************************************/
+				?>
 				<div role="tabpanel" class="tab-pane" id="tab_frontpage">
 					<div class="form-group">
 						<div class="input-group">
@@ -107,6 +186,7 @@
 							</label>
 							<textarea name="frontpage_description_text"
 							          id="frontpage_description_text"><?php echo ltiopt( 'frontpage_description_text' ); ?></textarea>
+							<span id="wfrontpage_description_text" class="char-counter">Character count:&nbsp;<span id="cfrontpage_description_text"></span></span>
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
@@ -177,7 +257,7 @@
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<label>Social Accounts</label>
+								<label>Social accounts</label>
 
 								<div class="input-group">
 									<label for="account_facebook">Facebook
@@ -209,7 +289,6 @@
 										       value="<?php echo ltiopt( 'account_myspace' ); ?>"/>
 									</label>
 								</div>
-
 							</div>
 							<div class="form-help-container">
 								<div class="form-help">
@@ -260,6 +339,11 @@
 						</div>
 					</div>
 				</div>
+				<?php
+				/***********************************************************************************************
+				 *                             SOCIAL TAB
+				 ***********************************************************************************************/
+				?>
 				<div role="tabpanel" class="tab-pane" id="tab_social">
 					<div class="form-group">
 						<div class="input-group">
@@ -271,7 +355,8 @@
 							</div>
 							<label for="facebook_publisher">Facebook publisher URL
 								<input type="text" name="facebook_publisher" id="facebook_publisher"
-								       value="<?php echo ltiopt( 'facebook_publisher' ); ?>" placeholder="https://www.facebook.com/publisher"/>
+								       value="<?php echo ltiopt( 'facebook_publisher' ); ?>"
+								       placeholder="https://www.facebook.com/publisher"/>
 							</label>
 						</div>
 						<div class="form-help-container">
@@ -314,7 +399,8 @@
 								</label>
 								<label for="twitter_publisher">Twitter publisher username
 									<input type="text" name="twitter_publisher" id="twitter_publisher"
-									       value="<?php echo ltiopt( 'twitter_publisher' ); ?>" placeholder="@publisher"/>
+									       value="<?php echo ltiopt( 'twitter_publisher' ); ?>"
+									       placeholder="@publisher"/>
 								</label>
 							</div>
 
@@ -328,8 +414,9 @@
 					<div class="form-group">
 						<div class="input-group">
 							<label for="gplus_publisher">Google+ publisher URL</label>
-								<input type="text" name="gplus_publisher" id="gplus_publisher"
-								       value="<?php echo ltiopt( 'gplus_publisher' ); ?>" placeholder="https://plus.google.com/+Editor/"/>
+							<input type="text" name="gplus_publisher" id="gplus_publisher"
+							       value="<?php echo ltiopt( 'gplus_publisher' ); ?>"
+							       placeholder="https://plus.google.com/+Editor/"/>
 
 						</div>
 						<div class="form-help-container">

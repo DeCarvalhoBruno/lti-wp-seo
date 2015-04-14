@@ -4,21 +4,52 @@
     $(document).ready(function () {
         //Thank you http://www.webmaster-source.com/2013/02/06/using-the-wordpress-3-5-media-uploader-in-your-plugin-or-theme/
         $('.upload_image_button').click(function (e) {
-            var target_id = $(this).attr('id').replace(/_button$/,'');
+            var target_id = $(this).attr('id').replace(/_button$/, '');
             e.preventDefault();
 
             var custom_uploader = wp.media.frames.file_frame = wp.media({
-                title   : lti_seo_i8n.use_img,
-                button  : { text: lti_seo_i8n.use_img }
+                title: lti_seo_i8n.use_img,
+                button: {text: lti_seo_i8n.use_img}
             });
             custom_uploader.on('select', function () {
                 var attachment = custom_uploader.state().get('selection').first().toJSON();
                 //We grab the attachment URL for display and we stash away the ID to retrieve image information if needed.
-                $('#'+target_id).val(attachment.url);
-                $('#'+target_id+"_id").val(attachment.id);
+                $('#' + target_id).val(attachment.url);
+                $('#' + target_id + "_id").val(attachment.id);
             });
             custom_uploader.open();
         });
+
+        var updateCount = function (target, targetCharCount, targetMax) {
+            if (targetCharCount > targetMax) {
+                var targetID = $(this).attr('id');
+                $('#w' + target).addClass("danger");
+            } else {
+                $('#w' + target).removeClass("danger");
+            }
+            //console.log(targetCharCount+' '+targetMax);
+            //console.log( $('#c'+target).val());
+            $('#c' + target).html(targetCharCount);
+        };
+
+        var fieldsWithCounter = [
+            [$("#frontpage_description_text"), 160],
+            [$("#lti_seo_description"), 160]
+        ];
+
+        var nbFields = fieldsWithCounter.length;
+
+        for (var i = 0; i < nbFields; i++) {
+            if (fieldsWithCounter[i][0].length) {
+                var tmp = fieldsWithCounter[i];
+                updateCount(tmp[0].attr('id'), tmp[0].val().length, tmp[1]);
+                tmp[0].bind("change keyup click", function () {
+                    updateCount(tmp[0].attr('id'), tmp[0].val().length, tmp[1]);
+                });
+            }
+        }
+
+
     });
 
 })(jQuery);

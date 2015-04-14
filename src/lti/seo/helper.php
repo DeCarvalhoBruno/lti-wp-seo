@@ -14,8 +14,7 @@ function ltint( $text, $domain = 'lti-seo' ) {
 
 function ltiopt( $value ) {
 	$admin = \Lti\Seo\LTI_SEO::get_instance()->get_admin();
-
-	return $admin->get_settings()->get( $value );
+	return $admin->get_form_values()->get( $value );
 }
 
 function ltichk( $value ) {
@@ -34,10 +33,6 @@ function ltirad( $key, $currentValue ) {
 	} else {
 		return null;
 	}
-}
-
-function lti_generate_meta($type,$type_value,$content){
-	return sprintf('<meta %s="%s" content="%s"/>',$type,$type_value,$content);
 }
 
 function lti_iso8601_date( $mysqldate ) {

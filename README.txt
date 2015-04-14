@@ -5,7 +5,7 @@ Requires at least: 4
 Tested up to: 4.11
 Stable tag: 1.0.0
 
-Searh Engine Optimization
+Search Engine Optimization
 
 == Description ==
 

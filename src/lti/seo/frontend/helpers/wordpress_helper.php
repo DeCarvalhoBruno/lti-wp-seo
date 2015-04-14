@@ -1,5 +1,7 @@
 <?php namespace Lti\Seo\Helpers;
 
+use Lti\Seo\Plugin\Postbox_Values;
+
 class Wordpress_Helper extends Helper implements ICanHelp {
 
 	private $is_home_posts_page;
@@ -35,7 +37,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	public function get_site_description() {
 		if ( is_null( $this->page_description ) ) {
-			if ( $this->page_type()==="Frontpage" ) {
+			if ( $this->page_type() === "Frontpage" ) {
 				$this->page_description = $this->settings->get( 'frontpage_description_text' );
 			} else {
 				$this->page_description = get_bloginfo( 'description' );
@@ -82,6 +84,12 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				$this->page_type = "Author";
 			} elseif ( is_attachment() ) {
 				$this->page_type = "Attachment";
+			} elseif ( is_archive() ) {
+				$this->page_type = 'Archive';
+			} elseif ( is_search() ) {
+				$this->page_type = 'Search';
+			} elseif ( is_404() ) {
+				$this->page_type = 'NotFound';
 			}
 		}
 
@@ -304,30 +312,130 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return null;
 	}
 
-	public function get_tagcat() {
+	public function get_tagcat($post_id=null) {
 		$keywords = array();
+		if(is_null($post_id)){
+			$post_id = $this->post_id;
+		}
 		if ( $this->page_type() == "Frontpage" ) {
 			$keywords = explode( ",", $this->settings->get( 'frontpage_keyword_text' ) );
 		} else {
-			if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
-				$keywords = $this->extract_array_object_value(get_the_category($this->post_id),'cat_name') ;
-			}
-			if ( $this->settings->get( 'keyword_tag_based' ) === true ) {
-				$keywords = array_merge($keywords,$this->extract_array_object_value(get_the_tags($this->post_id),'name'));
+			$box_values = get_post_meta( $post_id, "lti_seo", true );
+			if(isset($box_values->keywords)&&!is_null($box_values->keywords)){
+				$keywords = $box_values->keywords->value;
+			}else{
+				if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
+					$keywords = array_unique($this->extract_array_object_value( get_the_category( $post_id ), 'cat_name' ));
+				}
+				if ( $this->settings->get( 'keyword_tag_based' ) === true ) {
+					$keywords = array_unique(array_merge( $keywords,
+						$this->extract_array_object_value( get_the_tags( $this->post_id ), 'name' ) ));
+				}
 			}
 		}
-		return array_unique($keywords);
+
+		return $keywords;
 	}
 
-	private function extract_array_object_value($values,$field){
+	public function get_robots() {
+		$robots = array();
+		switch ( $this->page_type() ) {
+			case 'Singular':
+			case 'Frontpage':
+				$robots = $this->get_robot_setting('robots_support');
+				break;
+			case 'Catagax':
+				if ( is_category() ) {
+					$robots = $this->get_robot_setting( 'robots_cat_based' );
+				} else if ( is_tag() ) {
+					$robots = $this->get_robot_setting( 'robots_tag_based' );
+				}
+				break;
+			case 'Archive':
+				$robots = $this->get_robot_setting( 'robots_date_based' );
+				break;
+			case 'Search':
+				$robots = $this->get_robot_setting( 'robots_search_based' );
+				break;
+			case 'Author':
+				$robots = $this->get_robot_setting( 'robots_author_based' );
+				break;
+			case 'NotFound':
+				$robots = $this->get_robot_setting( 'robots_notfound_based' );
+				break;
+		}
+		return $robots;
+	}
+
+	private function get_robot_setting( $setting ) {
+		$robots = array();
+		if ( $this->settings->get( $setting ) === true ) {
+			if ( $this->settings->get( 'robots_noindex' ) === true ) {
+				$robots[] = 'noindex';
+			}
+			if ( $this->settings->get( 'robots_nofollow' ) === true ) {
+				$robots[] = 'nofollow';
+			}
+			if ( $this->settings->get( 'robots_noodp' ) === true ) {
+				$robots[] = 'noodp';
+			}
+			if ( $this->settings->get( 'robots_noydir' ) === true ) {
+				$robots[] = 'noydir';
+			}
+			if ( $this->settings->get( 'robots_noarchive' ) === true ) {
+				$robots[] = 'noarchive';
+			}
+			if ( $this->settings->get( 'robots_nosnippet' ) === true ) {
+				$robots[] = 'nosnippet';
+			}
+		}
+
+		return $robots;
+	}
+
+	private function extract_array_object_value( $values, $field ) {
 		$vals = array();
-		if(is_array($values)){
-			foreach($values as $value){
+		if ( is_array( $values ) ) {
+			foreach ( $values as $value ) {
 				$vals[] = $value->{$field};
 			}
 		}
+
 		return $vals;
 
+	}
+
+	public function update_global_post_fields($changed) {
+		/**
+		 * @var \wpdb $wpdb
+		 */
+		global $wpdb;
+		$sql = 'SELECT ' . $wpdb->posts . '.ID,' . $wpdb->postmeta . '.meta_value  FROM ' . $wpdb->posts . '
+				LEFT JOIN ' . $wpdb->postmeta . ' ON (' . $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id AND ' . $wpdb->postmeta . '.meta_key = "lti_seo")
+				WHERE ' . $wpdb->posts . '.post_type = "post" AND ' . $wpdb->posts . '.post_status!="auto-draft"';
+
+		//$sql = "SELECT cat_name FROM $wpdb->categories ORDER BY cat_name ASC";
+
+		$results = $wpdb->get_results( $sql );
+
+		if ( is_array( $results ) ) {
+			foreach ( $results as $result ) {
+				$postbox_values = $result->meta_value;
+				if ( ! is_null( $postbox_values ) ) {
+					$postbox_values = unserialize( $postbox_values );
+				} else {
+					$postbox_values = new Postbox_Values( new \stdClass() );
+				}
+
+				foreach($changed as $changedKey=>$changedValue){
+					if ( isset( $postbox_values->{$changedKey} ) && $postbox_values->{$changedKey} instanceof \Lti\Seo\Plugin\Fields ) {
+						$postbox_values->{$changedKey}->value = $changedValue;
+					}
+				}
+
+				update_post_meta( $result->ID, 'lti_seo', $postbox_values );
+			}
+		}
 	}
 
 }

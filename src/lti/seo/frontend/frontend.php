@@ -2,6 +2,7 @@
 
 use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Plugin_Settings;
+use Lti\Seo\Plugin\Postbox_Values;
 
 
 class Frontend {
@@ -46,21 +47,27 @@ class Frontend {
 		$keywords_class = sprintf( $class_pattern, $this->helper->page_type(), "Keyword" );
 		if ( $this->settings->get( 'keyword_support' ) === true && class_exists( $keywords_class ) ) {
 			$keywords = new $keywords_class( $this->helper, $this->settings );
-			add_action( 'lti_seo_head', array( $keywords, 'get_tags' ) );
+			add_action( 'lti_seo_head', array( $keywords, 'display_tags' ) );
 		}
 
 		$og_class = sprintf( $class_pattern, $this->helper->page_type(), "Open_Graph" );
 
 		if ( $this->settings->get( 'open_graph_support' ) === true && class_exists( $og_class ) ) {
 			$og = new $og_class( $this->helper, $this->settings );
-			add_action( 'lti_seo_head', array( $og, 'get_tags' ), 10 );
+			add_action( 'lti_seo_head', array( $og, 'display_tags' ), 10 );
 		}
 
 		$twitter_class = sprintf( $class_pattern, $this->helper->page_post_format(), "Twitter_Card" );
 
 		if ( $this->settings->get( 'twitter_card_support' ) === true && class_exists( $twitter_class ) ) {
 			$twitter = new $twitter_class( $this->helper, $this->settings );
-			add_action( 'lti_seo_head', array( $twitter, 'get_tags' ), 10 );
+			add_action( 'lti_seo_head', array( $twitter, 'display_tags' ), 10 );
+		}
+
+		$robots_class = sprintf( $class_pattern, $this->helper->page_type(), "Robot" );
+		if ( $this->settings->get( 'robots_support' ) === true && class_exists( $robots_class ) ) {
+			$robots = new $robots_class( $this->helper, $this->settings );
+			add_action( 'lti_seo_head', array( $robots, 'display_tags' ), 10 );
 		}
 
 		$jsonld_class = sprintf( $class_pattern, $this->helper->page_type(), "JSON_LD" );
@@ -76,7 +83,6 @@ class Frontend {
 			}
 			add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ), 90 );
 		}
-
 	}
 
 	public function frontpage_description() {

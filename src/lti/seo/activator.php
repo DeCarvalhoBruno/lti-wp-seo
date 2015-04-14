@@ -1,16 +1,10 @@
 <?php namespace Lti\Seo;
 
-use Lti\Seo\LTI_SEO;
 use Lti\Seo\Plugin\Plugin_Settings;
 
 /**
  * Fired during plugin activation
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    lti-seo
- * @subpackage lti-seo/includes
+
  */
 
 class Activator {

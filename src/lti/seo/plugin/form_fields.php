@@ -1,7 +1,11 @@
 <?php namespace Lti\Seo\Plugin;
 
 abstract class Fields {
-	public function __construct( $value, $default = "" ) {
+	public $value;
+	public $isTracked;
+
+	public function __construct( $value, $default = "", $isTracked = false ) {
+		$this->isTracked = $isTracked;
 		if ( $value ) {
 			$this->value = sanitize_text_field($value);
 		} else {
@@ -11,14 +15,16 @@ abstract class Fields {
 }
 
 class Field_Checkbox extends Fields {
-	public function __construct( $value, $default = false ) {
+	public function __construct( $value, $default = false,$isTracked = false ) {
+		$this->isTracked = $isTracked;
 		$this->value = ( $value === true || (int) $value === 1 || $value === "true" || $value === 'on' ) ? true : $default;
 	}
 }
 
 class Field_Radio extends Fields {
 
-	public function __construct( $value, $default = "" ) {
+	public function __construct( $value, $default = "", $isTracked = false ) {
+		$this->isTracked = $isTracked;
 		if ( is_array( $default ) ) {
 			$defaults = array_flip( $default['choice'] );
 			if ( $value ) {
@@ -44,7 +50,8 @@ class Field_String extends Fields {
 }
 
 class Field_Url extends Fields {
-	public function __construct( $value, $default = "" ) {
+	public function __construct( $value, $default = "", $isTracked = false ) {
+		$this->isTracked = $isTracked;
 		if ( $value && ! filter_var( $value, FILTER_VALIDATE_URL ) === false ) {
 			$this->value = $value;
 		} else {
