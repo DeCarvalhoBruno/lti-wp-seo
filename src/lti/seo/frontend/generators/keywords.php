@@ -18,7 +18,7 @@ class Frontpage_Keyword extends Keyword implements ICanMakeHeaderTags {
 		$tags = apply_filters( 'lti_seo_keywords', $tags );
 		
 		if ( is_array( $tags ) ) {
-			return implode( ',', $tags );
+			return implode( ',', array_map('strtolower',$tags ));
 		}
 		return null;
 	}

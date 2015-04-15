@@ -40,7 +40,7 @@
         margin: 0 auto;
     }
 
-    #flseo .input-group > .input-group {
+    #flseo .input-group .input-group {
         margin: 0 0 10px 10px;
         font-size:0.9em;
         font-weight: normal;
@@ -48,23 +48,23 @@
         width: 95%;
     }
 
-    #flseo .input-group > .input-group label {
+    #flseo .input-group .input-group label {
         margin: 10px 0 10px 10px;
     }
 
-    #flseo .input-group > .input-group.file-selector input[type="text"] {
+    #flseo .input-group .input-group.file-selector input[type="text"] {
         width: 97%;
         margin-left: 10px;
     }
 
-    #flseo .input-group > .input-group.file-selector input[type="button"] {
+    #flseo .input-group .input-group.file-selector input[type="button"] {
         width: 50%;
         margin: 10px auto 0;
         background-color: #1aa55f;
         border: 1px solid #16894f;
     }
 
-    #flseo .input-group > .input-group.file-selector input[type="button"]:hover {
+    #flseo .input-group .input-group.file-selector input[type="button"]:hover {
         width: 50%;
         margin: 10px auto 0;
         background-color: #16864d;
@@ -162,6 +162,38 @@
     #flseo .char-counter {
         font-weight: normal;
         color: #000000;
+    }
+
+    #flseo .table {
+        background-color: #ffffff;
+        border: 1px solid #e7e7e7;
+        border-radius: 3px;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #flseo .table thead{
+    }
+
+    #flseo .table th{
+        border: 1px solid #e7e7e7;
+        border-spacing: 0;
+    }
+
+    #flseo .table td{
+        text-align:center;
+        border-right: 1px solid #e7e7e7;
+        border-left: 1px solid #e7e7e7;
+    }
+
+
+
+    #flseo .table input[type="checkbox"]{
+        float: none;
+        text-align: center;
+        width:100%;
+        border:0;
+        padding:0;
     }
 
 
@@ -391,6 +423,8 @@
         position: fixed;
     }
 
+
+
 }
 
 @media (min-width: 782px) {
@@ -489,5 +523,24 @@
 #plseo .char-counter {
     font-weight: normal;
     color: #000000;
+}
+
+#plseo .input-group > .input-group.file-selector input[type="text"] {
+    width: 97%;
+    margin-left: 10px;
+}
+
+#plseo .input-group > .input-group.file-selector input[type="button"] {
+    width: 50%;
+    margin: 10px auto 0;
+    background-color: #1aa55f;
+    border: 1px solid #16894f;
+}
+
+#plseo .input-group > .input-group.file-selector input[type="button"]:hover {
+    width: 50%;
+    margin: 10px auto 0;
+    background-color: #16864d;
+    border: 1px solid #16894f;
 }
 

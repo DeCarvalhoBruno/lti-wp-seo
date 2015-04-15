@@ -66,7 +66,6 @@ class LTI_SEO {
 			$this->settings = new Plugin_Settings( null );
 		}
 
-
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -133,7 +132,8 @@ class LTI_SEO {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-		$this->plugin_admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path, $this->helper );
+		$this->plugin_admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path,
+			$this->helper );
 
 		$this->loader->add_action( 'admin_init', $this->plugin_admin, 'register_setting' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles' );
@@ -160,7 +160,7 @@ class LTI_SEO {
 	private function define_public_hooks() {
 
 		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings,
-			$this->helper);
+			$this->helper );
 
 		//$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
 		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'head', 0 );
@@ -169,6 +169,10 @@ class LTI_SEO {
 			$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'rel_canonical' );
 		}
 		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head', 0 );
+
+		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
+			$this->loader->add_filter( 'user_contactmethods', $this->plugin_frontend, 'user_contactmethods', 10 );
+		}
 	}
 
 	/**

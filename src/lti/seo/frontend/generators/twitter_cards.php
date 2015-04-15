@@ -10,7 +10,7 @@ class Twitter_Card extends GenericMetaTag {
 	protected $tags;
 
 	public function __construct( ICanHelp $helper, Plugin_Settings $settings, $type = "summary" ) {
-		//$this->type = $type;
+		$this->type = $type;
 		parent::__construct( $helper, $settings);
 	}
 
@@ -60,12 +60,11 @@ class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags 
 
 	public function make_tags() {
 		$twitter         = array();
-		$handle          = $this->helper->get_twitter_handle();
+		$handle          = $this->settings->get( 'twitter_publisher' );
 		$twitter['card'] = $this->type;
 
 		if ( ! is_null( $handle ) ) {
 			$twitter['site']    = $handle;
-			$twitter['creator'] = $handle;
 		}
 		$twitter['title']       = esc_attr( $this->helper->get_title() );
 		$twitter['url']         = esc_url_raw( $this->helper->get_canonical_url() );
@@ -77,7 +76,28 @@ class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags 
 	}
 }
 
-class Singular_Twitter_Card extends Frontpage_Twitter_Card {
+class Singular_Twitter_Card extends Twitter_Card {
+	public function make_tags() {
+		$twitter         = array();
+		$handle          = $this->settings->get( 'twitter_publisher' );
+		$twitter['card'] = $this->type;
+
+		if ( ! is_null( $handle ) ) {
+			$twitter['site']    = $handle;
+		}
+		$twitter['creator'] = $this->helper->get_author_social_url("twitter");
+		$twitter['title']       = esc_attr( $this->helper->get_title() );
+		$twitter['url']         = esc_url_raw( $this->helper->get_canonical_url() );
+		$twitter['description'] = esc_attr( $this->helper->get_site_description() );
+		$twitter['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
+
+		return compact( 'twitter' );
+
+	}
+}
+
+class Author_Gallery_Twitter_Card extends Singular_Twitter_Card {
+
 }
 
 class Singular_Gallery_Twitter_Card extends Singular_Twitter_Card {
@@ -98,6 +118,8 @@ class Singular_Gallery_Twitter_Card extends Singular_Twitter_Card {
 		if ( is_array( $img ) ) {
 			foreach ( $img as $image ) {
 				unset( $image->properties['type'] );
+				unset( $image->properties['width'] );
+				unset( $image->properties['height'] );
 				$meta .= $this->generate_tag( $this->meta_tag_name_attribute, 'twitter:image' . $i ++, $image->url );
 				foreach ( $image->properties as $key => $val ) {
 					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, sprintf( 'twitter:image:%s', $key ),

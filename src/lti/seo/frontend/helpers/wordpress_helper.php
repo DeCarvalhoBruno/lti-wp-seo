@@ -71,6 +71,32 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return $url;
 	}
 
+	public function get_author_social_url( $platform ) {
+		if ( $this->page_type() == "Author" ) {
+			$author = get_query_var( 'author' );
+		} else {
+			$author = get_the_author_meta( 'ID',
+				$this->get_post_info( 'post_author' ) );
+		}
+		switch ( $platform ) {
+			case 'facebook':
+				$info = get_user_meta( $author, "lti_facebook_url" );
+				break;
+			case 'twitter':
+				$info = get_user_meta( $author, "lti_twitter_username" );
+				break;
+			case 'gplus':
+				$info = get_user_meta( $author, "lti_gplus_url" );
+				break;
+		}
+		if ( ! empty( $info ) && ! empty( $info[0] ) ) {
+			return array_shift( $info );
+		}
+
+
+		return null;
+	}
+
 	public function page_type() {
 		if ( is_null( $this->page_type ) ) {
 			if ( is_front_page() ) {
@@ -188,18 +214,9 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return $this->current_url;
 	}
 
-	public function get_twitter_handle() {
-		if ( $this->page_type() == "Frontpage" ) {
-			return $this->settings->get( 'twitter_handle' );
-		} else {
-			//get author twitter info from profile
-			return null;
-		}
-	}
-
 	public function get_social_images( $mode = "", $number = - 1 ) {
 		/**
-		 * Allow filtering of the open graph image size
+		 * Allow filtering of the image size
 		 *
 		 * @api string $index The index as returned by get_intermediate_image_sizes()
 		 * @see get_intermediate_image_sizes()
@@ -213,11 +230,16 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		if ( ! is_null( $image_data ) ) {
 			$data[] = $image_data;
 		}
-
+		$img_id     = $this->get_custom_social_image();
+		$image_data = $this->get_img( $img_id, $image_size );
+		if ( ! is_null( $image_data ) ) {
+			$data[] = $image_data;
+		}
 		switch ( $mode ) {
+			/*
 			case "fallback":
 				if ( empty( $data ) ) {
-					$img_id     = $this->settings->get( 'frontpage_social_img_id' );
+					$img_id     = $this->get_custom_social_image();
 					$image_data = $this->get_img( $img_id, $image_size );
 					if ( ! is_null( $image_data ) ) {
 						$data[] = $image_data;
@@ -225,12 +247,13 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				}
 				break;
 			case "with_main_image":
-				$img_id     = $this->settings->get( 'frontpage_social_img_id' );
+				$img_id     = $this->$this->get_custom_social_image();
 				$image_data = $this->get_img( $img_id, $image_size );
 				if ( ! is_null( $image_data ) ) {
 					$data[] = $image_data;
 				}
 				break;
+			*/
 			case "all":
 				if ( $number == - 1 ) {
 					$nb_img = $number;
@@ -239,16 +262,18 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				}
 				$img = array();
 				if ( $this->page_post_format() == "Singular_Gallery" ) {
-					$tmp = get_post_gallery_images();
-					if ( ! empty( $tmp ) ) {
-						$tmp = array_slice( $tmp, 0, 4 );
+
+
+					$tmp = get_post_galleries( $this->post_id, false );
+
+
+					if ( ! empty( $tmp ) && isset( $tmp[0]['ids'] ) ) {
+						$tmp = explode( ',', $tmp[0]['ids'], 4 );
+						//$tmp = array_slice( $tmp['src'], 0, 4 );
 
 						$i = 0;
-						foreach ( $tmp as $gallery_img ) {
-							$image_data             = new \stdClass();
-							$image_data->url        = $gallery_img;
-							$image_data->properties = array();
-							$img[]                  = $image_data;
+						foreach ( $tmp as $id ) {
+							$img[] = $this->get_img( $id );
 						}
 					}
 				} else {
@@ -266,6 +291,20 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		}
 
 		return null;
+	}
+
+	private function get_custom_social_image() {
+		$img_id = null;
+		if ( $this->page_type() == "Frontpage" ) {
+			$img_id = $this->settings->get( 'frontpage_social_img_id' );
+		} else {
+			$box_values = get_post_meta( $this->post_id, "lti_seo", true );
+			if ( ! empty( $box_values ) ) {
+				$img_id = $box_values->get( 'social_img_id' );
+			}
+		}
+
+		return $img_id;
 	}
 
 	public function get_attached_post_images( $limit = - 1 ) {
@@ -312,24 +351,25 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return null;
 	}
 
-	public function get_tagcat($post_id=null) {
+	public function get_tagcat( $post_id = null ) {
 		$keywords = array();
-		if(is_null($post_id)){
+		if ( is_null( $post_id ) ) {
 			$post_id = $this->post_id;
 		}
 		if ( $this->page_type() == "Frontpage" ) {
 			$keywords = explode( ",", $this->settings->get( 'frontpage_keyword_text' ) );
 		} else {
 			$box_values = get_post_meta( $post_id, "lti_seo", true );
-			if(isset($box_values->keywords)&&!is_null($box_values->keywords)){
+			if ( isset( $box_values->keywords ) && ! is_null( $box_values->keywords ) ) {
 				$keywords = $box_values->keywords->value;
-			}else{
+			} else {
 				if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
-					$keywords = array_unique($this->extract_array_object_value( get_the_category( $post_id ), 'cat_name' ));
+					$keywords = array_unique( $this->extract_array_object_value( get_the_category( $post_id ),
+						'cat_name' ) );
 				}
 				if ( $this->settings->get( 'keyword_tag_based' ) === true ) {
-					$keywords = array_unique(array_merge( $keywords,
-						$this->extract_array_object_value( get_the_tags( $this->post_id ), 'name' ) ));
+					$keywords = array_unique( array_merge( $keywords,
+						$this->extract_array_object_value( get_the_tags( $this->post_id ), 'name' ) ) );
 				}
 			}
 		}
@@ -341,8 +381,10 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		$robots = array();
 		switch ( $this->page_type() ) {
 			case 'Singular':
+				$robots = $this->get_robot_setting( 'robots_support', 'post_' );
+				break;
 			case 'Frontpage':
-				$robots = $this->get_robot_setting('robots_support');
+				$robots = $this->get_robot_setting( 'robots_support' );
 				break;
 			case 'Catagax':
 				if ( is_category() ) {
@@ -364,28 +406,29 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				$robots = $this->get_robot_setting( 'robots_notfound_based' );
 				break;
 		}
+
 		return $robots;
 	}
 
-	private function get_robot_setting( $setting ) {
+	private function get_robot_setting( $setting, $settings_prefix = "" ) {
 		$robots = array();
 		if ( $this->settings->get( $setting ) === true ) {
-			if ( $this->settings->get( 'robots_noindex' ) === true ) {
+			if ( $this->settings->get( $settings_prefix . 'robots_noindex' ) === true ) {
 				$robots[] = 'noindex';
 			}
-			if ( $this->settings->get( 'robots_nofollow' ) === true ) {
+			if ( $this->settings->get( $settings_prefix . 'robots_nofollow' ) === true ) {
 				$robots[] = 'nofollow';
 			}
-			if ( $this->settings->get( 'robots_noodp' ) === true ) {
+			if ( $this->settings->get( $settings_prefix . 'robots_noodp' ) === true ) {
 				$robots[] = 'noodp';
 			}
-			if ( $this->settings->get( 'robots_noydir' ) === true ) {
+			if ( $this->settings->get( $settings_prefix . 'robots_noydir' ) === true ) {
 				$robots[] = 'noydir';
 			}
-			if ( $this->settings->get( 'robots_noarchive' ) === true ) {
+			if ( $this->settings->get( $settings_prefix . 'robots_noarchive' ) === true ) {
 				$robots[] = 'noarchive';
 			}
-			if ( $this->settings->get( 'robots_nosnippet' ) === true ) {
+			if ( $this->settings->get( $settings_prefix . 'robots_nosnippet' ) === true ) {
 				$robots[] = 'nosnippet';
 			}
 		}
@@ -405,7 +448,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	}
 
-	public function update_global_post_fields($changed) {
+	public function update_global_post_fields( $changed ) {
 		/**
 		 * @var \wpdb $wpdb
 		 */
@@ -427,7 +470,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 					$postbox_values = new Postbox_Values( new \stdClass() );
 				}
 
-				foreach($changed as $changedKey=>$changedValue){
+				foreach ( $changed as $changedKey => $changedValue ) {
 					if ( isset( $postbox_values->{$changedKey} ) && $postbox_values->{$changedKey} instanceof \Lti\Seo\Plugin\Fields ) {
 						$postbox_values->{$changedKey}->value = $changedValue;
 					}

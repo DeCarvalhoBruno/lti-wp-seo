@@ -102,4 +102,18 @@ class Frontend {
 		}
 	}
 
+	public function user_contactmethods() {
+		if ( ! isset( $contactmethods['lti_twitter_username'] ) ) {
+			$contactmethods['lti_twitter_username'] = ltint( 'Twitter username (LTI)' );
+		}
+		if ( ! isset( $contactmethods['lti_facebook_url'] ) ) {
+			$contactmethods['lti_facebook_url'] = ltint( 'Facebook profile URL (LTI)' );
+		}
+		if ( ! isset( $contactmethods['lti_gplus_url'] ) ) {
+			$contactmethods['lti_gplus_url'] = ltint( 'Google+ profile URL (LTI)' );
+		}
+
+		return $contactmethods;
+	}
+
 }

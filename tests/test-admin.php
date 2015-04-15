@@ -22,8 +22,10 @@ class AdminTest extends WP_UnitTestCase {
 
 	public function setUp() {
 		$this->instance = LTI_SEO::get_instance();
-		$this->admin = new Admin( $this->instance->get_plugin_name(), $this->instance->get_version(), $this->instance->get_settings(),dirname( plugin_dir_path( __FILE__ ) ),$this->instance->get_helper() );
-		$this->frontend = new Frontend( $this->instance->get_plugin_name(), $this->instance->get_version(), $this->instance->get_settings(), $this->instance->get_helper() );
+		$this->admin    = new Admin( $this->instance->get_plugin_name(), $this->instance->get_version(),
+			$this->instance->get_settings(), dirname( plugin_dir_path( __FILE__ ) ), $this->instance->get_helper() );
+		$this->frontend = new Frontend( $this->instance->get_plugin_name(), $this->instance->get_version(),
+			$this->instance->get_settings(), $this->instance->get_helper() );
 	}
 
 	public function testInit() {
@@ -42,10 +44,11 @@ class AdminTest extends WP_UnitTestCase {
 		$this->assertInstanceOf( "Lti\\Seo\\Plugin\\Plugin_Settings", $stored_options );
 	}
 
-	public function testGetSupportedPostTypes(){
+	public function testGetSupportedPostTypes() {
 		$post_types = $this->admin->get_supported_post_types();
-		$this->assertTrue( count($post_types)>=2 );
+		$this->assertTrue( count( $post_types ) >= 2 );
 	}
+
 
 
 }

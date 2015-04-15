@@ -128,17 +128,17 @@ class Admin {
 			$this->box_values = new Postbox_Values( array() );
 		}
 
-		if(is_null($this->box_values->get('keywords'))){
-			$f = new Singular_Keyword($this->helper, $this->settings, $post->ID);
-			$this->box_values->set('keywords_suggestion', $f->get_tags());
+		if ( is_null( $this->box_values->get( 'keywords' ) ) ) {
+			$f = new Singular_Keyword( $this->helper, $this->settings, $post->ID );
+			$this->box_values->set( 'keywords_suggestion', $f->get_tags() );
 		}
 
-		if(is_null($this->box_values->get('description'))){
-			$this->box_values->set('description_suggestion', $this->settings->get('frontpage_description_text'));
+		if ( is_null( $this->box_values->get( 'description' ) ) ) {
+			$this->box_values->set( 'description_suggestion', $this->settings->get( 'frontpage_description_text' ) );
 		}
 
 		$this->set_current_page( 'post-edit' );
-		include $this->admin_dir . '/partials/posts-box.php';
+		include $this->admin_dir . '/partials/postbox.php';
 	}
 
 	public function get_supported_post_types() {
@@ -176,7 +176,7 @@ class Admin {
 		$this->current_page = $page;
 	}
 
-	public function get_settings(){
+	public function get_settings() {
 		return $this->settings;
 	}
 }
