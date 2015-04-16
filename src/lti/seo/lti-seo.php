@@ -104,7 +104,9 @@ class LTI_SEO {
 		require_once $this->file_path . 'frontend/generators/open_graph.php';
 		require_once $this->file_path . 'frontend/generators/twitter_cards.php';
 		require_once $this->file_path . 'frontend/generators/keywords.php';
+		require_once $this->file_path . 'frontend/generators/description.php';
 		require_once $this->file_path . 'frontend/generators/robots.php';
+		require_once $this->file_path . 'frontend/generators/link_rel.php';
 		$this->loader = new Loader();
 		$this->helper = new Wordpress_Helper( $this->settings );
 	}
@@ -162,13 +164,7 @@ class LTI_SEO {
 		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings,
 			$this->helper );
 
-		//$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'front_page_head', 0 );
 		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'head', 0 );
-
-		if ( $this->settings->get( 'canonical_urls' ) === true ) {
-			$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'rel_canonical' );
-		}
-		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'wp_head', 0 );
 
 		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
 			$this->loader->add_filter( 'user_contactmethods', $this->plugin_frontend, 'user_contactmethods', 10 );

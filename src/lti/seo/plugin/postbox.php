@@ -4,12 +4,12 @@ class Postbox_Fields {
 	public $values = array(
 		array( 'description', 'Text' ),
 		array( 'keywords', 'Text' ),
-		array( 'post_robots_noindex', 'Checkbox' ),
-		array( 'post_robots_nofollow', 'Checkbox' ),
-		array( 'post_robots_noodp', 'Checkbox' ),
-		array( 'post_robots_noydir', 'Checkbox' ),
-		array( 'post_robots_noarchive', 'Checkbox' ),
-		array( 'post_robots_nosnippet', 'Checkbox' ),
+		array( 'post_robot_noindex', 'Checkbox' ),
+		array( 'post_robot_nofollow', 'Checkbox' ),
+		array( 'post_robot_noodp', 'Checkbox' ),
+		array( 'post_robot_noydir', 'Checkbox' ),
+		array( 'post_robot_noarchive', 'Checkbox' ),
+		array( 'post_robot_nosnippet', 'Checkbox' ),
 		array( 'social_img_url', 'Url' ),
 		array( 'social_img_id', 'Text' )
 	);

@@ -7,6 +7,8 @@ use Lti\Seo\Plugin\Postbox_Values;
 
 class Admin {
 
+	private $page_type = 'edit';
+	private $message = '';
 	private $plugin_name;
 	private $version;
 	/**
@@ -43,14 +45,14 @@ class Admin {
 	}
 
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/css/lti_seo_admin.css',
+		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/dist/css/lti_seo_admin.css',
 			array( 'thickbox' ), $this->version,
 			'all' );
 	}
 
 	public function enqueue_scripts() {
 		wp_enqueue_media();
-		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/js/lti_seo_admin.js', array( 'jquery' ),
+		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/dist/js/lti_seo_admin.js', array( 'jquery' ),
 			$this->version,
 			false );
 		wp_localize_script( $this->plugin_name, 'lti_seo_i8n', array( 'use_img' => ltint( 'Use image' ) ) );
@@ -71,13 +73,24 @@ class Admin {
 	}
 
 	public function options_page() {
-		if ( isset( $_POST['lti_seo_token'] ) ) {
-			if ( wp_verify_nonce( $_POST['lti_seo_token'], 'lti_seo_options' ) !== false ) {
-				$this->validate_input( $_POST );
-				print_r( $_POST );
-			} else {
-				//error message;
+		if ( isset( $_POST['lti_seo_update'] ) ) {
+			if ( isset( $_POST['lti_seo_token'] ) ) {
+				if ( wp_verify_nonce( $_POST['lti_seo_token'], 'lti_seo_options' ) !== false ) {
+					$this->validate_input( $_POST );
+					$this->page_type = "update";
+					$this->message = ltint('Plugin options have been updated');
+
+				} else {
+					//error message;
+				}
 			}
+		} elseif ( isset( $_POST['lti_seo_reset'] ) ) {
+			$this->settings = new Plugin_Settings();
+			update_option( 'lti_seo_options', $this->settings );
+			$this->page_type = "reset";
+			$this->message = ltint('Plugin options have been reset');
+		}else{
+			$this->page_type = "edit";
 		}
 		include $this->admin_dir . '/partials/options-page.php';
 	}
@@ -94,16 +107,13 @@ class Admin {
 
 		if ( $this->settings != $oldSettings ) {
 			$changed = $this->settings->compare( $oldSettings );
+
 			if ( ! empty( $changed ) ) {
 				$this->helper->update_global_post_fields( $changed );
 			}
 		}
 
 		update_option( 'lti_seo_options', $this->settings );
-//		echo "after save<pre>";
-//		print_r($this->settings);
-//		echo "</pre>";
-
 	}
 
 	public function add_meta_boxes() {
@@ -178,5 +188,13 @@ class Admin {
 
 	public function get_settings() {
 		return $this->settings;
+	}
+
+	public function get_page_type(){
+		return $this->page_type;
+	}
+
+	public function get_message(){
+		return $this->message;
 	}
 }

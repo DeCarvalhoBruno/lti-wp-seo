@@ -2,14 +2,14 @@
 
 use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Plugin_Settings;
-use Lti\Seo\Plugin\Postbox_Values;
-
 
 class Frontend {
 
 	private $plugin_name;
 
 	private $version;
+
+	private $class_pattern = "Lti\\Seo\\Generators\\%s_%s";
 
 	/**
 	 * @var \Lti\Seo\Plugin\Plugin_Settings
@@ -35,40 +35,22 @@ class Frontend {
 	}
 
 
-	public function wp_head() {
-		do_action( 'lti_seo_head' );
-	}
-
 	public function head() {
 		$this->helper->init();
-		add_action( 'lti_seo_head', array( $this, 'frontpage_description' ) );
+		//add_action( 'lti_seo_head', array( $this, 'frontpage_description' ) );
 		$class_pattern = "Lti\\Seo\\Generators\\%s_%s";
 
-		$keywords_class = sprintf( $class_pattern, $this->helper->page_type(), "Keyword" );
-		if ( $this->settings->get( 'keyword_support' ) === true && class_exists( $keywords_class ) ) {
-			$keywords = new $keywords_class( $this->helper, $this->settings );
-			add_action( 'lti_seo_head', array( $keywords, 'display_tags' ) );
-		}
+		$this->hook_functionality( 'Link_Rel' );
 
-		$og_class = sprintf( $class_pattern, $this->helper->page_type(), "Open_Graph" );
+		$this->hook_functionality( 'Description' );
 
-		if ( $this->settings->get( 'open_graph_support' ) === true && class_exists( $og_class ) ) {
-			$og = new $og_class( $this->helper, $this->settings );
-			add_action( 'lti_seo_head', array( $og, 'display_tags' ), 10 );
-		}
+		$this->hook_functionality( 'Keyword' );
 
-		$twitter_class = sprintf( $class_pattern, $this->helper->page_post_format(), "Twitter_Card" );
+		$this->hook_functionality( 'Open_Graph' );
 
-		if ( $this->settings->get( 'twitter_card_support' ) === true && class_exists( $twitter_class ) ) {
-			$twitter = new $twitter_class( $this->helper, $this->settings );
-			add_action( 'lti_seo_head', array( $twitter, 'display_tags' ), 10 );
-		}
+		$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
 
-		$robots_class = sprintf( $class_pattern, $this->helper->page_type(), "Robot" );
-		if ( $this->settings->get( 'robots_support' ) === true && class_exists( $robots_class ) ) {
-			$robots = new $robots_class( $this->helper, $this->settings );
-			add_action( 'lti_seo_head', array( $robots, 'display_tags' ), 10 );
-		}
+		$this->hook_functionality( 'Robot' );
 
 		$jsonld_class = sprintf( $class_pattern, $this->helper->page_type(), "JSON_LD" );
 		if ( class_exists( $jsonld_class ) ) {
@@ -76,29 +58,22 @@ class Frontend {
 			$json_ld = new $jsonld_class( $this->settings );
 
 			if ( $this->settings->get( 'jsonld_org_info' ) ) {
-				add_action( 'lti_seo_json_ld', array( $json_ld, 'json_entity' ), 10 );
+				add_action( 'lti_seo_json_ld', array( $json_ld, 'json_entity' ) );
 			}
 			if ( $this->settings->get( 'jsonld_website_info' ) ) {
-				add_action( 'lti_seo_json_ld', array( $json_ld, 'website_tag' ), 20 );
+				add_action( 'lti_seo_json_ld', array( $json_ld, 'website_tag' ) );
 			}
 			add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ), 90 );
 		}
+		do_action( 'lti_seo_head' );
 	}
 
-	public function frontpage_description() {
-		if ( ( $this->settings->get( 'frontpage_description' ) === true ) && ! is_null( $this->settings->get( 'frontpage_description_text' ) ) ) {
-			echo sprintf( '<meta name="description" content="%s"/>' . PHP_EOL,
-				$this->helper->get_site_description() );
-		}
-	}
+	private function hook_functionality( $type, $format = 'page_type' ) {
+		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, $format ) ), $type );
 
-	public function rel_canonical() {
-		if ( is_singular() ) {
-			return;
-		}
-		$canonical = $this->helper->get_canonical_url();
-		if ( ! empty( $canonical ) ) {
-			echo sprintf( '<link rel="canonical" href="%s" />' . PHP_EOL, $canonical );
+		if ( $this->settings->get( strtolower( $type ) . '_support' ) === true && class_exists( $class ) ) {
+			$og = new $class( $this->helper, $this->settings );
+			add_action( 'lti_seo_head', array( $og, 'display_tags' ) );
 		}
 	}
 
@@ -108,6 +83,9 @@ class Frontend {
 		}
 		if ( ! isset( $contactmethods['lti_facebook_url'] ) ) {
 			$contactmethods['lti_facebook_url'] = ltint( 'Facebook profile URL (LTI)' );
+		}
+		if ( ! isset( $contactmethods['lti_gplus_url'] ) ) {
+			$contactmethods['lti_gplus_url'] = ltint( 'Google+ profile URL (LTI)' );
 		}
 		if ( ! isset( $contactmethods['lti_gplus_url'] ) ) {
 			$contactmethods['lti_gplus_url'] = ltint( 'Google+ profile URL (LTI)' );

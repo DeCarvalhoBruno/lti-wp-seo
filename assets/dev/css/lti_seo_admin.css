@@ -4,12 +4,37 @@
 ******************************************************************************************************/
 
 @media (min-width: 300px) {
-    .lti-seo-title {
+    .lti-seo-header {
         background-color: #FFA500;
-        padding:10px 25px;
+        padding: 10px 25px;
         /*border-radius: 3px;*/
         border: 1px solid transparent;
         margin-left: -20px;
+        min-height: 50px;
+        transition: background-color 0.5s linear;
+        color: #000000;
+    }
+
+    .lti-seo-header.update {
+        background-color: #007725;
+    }
+
+    .lti-seo-header.update h2 {
+        color: #ffffff;
+    }
+
+    .lti-seo-header.reset {
+        background-color: #e7e7e7;
+    }
+
+    .lti-seo-message {
+        float: right;
+        width: 60%;
+    }
+
+    .lti-seo-title {
+        float: left;
+        width: 35%;
     }
 
     #flseo{
@@ -170,22 +195,26 @@
         border-radius: 3px;
         width: 100%;
         border-collapse: collapse;
-    }
-
-    #flseo .table thead{
+        padding: 5px;
     }
 
     #flseo .table th{
         border: 1px solid #e7e7e7;
         border-spacing: 0;
+        padding:5px 0;
+
     }
 
     #flseo .table td{
         text-align:center;
         border-right: 1px solid #e7e7e7;
         border-left: 1px solid #e7e7e7;
+        padding:3px 0;
     }
 
+    #flseo .table tbody tr:last-child td{
+        padding-bottom:10px;
+    }
 
 
     #flseo .table input[type="checkbox"]{
@@ -195,9 +224,6 @@
         border:0;
         padding:0;
     }
-
-
-
 
     #lti_seo_wrapper .nav {
         margin: 0;

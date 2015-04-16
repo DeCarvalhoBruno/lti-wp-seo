@@ -29,8 +29,6 @@ class i18n {
 	/**
 	 * The domain specified for this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
 	 * @var      string    $domain    The domain identifier for this plugin.
 	 */
 	private $domain;
@@ -45,7 +43,7 @@ class i18n {
 		load_plugin_textdomain(
 			$this->domain,
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			WP_PLUGIN_DIR . '/lti-wp-seo/languages/'
 		);
 
 	}

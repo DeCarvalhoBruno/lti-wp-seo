@@ -3,9 +3,33 @@
 
     $(document).ready(function () {
 
-        var input = function (){
+        var seo_header = $('#lti-seo-header');
+        if (seo_header.length) {
+            if (seo_header.hasClass('update')) {
+                setTimeout(
+                    function () {
+                        seo_header.removeClass('update');
+                    }, 3000);
+                setTimeout(
+                    function () {
+                        $('.lti-seo-message').empty();
+                    }, 5000);
+            }
+            if (seo_header.hasClass('reset')) {
+                setTimeout(
+                    function () {
+                        seo_header.removeClass('reset');
+                    }, 3000);
+                setTimeout(
+                    function () {
+                        $('.lti-seo-message').empty();
+                    }, 5000);
+            }
+        }
+
+        var input = function () {
             this.objectToLookIntoID = null;
-            this.optionID =  null;
+            this.optionID = null;
         };
 
         input.prototype.init = function (optionID, objectToLookIntoID) {
@@ -41,11 +65,11 @@
             }
         };
 
-        $('[data-toggle="seo-options"]').each(function(){
+        $('[data-toggle="seo-options"]').each(function () {
             var targetToDisable = $(this).attr('data-target');
-            if(typeof targetToDisable!="undefined"){
+            if (typeof targetToDisable != "undefined") {
                 var element = new input();
-                element.init("#"+$(this).attr('id'),targetToDisable);
+                element.init("#" + $(this).attr('id'), targetToDisable);
                 element.toggleDisabled();
             }
         });
@@ -121,7 +145,6 @@
             }
         }
     });
-
 })(jQuery);
 if ("undefined" == typeof jQuery)throw new Error("Bootstrap's JavaScript requires jQuery");
 +function (t) {

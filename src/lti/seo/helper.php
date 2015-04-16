@@ -8,7 +8,7 @@
  *
  * @return string|void
  */
-function ltint( $text, $domain = 'lti-seo' ) {
+function ltint( $text, $domain = 'lti-wp-seo' ) {
 	return __( $text, $domain );
 }
 
@@ -33,6 +33,16 @@ function ltirad( $key, $currentValue ) {
 	} else {
 		return null;
 	}
+}
+
+function ltipagetype() {
+	$admin = \Lti\Seo\LTI_SEO::get_instance()->get_admin();
+	return $admin->get_page_type();
+}
+
+function ltimessage() {
+	$admin = \Lti\Seo\LTI_SEO::get_instance()->get_admin();
+	return $admin->get_message();
 }
 
 function lti_iso8601_date( $mysqldate ) {

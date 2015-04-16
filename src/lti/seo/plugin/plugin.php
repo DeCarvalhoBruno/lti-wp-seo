@@ -1,86 +1,117 @@
 <?php namespace Lti\Seo\Plugin;
 
 class Defaults {
-	public $values = array(
-		array( "version", 'Text', '1.0.0' ),
-		array( 'canonical_urls', 'Checkbox' ),
-		array( 'keyword_support', 'Checkbox' ),
-		array( 'keyword_tag_based', 'Checkbox' ),
-		array( 'keyword_cat_based', 'Checkbox' ),
-		array( 'robots_support', 'Checkbox' ),
-		array( 'post_robots_noindex', 'Checkbox', false, true ),
-		array( 'post_robots_nofollow', 'Checkbox', false, true ),
-		array( 'post_robots_noodp', 'Checkbox', false, true ),
-		array( 'post_robots_noydir', 'Checkbox', false, true ),
-		array( 'post_robots_noarchive', 'Checkbox', false, true ),
-		array( 'post_robots_nosnippet', 'Checkbox', false, true ),
-		array( 'robots_noindex', 'Checkbox' ),
-		array( 'robots_nofollow', 'Checkbox' ),
-		array( 'robots_noodp', 'Checkbox' ),
-		array( 'robots_noydir', 'Checkbox' ),
-		array( 'robots_noarchive', 'Checkbox' ),
-		array( 'robots_nosnippet', 'Checkbox' ),
-		array( 'robots_date_based', 'Checkbox' ),
-		array( 'robots_cat_based', 'Checkbox' ),
-		array( 'robots_tag_based', 'Checkbox' ),
-		array( 'robots_author_based', 'Checkbox' ),
-		array( 'robots_search_based', 'Checkbox' ),
-		array( 'robots_notfound_based', 'Checkbox' ),
-		array( 'meta_description', 'Checkbox' ),
-		array( 'open_graph_support', 'Checkbox' ),
-		array( 'facebook_publisher', 'Url' ),
-		array( 'frontpage_description', 'Checkbox' ),
-		array( 'frontpage_description_text', 'Text' ),
-		array( 'frontpage_keyword', 'Checkbox' ),
-		array( 'frontpage_keyword_text', 'Text' ),
-		array( 'frontpage_social_img_url', 'Url' ),
-		array( 'frontpage_social_img_id', 'Text' ),
-		array( 'jsonld_website_info', 'Checkbox' ),
-		array( 'jsonld_org_info', 'Checkbox' ),
-		array(
-			'jsonld_entity_type',
-			'Radio',
-			array( 'default' => 'person', 'choice' => array( 'person', 'organization' ) )
-		),
-		array( 'jsonld_type_name', 'Text' ),
-		array( 'jsonld_type_logo_url', 'Url' ),
-		array( 'jsonld_type_logo_id', 'Text' ),
-		array( 'twitter_card_support', 'Checkbox' ),
-		array( 'twitter_publisher', 'Text' ),
-		array(
-			'twitter_card_type',
-			'Radio',
-			array( 'default' => 'summary', 'choice' => array( 'summary', 'summary_img' ) )
-		),
-		array( 'gplus_publisher', 'Url' ),
-		array( 'account_facebook', 'Url' ),
-		array( 'account_twitter', 'Url' ),
-		array( 'account_gplus', 'Url' ),
-		array( 'account_instagram', 'Url' ),
-		array( 'account_youtube', 'Url' ),
-		array( 'account_linkedin', 'Url' ),
-		array( 'account_myspace', 'Url' ),
-	);
+	public $values;
+
+	public function __construct() {
+		$this->values = array(
+			new def( "version", 'Text', '1.0.0' ),
+			new def( 'link_rel_support', 'Checkbox' ),
+			new def( 'link_rel_canonical', 'Checkbox' ),
+			new def( 'link_rel_author', 'Checkbox' ),
+			new def( 'link_rel_publisher', 'Checkbox' ),
+			new def( 'keyword_support', 'Checkbox' ),
+			new def( 'keyword_tag_based', 'Checkbox' ),
+			new def( 'keyword_cat_based', 'Checkbox' ),
+			new def( 'robot_support', 'Checkbox' ),
+			new def( 'post_robot_noindex', 'Checkbox', false, true ),
+			new def( 'post_robot_nofollow', 'Checkbox', false, true ),
+			new def( 'post_robot_noodp', 'Checkbox', false, true ),
+			new def( 'post_robot_noydir', 'Checkbox', false, true ),
+			new def( 'post_robot_noarchive', 'Checkbox', false, true ),
+			new def( 'post_robot_nosnippet', 'Checkbox', false, true ),
+			new def( 'robot_noindex', 'Checkbox' ),
+			new def( 'robot_nofollow', 'Checkbox' ),
+			new def( 'robot_noodp', 'Checkbox' ),
+			new def( 'robot_noydir', 'Checkbox' ),
+			new def( 'robot_noarchive', 'Checkbox' ),
+			new def( 'robot_nosnippet', 'Checkbox' ),
+			new def( 'robot_date_based', 'Checkbox' ),
+			new def( 'robot_cat_based', 'Checkbox' ),
+			new def( 'robot_tag_based', 'Checkbox' ),
+			new def( 'robot_author_based', 'Checkbox' ),
+			new def( 'robot_search_based', 'Checkbox' ),
+			new def( 'robot_notfound_based', 'Checkbox' ),
+			new def( 'description_support', 'Checkbox' ),
+			new def( 'open_graph_support', 'Checkbox' ),
+			new def( 'facebook_publisher', 'Url' ),
+			new def( 'frontpage_description', 'Checkbox' ),
+			new def( 'frontpage_description_text', 'Text' ),
+			new def( 'frontpage_robot', 'Checkbox' ),
+			new def( 'frontpage_robot_noindex', 'Checkbox' ),
+			new def( 'frontpage_robot_nofollow', 'Checkbox' ),
+			new def( 'frontpage_robot_noodp', 'Checkbox' ),
+			new def( 'frontpage_robot_noydir', 'Checkbox' ),
+			new def( 'frontpage_robot_noarchive', 'Checkbox' ),
+			new def( 'frontpage_robot_nosnippet', 'Checkbox' ),
+			new def( 'frontpage_keyword', 'Checkbox' ),
+			new def( 'frontpage_keyword_text', 'Text' ),
+			new def( 'frontpage_social_img_url', 'Url' ),
+			new def( 'frontpage_social_img_id', 'Text' ),
+			new def( 'jsonld_website_info', 'Checkbox' ),
+			new def( 'jsonld_org_info', 'Checkbox'),
+			new def(
+					'jsonld_entity_type',
+					'Radio',
+					array( 'default' => 'person', 'choice' => array( 'person', 'organization' ) )
+			),
+			new def( 'jsonld_type_name', 'Text' ),
+			new def( 'jsonld_type_logo_url', 'Url' ),
+			new def( 'jsonld_type_logo_id', 'Text' ),
+			new def( 'twitter_card_support', 'Checkbox' ),
+			new def( 'twitter_publisher', 'Text' ),
+			new def(
+				'twitter_card_type',
+				'Radio',
+				array( 'default' => 'summary', 'choice' => array( 'summary', 'summary_img' ) )
+			),
+			new def( 'gplus_publisher', 'Url' ),
+			new def( 'account_facebook', 'Url' ),
+			new def( 'account_twitter', 'Url' ),
+			new def( 'account_gplus', 'Url' ),
+			new def( 'account_instagram', 'Url' ),
+			new def( 'account_youtube', 'Url' ),
+			new def( 'account_linkedin', 'Url' ),
+			new def( 'account_myspace', 'Url' ),
+		);
+	}
+}
+
+class def {
+
+	public $name;
+	public $type;
+	public $default_value;
+	public $impacts_user_settings;
+
+	public function __construct( $name, $type, $default_value = null, $impacts_user_settings = false ) {
+		$this->name                  = $name;
+		$this->type                  = __NAMESPACE__ . "\\Field_" . $type;
+		$this->default_value         = $default_value;
+		$this->impacts_user_settings = $impacts_user_settings;
+	}
 }
 
 class Plugin_Settings {
-	public function __construct( $settings = array() ) {
+	public function __construct( \stdClass $settings = null ) {
 
 		$defaults = new Defaults();
 
+		/**
+		 * @var def $value
+		 */
 		foreach ( $defaults->values as $value ) {
-			$valueIsTracked = ( isset( $value[3] ) ) ? true : false;
-
 			$storedValue = null;
-			if ( isset( $settings->{$value[0]} ) && ! is_object( $settings->{$value[0]} ) ) {
-				$storedValue = $settings->{$value[0]};
+			if ( isset( $settings->{$value->name} ) ) {
+				$storedValue = $settings->{$value->name};
 			}
-			$className = __NAMESPACE__ . "\\Field_" . $value[1];
+			$className = $value->type;
 
-			if ( isset( $value[2] ) ) {
-				$this->{$value[0]} = new $className( $storedValue, $value[2], $valueIsTracked );
+			if ( ! is_null( $value->default_value ) ) {
+				$this->{$value->name} = new $className( $storedValue, $value->default_value,
+					$value->impacts_user_settings );
 			} else {
-				$this->{$value[0]} = new $className( $storedValue, null, $valueIsTracked );
+				$this->{$value->name} = new $className( $storedValue, null, $value->impacts_user_settings );
 			}
 		}
 	}

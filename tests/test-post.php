@@ -33,9 +33,6 @@ class PostTest extends WP_UnitTestCase {
 			$this->instance->get_settings(), $this->instance->get_helper() );
 		$this->post = new WP_UnitTest_Factory_For_Post();
 		$this->postID =  $this->post->create_object(array("post_title"=>'test title', "post_content"=>"content"));
-
-		
-
 	}
 
 	public function testPost(){

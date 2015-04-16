@@ -11,8 +11,10 @@
 
 <div id="lti_seo_wrapper">
 
-	<div class="lti-seo-title">
-		<h2><?php echo ltint( 'LTI SEO Settings' ); ?></h2>
+	<div id="lti-seo-header" class="lti-seo-header <?php echo ltipagetype() ?>">
+		<h2 class="lti-seo-title"><?php echo ltint( 'LTI SEO Settings' ); ?></h2>
+
+		<h2 class="lti-seo-message"><?php echo ltimessage(); ?></h2>
 	</div>
 	<div role="tabpanel">
 
@@ -41,10 +43,27 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="checkbox">
-								<label for="canonical_urls">Canonical URLs
-									<input type="checkbox" name="canonical_urls"
-									       id="canonical_urls" <?php echo ltichk( 'canonical_urls' ); ?>/>
+								<label for="link_rel_support">Link rel tags
+									<input type="checkbox" name="link_rel_support" data-toggle="seo-options"
+									       data-target="#link_rel_chk_group"
+									       id="link_rel_support" <?php echo ltichk( 'link_rel_support' ); ?>/>
 								</label>
+								<div id="link_rel_chk_group">
+									<div class="checkbox-group">
+										<label for="link_rel_canonical">Canonical URL
+											<input type="checkbox" name="link_rel_canonical"
+											       id="link_rel_canonical" <?php echo ltichk( 'link_rel_canonical' ); ?>/>
+										</label>
+										<label for="link_rel_publisher">Publisher URL
+											<input type="checkbox" name="link_rel_publisher"
+											       id="link_rel_publisher" <?php echo ltichk( 'link_rel_publisher' ); ?>/>
+										</label>
+										<label for="link_rel_author">Author URL
+											<input type="checkbox" name="link_rel_author"
+											       id="link_rel_author" <?php echo ltichk( 'link_rel_author' ); ?>/>
+										</label>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-help-container">
@@ -52,6 +71,7 @@
 								<p>Lets Wordpress generate a canonical URL for single pages, and will try to generate
 									one for other types of pages.</p>
 							</div>
+
 						</div>
 					</div>
 					<div class="form-group">
@@ -85,11 +105,12 @@
 					<div class="form-group">
 						<div class="input-group">
 							<label>Robots tag
-								<input type="checkbox" name="robots_support" data-toggle="seo-options" data-target="#robots_chk_group"
-								       id="robots_support" <?php echo ltichk( 'robots_support' ); ?>/>
+								<input type="checkbox" name="robot_support" data-toggle="seo-options"
+								       data-target="#robot_chk_group"
+								       id="robot_support" <?php echo ltichk( 'robot_support' ); ?>/>
 							</label>
 
-							<div id="robots_chk_group">
+							<div id="robot_chk_group">
 								<div class="input-group">
 									<label>Attributes to apply</label>
 									<table class="table">
@@ -107,55 +128,55 @@
 										<tbody>
 										<tr>
 											<td>NOINDEX</td>
-											<td><input type="checkbox" name="robots_noindex"
-											           id="robots_noindex" <?php echo ltichk( 'robots_noindex' ); ?>/>
+											<td><input type="checkbox" name="robot_noindex"
+											           id="robot_noindex" <?php echo ltichk( 'robot_noindex' ); ?>/>
 											</td>
-											<td><input type="checkbox" name="post_robots_noindex"
-											           id="post_robots_noindex" <?php echo ltichk( 'post_robots_noindex' ); ?>/>
+											<td><input type="checkbox" name="post_robot_noindex"
+											           id="post_robot_noindex" <?php echo ltichk( 'post_robot_noindex' ); ?>/>
 											</td>
 										</tr>
 										<tr>
 											<td>NOFOLLOW</td>
-											<td><input type="checkbox" name="robots_nofollow"
-											           id="robots_nofollow" <?php echo ltichk( 'robots_nofollow' ); ?>/>
+											<td><input type="checkbox" name="robot_nofollow"
+											           id="robot_nofollow" <?php echo ltichk( 'robot_nofollow' ); ?>/>
 											</td>
-											<td><input type="checkbox" name="post_robots_nofollow"
-											           id="post_robots_nofollow" <?php echo ltichk( 'post_robots_nofollow' ); ?>/>
+											<td><input type="checkbox" name="post_robot_nofollow"
+											           id="post_robot_nofollow" <?php echo ltichk( 'post_robot_nofollow' ); ?>/>
 											</td>
 										</tr>
 										<tr>
 											<td>NOODP</td>
-											<td><input type="checkbox" name="robots_noodp"
-											           id="robots_noodp" <?php echo ltichk( 'robots_noodp' ); ?>/></td>
-											<td><input type="checkbox" name="post_robots_noodp"
-											           id="post_robots_noodp" <?php echo ltichk( 'post_robots_noodp' ); ?>/>
+											<td><input type="checkbox" name="robot_noodp"
+											           id="robot_noodp" <?php echo ltichk( 'robot_noodp' ); ?>/></td>
+											<td><input type="checkbox" name="post_robot_noodp"
+											           id="post_robot_noodp" <?php echo ltichk( 'post_robot_noodp' ); ?>/>
 											</td>
 										</tr>
 										<tr>
 											<td>NOYDIR</td>
-											<td><input type="checkbox" name="robots_noydir"
-											           id="robots_noydir" <?php echo ltichk( 'robots_noydir' ); ?>/>
+											<td><input type="checkbox" name="robot_noydir"
+											           id="robot_noydir" <?php echo ltichk( 'robot_noydir' ); ?>/>
 											</td>
-											<td><input type="checkbox" name="post_robots_noydir"
-											           id="post_robots_noydir" <?php echo ltichk( 'post_robots_noydir' ); ?>/>
+											<td><input type="checkbox" name="post_robot_noydir"
+											           id="post_robot_noydir" <?php echo ltichk( 'post_robot_noydir' ); ?>/>
 											</td>
 										</tr>
 										<tr>
 											<td>NOARCHIVE</td>
-											<td><input type="checkbox" name="robots_noarchive"
-											           id="robots_noarchive" <?php echo ltichk( 'robots_noarchive' ); ?>/>
+											<td><input type="checkbox" name="robot_noarchive"
+											           id="robot_noarchive" <?php echo ltichk( 'robot_noarchive' ); ?>/>
 											</td>
-											<td><input type="checkbox" name="post_robots_noarchive"
-											           id="post_robots_noarchive" <?php echo ltichk( 'post_robots_noarchive' ); ?>/>
+											<td><input type="checkbox" name="post_robot_noarchive"
+											           id="post_robot_noarchive" <?php echo ltichk( 'post_robot_noarchive' ); ?>/>
 											</td>
 										</tr>
 										<tr>
 											<td>NOSNIPPET</td>
-											<td><input type="checkbox" name="robots_nosnippet"
-											           id="robots_nosnippet" <?php echo ltichk( 'robots_nosnippet' ); ?>/>
+											<td><input type="checkbox" name="robot_nosnippet"
+											           id="robot_nosnippet" <?php echo ltichk( 'robot_nosnippet' ); ?>/>
 											</td>
-											<td><input type="checkbox" name="post_robots_nosnippet"
-											           id="post_robots_nosnippet" <?php echo ltichk( 'post_robots_nosnippet' ); ?>/>
+											<td><input type="checkbox" name="post_robot_nosnippet"
+											           id="post_robot_nosnippet" <?php echo ltichk( 'post_robot_nosnippet' ); ?>/>
 											</td>
 										</tr>
 										</tbody>
@@ -166,29 +187,29 @@
 									<label>Global attributes applied to:</label>
 
 									<div class="checkbox-group">
-										<label for="robots_date_based">Date archives
-											<input type="checkbox" name="robots_date_based"
-											       id="robots_date_based" <?php echo ltichk( 'robots_date_based' ); ?>/>
+										<label for="robot_date_based">Date archives
+											<input type="checkbox" name="robot_date_based"
+											       id="robot_date_based" <?php echo ltichk( 'robot_date_based' ); ?>/>
 										</label>
-										<label for="robots_cat_based">Categories
-											<input type="checkbox" name="robots_cat_based"
-											       id="robots_cat_based" <?php echo ltichk( 'robots_cat_based' ); ?>/>
+										<label for="robot_cat_based">Categories
+											<input type="checkbox" name="robot_cat_based"
+											       id="robot_cat_based" <?php echo ltichk( 'robot_cat_based' ); ?>/>
 										</label>
-										<label for="robots_tag_based">Tags
-											<input type="checkbox" name="robots_tag_based"
-											       id="robots_tag_based" <?php echo ltichk( 'robots_tag_based' ); ?>/>
+										<label for="robot_tag_based">Tags
+											<input type="checkbox" name="robot_tag_based"
+											       id="robot_tag_based" <?php echo ltichk( 'robot_tag_based' ); ?>/>
 										</label>
-										<label for="robots_author_based">Author pages
-											<input type="checkbox" name="robots_author_based"
-											       id="robots_author_based" <?php echo ltichk( 'robots_author_based' ); ?>/>
+										<label for="robot_author_based">Author pages
+											<input type="checkbox" name="robot_author_based"
+											       id="robot_author_based" <?php echo ltichk( 'robot_author_based' ); ?>/>
 										</label>
-										<label for="robots_search_based">Searches
-											<input type="checkbox" name="robots_search_based"
-											       id="robots_search_based" <?php echo ltichk( 'robots_search_based' ); ?>/>
+										<label for="robot_search_based">Searches
+											<input type="checkbox" name="robot_search_based"
+											       id="robot_search_based" <?php echo ltichk( 'robot_search_based' ); ?>/>
 										</label>
-										<label for="robots_notfound_based">"Not found" page
-											<input type="checkbox" name="robots_notfound_based"
-											       id="robots_notfound_based" <?php echo ltichk( 'robots_notfound_based' ); ?>/>
+										<label for="robot_notfound_based">"Not found" page
+											<input type="checkbox" name="robot_notfound_based"
+											       id="robot_notfound_based" <?php echo ltichk( 'robot_notfound_based' ); ?>/>
 										</label>
 									</div>
 								</div>
@@ -204,9 +225,9 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="checkbox">
-								<label for="meta_description">Description meta tag support
-									<input type="checkbox" name="meta_description"
-									       id="meta_description" <?php echo ltichk( 'meta_description' ); ?>/>
+								<label for="description_support">Description meta tag
+									<input type="checkbox" name="description_support"
+									       id="description_support" <?php echo ltichk( 'description_support' ); ?>/>
 								</label>
 							</div>
 						</div>
@@ -227,9 +248,11 @@
 					<div class="form-group">
 						<div class="input-group">
 							<label for="frontpage_description">Description
-								<input type="checkbox" name="frontpage_description" data-toggle="seo-options" data-target="#description_group"
+								<input type="checkbox" name="frontpage_description" data-toggle="seo-options"
+								       data-target="#description_group"
 								       id="frontpage_description" <?php echo ltichk( 'frontpage_description' ); ?>/>
 							</label>
+
 							<div id="description_group">
 							<textarea name="frontpage_description_text"
 							          id="frontpage_description_text"><?php echo ltiopt( 'frontpage_description_text' ); ?></textarea>
@@ -246,10 +269,12 @@
 					<div class="form-group">
 						<div class="input-group">
 							<label for="frontpage_keyword">Keywords
-								<input type="checkbox" name="frontpage_keyword" data-toggle="seo-options" data-target="#keyword_group"
+								<input type="checkbox" name="frontpage_keyword" data-toggle="seo-options"
+								       data-target="#frontpage_keyword_group"
 								       id="frontpage_keyword" <?php echo ltichk( 'frontpage_keyword' ); ?>/>
 							</label>
-							<div id="keyword_group">
+
+							<div id="frontpage_keyword_group">
 							<textarea name="frontpage_keyword_text"
 							          id="frontpage_keyword_text"><?php echo ltiopt( 'frontpage_keyword_text' ); ?></textarea>
 							</div>
@@ -261,12 +286,58 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<div class="input-group">
+							<label>Robots
+								<input type="checkbox" name="frontpage_robot" data-toggle="seo-options"
+								       data-target="#frontpage_robot_group"
+								       id="frontpage_robot" <?php echo ltichk( 'frontpage_robot' ); ?>/>
+							</label>
+
+							<div id="frontpage_robot_group">
+								<div class="checkbox-group">
+									<label for="frontpage_robot_noindex">NOINDEX
+										<input type="checkbox" name="frontpage_robot_noindex"
+										       id="frontpage_robot_noindex" <?php echo ltichk( 'frontpage_robot_noindex' ); ?>/>
+									</label>
+									<label for="frontpage_robot_nofollow">NOFOLLOW
+										<input type="checkbox" name="frontpage_robot_nofollow"
+										       id="frontpage_robot_nofollow" <?php echo ltichk( 'frontpage_robot_nofollow' ); ?>/>
+									</label>
+									<label for="frontpage_robot_noodp">NOODP
+										<input type="checkbox" name="frontpage_robot_noodp"
+										       id="frontpage_robot_noodp" <?php echo ltichk( 'frontpage_robot_noodp' ); ?>/>
+									</label>
+									<label for="frontpage_robot_noydir">NOYDIR
+										<input type="checkbox" name="frontpage_robot_noydir"
+										       id="frontpage_robot_noydir" <?php echo ltichk( 'frontpage_robot_noydir' ); ?>/>
+									</label>
+									<label for="frontpage_robot_noarchive">NOARCHIVE
+										<input type="checkbox" name="frontpage_robot_noarchive"
+										       id="frontpage_robot_noarchive" <?php echo ltichk( 'frontpage_robot_noarchive' ); ?>/>
+									</label>
+									<label for="frontpage_robot_nosnippet">NOSNIPPET
+										<input type="checkbox" name="frontpage_robot_nosnippet"
+										       id="frontpage_robot_nosnippet" <?php echo ltichk( 'frontpage_robot_nosnippet' ); ?>/>
+									</label>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="form-help-container">
+							<div class="form-help">
+								<p>Robot attributes to apply to the front page.</p>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
 						<label>JSON-LD</label>
 
 						<div class="form-group">
 							<div class="input-group">
 								<label for="jsonld_org_info">Person/Organization
-									<input type="checkbox" name="jsonld_org_info" data-toggle="seo-options" data-target="#jsonld_org_group"
+									<input type="checkbox" name="jsonld_org_info" data-toggle="seo-options"
+									       data-target="#jsonld_org_group"
 									       id="jsonld_org_info" <?php echo ltichk( 'jsonld_org_info' ); ?>/>
 								</label>
 
@@ -415,16 +486,17 @@
 						<div class="input-group">
 							<div class="checkbox">
 								<label for="meta_description">Open Graph support
-									<input type="checkbox" name="open_graph_support" data-toggle="seo-options" data-target="#fb_publisher_group"
+									<input type="checkbox" name="open_graph_support" data-toggle="seo-options"
+									       data-target="#fb_publisher_group"
 									       id="open_graph_support" <?php echo ltichk( 'open_graph_support' ); ?> />
 								</label>
 							</div>
 							<div id="fb_publisher_group">
-							<label for="facebook_publisher">Facebook publisher URL
-								<input type="text" name="facebook_publisher" id="facebook_publisher"
-								       value="<?php echo ltiopt( 'facebook_publisher' ); ?>"
-								       placeholder="https://www.facebook.com/publisher"/>
-							</label>
+								<label for="facebook_publisher">Facebook publisher URL
+									<input type="text" name="facebook_publisher" id="facebook_publisher"
+									       value="<?php echo ltiopt( 'facebook_publisher' ); ?>"
+									       placeholder="https://www.facebook.com/publisher"/>
+								</label>
 							</div>
 						</div>
 						<div class="form-help-container">
@@ -449,7 +521,8 @@
 						<div class="input-group">
 							<div class="checkbox">
 								<label for="meta_description">Twitter Cards support
-									<input type="checkbox" name="twitter_card_support"  data-toggle="seo-options" data-target="#twitter_card_group"
+									<input type="checkbox" name="twitter_card_support" data-toggle="seo-options"
+									       data-target="#twitter_card_group"
 									       id="twitter_card_support" <?php echo ltichk( 'twitter_card_support' ); ?> />
 								</label>
 							</div>
@@ -497,10 +570,10 @@
 			</div>
 			<div class="form-group-submit">
 				<div class="button-group-submit">
-					<input id="in-seopt-submit" class="button-primary" type="submit"
-					       value="<?php echo ltint( 'Save Changes', 'add-meta-tags' ); ?>"/>
-					<input id="in-seopt-reset" class="button-primary" type="submit"
-					       value="<?php echo ltint( 'Reset to defaults', 'add-meta-tags' ); ?>"/>
+					<input id="in-seopt-submit" class="button-primary" type="submit" name="lti_seo_update"
+					       value="<?php echo ltint( 'Save Changes' ); ?>"/>
+					<input id="in-seopt-reset" class="button-primary" type="submit" name="lti_seo_reset"
+					       value="<?php echo ltint( 'Reset to defaults' ); ?>"/>
 				</div>
 			</div>
 		</form>

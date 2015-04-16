@@ -13,12 +13,12 @@ class Frontpage_Keyword extends Keyword implements ICanMakeHeaderTags {
 
 	public function make_tags() {
 
-		$tags = $this->helper->get_tagcat($this->post_id);
+		$tags = $this->helper->get_keywords($this->post_id);
 
 		$tags = apply_filters( 'lti_seo_keywords', $tags );
-		
-		if ( is_array( $tags ) ) {
-			return implode( ',', array_map('strtolower',$tags ));
+
+		if ( !is_null( $tags )&&!empty($tags) ) {
+			return $tags;
 		}
 		return null;
 	}

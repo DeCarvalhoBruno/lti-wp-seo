@@ -68,7 +68,7 @@ class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags 
 		}
 		$twitter['title']       = esc_attr( $this->helper->get_title() );
 		$twitter['url']         = esc_url_raw( $this->helper->get_canonical_url() );
-		$twitter['description'] = esc_attr( $this->helper->get_site_description() );
+		$twitter['description'] = esc_attr( $this->helper->get_description() );
 		$twitter['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
 
 		return compact( 'twitter' );
@@ -88,7 +88,7 @@ class Singular_Twitter_Card extends Twitter_Card {
 		$twitter['creator'] = $this->helper->get_author_social_url("twitter");
 		$twitter['title']       = esc_attr( $this->helper->get_title() );
 		$twitter['url']         = esc_url_raw( $this->helper->get_canonical_url() );
-		$twitter['description'] = esc_attr( $this->helper->get_site_description() );
+		$twitter['description'] = esc_attr( $this->helper->get_description() );
 		$twitter['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
 
 		return compact( 'twitter' );
