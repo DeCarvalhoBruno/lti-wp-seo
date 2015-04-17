@@ -59,8 +59,25 @@ class Admin {
 	}
 
 	public function admin_menu() {
-		add_options_page( ltint( 'LTI SEO Settings' ), ltint( 'LTI SEO' ), 'manage_options', 'lti-seo-options',
+		$page = add_options_page( ltint( 'LTI SEO Settings' ), ltint( 'LTI SEO' ), 'manage_options', 'lti-seo-options',
 			array( $this, 'options_page' ) );
+		add_action( 'load-' . $page, array( $this, 'wp_help_menu' ) );
+	}
+
+	public function wp_help_menu() {
+		include $this->admin_dir . '/partials/help_menu.php';
+		$screen = get_current_screen();
+		$menu = new \Lti_Seo_Help_Menu();
+		$screen->add_help_tab( array(
+			'id'      => 'lti_seo_help1',
+			'title'   => __( 'Welcome!' ),
+			'content' => $menu->welcome_tab()
+		) );
+
+		$screen->set_help_sidebar(
+			'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
+			'<p><a href="http://wordpress.org/support/" target="_blank">' . _( 'Support Forums' ) . '</a></p>'
+		);
 	}
 
 	public function plugin_actions( $links, $file ) {
@@ -77,20 +94,21 @@ class Admin {
 			if ( isset( $_POST['lti_seo_token'] ) ) {
 				if ( wp_verify_nonce( $_POST['lti_seo_token'], 'lti_seo_options' ) !== false ) {
 					$this->validate_input( $_POST );
-					$this->page_type = "update";
+					$this->page_type = "lti_update";
 					$this->message = ltint('Plugin options have been updated');
 
 				} else {
-					//error message;
+					$this->page_type = "lti_error";
+					$this->message = ltint("Plugin options could not be saved (session error).");
 				}
 			}
 		} elseif ( isset( $_POST['lti_seo_reset'] ) ) {
 			$this->settings = new Plugin_Settings();
 			update_option( 'lti_seo_options', $this->settings );
-			$this->page_type = "reset";
+			$this->page_type = "lti_reset";
 			$this->message = ltint('Plugin options have been reset');
 		}else{
-			$this->page_type = "edit";
+			$this->page_type = "lti_edit";
 		}
 		include $this->admin_dir . '/partials/options-page.php';
 	}

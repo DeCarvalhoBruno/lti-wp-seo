@@ -535,8 +535,8 @@
 								<label>
 									<input name="twitter_card_type"
 									       type="radio" <?php echo ltirad( 'twitter_card_type',
-										'summary_img' ); ?>
-									       value="summary_img"/>Summary card with large image
+										'summary_large_image' ); ?>
+									       value="summary_large_image"/>Summary card with large image
 								</label>
 								<label for="twitter_publisher">Twitter publisher username
 									<input type="text" name="twitter_publisher" id="twitter_publisher"

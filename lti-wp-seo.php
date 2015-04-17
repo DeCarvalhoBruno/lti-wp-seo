@@ -30,6 +30,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+define( 'LTI_SEO_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
 require_once( plugin_dir_path( __FILE__ ) . 'src/lti/seo/lti-seo.php' );
 
 register_activation_hook( __FILE__, array( 'Lti\Seo\LTI_SEO', 'activate' ) );

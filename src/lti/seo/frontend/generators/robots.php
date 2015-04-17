@@ -16,31 +16,32 @@ class Robot extends GenericMetaTag {
 
 	protected function get_robot_setting( $setting, $settings_prefix = "" ) {
 		$robots = array();
-		if ( $this->settings->get( $setting ) === true ) {
-			if ( $this->settings->get( $settings_prefix . 'robot_noindex' ) === true ) {
+
+		if ( $this->helper->get( $setting ) == true ) {
+			if ( $this->helper->get( $settings_prefix . 'robot_noindex' ) == true ) {
 				$robots[] = 'noindex';
 			}
-			if ( $this->settings->get( $settings_prefix . 'robot_nofollow' ) === true ) {
+			if ( $this->helper->get( $settings_prefix . 'robot_nofollow' ) == true ) {
 				$robots[] = 'nofollow';
 			}
-			if ( $this->settings->get( $settings_prefix . 'robot_noodp' ) === true ) {
+			if ( $this->helper->get( $settings_prefix . 'robot_noodp' ) == true ) {
 				$robots[] = 'noodp';
 			}
-			if ( $this->settings->get( $settings_prefix . 'robot_noydir' ) === true ) {
+			if ( $this->helper->get( $settings_prefix . 'robot_noydir' ) == true ) {
 				$robots[] = 'noydir';
 			}
-			if ( $this->settings->get( $settings_prefix . 'robot_noarchive' ) === true ) {
+			if ( $this->helper->get( $settings_prefix . 'robot_noarchive' ) == true ) {
 				$robots[] = 'noarchive';
 			}
-			if ( $this->settings->get( $settings_prefix . 'robot_nosnippet' ) === true ) {
+			if ( $this->helper->get( $settings_prefix . 'robot_nosnippet' ) == true ) {
 				$robots[] = 'nosnippet';
 			}
 		}
-
 		return $robots;
 	}
 
 	public function make_tags() {
+
 		$tags = $this->get_robot();
 		$tags = apply_filters( 'lti_seo_robots', $tags );
 
@@ -55,14 +56,29 @@ class Robot extends GenericMetaTag {
 class Frontpage_Robot extends Robot implements ICanMakeHeaderTags {
 	protected $setting = 'frontpage_robot';
 	protected $prefix = 'frontpage_';
-
-
+	public function make_tags() {
+		if($this->helper->get('frontpage_robot')){
+			return parent::make_tags();
+		}
+		return null;
+	}
 
 }
 
 class Singular_Robot extends Robot {
 	protected $setting = 'robot_support';
 	protected $prefix = 'post_';
+
+	public function make_tags() {
+		$box_values = $this->helper->get_post_meta();
+
+		if ( ! is_null( $box_values )&&!empty($box_values) ) {
+			$box_values->set('robot_support',true,'Checkbox');
+			$this->helper = $box_values;
+			return parent::make_tags();
+		}
+		return null;
+	}
 }
 
 class Archive_Robot extends Robot {

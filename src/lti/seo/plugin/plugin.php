@@ -63,7 +63,7 @@ class Defaults {
 			new def(
 				'twitter_card_type',
 				'Radio',
-				array( 'default' => 'summary', 'choice' => array( 'summary', 'summary_img' ) )
+				array( 'default' => 'summary', 'choice' => array( 'summary', 'summary_large_image' ) )
 			),
 			new def( 'gplus_publisher', 'Url' ),
 			new def( 'account_facebook', 'Url' ),

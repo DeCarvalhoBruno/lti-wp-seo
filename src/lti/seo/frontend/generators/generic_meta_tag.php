@@ -30,17 +30,11 @@ abstract class GenericMetaTag {
 	protected $helper;
 
 	/**
-	 * @var \Lti\Seo\Plugin\Plugin_Settings
-	 */
-	protected $settings;
-
-	/**
 	 * @param ICanHelp $helper
 	 * @param Plugin_Settings $settings
 	 */
-	public function __construct( ICanHelp $helper, Plugin_Settings $settings, $post_id = null ) {
+	public function __construct( ICanHelp $helper, $post_id = null ) {
 		$this->helper = $helper;
-		$this->settings = $settings;
 		$this->tags   = $this->make_tags();
 		$this->post_id = $post_id;
 	}

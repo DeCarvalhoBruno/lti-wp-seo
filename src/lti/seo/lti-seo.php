@@ -42,8 +42,8 @@ class LTI_SEO {
 	/**
 	 * @var \Lti\Seo\Admin
 	 */
-	public $plugin_admin;
-	public $plugin_frontend;
+	public $admin;
+	public $frontend;
 	private $helper;
 
 	/**
@@ -59,7 +59,7 @@ class LTI_SEO {
 		require_once $this->file_path . 'plugin/form_fields.php';
 		require_once $this->file_path . 'plugin/plugin.php';
 		$this->name        = 'lti-wp-seo';
-		$this->plugin_path = dirname( dirname( dirname( $this->file_path ) ) );
+		$this->plugin_path = LTI_SEO_PLUGIN_DIR;
 		$this->settings    = get_option( "lti_seo_options" );
 
 		if ( $this->settings === false ) {
@@ -68,14 +68,11 @@ class LTI_SEO {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_admin_hooks();
-		$this->define_public_hooks();
-
 	}
 
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new static();
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -134,23 +131,27 @@ class LTI_SEO {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-		$this->plugin_admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path,
+		$this->admin = new Admin( $this->name, $this->version, $this->settings, $this->plugin_path,
 			$this->helper );
 
-		$this->loader->add_action( 'admin_init', $this->plugin_admin, 'register_setting' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_menu', $this->plugin_admin, 'admin_menu' );
-		$this->loader->add_filter( 'plugin_action_links', $this->plugin_admin, 'plugin_actions', 10, 2 );
-		$this->loader->add_action( 'add_meta_boxes', $this->plugin_admin, 'add_meta_boxes' );
-		$this->loader->add_action( 'save_post', $this->plugin_admin, 'save_post', 10, 3 );
+		$this->loader->add_action( 'admin_init', $this->admin, 'register_setting' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $this->admin, 'admin_menu' );
+		$this->loader->add_filter( 'plugin_action_links', $this->admin, 'plugin_actions', 10, 2 );
+		$this->loader->add_action( 'add_meta_boxes', $this->admin, 'add_meta_boxes' );
+		$this->loader->add_action( 'save_post', $this->admin, 'save_post', 10, 3 );
 	}
 
 	/**
 	 * @return \Lti\Seo\Admin
 	 */
 	public function get_admin() {
-		return $this->plugin_admin;
+		return $this->admin;
+	}
+
+	public function get_frontend(){
+		return $this->frontend;
 	}
 
 	/**
@@ -161,13 +162,13 @@ class LTI_SEO {
 	 */
 	private function define_public_hooks() {
 
-		$this->plugin_frontend = new Frontend( $this->name, $this->version, $this->settings,
+		$this->frontend = new Frontend( $this->name, $this->version, $this->settings,
 			$this->helper );
 
-		$this->loader->add_action( 'wp_head', $this->plugin_frontend, 'head', 0 );
+		$this->loader->add_action( 'wp_head', $this->frontend, 'head' );
 
 		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
-			$this->loader->add_filter( 'user_contactmethods', $this->plugin_frontend, 'user_contactmethods', 10 );
+			$this->loader->add_filter( 'user_contactmethods', $this->frontend, 'user_contactmethods', 10 );
 		}
 	}
 
@@ -177,6 +178,8 @@ class LTI_SEO {
 	 * @since    1.0.0
 	 */
 	public function run() {
+		$this->define_admin_hooks();
+		$this->define_public_hooks();
 		$this->loader->run();
 	}
 
@@ -210,12 +213,12 @@ class LTI_SEO {
 	}
 
 	public static function activate() {
-		require_once plugin_dir_path( __FILE__ ) . 'activator.php';
+		require_once LTI_SEO_PLUGIN_DIR . 'activator.php';
 		Activator::activate();
 	}
 
 	public static function deactivate() {
-		require_once plugin_dir_path( __FILE__ ) . 'deactivator.php';
+		require_once LTI_SEO_PLUGIN_DIR . 'deactivator.php';
 		Deactivator::deactivate();
 	}
 

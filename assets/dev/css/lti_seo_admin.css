@@ -15,26 +15,32 @@
         color: #000000;
     }
 
-    .lti-seo-header.update {
+    .lti-seo-header.lti_update {
         background-color: #007725;
     }
 
-    .lti-seo-header.update h2 {
+    .lti-seo-header.lti_update h2, .lti-seo-header.lti_error h2 {
         color: #ffffff;
     }
 
-    .lti-seo-header.reset {
+    .lti-seo-header.lti_reset {
         background-color: #e7e7e7;
     }
 
+    .lti-seo-header.lti_error {
+        background-color: #c90000;
+    }
+
     .lti-seo-message {
-        float: right;
-        width: 60%;
+        display:inline-block;
+        width: 50%;
+        vertical-align: middle;
     }
 
     .lti-seo-title {
-        float: left;
+        display:inline-block;
         width: 35%;
+        vertical-align: middle;
     }
 
     #flseo{
@@ -87,6 +93,8 @@
         margin: 10px auto 0;
         background-color: #1aa55f;
         border: 1px solid #16894f;
+        color: #ffffff;
+        box-shadow: none;
     }
 
     #flseo .input-group .input-group.file-selector input[type="button"]:hover {
@@ -94,6 +102,8 @@
         margin: 10px auto 0;
         background-color: #16864d;
         border: 1px solid #16894f;
+        color: #ffffff;
+        box-shadow: none;
     }
 
     #flseo .form-help-container {
@@ -138,6 +148,10 @@
         max-width: 100%;
     }
 
+    #flseo .input-group .checkbox-group input[type="checkbox"] {
+        margin:0.4em 15% 0 2%;
+    }
+
     #flseo .input-group input[type="checkbox"] {
         float: right;
         margin:0.4em 5% 0 2%;
@@ -146,7 +160,7 @@
 
     #flseo .input-group input[type="radio"] {
         float: right;
-        margin: 0.4em 25% 0 2%;
+        margin: 0.4em 15% 0 2%;
         width: 5%;
     }
 

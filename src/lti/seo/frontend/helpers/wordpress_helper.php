@@ -14,6 +14,8 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 	private $page_description;
 	private $page_type;
 	private $post_id;
+	private $shortlink;
+	private $post_meta;
 
 	/**
 	 * @var \Lti\Seo\Plugin\Plugin_Settings
@@ -22,6 +24,10 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	public function __construct( $settings ) {
 		parent::__construct( $settings );
+	}
+
+	public function get($value){
+		return $this->settings->get($value);
 	}
 
 	public function init() {
@@ -48,6 +54,27 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		$field = get_post_field( $key, $this->post_id, 'raw' );
 		if ( ! empty( $field ) ) {
 			return $field;
+		}
+
+		return null;
+	}
+
+	public function get_post_meta() {
+		if ( is_null( $this->post_meta ) ) {
+			$box_values      = get_post_meta( $this->post_id, "lti_seo", true );
+			$this->post_meta = $box_values;
+		}
+
+		return $this->post_meta;
+	}
+
+	public function get_post_meta_key( $key ) {
+		if ( is_null( $this->post_meta ) ) {
+			$this->get_post_meta();
+		}
+
+		if ( ! empty( $this->post_meta ) && $this->post_meta instanceof Postbox_Values ) {
+			return $this->post_meta->get( $key );
 		}
 
 		return null;
@@ -82,8 +109,10 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 			return esc_url_raw( array_shift( $info ) );
 		}
 
-		return esc_url_raw( get_author_posts_url( get_the_author_meta( 'ID',
-			$this->get_post_info( 'post_author' ) ) ) );
+		return null;
+
+//		return esc_url_raw( get_author_posts_url( get_the_author_meta( 'ID',
+//			$this->get_post_info( 'post_author' ) ) ) );
 	}
 
 	public function page_type() {
@@ -91,14 +120,16 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 			if ( is_front_page() ) {
 				$this->page_type = "Frontpage";
 			} elseif ( is_singular() ) {
-				$this->page_type = 'Singular';
-				$this->post_id   = $this->get_post_info( 'ID' );
+				if ( is_attachment() ) {
+					$this->page_type = 'Attachment';
+				} else {
+					$this->page_type = 'Singular';
+					$this->post_id   = $this->get_post_info( 'ID' );
+				}
 			} elseif ( is_category() || is_tag() || is_tax() ) {
 				$this->page_type = "Catagax";
 			} elseif ( is_author() ) {
 				$this->page_type = "Author";
-			} elseif ( is_attachment() ) {
-				$this->page_type = "Attachment";
 			} elseif ( is_archive() ) {
 				$this->page_type = 'Archive';
 			} elseif ( is_search() ) {
@@ -109,6 +140,10 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		}
 
 		return $this->page_type;
+	}
+
+	public function get_post_id() {
+		return $this->post_id;
 	}
 
 	public function page_post_format() {
@@ -203,6 +238,14 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return $this->current_url;
 	}
 
+	public function get_shortlink() {
+		if ( is_null( $this->shortlink ) ) {
+			$this->shortlink = wp_get_shortlink();
+		}
+
+		return $this->shortlink;
+	}
+
 	public function get_social_images( $mode = "", $number = - 1 ) {
 		/**
 		 * Allow filtering of the image size
@@ -211,7 +254,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		 * @see get_intermediate_image_sizes()
 		 *
 		 */
-		$image_size = apply_filters( 'lti_seo_image_size_index', 'full' );
+		$image_size = apply_filters( 'lti_seo_image_size_index', 'large' );
 		$data       = array();
 
 		$image_data = $this->get_img( get_post_thumbnail_id(), $image_size );
@@ -225,24 +268,6 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 			$data[] = $image_data;
 		}
 		switch ( $mode ) {
-			/*
-			case "fallback":
-				if ( empty( $data ) ) {
-					$img_id     = $this->get_custom_social_image();
-					$image_data = $this->get_img( $img_id, $image_size );
-					if ( ! is_null( $image_data ) ) {
-						$data[] = $image_data;
-					}
-				}
-				break;
-			case "with_main_image":
-				$img_id     = $this->$this->get_custom_social_image();
-				$image_data = $this->get_img( $img_id, $image_size );
-				if ( ! is_null( $image_data ) ) {
-					$data[] = $image_data;
-				}
-				break;
-			*/
 			case "all":
 				if ( $number == - 1 ) {
 					$nb_img = $number;
@@ -258,7 +283,6 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 					if ( ! empty( $tmp ) && isset( $tmp[0]['ids'] ) ) {
 						$tmp = explode( ',', $tmp[0]['ids'], 4 );
-						//$tmp = array_slice( $tmp['src'], 0, 4 );
 
 						$i = 0;
 						foreach ( $tmp as $id ) {
@@ -287,10 +311,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		if ( $this->page_type() == "Frontpage" ) {
 			$img_id = $this->settings->get( 'frontpage_social_img_id' );
 		} else {
-			$box_values = get_post_meta( $this->post_id, "lti_seo", true );
-			if ( ! empty( $box_values ) ) {
-				$img_id = $box_values->get( 'social_img_id' );
-			}
+			$img_id = $this->get_post_meta_key( 'social_img_id' );
 		}
 
 		return $img_id;
@@ -348,10 +369,8 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		if ( $this->page_type() == "Frontpage" ) {
 			$keywords = explode( ",", $this->settings->get( 'frontpage_keyword_text' ) );
 		} else {
-			$box_values = get_post_meta( $post_id, "lti_seo", true );
-			if ( isset( $box_values->keywords ) && ! is_null( $box_values->keywords ) ) {
-				$keywords = $box_values->keywords->value;
-			} else {
+			$keywords = $this->get_post_meta_key( 'keywords' );
+			if ( is_null( $keywords ) ) {
 				if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
 					$keywords = array_unique( $this->extract_array_object_value( get_the_category( $post_id ),
 						'cat_name' ) );
@@ -421,11 +440,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 					$this->page_description = get_bloginfo( 'description' );
 				}
 			} else {
-				$box_values = get_post_meta( $this->post_id, "lti_seo", true );
-				if ( ! empty( $box_values ) ) {
-					$this->page_description = $box_values->get( 'description' );
-
-				}
+				$this->page_description = $this->get_post_meta_key( 'description' );
 			}
 		}
 

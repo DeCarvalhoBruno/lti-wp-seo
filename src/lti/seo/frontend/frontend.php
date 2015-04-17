@@ -37,7 +37,7 @@ class Frontend {
 
 	public function head() {
 		$this->helper->init();
-		//add_action( 'lti_seo_head', array( $this, 'frontpage_description' ) );
+
 		$class_pattern = "Lti\\Seo\\Generators\\%s_%s";
 
 		$this->hook_functionality( 'Link_Rel' );
@@ -46,9 +46,13 @@ class Frontend {
 
 		$this->hook_functionality( 'Keyword' );
 
-		$this->hook_functionality( 'Open_Graph' );
+		if ( $this->settings->get( 'open_graph_support' ) == true ) {
+			$this->hook_functionality( 'Open_Graph' );
+		}
 
-		$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
+		if ( $this->settings->get( 'twitter_card_support' ) == true ) {
+			$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
+		}
 
 		$this->hook_functionality( 'Robot' );
 
@@ -70,8 +74,7 @@ class Frontend {
 
 	private function hook_functionality( $type, $format = 'page_type' ) {
 		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, $format ) ), $type );
-
-		if ( $this->settings->get( strtolower( $type ) . '_support' ) === true && class_exists( $class ) ) {
+		if ( class_exists( $class ) ) {
 			$og = new $class( $this->helper, $this->settings );
 			add_action( 'lti_seo_head', array( $og, 'display_tags' ) );
 		}

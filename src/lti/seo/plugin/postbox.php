@@ -16,7 +16,7 @@ class Postbox_Fields {
 }
 
 class Postbox_Values {
-	public function __construct( $form=null ) {
+	public function __construct( $form = null ) {
 
 		if ( is_object( $form ) ) {
 			$postbox = new Postbox_Fields();
@@ -42,7 +42,12 @@ class Postbox_Values {
 	}
 
 	public function set( $key, $value, $type = "Text" ) {
-		$className    = __NAMESPACE__ ."\\Field_" . $type;
-		$this->{$key} = new $className( $value );
+		if ( isset( $this->{$key} ) ) {
+			$this->{$key}->value = $value;
+		} else {
+			$className    = __NAMESPACE__ . "\\Field_" . $type;
+			$this->{$key} = new $className( $value );
+
+		}
 	}
 }

@@ -4,21 +4,30 @@
     $(document).ready(function () {
 
         var seo_header = $('#lti-seo-header');
+
         if (seo_header.length) {
-            if (seo_header.hasClass('update')) {
+            if (seo_header.hasClass('lti_update')) {
                 setTimeout(
                     function () {
-                        seo_header.removeClass('update');
+                        seo_header.removeClass('lti_update');
                     }, 3000);
                 setTimeout(
                     function () {
                         $('.lti-seo-message').empty();
                     }, 5000);
-            }
-            if (seo_header.hasClass('reset')) {
+            } else if (seo_header.hasClass('lti_reset')) {
                 setTimeout(
                     function () {
-                        seo_header.removeClass('reset');
+                        seo_header.removeClass('lti_reset');
+                    }, 3000);
+                setTimeout(
+                    function () {
+                        $('.lti-seo-message').empty();
+                    }, 5000);
+            } else if (seo_header.hasClass('lti_error')) {
+                setTimeout(
+                    function () {
+                        seo_header.removeClass('lti_error');
                     }, 3000);
                 setTimeout(
                     function () {
