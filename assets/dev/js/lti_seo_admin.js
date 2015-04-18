@@ -64,7 +64,6 @@
                 var $this = this;
                 this.optionID.click(function () {
                     if (this.checked) {
-
                         $this.enable();
                     } else {
                         $this.disable();

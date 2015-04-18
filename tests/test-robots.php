@@ -1,7 +1,10 @@
-<?php
+<?php namespace Lti\Seo\Test;
 
-use Lti\Seo\Frontend;
 
+use Lti\Seo\Generators\Frontpage_Robot;
+use Lti\Seo\Generators\Singular_Robot;
+use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Plugin\Plugin_Settings;
 
 class RobotsTest extends LTI_SEO_UnitTestCase {
 
@@ -11,7 +14,7 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 	}
 
 	public function testRobotsDisabled(){
-		$robots = new \Lti\Seo\Generators\Frontpage_Robot(new \Lti\Seo\Helpers\Wordpress_Helper(new \Lti\Seo\Plugin\Plugin_Settings((object)array())));
+		$robots = new Frontpage_Robot(new \Lti\Seo\Helpers\Wordpress_Helper(new \Lti\Seo\Plugin\Plugin_Settings((object)array())));
 		ob_start();
 		$robots->display_tags();
 		$output = ob_get_clean();
@@ -21,7 +24,7 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 
 	public function testFrontpageRobots() {
 
-		$settings = new \Lti\Seo\Plugin\Plugin_Settings((object)array());
+		$settings = new Plugin_Settings((object)array());
 		$settings->set( 'frontpage_robot', true );
 		$settings->set( 'frontpage_robot_noindex', true );
 		$settings->set( 'frontpage_robot_nofollow', true );
@@ -30,7 +33,7 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 		$settings->set( 'frontpage_robot_noarchive', true );
 		$settings->set( 'frontpage_robot_nosnippet', true );
 
-		$robots = new \Lti\Seo\Generators\Frontpage_Robot(new \Lti\Seo\Helpers\Wordpress_Helper($settings));
+		$robots = new Frontpage_Robot(new Wordpress_Helper($settings));
 		ob_start();
 		$robots->display_tags();
 		$output = ob_get_clean();
@@ -51,9 +54,9 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 		update_post_meta( $postID, 'lti_seo', new \Lti\Seo\Plugin\Postbox_Values( (object) $postbox_settings ) );
 
 		$this->go_to(get_permalink($postID));
-		$helper = new \Lti\Seo\Helpers\Wordpress_Helper(new Lti\Seo\Plugin\Plugin_Settings(new \stdClass()));
+		$helper = new Wordpress_Helper(new \Lti\Seo\Plugin\Plugin_Settings(new \stdClass()));
 		$helper->init();
-		$robots = new \Lti\Seo\Generators\Singular_Robot($helper);
+		$robots = new Singular_Robot($helper);
 		ob_start();
 		$robots->display_tags();
 		$output = ob_get_clean();

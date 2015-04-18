@@ -8,19 +8,13 @@
  */
 ?>
 <div id="plseo">
-	<div style="font-family: Courier, monospace;font-size:0.9em">
-		<?php
-
-		?>
-		<br/><br/>
-	</div>
 	<?php if ( $this->settings->get( 'description_support' ) === true ) { ?>
 		<div class="form-group">
 			<div class="input-group">
-				<label for="lti_seo_description">Description</label>
+				<label for="lti_seo_description"><?php echo ltint('box.description'); ?></label>
 				<textarea name="lti_seo[description]" id="lti_seo_description"
 				          placeholder="<?php echo ltiopt( 'description_suggestion' ); ?>"><?php echo ltiopt( 'description' ); ?></textarea>
-				<span id="wlti_seo_description" class="char-counter">Character count:&nbsp;<span
+				<span id="wlti_seo_description" class="char-counter"><?php echo ltint('general.char_count'); ?>&nbsp;<span
 						id="clti_seo_description"></span></span>
 			</div>
 		</div>
@@ -28,13 +22,13 @@
 	<?php if ( $this->settings->get( 'keyword_support' ) === true ) { ?>
 		<div class="form-group">
 			<div class="input-group">
-				<label for="lti_seo_keywords">Keywords</label>
+				<label for="lti_seo_keywords"><?php echo ltint('box.keywords'); ?></label>
 				<input type="text" name="lti_seo[keywords]" id="lti_seo_keywords"
 				       value="<?php echo ltiopt( 'keywords' ); ?>"/>
 				<?php if ( !is_null(ltiopt( 'keywords_suggestion' )) ) { ?>
-				<span id="keywords_suggestion_box">Suggestion: <span id="lti_seo_keywords_suggestion"><?php echo ltiopt( 'keywords_suggestion' ); ?></span><a
+				<span id="keywords_suggestion_box"><?php echo ltint('box.keywords_suggestion'); ?>&nbsp;<span id="lti_seo_keywords_suggestion"><?php echo ltiopt( 'keywords_suggestion' ); ?></span><a
 					onclick="document.getElementById('lti_seo_keywords').setAttribute('value',document.getElementById('lti_seo_keywords_suggestion').textContent);">
-					(Copy)</a></span>
+					<?php echo ltint('box.text_copy'); ?></a></span>
 				<?php } ?>
 			</div>
 		</div>
@@ -42,7 +36,7 @@
 	<?php if ( $this->settings->get( 'open_graph_support' ) === true || $this->settings->get( 'twitter_cards_support' ) === true ) { ?>
 		<div class="form-group">
 			<div class="input-group">
-				<label for="meta_description">Social media image</label>
+				<label for="meta_description"><?php echo ltint('box.meta_description'); ?></label>
 
 				<div class="input-group file-selector">
 					<input id="lti_social_img" type="text" name="lti_seo[social_img_url]"
@@ -50,7 +44,7 @@
 					       readonly="readonly"/>
 					<input id="lti_social_img_button" class="button-primary upload_image_button"
 					       type="button"
-					       value="<?php echo ltint( 'Choose image' ); ?>"/>
+					       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
 					<input id="lti_social_img_id" type="hidden"
 					       name="lti_seo[social_img_id]"
 					       value="<?php echo ltiopt( 'social_img_id' ); ?>"/>
@@ -62,30 +56,30 @@
 	<?php if ( $this->settings->get( 'robot_support' ) === true ) { ?>
 		<div class="form-group">
 			<div class="input-group">
-				<label>Robots meta tag</label>
+				<label><?php echo ltint('box.group.robots'); ?></label>
 
 				<div class="checkbox-group">
-					<label for="post_robot_noindex">NOINDEX
+					<label for="post_robot_noindex"><?php echo ltint('box.post_robot_noindex'); ?>
 						<input type="checkbox" name="lti_seo[post_robot_noindex]"
 						       id="post_robot_noindex" <?php echo ltichk( 'post_robot_noindex' ); ?>/>
 					</label>
-					<label for="post_robot_nofollow">NOFOLLOW
+					<label for="post_robot_nofollow"><?php echo ltint('box.post_robot_nofollow'); ?>
 						<input type="checkbox" name="lti_seo[post_robot_nofollow]"
 						       id="post_robot_nofollow" <?php echo ltichk( 'post_robot_nofollow' ); ?>/>
 					</label>
-					<label for="post_robot_noodp">NOODP
+					<label for="post_robot_noodp"><?php echo ltint('box.post_robot_noodp'); ?>
 						<input type="checkbox" name="lti_seo[post_robot_noodp]"
 						       id="post_robot_noodp" <?php echo ltichk( 'post_robot_noodp' ); ?>/>
 					</label>
-					<label for="post_robot_noydir">NOYDIR
+					<label for="post_robot_noydir"><?php echo ltint('box.post_robot_noydir'); ?>
 						<input type="checkbox" name="lti_seo[post_robot_noydir]"
 						       id="post_robot_noydir" <?php echo ltichk( 'post_robot_noydir' ); ?>/>
 					</label>
-					<label for="post_robot_noarchive">NOARCHIVE
+					<label for="post_robot_noarchive"><?php echo ltint('box.post_robot_noarchive'); ?>
 						<input type="checkbox" name="lti_seo[post_robot_noarchive]"
 						       id="post_robot_noarchive" <?php echo ltichk( 'post_robot_noarchive' ); ?>/>
 					</label>
-					<label for="post_robot_nosnippet">NOSNIPPET
+					<label for="post_robot_nosnippet"><?php echo ltint('box.post_robot_nosnippet'); ?>
 						<input type="checkbox" name="lti_seo[post_robot_nosnippet]"
 						       id="post_robot_nosnippet" <?php echo ltichk( 'post_robot_nosnippet' ); ?>/>
 					</label>

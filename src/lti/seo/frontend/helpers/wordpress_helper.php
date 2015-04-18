@@ -26,8 +26,8 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		parent::__construct( $settings );
 	}
 
-	public function get($value){
-		return $this->settings->get($value);
+	public function get( $value ) {
+		return $this->settings->get( $value );
 	}
 
 	public function init() {
@@ -240,7 +240,12 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	public function get_shortlink() {
 		if ( is_null( $this->shortlink ) ) {
-			$this->shortlink = wp_get_shortlink();
+			$link = wp_get_shortlink();
+			if ( ! is_null( $link ) && ! empty( $link ) ) {
+				$this->shortlink = $link;
+			} else {
+				$this->shortlink = get_permalink();
+			}
 		}
 
 		return $this->shortlink;

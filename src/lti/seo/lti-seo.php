@@ -9,7 +9,6 @@ class LTI_SEO {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @access   protected
 	 * @var      \Lti\SEO\Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
@@ -17,7 +16,6 @@ class LTI_SEO {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @access   protected
 	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $LTI_SEO;
@@ -25,7 +23,6 @@ class LTI_SEO {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @access   protected
 	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
@@ -62,8 +59,8 @@ class LTI_SEO {
 		$this->plugin_path = LTI_SEO_PLUGIN_DIR;
 		$this->settings    = get_option( "lti_seo_options" );
 
-		if ( $this->settings === false ) {
-			$this->settings = new Plugin_Settings( null );
+		if ( $this->settings === false || empty($this->settings) ) {
+			$this->settings = new Plugin_Settings( );
 		}
 
 		$this->load_dependencies();
@@ -118,7 +115,7 @@ class LTI_SEO {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new i18n();
+		$plugin_i18n = new i18n($this->name);
 		$plugin_i18n->set_domain( $this->get_plugin_name() );
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -175,7 +172,6 @@ class LTI_SEO {
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.0.0
 	 */
 	public function run() {
 		$this->define_admin_hooks();
@@ -205,7 +201,6 @@ class LTI_SEO {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {

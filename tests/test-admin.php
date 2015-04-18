@@ -1,4 +1,4 @@
-<?php
+<?php namespace Lti\Seo\Test;
 
 class AdminTest extends LTI_SEO_UnitTestCase {
 

@@ -11,4 +11,8 @@ abstract class Helper {
 	public function __construct( $settings ) {
 		$this->settings = $settings;
 	}
+
+	public function get_settings(){
+		return $this->settings;
+	}
 }

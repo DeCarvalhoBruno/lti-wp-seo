@@ -1,4 +1,4 @@
-<?php
+<?php namespace Lti\Seo\Test;
 
 use Lti\Seo\Deactivator;
 use Lti\Seo\Activator;

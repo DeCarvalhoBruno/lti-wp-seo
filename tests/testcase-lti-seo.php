@@ -1,15 +1,15 @@
-<?php
+<?php namespace Lti\Seo\Test;
 
 use Lti\Seo\LTI_SEO;
 
-class LTI_SEO_UnitTestCase extends WP_UnitTestCase {
+class LTI_SEO_UnitTestCase extends \WP_UnitTestCase {
 
 	/**
 	 * @var LTI_SEO
 	 */
 	protected $instance;
 	/**
-	 * @var Lti\Seo\Admin
+	 * @var \Lti\Seo\Admin
 	 */
 	protected $admin;
 	/**
@@ -17,15 +17,17 @@ class LTI_SEO_UnitTestCase extends WP_UnitTestCase {
 	 */
 	protected $frontend;
 
+	protected $output;
+
 	public function setUp() {
 		parent::setUp();
 		$this->instance = LTI_SEO::get_instance();
 	}
 
 	public function hasContent($content,$query){
-		$s = new DOMDocument();
+		$s = new \DOMDocument();
 		@$s->loadHTML($content);
-		$xpath = new DOMXPath($s);
+		$xpath = new \DOMXPath($s);
 		$tags = $xpath->query($query);
 
 		if($tags->length>0){
@@ -58,9 +60,9 @@ class LTI_SEO_UnitTestCase extends WP_UnitTestCase {
 
 		$this->flush_cache();
 		unset($GLOBALS['wp_query'], $GLOBALS['wp_the_query']);
-		$GLOBALS['wp_the_query'] = new WP_Query();
+		$GLOBALS['wp_the_query'] = new \WP_Query();
 		$GLOBALS['wp_query'] = $GLOBALS['wp_the_query'];
-		$GLOBALS['wp'] = new WP();
+		$GLOBALS['wp'] = new \WP();
 		_cleanup_query_vars();
 
 		$GLOBALS['wp']->main($parts['query']);

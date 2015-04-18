@@ -9,10 +9,6 @@ use Lti\Seo\Plugin\Plugin_Settings;
 
 class Activator {
 
-	/**
-	 *
-	 * @since    1.0.0
-	 */
 	public static function activate() {
 		$stored_options = get_option("lti_seo_options");
 		if (empty($stored_options)) {

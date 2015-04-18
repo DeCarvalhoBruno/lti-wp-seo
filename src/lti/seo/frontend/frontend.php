@@ -75,23 +75,20 @@ class Frontend {
 	private function hook_functionality( $type, $format = 'page_type' ) {
 		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, $format ) ), $type );
 		if ( class_exists( $class ) ) {
-			$og = new $class( $this->helper, $this->settings );
+			$og = new $class( $this->helper);
 			add_action( 'lti_seo_head', array( $og, 'display_tags' ) );
 		}
 	}
 
 	public function user_contactmethods() {
 		if ( ! isset( $contactmethods['lti_twitter_username'] ) ) {
-			$contactmethods['lti_twitter_username'] = ltint( 'Twitter username (LTI)' );
+			$contactmethods['lti_twitter_username'] = ltint( 'user.twitter_username' );
 		}
 		if ( ! isset( $contactmethods['lti_facebook_url'] ) ) {
-			$contactmethods['lti_facebook_url'] = ltint( 'Facebook profile URL (LTI)' );
+			$contactmethods['lti_facebook_url'] = ltint( 'user.facebook_url' );
 		}
 		if ( ! isset( $contactmethods['lti_gplus_url'] ) ) {
-			$contactmethods['lti_gplus_url'] = ltint( 'Google+ profile URL (LTI)' );
-		}
-		if ( ! isset( $contactmethods['lti_gplus_url'] ) ) {
-			$contactmethods['lti_gplus_url'] = ltint( 'Google+ profile URL (LTI)' );
+			$contactmethods['lti_gplus_url'] = ltint( 'user.gplus_url' );
 		}
 
 		return $contactmethods;

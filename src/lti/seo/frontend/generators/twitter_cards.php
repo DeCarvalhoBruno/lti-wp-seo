@@ -9,12 +9,15 @@ class Twitter_Card extends GenericMetaTag {
 	protected $type = "summary";
 	protected $tags;
 
-	public function __construct( ICanHelp $helper, Plugin_Settings $settings ) {
-		$type = $settings->get( 'twitter_card_type' );
+	public function __construct( ICanHelp $helper, $type=null) {
+		//$type = $this->helper->get( 'twitter_card_type' );
 		if ( ! is_null( $type ) ) {
 			$this->type = $type;
+		}else{
+			$this->type = $helper->get('twitter_card_type');
 		}
-		parent::__construct( $helper, $settings );
+		parent::__construct( $helper );
+
 	}
 
 	public function display_tags() {
@@ -70,7 +73,7 @@ class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags 
 			$twitter['site'] = $handle;
 		}
 		$twitter['title']       = esc_attr( $this->helper->get_title() );
-		$twitter['url']         = esc_url_raw( $this->helper->get_shortlink() );
+		$twitter['url']         = esc_url_raw( home_url('/') );
 		$twitter['description'] = esc_attr( $this->helper->get_description() );
 		$twitter['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
 
@@ -92,8 +95,8 @@ class Attachment_Twitter_Card extends Frontpage_Twitter_Card {
 
 	protected $type = "photo";
 
-	public function __construct( ICanHelp $helper, Plugin_Settings $settings ) {
-		parent::__construct( $helper, $settings, $this->type );
+	public function __construct( ICanHelp $helper) {
+		parent::__construct( $helper, $this->type );
 	}
 
 }
@@ -110,8 +113,8 @@ class Singular_Gallery_Twitter_Card extends Singular_Twitter_Card {
 
 	protected $type = "gallery";
 
-	public function __construct( ICanHelp $helper, Plugin_Settings $settings ) {
-		parent::__construct( $helper, $settings, $this->type );
+	public function __construct( ICanHelp $helper ) {
+		parent::__construct( $helper, $this->type );
 	}
 
 	protected function process_images( $img ) {

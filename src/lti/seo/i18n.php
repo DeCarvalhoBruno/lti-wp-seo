@@ -1,17 +1,12 @@
 <?php namespace Lti\Seo;
 
-/**
- * Define the internationalization functionality
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    lti-seo
- * @subpackage lti-seo/includes
- */
+	/**
+	 * Define the internationalization functionality
+	 *
+	 * Loads and defines the internationalization files for this plugin
+	 * so that it is ready for translation.
+	 *
+	 */
 
 /**
  * Define the internationalization functionality.
@@ -19,40 +14,65 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      1.0.0
- * @package    lti-seo
- * @subpackage lti-seo/includes
- * @author     Your Name <email@example.com>
  */
 class i18n {
 
 	/**
 	 * The domain specified for this plugin.
 	 *
-	 * @var      string    $domain    The domain identifier for this plugin.
+	 * @var      string $domain The domain identifier for this plugin.
 	 */
 	private $domain;
+
+	private $supportedLanguages = array( "en_US" );
 
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0.0
 	 */
 	public function load_plugin_textdomain() {
+		add_filter( 'plugin_locale', array( $this, 'choose_language' ), $this->domain );
 
 		load_plugin_textdomain(
 			$this->domain,
 			false,
-			WP_PLUGIN_DIR . '/lti-wp-seo/languages/'
+			'lti-wp-seo/languages/'
 		);
 
+	}
+
+	public function choose_language() {
+		if ( $dir = @opendir( LTI_SEO_PLUGIN_DIR . 'languages/' ) ) {
+			$locale         = get_locale();
+			$lang           = '';
+			$supportedLangs = array_flip( $this->supportedLanguages );
+			while ( ( $file = readdir( $dir ) ) !== false ) {
+				if ( $file == '.' || $file == '..' ) {
+					continue;
+				}
+				$m = array();
+				preg_match( sprintf( '#(?<=%s-)[a-zA-Z\-_]{1,}(?<!(\.mo))#', LTI_SEO_NAME ), $file, $m );
+				if ( isset( $m[0] ) ) {
+					if ( isset( $supportedLangs[ $m[0] ] ) ) {
+						$lang = $m[0];
+						break;
+					}
+				}
+
+			}
+		}
+		@closedir( $dir );
+		if ( ! empty( $lang ) ) {
+			return $lang;
+		}
+
+		return 'en_US';
 	}
 
 	/**
 	 * Set the domain equal to that of the specified domain.
 	 *
-	 * @since    1.0.0
-	 * @param    string    $domain    The domain that represents the locale of this plugin.
+	 * @param    string $domain The domain that represents the locale of this plugin.
 	 */
 	public function set_domain( $domain ) {
 		$this->domain = $domain;

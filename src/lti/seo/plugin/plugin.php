@@ -5,7 +5,7 @@ class Defaults {
 
 	public function __construct() {
 		$this->values = array(
-			new def( "version", 'Text', '1.0.0' ),
+			new def( "version", 'Text', LTI_SEO_VERSION ),
 			new def( 'link_rel_support', 'Checkbox' ),
 			new def( 'link_rel_canonical', 'Checkbox' ),
 			new def( 'link_rel_author', 'Checkbox' ),

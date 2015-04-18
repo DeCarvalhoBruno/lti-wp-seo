@@ -1,4 +1,6 @@
-<?php
+<?php namespace Lti\Seo\Test;
+
+use Lti\Seo\Plugin\Plugin_Settings;
 
 class SettingsTest extends LTI_SEO_UnitTestCase {
 
@@ -48,10 +50,10 @@ class SettingsTest extends LTI_SEO_UnitTestCase {
 	 *
 	 */
 	public function testDefaults(){
-		$test = new \Lti\Seo\Plugin\Plugin_Settings();
+		$test = new Plugin_Settings();
 		$this->assertInstanceOf( "Lti\\Seo\\Plugin\\Plugin_Settings", $test );
 
-		$test2 = \Lti\Seo\Plugin\Plugin_Settings::get_defaults();
+		$test2 = Plugin_Settings::get_defaults();
 		$this->assertInstanceOf( "Lti\\Seo\\Plugin\\Plugin_Settings", $test2 );
 	}
 
@@ -62,7 +64,7 @@ class SettingsTest extends LTI_SEO_UnitTestCase {
 	public function testCompare(){
 		$settings = $this->instance->get_settings();
 
-		$test = new \Lti\Seo\Plugin\Plugin_Settings();
+		$test = new Plugin_Settings();
 		$test->set('post_robot_nofollow',true);
 
 		$this->assertEquals(array("post_robot_nofollow"=>false),$settings->compare($test));

@@ -11,8 +11,10 @@ class Open_Graph extends GenericMetaTag {
 		$meta = "";
 		foreach ( $this->tags as $tags => $tag ) {
 			foreach ( $tag as $subtag => $property ) {
+				if(!empty($property)){
 				$meta .= $this->generate_tag( $this->meta_tag_name_attribute, sprintf( '%s:%s', $tags, $subtag ),
 					$property );
+				}
 			}
 		}
 
@@ -41,7 +43,7 @@ class Frontpage_Open_Graph extends Open_Graph implements ICanMakeHeaderTags {
 		$og['type']        = 'website';
 		$og['site_name']   = esc_attr( $this->helper->get_site_name() );
 		$og['title']       = esc_attr( $this->helper->get_title() );
-		$og['url']         = esc_url_raw( $this->helper->get_shortlink() );
+		$og['url']         = esc_url_raw( home_url( '/' ) );
 		$og['description'] = esc_attr( $this->helper->get_description() );
 		$og['locale']      = esc_attr( get_bloginfo( 'language' ) );
 		$og['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );

@@ -9,14 +9,12 @@
 	 * that starts the plugin.
 	 *
 	 * @link              http://example.com
-	 * @since             1.0.0
-	 * @package           lti-seo
 	 *
 	 * @wordpress-plugin
 	 * Plugin Name:       LTI Search Engine Optimization
 	 * Plugin URI:
 	 * Description:       Search Engine Optimization
-	 * Version:           1.0.0
+	 * Version:           0.5.0
 	 * Author:            LTI
 	 * Author URI:        https://github.com/DeCarvalhoBruno
 	 * License:           GPL-2.0+
@@ -31,6 +29,8 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'LTI_SEO_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'LTI_SEO_VERSION', '0.5.0');
+define( 'LTI_SEO_NAME', 'lti-wp-seo');
 
 require_once( plugin_dir_path( __FILE__ ) . 'src/lti/seo/lti-seo.php' );
 

@@ -1,6 +1,8 @@
 <?php namespace Lti\Seo\Generators;
 
 
+use Lti\Seo\Helpers\ICanHelp;
+
 class Schema {
 	protected $context = 'http://schema.org';
 	protected $type;
@@ -33,6 +35,10 @@ class Schema_Type extends Schema {
 class WebSite extends Schema_Type {
 	protected $type = "WebSite";
 
+	/**
+	 * @param $url
+	 * @param canBeSearched|SearchAction $potentialAction
+	 */
 	public function __construct( $url, canBeSearched $potentialAction ) {
 		parent::__construct();
 		$this->value['url']             = $url;
@@ -89,18 +95,16 @@ class JSON_LD {
 }
 
 class Frontpage_JSON_LD extends JSON_LD{
-	/**
-	 * @var \Lti\Seo\Plugin\Plugin_Settings
-	 */
-	public $options = array();
 
 	private $profiles = array();
 
 	/**
-	 * @param \Lti\Seo\Plugin\Plugin_Settings $settings
+	 * @var \Lti\Seo\Helpers\ICanHelp|\Lti\Seo\Helpers\Wordpress_Helper
 	 */
-	public function __construct( $settings ) {
-		$this->options = $settings;
+	private $helper;
+
+	public function __construct(ICanHelp $helper ) {
+		$this->helper = $helper;
 	}
 
 	protected function json_ld_output( $output ) {
@@ -116,7 +120,7 @@ class Frontpage_JSON_LD extends JSON_LD{
 	}
 
 	public function website_tag() {
-		$home_url    = trailingslashit( $this->options->get( 'wp_home_url' ) );
+		$home_url    = home_url('/');
 		$website_tag = new WebSite(
 			$home_url,
 			new WordpressSearchAction( sprintf( "%s?s={search_term}", $home_url ), "required name=search_term" )
@@ -125,11 +129,11 @@ class Frontpage_JSON_LD extends JSON_LD{
 	}
 
 	public function organization_tag() {
-		$home_url         = trailingslashit( $this->options->get( 'wp_home_url' ) );
+		$home_url         = trailingslashit( $this->helper->get( 'wp_home_url' ) );
 		$organization_tag = new Organization(
 			$home_url,
-			$this->options->get( 'jsonld_type_name' ),
-			$this->options->get( 'jsonld_type_logo_url' ),
+			$this->helper->get( 'jsonld_type_name' ),
+			$this->helper->get( 'jsonld_type_logo_url' ),
 			$this->profiles
 		);
 
@@ -137,8 +141,8 @@ class Frontpage_JSON_LD extends JSON_LD{
 	}
 
 	public function person_tag() {
-		$home_url   = trailingslashit( $this->options->get( 'wp_home_url' ) );
-		$person_tag = new Person( $home_url, $this->options->get( 'jsonld_type_name' ), $this->profiles );
+		$home_url   = home_url('/');
+		$person_tag = new Person( $home_url, $this->helper->get( 'jsonld_type_name' ), $this->profiles );
 
 		return json_encode( $person_tag->get() );
 	}
@@ -155,8 +159,8 @@ class Frontpage_JSON_LD extends JSON_LD{
 			'account_pinterest',
 		);
 		foreach ( $social_profiles as $profile ) {
-			if ( ! is_null( $this->options->get( $profile ) ) ) {
-				$profiles[] = $this->options->get( $profile );
+			if ( ! is_null( $this->helper->get( $profile ) ) ) {
+				$profiles[] = $this->helper->get( $profile );
 			}
 		}
 
@@ -169,7 +173,7 @@ class Frontpage_JSON_LD extends JSON_LD{
 	public function json_entity() {
 		$this->fetch_social_profiles();
 
-		switch ( $this->options->get( 'jsonld_entity_type' ) ) {
+		switch ( $this->helper->get( 'jsonld_entity_type' ) ) {
 			case 'organization':
 				$output = $this->organization_tag();
 				break;
