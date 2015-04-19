@@ -19,8 +19,8 @@
 	 * Author URI:        https://github.com/DeCarvalhoBruno
 	 * License:           GPL-2.0+
 	 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
-	 * Text Domain:       lti-seo
-	 * Domain Path:       /languages
+	 * Text Domain:       lti-wp-seo
+	 * Domain Path:       /languages/
 	 */
 
 // If this file is called directly, abort.
@@ -29,6 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'LTI_SEO_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'LTI_SEO_MAIN_CLASS_DIR', plugin_dir_path( __FILE__ ).'src/lti/seo/' );
 define( 'LTI_SEO_VERSION', '0.5.0');
 define( 'LTI_SEO_NAME', 'lti-wp-seo');
 

@@ -59,7 +59,7 @@ class Frontend {
 		$jsonld_class = sprintf( $class_pattern, $this->helper->page_type(), "JSON_LD" );
 		if ( class_exists( $jsonld_class ) ) {
 			$this->settings->set( 'wp_home_url', home_url(), "Url" );
-			$json_ld = new $jsonld_class( $this->settings );
+			$json_ld = new $jsonld_class( $this->helper );
 
 			if ( $this->settings->get( 'jsonld_org_info' ) ) {
 				add_action( 'lti_seo_json_ld', array( $json_ld, 'json_entity' ) );

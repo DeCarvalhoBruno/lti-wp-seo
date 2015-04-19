@@ -69,14 +69,28 @@ class Admin {
 		$screen = get_current_screen();
 		$menu = new \Lti_Seo_Help_Menu();
 		$screen->add_help_tab( array(
-			'id'      => 'lti_seo_help1',
-			'title'   => __( 'Welcome!' ),
+			'id'      => 'general_hlp_welcome',
+			'title'   => ltint( 'general_hlp_welcome' ),
 			'content' => $menu->welcome_tab()
+		) );
+		$screen->add_help_tab( array(
+			'id'      => 'general_hlp_general',
+			'title'   => ltint( 'general_hlp_general' ),
+			'content' => $menu->general_tab()
+		) );
+		$screen->add_help_tab( array(
+			'id'      => 'general_hlp_frontpage',
+			'title'   => ltint( 'general_hlp_frontpage' ),
+			'content' => $menu->frontpage_tab()
+		) );
+		$screen->add_help_tab( array(
+			'id'      => 'general_hlp_social',
+			'title'   => ltint( 'general_hlp_social' ),
+			'content' => $menu->social_tab()
 		) );
 
 		$screen->set_help_sidebar(
-			'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-			'<p><a href="http://wordpress.org/support/" target="_blank">' .'Support Forums' . '</a></p>'
+			$menu->sidebar()
 		);
 	}
 
@@ -114,7 +128,8 @@ class Admin {
 	}
 
 	public function register_setting() {
-		register_setting( 'general', 'lti_seo_options' );
+		Activator::activate();
+		//register_setting( 'general', 'lti_seo_options' );
 	}
 
 	public function validate_input( $data ) {

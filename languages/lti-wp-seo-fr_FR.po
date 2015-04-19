@@ -1,30 +1,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-wp-seo\n"
-"POT-Creation-Date: 2015-04-19 21:01+0100\n"
-"PO-Revision-Date: 2015-04-19 21:05+0100\n"
+"POT-Creation-Date: 2015-04-19 21:06+0100\n"
+"PO-Revision-Date: 2015-04-19 21:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
-"Language: en_US\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.7.3\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;ltint\n"
+"X-Poedit-KeywordsList: ltint\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
 #: ../src/lti/seo/admin/admin.php:58
 msgid "general.use_image"
-msgstr "Use image"
+msgstr "Utiliser l'image"
 
 #: ../src/lti/seo/admin/admin.php:62
 msgid "admin.menu_title"
-msgstr "LTI SEO Settings"
+msgstr "Paramètres de LTI SEO"
 
 #: ../src/lti/seo/admin/admin.php:62
 msgid "admin.menu_item"
@@ -32,35 +30,35 @@ msgstr "LTI SEO"
 
 #: ../src/lti/seo/admin/admin.php:73
 msgid "general_hlp_welcome"
-msgstr "Welcome!"
+msgstr ""
 
 #: ../src/lti/seo/admin/admin.php:78
 msgid "general_hlp_general"
-msgstr "General tab"
+msgstr ""
 
 #: ../src/lti/seo/admin/admin.php:83
 msgid "general_hlp_frontpage"
-msgstr "Front page tab"
+msgstr ""
 
 #: ../src/lti/seo/admin/admin.php:88
 msgid "general_hlp_social"
-msgstr "Social tab"
+msgstr ""
 
 #: ../src/lti/seo/admin/admin.php:100
 msgid "general.settings"
-msgstr "Settings"
+msgstr "Paramètres"
 
 #: ../src/lti/seo/admin/admin.php:112
 msgid "opt.msg.updated"
-msgstr "Plugin options have been updated"
+msgstr "Les paramètres ont été mis à jour."
 
 #: ../src/lti/seo/admin/admin.php:116
 msgid "opt.msg.error_token"
-msgstr "Plugin options could not be saved (session error)."
+msgstr "Les paramètres n'ont pas été sauvegardés (erreur de session)."
 
 #: ../src/lti/seo/admin/admin.php:123
 msgid "opt.msg.reset"
-msgstr "Plugin options have been reset"
+msgstr "Les paramètres ont été réinitialisés"
 
 #: ../src/lti/seo/admin/admin.php:158
 msgid "admin.meta_box"
@@ -69,150 +67,116 @@ msgstr "LTI SEO"
 #: ../src/lti/seo/admin/partials/help_menu.php:9
 msgid "general_hlp_welcome_1"
 msgstr ""
-"Welcome to LTI SEO, your search engine optimization companion! The goal of "
-"this plugin is to provide as many SEO goodness as possible while being as "
-"inobstrusive and lightweight as possible. You'll also notice: no ads, no "
-"begging for your money, just the goods!"
 
 #: ../src/lti/seo/admin/partials/help_menu.php:13
 msgid "general_hlp_general_1"
 msgstr ""
-"In the general tab, options will be set for the entire site. With link rel "
-"attributes, relationships can be established between types of content. "
-"Wordpress ships with a number of default link rel attributes, and we're "
-"merely completementing the assortment."
 
 #: ../src/lti/seo/admin/partials/help_menu.php:14
 msgid "general_hlp_general_2"
 msgstr ""
-"Keywords are probably not crucial to search engine nowadays, but it doesn't "
-"hurt to add a few to each post."
 
 #: ../src/lti/seo/admin/partials/help_menu.php:15
 msgid "general_hlp_general_3"
 msgstr ""
-"The robots feature will provide some drastic instructions to search engines, "
-"please investigate these attributes carefully before applying them."
 
 #: ../src/lti/seo/admin/partials/help_menu.php:16
 msgid "general_hlp_general_4"
 msgstr ""
-"Last but not least, the description tag is a vital piece of information that "
-"will draw users to your content, provided its content is snappy and to the "
-"point!"
 
 #: ../src/lti/seo/admin/partials/help_menu.php:20
 msgid "general_hlp_frontpage_1"
 msgstr ""
-"We tried to pack as much functionality as we could in this tab, the front "
-"page being the most visited part of the site."
 
 #: ../src/lti/seo/admin/partials/help_menu.php:21
 msgid "general_hlp_frontpage_2"
 msgstr ""
-"You'll find the same goodies here than on the general tab, plus the "
-"possibility of adding schema.org markup to feature the publisher of your "
-"content."
 
 #: ../src/lti/seo/admin/partials/help_menu.php:25
 msgid "general_hlp_social_1"
 msgstr ""
-"The general tab allows you to enable open graph tags (used by facebook and "
-"pinterest) and twitter card tags."
 
 #: ../src/lti/seo/admin/partials/help_menu.php:26
 msgid "general_hlp_social_2"
 msgstr ""
-"The presence of these tags will ensure that your content will be featured on "
-"social networks as prominently as they'll allow."
 
 #: ../src/lti/seo/admin/partials/help_menu.php:30
 msgid "general_hlp_about_us"
-msgstr "More information:"
+msgstr ""
 
 #: ../src/lti/seo/admin/partials/help_menu.php:31
 msgid "general_hlp_dev_blog"
-msgstr "LTI Dev blog entry"
+msgstr ""
 
 #: ../src/lti/seo/admin/partials/help_menu.php:32
 msgid "general_hlp_contribute"
-msgstr "Contribute:"
+msgstr ""
 
 #: ../src/lti/seo/admin/partials/help_menu.php:33
 msgid "general_hlp_github"
-msgstr "Github repo"
+msgstr ""
 
 #: ../src/lti/seo/admin/partials/options-page.php:15
 msgid "opt.title"
-msgstr "LTI SEO Settings"
+msgstr "Paramètres de LTI SEO"
 
 #: ../src/lti/seo/admin/partials/options-page.php:23
 msgid "opt.tab.general"
-msgstr "General"
+msgstr "Général"
 
 #: ../src/lti/seo/admin/partials/options-page.php:27
 msgid "opt.tab.frontpage"
-msgstr "Front page"
+msgstr "Page d'accueil"
 
 #: ../src/lti/seo/admin/partials/options-page.php:31
 msgid "opt.tab.social"
-msgstr "Social"
+msgstr "Réseaux sociaux"
 
 #: ../src/lti/seo/admin/partials/options-page.php:48
 msgid "opt.link_rel_support"
-msgstr "Link rel tags"
+msgstr "Marqueurs link rel"
 
 #: ../src/lti/seo/admin/partials/options-page.php:56
 msgid "opt.link_rel_canonical"
-msgstr "Canonical URL"
+msgstr "URL \"Canonical\""
 
 #: ../src/lti/seo/admin/partials/options-page.php:60
 msgid "opt.link_rel_publisher"
-msgstr "Publisher URL"
+msgstr "URL \"Publisher\""
 
 #: ../src/lti/seo/admin/partials/options-page.php:64
 msgid "opt.link_rel_author"
-msgstr "Author URL"
+msgstr "URL \"Author\""
 
 #: ../src/lti/seo/admin/partials/options-page.php:74
 msgid "opt.hlp.link_rel1"
 msgstr ""
-"With link rel attributes, relationships can be established between types of "
-"content. Wordpress ships with a number of default link rel attributes, and "
-"we're merely completementing the assortment by providing three more links."
 
 #: ../src/lti/seo/admin/partials/options-page.php:75
 msgid "opt.hlp.link_rel2"
 msgstr ""
-"Wordpress creates canonical links for blog posts, and the canonical URL "
-"feature will try to create a canonical link for other types of pages."
 
 #: ../src/lti/seo/admin/partials/options-page.php:76
 msgid "opt.hlp.link_rel3"
 msgstr ""
-"The author and publisher URLs use Google+ information to add extra link rel "
-"tags. Please fill in the \"Google+ profile URL (LTI)\" in each user's "
-"profile, as well as the publisher field in this options page (\"Social\" "
-"tab, \"Google publisher URL\")."
 
 #: ../src/lti/seo/admin/partials/options-page.php:83
 msgid "opt.keyword_support"
-msgstr "Keywords tag"
+msgstr "Marqueur \"Keywords\""
 
 #: ../src/lti/seo/admin/partials/options-page.php:91
 msgid "opt.keyword_cat_based"
-msgstr "Based on categories"
+msgstr "Basé sur les catégories"
 
 #: ../src/lti/seo/admin/partials/options-page.php:95
 msgid "opt.keyword_tag_based"
-msgstr "Based on tags"
+msgstr "Basé sur les tags"
 
 #: ../src/lti/seo/admin/partials/options-page.php:104
 msgid "opt.hlp.keyword"
 msgstr ""
-"A list of comma delimited words (i.e \"cats, dogs, elephants\") that will be "
-"added as suggestions as you edit your blog post. (Each post will feature a "
-"\"LTI SEO\" box)."
+"Une liste de mots délimités par une virgule (ex. chien, chat, éléphant) qui "
+"sera ajoutée à la liste de mots."
 
 #: ../src/lti/seo/admin/partials/options-page.php:110
 msgid "opt.group.robots"
@@ -293,14 +257,10 @@ msgstr "\"Not found\" page"
 #: ../src/lti/seo/admin/partials/options-page.php:224
 msgid "opt.hlp.robot1"
 msgstr ""
-"As it finds ticked boxes under the \"Global\" column, the plugin will add "
-"the selected robot attributes to each of the types selected below the table. "
 
 #: ../src/lti/seo/admin/partials/options-page.php:224
 msgid "opt.hlp.robot2"
 msgstr ""
-"We separate robot attributes applied to posts from the rest of the site for "
-"more flexibility."
 
 #: ../src/lti/seo/admin/partials/options-page.php:231
 msgid "opt.description_support"
@@ -309,8 +269,8 @@ msgstr "Description meta tag"
 #: ../src/lti/seo/admin/partials/options-page.php:239
 msgid "opt.hlp.description"
 msgstr ""
-"Enables a field in the LTI SEO meta box allowing you to specify a custom "
-"description for posts/pages."
+"Enables a field in the LTI SEO meta box allowing you to input a custom "
+"description for posts/pages that will be used in a description meta tag."
 
 #: ../src/lti/seo/admin/partials/options-page.php:252
 msgid "opt.frontpage_description"
@@ -323,7 +283,8 @@ msgstr "Character count:"
 
 #: ../src/lti/seo/admin/partials/options-page.php:268
 msgid "opt.hlp.frontpage_description"
-msgstr "Front page only: adds your own description meta tag."
+msgstr ""
+"Adds your own description meta tag that will be applied to the front page."
 
 #: ../src/lti/seo/admin/partials/options-page.php:274
 msgid "opt.frontpage_keyword"
@@ -331,7 +292,7 @@ msgstr "Keywords"
 
 #: ../src/lti/seo/admin/partials/options-page.php:287
 msgid "opt.hlp.frontpage_keyword"
-msgstr "Front page only: adds your own comma separated set of keywords."
+msgstr "Adds your own keyword meta tag that will be applied to the front page."
 
 #: ../src/lti/seo/admin/partials/options-page.php:293
 msgid "opt.frontpage_robot"
@@ -398,10 +359,7 @@ msgstr "Choose image"
 #: ../src/lti/seo/admin/partials/options-page.php:388
 msgid "opt.hlp.jsonld"
 msgstr ""
-"Wraps schema.org attributes into JSON-LD markup, allowing search engine to "
-"identify the owner/publisher of your content and feature the person/"
-"organization prominently in search results. The logo only applies to "
-"organizations."
+"JSON LD website search capabilities. The logo only applies to organizations."
 
 #: ../src/lti/seo/admin/partials/options-page.php:394
 msgid "opt.group.social"
@@ -438,18 +396,16 @@ msgstr "Myspace"
 #: ../src/lti/seo/admin/partials/options-page.php:429
 msgid "opt.hlp.account_social"
 msgstr ""
-"A list of social accounts to be added to the organization/person entry for "
-"the site."
+"A list of comma delimited words (i.e \"cats, dogs, elephants\") that will be "
+"added before the keywords for all selected post types."
 
 #: ../src/lti/seo/admin/partials/options-page.php:435
 msgid "out.jsonld_website_info"
-msgstr "Website search"
+msgstr "Website info"
 
 #: ../src/lti/seo/admin/partials/options-page.php:442
 msgid "opt.help.jsonld_website"
-msgstr ""
-"Creates a schema.org WebSite entry (wrapped in JSON-LD) that features your "
-"wordpress site's search capabilities. (Search engines love company...)"
+msgstr "JSON LD website search capabilities."
 
 #: ../src/lti/seo/admin/partials/options-page.php:448
 msgid "opt.group.social_image"
@@ -462,9 +418,10 @@ msgstr "Image"
 #: ../src/lti/seo/admin/partials/options-page.php:467
 msgid "opt.hlp.frontpage_social"
 msgstr ""
-"Image file to be included in social media tags. This can be an image that "
-"represents the site, and it will be added to each post along with the other "
-"image you provided (if any) in the LTI SEO post box."
+"If the \"Open Graph Support\" checkbox is ticked (see \"Social\" tab), will "
+"add type,\t\t\t\t\t\t\t\t\t\tsite_name, title, url, description (if one is "
+"provided), and locale Open Graph\t\t\t\t\t\t\t\t\t\ttags to the front page. "
+"If an Image is provided, an extra image\t\t\t\t\t\t\t\t\t\ttag will be added."
 
 #: ../src/lti/seo/admin/partials/options-page.php:482
 msgid "opt.open_graph_support"
@@ -476,21 +433,15 @@ msgstr "Facebook publisher URL"
 
 #: ../src/lti/seo/admin/partials/options-page.php:498
 msgid "opt.hlp.open_graph1"
-msgstr "Adds the following open graph tags:"
+msgstr ""
 
 #: ../src/lti/seo/admin/partials/options-page.php:500
 msgid "opt.hlp.open_graph2"
 msgstr ""
-"On the front page, adds type (set to website), site name, title, url, "
-"description (if provided), locale and image (if provided) tags."
 
 #: ../src/lti/seo/admin/partials/options-page.php:501
 msgid "opt.hlp.open_graph3"
 msgstr ""
-"On posts, adds type (set to article), site name, title, url, description (if "
-"provided), locale and image (if provided) tags, plus published and modified "
-"timestamps as well as the facebook author (from the profile) and publisher "
-"information, if provided."
 
 #: ../src/lti/seo/admin/partials/options-page.php:510
 msgid "opt.twitter_card_support"
@@ -510,19 +461,15 @@ msgstr "Twitter publisher username"
 
 #: ../src/lti/seo/admin/partials/options-page.php:538
 msgid "opt.hlp.twitter_cards1"
-msgstr "Adds the following twitter card tags:"
+msgstr ""
 
 #: ../src/lti/seo/admin/partials/options-page.php:540
 msgid "opt.hlp.twitter_cards2"
 msgstr ""
-"On all pages, will add card, site, title, url, description (if provided), "
-"creator and image (if provided) tags."
 
 #: ../src/lti/seo/admin/partials/options-page.php:541
 msgid "opt.hlp.twitter_cards3"
 msgstr ""
-"On gallery type posts, will add a \"gallery\" card. A \"photo\" card will be "
-"added for attachment pages."
 
 #: ../src/lti/seo/admin/partials/options-page.php:548
 msgid "opt.gplus_publisher"
@@ -530,7 +477,7 @@ msgstr "Google+ publisher URL"
 
 #: ../src/lti/seo/admin/partials/options-page.php:556
 msgid "opt.hlp.gplus"
-msgstr "Used if the publisher link rel tag is enabled in the general tab."
+msgstr "_"
 
 #: ../src/lti/seo/admin/partials/options-page.php:565
 msgid "general.save_changes"
@@ -600,17 +547,45 @@ msgstr "Facebook profile URL (LTI)"
 msgid "user.gplus_url"
 msgstr "Google+ profile URL (LTI)"
 
-#~ msgid "opt.hlp.twitter_cards"
-#~ msgstr "_"
-
-#~ msgid "opt.hlp.robot"
-#~ msgstr ""
-#~ "As it finds ticked boxes under the \"Global\" column, the plugin will add "
-#~ "the selected robot attributes to each of the types selected below the "
-#~ "table. We separate robot attributes applied to posts from the rest of the "
-#~ "site for more flexibility."
+#~ msgid "Search Engine Optimization"
+#~ msgstr "Optimisations pour les moteurs de recherche"
 
 #~ msgid "opt.hlp.link_rel"
 #~ msgstr ""
-#~ "Lets Wordpress generate a canonical URL for single pages, and will try to "
-#~ "generate one for other types of pages."
+#~ "Génère un lien \"canonical\" pour tous les types de pages sauf pour les "
+#~ "entrées de blog pour lesquelles Wordpress génère ce lien automatiquement."
+
+#~ msgid "opt.hlp.robot"
+#~ msgstr ""
+#~ "A list of comma delimited words (i.e \"cats, dogs, elephants\") that will "
+#~ "be added before the keywords for all selected post types."
+
+#~ msgid "opt.hlp.open_graph"
+#~ msgstr "Adds the following open graph tags:"
+
+#~ msgid "opt.hlp.twitter_cards"
+#~ msgstr "_"
+
+#~ msgid "opt.group.robot"
+#~ msgstr "Robots tag"
+
+#~ msgid "options.link_rel_support"
+#~ msgstr "Link rel tags"
+
+#~ msgid "opts.tab.frontpage"
+#~ msgstr "Front page"
+
+#~ msgid "options.tab.social"
+#~ msgstr "Social"
+
+#~ msgid "opts.tab.general"
+#~ msgstr "General"
+
+#~ msgid "options.tab.frontpage"
+#~ msgstr "Front page"
+
+#~ msgid "options.tab.general"
+#~ msgstr "General"
+
+#~ msgid "optis.tab.general"
+#~ msgstr "General"

@@ -252,6 +252,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 	}
 
 	public function get_social_images( $mode = "", $number = - 1 ) {
+
 		/**
 		 * Allow filtering of the image size
 		 *
@@ -262,7 +263,10 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		$image_size = apply_filters( 'lti_seo_image_size_index', 'large' );
 		$data       = array();
 
-		$image_data = $this->get_img( get_post_thumbnail_id(), $image_size );
+		$image_data = null;
+		if ( ! is_null( $this->post_id ) ) {
+			$image_data = $this->get_img( get_post_thumbnail_id(), $image_size );
+		}
 
 		if ( ! is_null( $image_data ) ) {
 			$data[] = $image_data;
@@ -281,10 +285,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				}
 				$img = array();
 				if ( $this->page_post_format() == "Singular_Gallery" ) {
-
-
 					$tmp = get_post_galleries( $this->post_id, false );
-
 
 					if ( ! empty( $tmp ) && isset( $tmp[0]['ids'] ) ) {
 						$tmp = explode( ',', $tmp[0]['ids'], 4 );

@@ -24,7 +24,7 @@ class i18n {
 	 */
 	private $domain;
 
-	private $supportedLanguages = array( "en_US" );
+	private $supportedLanguages = array( "en_US", "fr_FR" );
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -53,7 +53,7 @@ class i18n {
 				$m = array();
 				preg_match( sprintf( '#(?<=%s-)[a-zA-Z\-_]{1,}(?<!(\.mo))#', LTI_SEO_NAME ), $file, $m );
 				if ( isset( $m[0] ) ) {
-					if ( isset( $supportedLangs[ $m[0] ] ) ) {
+					if ( isset( $supportedLangs[ $m[0] ] )&&$m[0]==$locale ) {
 						$lang = $m[0];
 						break;
 					}

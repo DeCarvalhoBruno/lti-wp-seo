@@ -101,6 +101,7 @@ class LTI_SEO {
 		require_once $this->file_path . 'frontend/generators/description.php';
 		require_once $this->file_path . 'frontend/generators/robots.php';
 		require_once $this->file_path . 'frontend/generators/link_rel.php';
+		require_once $this->file_path . 'activator.php';
 		$this->loader = new Loader();
 		$this->helper = new Wordpress_Helper( $this->settings );
 	}
@@ -208,12 +209,12 @@ class LTI_SEO {
 	}
 
 	public static function activate() {
-		require_once LTI_SEO_PLUGIN_DIR . 'activator.php';
+		require_once LTI_SEO_MAIN_CLASS_DIR . 'activator.php';
 		Activator::activate();
 	}
 
 	public static function deactivate() {
-		require_once LTI_SEO_PLUGIN_DIR . 'deactivator.php';
+		require_once LTI_SEO_MAIN_CLASS_DIR . 'deactivator.php';
 		Deactivator::deactivate();
 	}
 

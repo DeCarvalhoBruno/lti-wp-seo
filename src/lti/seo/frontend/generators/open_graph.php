@@ -58,7 +58,8 @@ class Singular_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeader
 
 	public function make_tags() {
 		$ar = parent::make_tags();
-
+		$ar['og']['type'] = 'article';
+		$ar['og']['url'] = esc_url_raw($this->helper->get_canonical_url());
 		$article['published_time'] = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_date' ) ) );
 		$article['modified_time']  = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_modified' ) ) );
 		$article['author']         = $this->helper->get_author_social_url('facebook');

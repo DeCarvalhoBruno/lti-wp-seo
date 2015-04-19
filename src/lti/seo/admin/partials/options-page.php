@@ -71,7 +71,9 @@
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
-								<p><?php echo ltint( 'opt.hlp.link_rel' ); ?></p>
+								<p><?php echo ltint( 'opt.hlp.link_rel1' ); ?></p>
+								<ul><li><?php echo ltint( 'opt.hlp.link_rel2' ); ?></li>
+								<li><?php echo ltint( 'opt.hlp.link_rel3' ); ?></li></ul>
 							</div>
 
 						</div>
@@ -219,7 +221,7 @@
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
-								<p><?php echo ltint( 'opt.hlp.robot' ); ?></p>
+								<p><?php echo ltint( 'opt.hlp.robot1' ); ?></p><p><?php echo ltint( 'opt.hlp.robot2' ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -493,17 +495,10 @@
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
-								<p><?php echo ltint( 'opt.hlp.open_graph' ); ?></p>
+								<p><?php echo ltint( 'opt.hlp.open_graph1' ); ?></p>
 								<ul>
-									<li>Type, set to 'Article'</li>
-									<li>Site name, set to the name of the website</li>
-									<li>Url, set to the canonical url for the post type</li>
-									<li>Description, set to the value of the description field for the post type</li>
-									<li>Locale, set to the site language</li>
-									<li>Updated time, set to the last time the post type was updated</li>
-									<li>Image, an upload form will appear in the LTI SEO meta box for you to specify an
-										image from the media library.
-									</li>
+									<li><?php echo ltint( 'opt.hlp.open_graph2' ); ?></li>
+									<li><?php echo ltint( 'opt.hlp.open_graph3' ); ?></li>
 								</ul>
 							</div>
 						</div>
@@ -540,7 +535,11 @@
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
-								<p><?php echo ltint( 'opt.hlp.twitter_cards' ); ?></p>
+								<p><?php echo ltint( 'opt.hlp.twitter_cards1' ); ?></p>
+								<ul>
+									<li><?php echo ltint( 'opt.hlp.twitter_cards2' ); ?></li>
+									<li><?php echo ltint( 'opt.hlp.twitter_cards3' ); ?></li>
+								</ul>
 							</div>
 						</div>
 					</div>
