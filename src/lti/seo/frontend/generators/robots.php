@@ -81,16 +81,23 @@ class Singular_Robot extends Robot {
 	}
 }
 
+class Attachment_Robot extends Robot {
+	protected $setting = 'robot_support';
+	protected $prefix = 'post_';
+}
+
 class Archive_Robot extends Robot {
 	protected $setting = 'robot_date_based';
 }
 
-class Catagax_Robot extends Frontpage_Robot {
+class Catagax_Robot extends Robot {
 	public function get_robot() {
 		if ( is_category() ) {
 			return $this->get_robot_setting( 'robot_cat_based' );
 		} else if ( is_tag() ) {
 			return $this->get_robot_setting( 'robot_tag_based' );
+		} else if ( is_tax() ) {
+			return $this->get_robot_setting( 'robot_tax_based' );
 		}
 
 		return null;

@@ -88,17 +88,23 @@
         margin-left: 10px;
     }
 
-    #flseo .input-group .input-group.file-selector input[type="button"] {
-        width: 50%;
-        margin: 10px auto 0;
+    #flseo .input-group .input-group.file-selector .btn-group input[type="button"] {
+        display: inline;
+        width: 40%;
+        margin: 10px 0;
         background-color: #1aa55f;
         border: 1px solid #16894f;
         color: #ffffff;
         box-shadow: none;
+        white-space: pre-wrap;
     }
 
+    #flseo .input-group .input-group.file-selector .btn-group {
+        text-align:center
+    }
+
+
     #flseo .input-group .input-group.file-selector input[type="button"]:hover {
-        width: 50%;
         margin: 10px auto 0;
         background-color: #16864d;
         border: 1px solid #16894f;
@@ -570,15 +576,20 @@
     margin-left: 10px;
 }
 
-#plseo .input-group > .input-group.file-selector input[type="button"] {
-    width: 50%;
-    margin: 10px auto 0;
+#plseo .input-group > .input-group.file-selector .btn-group input[type="button"] {
+    display: inline;
+    width: 30%;
+    margin: 10px  0;
     background-color: #1aa55f;
     border: 1px solid #16894f;
 }
 
+
+#plseo .input-group .input-group.file-selector .btn-group {
+    text-align:center
+}
+
 #plseo .input-group > .input-group.file-selector input[type="button"]:hover {
-    width: 50%;
     margin: 10px auto 0;
     background-color: #16864d;
     border: 1px solid #16894f;

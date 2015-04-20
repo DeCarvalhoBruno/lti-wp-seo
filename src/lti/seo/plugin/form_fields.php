@@ -7,7 +7,7 @@ abstract class Fields {
 	public function __construct( $value, $default = "", $isTracked = false ) {
 		$this->isTracked = $isTracked;
 		if ( $value ) {
-			$this->value = sanitize_text_field( $value );
+			$this->value = sanitize_text_field( stripslashes($value) );
 		} else {
 			$this->value = $default;
 		}

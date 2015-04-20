@@ -2,10 +2,31 @@
     'use strict';
 
     $(document).ready(function () {
+        var Header = function(headerElem){
+            this.elem = $(headerElem);
+            this.evalClass = function(elemClass){
+                var elem = this.elem;
+                if (elem.hasClass(elemClass)) {
+                    setTimeout(
+                        function () {
+                            elem.removeClass(elemClass);
+                        }, 3000);
+                    setTimeout(
+                        function () {
+                            $('.lti-seo-message').empty();
+                        }, 5000);
+                }
+            };
+        };
 
         var seo_header = $('#lti-seo-header');
-
         if (seo_header.length) {
+            seo_header = new Header(seo_header);
+            seo_header.evalClass('lti_update');
+            seo_header.evalClass('lti_reset');
+            seo_header.evalClass('lti_error');
+
+            /*
             if (seo_header.hasClass('lti_update')) {
                 setTimeout(
                     function () {
@@ -34,7 +55,17 @@
                         $('.lti-seo-message').empty();
                     }, 5000);
             }
+            */
+            $('#jsonld_reset').on('click',function(){
+                $('#jsonld_img').val('');
+                $('#jsonld_img_id').val('');
+            });
+            $('#frontpage_social_reset').on('click',function(){
+                $('#frontpage_social_img').val('');
+                $('#frontpage_social_img_id').val('');
+            });
         }
+
 
         var input = function () {
             this.objectToLookIntoID = null;
@@ -82,6 +113,11 @@
             }
         });
 
+        $('#lti_social_reset').on('click',function(){
+            $('#lti_social_img').val('');
+            $('#lti_social_img_id').val('');
+        });
+
         var lti_seo_tabs = $('#lti_seo_tabs');
         if (lti_seo_tabs.length) {
             var hash = window.location.hash;
@@ -93,8 +129,8 @@
 
             lti_seo_tabs.find('a').click(function (e) {
                 $(this).tab('show');
-                window.location.hash = this.hash;
                 $('html').scrollTop($('body').scrollTop());
+                window.location.hash = this.hash;
             });
 
             $('#flseo').on('submit', function () {

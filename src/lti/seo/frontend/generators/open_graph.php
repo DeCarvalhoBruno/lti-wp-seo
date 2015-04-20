@@ -11,16 +11,22 @@ class Open_Graph extends GenericMetaTag {
 		$meta = "";
 		foreach ( $this->tags as $tags => $tag ) {
 			foreach ( $tag as $subtag => $property ) {
-				if(!empty($property)){
-				$meta .= $this->generate_tag( $this->meta_tag_name_attribute, sprintf( '%s:%s', $tags, $subtag ),
-					$property );
+				if ( ! empty( $property ) ) {
+					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, sprintf( '%s:%s', $tags, $subtag ),
+						$property );
 				}
 			}
 		}
 
 		if ( is_array( $img ) ) {
 			foreach ( $img as $image ) {
-				$meta .= $this->generate_tag( $this->meta_tag_name_attribute, 'og:image', $image->url );
+				if ( is_ssl() ) {
+					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, 'og:image', $image->url );
+					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, 'og:image:secure_url',
+						$image->url );
+				} else {
+					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, 'og:image', $image->url );
+				}
 				foreach ( $image->properties as $key => $val ) {
 					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, sprintf( 'og:image:%s', $key ),
 						$val );
@@ -31,6 +37,10 @@ class Open_Graph extends GenericMetaTag {
 		if ( ! empty( $meta ) ) {
 			echo $meta;
 		}
+	}
+
+	public function make_tags() {
+		return apply_filters( "lti_seo_open_graph", $this->tags );
 	}
 
 }
@@ -48,39 +58,64 @@ class Frontpage_Open_Graph extends Open_Graph implements ICanMakeHeaderTags {
 		$og['locale']      = esc_attr( get_bloginfo( 'language' ) );
 		$og['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
 
-		return compact( 'og' );
-	}
+		$this->tags = compact( 'og' );
 
+		return parent::make_tags();
+	}
 
 }
 
 class Singular_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeaderTags {
 
 	public function make_tags() {
-		$ar = parent::make_tags();
-		$ar['og']['type'] = 'article';
-		$ar['og']['url'] = esc_url_raw($this->helper->get_canonical_url());
+		$ar                        = parent::make_tags();
+		$ar['og']['type']          = 'article';
+		$ar['og']['url']           = esc_url_raw( $this->helper->get_canonical_url() );
 		$article['published_time'] = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_date' ) ) );
 		$article['modified_time']  = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_modified' ) ) );
-		$article['author']         = $this->helper->get_author_social_url('facebook');
-		$publisher                 = $this->helper->get( 'facebook_publisher' );
+		$profile                   = $this->helper->get_author_social_info( 'facebook' );
+		$ar['article'] = $article;
+		if ( ! empty( $profile['profile_id'] ) ) {
+			$ar['article']['author'] = $profile['profile_id'];
+		}
+		if ( ! empty( $profile['first_name'] ) ) {
+			$ar['profile']['first_name'] = $profile['first_name'];
+		}
+		if ( ! empty( $profile['last_name'] ) ) {
+			$ar['profile']['last_name'] = $profile['last_name'];
+		}
+		$publisher = $this->helper->get( 'facebook_publisher' );
 
 		if ( ! is_null( $publisher ) ) {
 			$article['publisher'] = esc_url_raw( $publisher );
 		}
 
-		$author = $this->helper->get_author_social_url("facebook");
-		if(!is_null($author)){
-			$article['author'] = $author;
-		}
+		$this->tags    = $ar;
 
-		$ar['article'] = $article;
-
-		return $ar;
+		return Open_Graph::make_tags();
 	}
 
 }
 
-class Author_Open_Graph extends Singular_Open_Graph implements ICanMakeHeaderTags {
+class Singular_Gallery_Open_Graph extends Singular_Open_Graph {
+}
 
+class Author_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeaderTags {
+	public function make_tags() {
+		$ar                        = parent::make_tags();
+		unset($ar['og']['type']);
+		$ar['og']['type']            = 'profile';
+		$profile                   = $this->helper->get_author_social_info( 'facebook' );
+		if ( ! empty( $profile['first_name'] ) ) {
+			$ar['profile']['first_name'] = $profile['first_name'];
+		}
+		if ( ! empty( $profile['last_name'] ) ) {
+			$ar['profile']['last_name'] = $profile['last_name'];
+		}
+		if ( ! empty( $profile['profile_id'] ) ) {
+			$ar['fb']['profile_id'] = $profile['profile_id'];
+		}
+		$this->tags    = $ar;
+		return Open_Graph::make_tags();
+	}
 }

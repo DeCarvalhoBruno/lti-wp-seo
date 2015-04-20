@@ -9,12 +9,11 @@ class Twitter_Card extends GenericMetaTag {
 	protected $type = "summary";
 	protected $tags;
 
-	public function __construct( ICanHelp $helper, $type=null) {
-		//$type = $this->helper->get( 'twitter_card_type' );
+	public function __construct( ICanHelp $helper, $type = null ) {
 		if ( ! is_null( $type ) ) {
 			$this->type = $type;
-		}else{
-			$this->type = $helper->get('twitter_card_type');
+		} else {
+			$this->type = $helper->get( 'twitter_card_type' );
 		}
 		parent::__construct( $helper );
 
@@ -72,10 +71,13 @@ class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags 
 		if ( ! is_null( $handle ) ) {
 			$twitter['site'] = $handle;
 		}
-		$twitter['title']       = esc_attr( $this->helper->get_title() );
-		$twitter['url']         = esc_url_raw( home_url('/') );
-		$twitter['description'] = esc_attr( $this->helper->get_description() );
-		$twitter['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
+		$twitter['title'] = esc_attr( $this->helper->get_title() );
+		$twitter['url']   = esc_url_raw( home_url( '/' ) );
+		$description      = $this->helper->get_description();
+		if ( ! empty( $description ) && ! is_null( $description ) ) {
+			$twitter['description'] = esc_attr( $description );
+		}
+		$twitter['image'] = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
 
 		return compact( 'twitter' );
 
@@ -85,8 +87,8 @@ class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags 
 class Singular_Twitter_Card extends Frontpage_Twitter_Card {
 	public function make_tags() {
 		$ar                       = parent::make_tags();
-		$ar['twitter']['url']         = esc_url_raw( $this->helper->get_shortlink() );
-		$ar['twitter']['creator'] = $this->helper->get_author_social_url( "twitter" );
+		$ar['twitter']['url']     = esc_url_raw( $this->helper->get_shortlink() );
+		$ar['twitter']['creator'] = $this->helper->get_author_social_info( "twitter" );
 
 		return $ar;
 	}
@@ -96,7 +98,7 @@ class Attachment_Twitter_Card extends Singular_Twitter_Card {
 
 	protected $type = "photo";
 
-	public function __construct( ICanHelp $helper) {
+	public function __construct( ICanHelp $helper ) {
 		parent::__construct( $helper, $this->type );
 	}
 
@@ -104,6 +106,15 @@ class Attachment_Twitter_Card extends Singular_Twitter_Card {
 
 class Author_Gallery_Twitter_Card extends Singular_Twitter_Card {
 
+}
+
+class Archive_Twitter_Card extends Frontpage_Twitter_Card {
+	public function make_tags() {
+		$ar                       = parent::make_tags();
+		$ar['twitter']['url']     = esc_url_raw( $this->helper->get_shortlink() );
+
+		return $ar;
+	}
 }
 
 class Singular_Gallery_Twitter_Card extends Singular_Twitter_Card {

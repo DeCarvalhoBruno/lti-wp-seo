@@ -35,8 +35,8 @@ abstract class GenericMetaTag {
 	 */
 	public function __construct( ICanHelp $helper, $post_id = null ) {
 		$this->helper = $helper;
-		$this->tags   = $this->make_tags();
 		$this->post_id = $post_id;
+		$this->tags   = $this->make_tags();
 	}
 
 	public function generate_tag( $name, $property, $content ) {

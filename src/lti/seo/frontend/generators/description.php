@@ -1,31 +1,38 @@
 <?php namespace Lti\Seo\Generators;
 
+use Lti\Seo\Test\DescriptionTest;
+
 class Description extends GenericMetaTag {
 
 	public function display_tags() {
 		if ( ! is_null( $this->tags ) && ! empty( $this->tags ) ) {
-;			echo $this->generate_tag( 'name', 'description', $this->tags );
+			echo $this->generate_tag( 'name', 'description', $this->tags );
 		}
 	}
 
 	public function make_tags() {
-		$tag = $this->helper->get_description();
-
-		return apply_filters( 'lti_seo_description', $tag );
+		return apply_filters( 'lti_seo_description', $this->tags );
 	}
 }
 
 class Frontpage_Description extends Description implements ICanMakeHeaderTags {
 	public function make_tags() {
 		if ( $this->helper->get( 'frontpage_description' ) == true ) {
-			return parent::make_tags();
+			$this->tags = $this->helper->get_description();
 		}
 
-		return null;
+		return parent::make_tags();
+
 	}
 }
 
 class Singular_Description extends Description {
+	public function make_tags() {
+		if ( $this->helper->get( 'description_support' ) == true ) {
+			$this->tags = $this->helper->get_description();
+		}
 
+		return parent::make_tags();
+	}
 
 }

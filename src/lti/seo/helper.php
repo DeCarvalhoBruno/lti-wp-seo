@@ -14,7 +14,7 @@ function ltint( $text, $domain = 'lti-wp-seo' ) {
 
 function ltiopt( $value ) {
 	$admin = \Lti\Seo\LTI_SEO::get_instance()->get_admin();
-	return $admin->get_form_values()->get( $value );
+	return esc_attr($admin->get_form_values()->get( $value ));
 }
 
 function ltichk( $value ) {

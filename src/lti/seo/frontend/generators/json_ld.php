@@ -51,8 +51,12 @@ class Organization extends Schema_Type {
 
 	public function __construct( $url, $name, $logo, $profiles ) {
 		parent::__construct();
-		$this->value['url']  = $url;
-		$this->value['name'] = $name;
+		if ( ! is_null( $url ) ) {
+			$this->value['url'] = $url;
+		}
+		if ( ! is_null( $name ) ) {
+			$this->value['name'] = $name;
+		}
 		if ( ! is_null( $logo ) ) {
 			$this->value['logo'] = esc_url( $logo );
 		}
@@ -70,8 +74,12 @@ class Person extends Schema_Type {
 
 	public function __construct( $url, $name, $profiles ) {
 		parent::__construct();
-		$this->value['url']  = $url;
-		$this->value['name'] = $name;
+		if ( ! is_null( $url ) ) {
+			$this->value['url'] = $url;
+		}
+		if ( ! is_null( $name ) ) {
+			$this->value['name'] = $name;
+		}
 
 		if ( ! empty( $profiles ) ) {
 			$this->value['sameAs'] = $profiles;
@@ -94,7 +102,7 @@ class WordpressSearchAction extends SearchAction {
 class JSON_LD {
 }
 
-class Frontpage_JSON_LD extends JSON_LD{
+class Frontpage_JSON_LD extends JSON_LD {
 
 	private $profiles = array();
 
@@ -103,12 +111,12 @@ class Frontpage_JSON_LD extends JSON_LD{
 	 */
 	private $helper;
 
-	public function __construct(ICanHelp $helper ) {
+	public function __construct( ICanHelp $helper ) {
 		$this->helper = $helper;
 	}
 
 	protected function json_ld_output( $output ) {
-		echo sprintf( '<script type="application/ld+json">%s</script>'.PHP_EOL, $output );
+		echo sprintf( '<script type="application/ld+json">%s</script>' . PHP_EOL, $output );
 	}
 
 	/**
@@ -120,7 +128,7 @@ class Frontpage_JSON_LD extends JSON_LD{
 	}
 
 	public function website_tag() {
-		$home_url    = home_url('/');
+		$home_url    = home_url( '/' );
 		$website_tag = new WebSite(
 			$home_url,
 			new WordpressSearchAction( sprintf( "%s?s={search_term}", $home_url ), "required name=search_term" )
@@ -129,7 +137,7 @@ class Frontpage_JSON_LD extends JSON_LD{
 	}
 
 	public function organization_tag() {
-		$home_url         = trailingslashit( $this->helper->get( 'wp_home_url' ) );
+		$home_url         = home_url( '/' );
 		$organization_tag = new Organization(
 			$home_url,
 			$this->helper->get( 'jsonld_type_name' ),
@@ -141,7 +149,7 @@ class Frontpage_JSON_LD extends JSON_LD{
 	}
 
 	public function person_tag() {
-		$home_url   = home_url('/');
+		$home_url   = home_url( '/' );
 		$person_tag = new Person( $home_url, $this->helper->get( 'jsonld_type_name' ), $this->profiles );
 
 		return json_encode( $person_tag->get() );
@@ -151,12 +159,12 @@ class Frontpage_JSON_LD extends JSON_LD{
 		$profiles        = array();
 		$social_profiles = array(
 			'account_facebook',
-			'account_instagram',
-			'account_linkedin',
+			'account_twitter',
 			'account_gplus',
-			'account_myspace',
+			'account_instagram',
 			'account_youtube',
-			'account_pinterest',
+			'account_linkedin',
+			'account_myspace'
 		);
 		foreach ( $social_profiles as $profile ) {
 			if ( ! is_null( $this->helper->get( $profile ) ) ) {

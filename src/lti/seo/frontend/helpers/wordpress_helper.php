@@ -87,7 +87,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return $url;
 	}
 
-	public function get_author_social_url( $platform ) {
+	public function get_author_social_info( $platform ) {
 		if ( $this->page_type() == "Author" ) {
 			$author = get_query_var( 'author' );
 		} else {
@@ -96,23 +96,22 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		}
 		switch ( $platform ) {
 			case 'facebook':
-				$info = get_user_meta( $author, "lti_facebook_url" );
+				$info['first_name'] = get_user_meta( $author, "first_name" ,true);
+				$info['last_name'] = get_user_meta( $author, "last_name",true );
+				$info['profile_id']= get_user_meta( $author, "lti_facebook_id",true );
 				break;
 			case 'twitter':
 				$info = get_user_meta( $author, "lti_twitter_username" );
+				if ( ! empty( $info ) && ! empty( $info[0] ) ) {
+					return array_shift( $info );
+				}
 				break;
 			case 'gplus':
 				$info = get_user_meta( $author, "lti_gplus_url" );
 				break;
 		}
-		if ( ! empty( $info ) && ! empty( $info[0] ) ) {
-			return esc_url_raw( array_shift( $info ) );
-		}
 
-		return null;
-
-//		return esc_url_raw( get_author_posts_url( get_the_author_meta( 'ID',
-//			$this->get_post_info( 'post_author' ) ) ) );
+		return $info;
 	}
 
 	public function page_type() {
@@ -198,41 +197,47 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	public function get_canonical_url() {
 		if ( is_null( $this->current_url ) ) {
-			$link = "";
-			if ( is_singular() ) {
-				$link = get_permalink();
-			} elseif ( is_search() ) {
-				$link = get_search_link();
-			} elseif ( is_front_page() ) {
-				$link = home_url();
-			} elseif ( $this->is_posts_page() ) {
-				$link = get_permalink( get_option( 'page_for_posts' ) );
-			} elseif ( $this->page_type() == 'Catagax' ) {
-				$term = get_queried_object();
-				$link = get_term_link( $term, $term->taxonomy );
-			} elseif ( is_post_type_archive() ) {
-				$post_type = get_query_var( 'post_type' );
-				if ( is_array( $post_type ) ) {
-					$post_type = reset( $post_type );
-				}
-				$link = get_post_type_archive_link( $post_type );
-			} elseif ( is_author() ) {
-				$link = get_author_posts_url( get_query_var( 'author' ), get_query_var( 'author_name' ) );
-			} elseif ( is_archive() ) {
-				if ( is_date() ) {
-					if ( is_day() ) {
-						$link = get_day_link( get_query_var( 'year' ), get_query_var( 'monthnum' ),
-							get_query_var( 'day' ) );
-					} elseif ( is_month() ) {
-						$link = get_month_link( get_query_var( 'year' ), get_query_var( 'monthnum' ) );
-					} elseif ( is_year() ) {
-						$link = get_year_link( get_query_var( 'year' ) );
+			$this->current_url = apply_filters( 'lti_seo_get_canonical_url', false );
+
+			if ( $this->current_url === false ) {
+				$link = "";
+				if ( is_singular() ) {
+					$link = get_permalink();
+				} elseif ( is_search() ) {
+					$link = get_search_link();
+				} elseif ( is_front_page() ) {
+					$link = home_url();
+				} elseif ( $this->is_posts_page() ) {
+					$link = get_permalink( get_option( 'page_for_posts' ) );
+				} elseif ( $this->page_type() == 'Catagax' ) {
+					$term = get_queried_object();
+					$link = get_term_link( $term, $term->taxonomy );
+				} elseif ( is_post_type_archive() ) {
+					$post_type = get_query_var( 'post_type' );
+					if ( is_array( $post_type ) ) {
+						$post_type = reset( $post_type );
 					}
+					$link = get_post_type_archive_link( $post_type );
+				} elseif ( is_author() ) {
+					$link = get_author_posts_url( get_query_var( 'author' ), get_query_var( 'author_name' ) );
+				} elseif ( is_archive() ) {
+					if ( is_date() ) {
+						if ( is_day() ) {
+							$link = get_day_link( get_query_var( 'year' ), get_query_var( 'monthnum' ),
+								get_query_var( 'day' ) );
+						} elseif ( is_month() ) {
+							$link = get_month_link( get_query_var( 'year' ), get_query_var( 'monthnum' ) );
+						} elseif ( is_year() ) {
+							$link = get_year_link( get_query_var( 'year' ) );
+						}
+					}
+				} elseif ( is_attachment() ) {
+					$link = wp_get_attachment_url( $this->post_id );
+				} else {
+					$link = get_permalink();
 				}
-			} elseif ( is_attachment() ) {
-				$link = wp_get_attachment_url( $this->post_id );
+				$this->current_url = $link;
 			}
-			$this->current_url = $link;
 		}
 
 		return $this->current_url;
@@ -261,48 +266,44 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		 *
 		 */
 		$image_size = apply_filters( 'lti_seo_image_size_index', 'large' );
-		$data       = array();
+
+		$data = array();
 
 		$image_data = null;
 		if ( ! is_null( $this->post_id ) ) {
 			$image_data = $this->get_img( get_post_thumbnail_id(), $image_size );
+			if ( ! is_null( $image_data ) ) {
+				$data[ get_post_thumbnail_id() ] = $image_data;
+			}
+
+			if ( $number == - 1 ) {
+				$nb_img = $number;
+			} else {
+				$nb_img = $number - count( $data );
+			}
+			$img = array();
+			if ( $this->page_post_format() == "Singular_Gallery" ) {
+				$tmp = get_post_galleries( $this->post_id, false );
+
+				if ( ! empty( $tmp ) && isset( $tmp[0]['ids'] ) ) {
+					$tmp = explode( ',', $tmp[0]['ids'], 4 );
+
+					foreach ( $tmp as $id ) {
+						$data[ $id ] = $this->get_img( $id );
+					}
+				}
+			} else {
+				$img = $this->get_attached_post_images( $nb_img );
+			}
+			if ( ! empty( $img ) ) {
+				$data = array_merge( $data, $img );
+			}
 		}
 
-		if ( ! is_null( $image_data ) ) {
-			$data[] = $image_data;
-		}
 		$img_id     = $this->get_custom_social_image();
 		$image_data = $this->get_img( $img_id, $image_size );
 		if ( ! is_null( $image_data ) ) {
-			$data[] = $image_data;
-		}
-		switch ( $mode ) {
-			case "all":
-				if ( $number == - 1 ) {
-					$nb_img = $number;
-				} else {
-					$nb_img = $number - count( $data );
-				}
-				$img = array();
-				if ( $this->page_post_format() == "Singular_Gallery" ) {
-					$tmp = get_post_galleries( $this->post_id, false );
-
-					if ( ! empty( $tmp ) && isset( $tmp[0]['ids'] ) ) {
-						$tmp = explode( ',', $tmp[0]['ids'], 4 );
-
-						$i = 0;
-						foreach ( $tmp as $id ) {
-							$img[] = $this->get_img( $id );
-						}
-					}
-				} else {
-					$img = $this->get_attached_post_images( $nb_img );
-				}
-				if ( ! empty( $img ) ) {
-					$data = array_merge( $data, $img );
-
-				}
-				break;
+			$data[ $img_id ] = $image_data;
 		}
 
 		if ( ! empty( $data ) ) {
@@ -340,7 +341,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 			$output = array();
 			foreach ( $images as $image ) {
 				//if($image->)
-				$output[] = $this->get_img( $image->ID );
+				$output[ $image->ID ] = $this->get_img( $image->ID );
 			}
 
 			return $output;
@@ -369,21 +370,24 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	public function get_keywords( $post_id = null ) {
 		$keywords = array();
-		if ( is_null( $post_id ) ) {
+		if ( ! is_null( $post_id ) ) {
 			$post_id = $this->post_id;
 		}
 		if ( $this->page_type() == "Frontpage" ) {
 			$keywords = explode( ",", $this->settings->get( 'frontpage_keyword_text' ) );
 		} else {
-			$keywords = $this->get_post_meta_key( 'keywords' );
-			if ( is_null( $keywords ) ) {
-				if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
-					$keywords = array_unique( $this->extract_array_object_value( get_the_category( $post_id ),
-						'cat_name' ) );
-				}
-				if ( $this->settings->get( 'keyword_tag_based' ) === true ) {
-					$keywords = array_unique( array_merge( $keywords,
-						$this->extract_array_object_value( get_the_tags( $this->post_id ), 'name' ) ) );
+			if ( $this->settings->get( 'keyword_support' ) == true ) {
+				$keywords = str_replace( ', ', ',', $this->get_post_meta_key( 'keyword_text' ) );
+				if ( empty( $keywords ) || is_null( $keywords ) ) {
+					$keywords = array();
+					if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
+						$keywords = array_unique( $this->extract_array_object_value( get_the_category( $post_id ),
+							'cat_name' ) );
+					}
+					if ( $this->settings->get( 'keyword_tag_based' ) === true ) {
+						$keywords = array_unique( array_merge( $keywords,
+							$this->extract_array_object_value( get_the_tags( $post_id ), 'name' ) ) );
+					}
 				}
 			}
 		}
@@ -394,7 +398,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return $keywords;
 	}
 
-	private function extract_array_object_value( $values, $field ) {
+	public function extract_array_object_value( $values, $field ) {
 		$vals = array();
 		if ( is_array( $values ) ) {
 			foreach ( $values as $value ) {
@@ -406,7 +410,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	}
 
-	public function update_global_post_fields( $changed ) {
+	public function update_global_post_fields( $changed = array(), $reset = false ) {
 		/**
 		 * @var \wpdb $wpdb
 		 */
@@ -420,7 +424,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		if ( is_array( $results ) ) {
 			foreach ( $results as $result ) {
 				$postbox_values = $result->meta_value;
-				if ( ! is_null( $postbox_values ) ) {
+				if ( ! is_null( $postbox_values ) && ! $reset ) {
 					$postbox_values = unserialize( $postbox_values );
 				} else {
 					$postbox_values = new Postbox_Values( new \stdClass() );
@@ -450,7 +454,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 			}
 		}
 
-		return $this->page_description;
+		return esc_attr( $this->page_description );
 	}
 
 }

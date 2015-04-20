@@ -202,6 +202,10 @@
 											<input type="checkbox" name="robot_tag_based"
 											       id="robot_tag_based" <?php echo ltichk( 'robot_tag_based' ); ?>/>
 										</label>
+										<label for="robot_tax_based"><?php echo ltint( 'opt.robot_tax_based' ); ?>
+											<input type="checkbox" name="robot_tax_based"
+											       id="robot_tax_based" <?php echo ltichk( 'robot_tax_based' ); ?>/>
+										</label>
 										<label for="robot_author_based"><?php echo ltint( 'opt.robot_author_based' ); ?>
 											<input type="checkbox" name="robot_author_based"
 											       id="robot_author_based" <?php echo ltichk( 'robot_author_based' ); ?>/>
@@ -370,13 +374,18 @@
 										</label>
 									</div>
 									<div class="input-group file-selector">
-										<label for="jsonld_img"><?php echo ltint( 'opt.jsonld_img' ); ?>Logo</label>
+										<label for="jsonld_img"><?php echo ltint( 'opt.jsonld_img' ); ?></label>
 										<input id="jsonld_img" class="upload_image" type="text" readonly="readonly"
 										       name="jsonld_type_logo_url"
 										       value="<?php echo ltiopt( 'jsonld_type_logo_url' ); ?>"/>
-										<input id="jsonld_img_button" class="upload_image_button button-primary"
-										       type="button"
-										       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+										<div class="btn-group">
+											<input id="jsonld_img_button" class="upload_image_button button-primary"
+											       type="button"
+											       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+											<input id="jsonld_reset" class="button-primary"
+											       type="button"
+											       value="<?php echo ltint( 'general.reset' ); ?>"/>
+										</div>
 										<input id="jsonld_img_id" type="hidden"
 										       name="jsonld_type_logo_id"
 										       value="<?php echo ltiopt( 'jsonld_type_logo_id' ); ?>"/>
@@ -454,9 +463,14 @@
 									<input id="frontpage_social_img" type="text" name="frontpage_social_img_url"
 									       value="<?php echo ltiopt( 'frontpage_social_img_url' ); ?>"
 									       readonly="readonly"/>
-									<input id="frontpage_social_img_button" class="button-primary upload_image_button"
-									       type="button"
-									       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+									<div class="btn-group">
+										<input id="frontpage_social_img_button" class="button-primary upload_image_button"
+										       type="button"
+										       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+										<input id="frontpage_social_reset" class="button-primary"
+										       type="button"
+										       value="<?php echo ltint( 'general.reset' ); ?>"/>
+									</div>
 									<input id="frontpage_social_img_id" type="hidden"
 									       name="frontpage_social_img_id"
 									       value="<?php echo ltiopt( 'frontpage_social_img_id' ); ?>"/>

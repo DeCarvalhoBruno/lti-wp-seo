@@ -6,13 +6,15 @@ class Lti_Seo_Help_Menu {
 	}
 
 	public function welcome_tab() {
-		return '<p>' . ltint( 'general_hlp_welcome_1' ) . '</p>';
+		return '<p>' . ltint( 'general_hlp_welcome_1' ) . '</p>'.
+		'<p>' . ltint( 'general_hlp_welcome_2' ) . '</p>'.
+		'<p>' . ltint( 'general_hlp_welcome_3' ) . '</p>';
 	}
 
 	public function general_tab() {
 		return '<p>' . ltint( 'general_hlp_general_1' ) . '</p>' .
 		       '<p>' . ltint( 'general_hlp_general_2' ) . '</p>' .
-		       '<p>' . ltint( 'general_hlp_general_3' ) . '</p>' .
+		       '<p>' . ltint( 'general_hlp_general_3' ) . '</p>' .'<br/>'.
 		       '<p>' . ltint( 'general_hlp_general_4' ) . '</p>';
 	}
 
@@ -23,7 +25,8 @@ class Lti_Seo_Help_Menu {
 
 	public function social_tab() {
 		return '<p>' . ltint( 'general_hlp_social_1' ) . '</p>'.
-		       '<p>' . ltint( 'general_hlp_social_2' ) . '</p>';
+		       '<p>' . ltint( 'general_hlp_social_2' ) . '</p>'.
+		       '<p>' . ltint( 'general_hlp_social_3' ) . '</p>';
 	}
 
 	public function sidebar() {

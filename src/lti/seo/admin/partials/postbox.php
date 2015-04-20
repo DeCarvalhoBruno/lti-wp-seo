@@ -5,6 +5,7 @@
  *
  * Box that appears on post types
  *
+ * @see \Lti\Seo\Admin::metadata_box
  */
 ?>
 <div id="plseo">
@@ -13,7 +14,7 @@
 			<div class="input-group">
 				<label for="lti_seo_description"><?php echo ltint('box.description'); ?></label>
 				<textarea name="lti_seo[description]" id="lti_seo_description"
-				          placeholder="<?php echo ltiopt( 'description_suggestion' ); ?>"><?php echo ltiopt( 'description' ); ?></textarea>
+				          ><?php echo ltiopt( 'description' ); ?></textarea>
 				<span id="wlti_seo_description" class="char-counter"><?php echo ltint('general.char_count'); ?>&nbsp;<span
 						id="clti_seo_description"></span></span>
 			</div>
@@ -42,9 +43,14 @@
 					<input id="lti_social_img" type="text" name="lti_seo[social_img_url]"
 					       value="<?php echo ltiopt( 'social_img_url' ); ?>"
 					       readonly="readonly"/>
-					<input id="lti_social_img_button" class="button-primary upload_image_button"
-					       type="button"
-					       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+					<div class="btn-group">
+						<input id="lti_social_img_button" class="button-primary upload_image_button"
+						       type="button"
+						       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+						<input id="lti_social_reset" class="button-primary"
+						       type="button"
+						       value="<?php echo ltint( 'general.reset' ); ?>"/>
+					</div>
 					<input id="lti_social_img_id" type="hidden"
 					       name="lti_seo[social_img_id]"
 					       value="<?php echo ltiopt( 'social_img_id' ); ?>"/>

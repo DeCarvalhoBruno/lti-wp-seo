@@ -166,7 +166,7 @@ class LTI_SEO {
 		$this->loader->add_action( 'wp_head', $this->frontend, 'head' );
 
 		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
-			$this->loader->add_filter( 'user_contactmethods', $this->frontend, 'user_contactmethods', 10 );
+			$this->loader->add_filter( 'user_contactmethods', $this->frontend, 'user_contactmethods' );
 		}
 	}
 

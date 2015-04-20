@@ -52,14 +52,16 @@ class Admin {
 
 	public function enqueue_scripts() {
 		wp_enqueue_media();
-		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/dist/js/lti_seo_admin.js', array( 'jquery' ),
+		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/dist/js/lti_seo_admin.js',
+			array( 'jquery' ),
 			$this->version,
 			false );
 		wp_localize_script( $this->plugin_name, 'lti_seo_i8n', array( 'use_img' => ltint( 'general.use_image' ) ) );
 	}
 
 	public function admin_menu() {
-		$page = add_options_page( ltint( 'admin.menu_title' ), ltint( 'admin.menu_item' ), 'manage_options', 'lti-seo-options',
+		$page = add_options_page( ltint( 'admin.menu_title' ), ltint( 'admin.menu_item' ), 'manage_options',
+			'lti-seo-options',
 			array( $this, 'options_page' ) );
 		add_action( 'load-' . $page, array( $this, 'wp_help_menu' ) );
 	}
@@ -67,7 +69,7 @@ class Admin {
 	public function wp_help_menu() {
 		include $this->admin_dir . '/partials/help_menu.php';
 		$screen = get_current_screen();
-		$menu = new \Lti_Seo_Help_Menu();
+		$menu   = new \Lti_Seo_Help_Menu();
 		$screen->add_help_tab( array(
 			'id'      => 'general_hlp_welcome',
 			'title'   => ltint( 'general_hlp_welcome' ),
@@ -109,19 +111,21 @@ class Admin {
 				if ( wp_verify_nonce( $_POST['lti_seo_token'], 'lti_seo_options' ) !== false ) {
 					$this->validate_input( $_POST );
 					$this->page_type = "lti_update";
-					$this->message = ltint('opt.msg.updated');
+					$this->message   = ltint( 'opt.msg.updated' );
 
 				} else {
 					$this->page_type = "lti_error";
-					$this->message = ltint("opt.msg.error_token");
+					$this->message   = ltint( "opt.msg.error_token" );
 				}
 			}
 		} elseif ( isset( $_POST['lti_seo_reset'] ) ) {
 			$this->settings = new Plugin_Settings();
 			update_option( 'lti_seo_options', $this->settings );
+			$this->helper->update_global_post_fields( array(), true );
+
 			$this->page_type = "lti_reset";
-			$this->message = ltint('opt.msg.reset');
-		}else{
+			$this->message   = ltint( 'opt.msg.reset' );
+		} else {
 			$this->page_type = "lti_edit";
 		}
 		include $this->admin_dir . '/partials/options-page.php';
@@ -171,15 +175,13 @@ class Admin {
 			$this->box_values = new Postbox_Values( array() );
 		}
 
-		if ( is_null( $this->box_values->get( 'keywords' ) ) ) {
-			$f = new Singular_Keyword( $this->helper, $this->settings, $post->ID );
-			$this->box_values->set( 'keywords_suggestion', $f->get_tags() );
+		if ( $this->settings->get( 'keyword_support' ) == true ) {
+			$keyword_text = $this->box_values->get( 'keywords' );
+			if ( is_null( $keyword_text ) || empty( $keyword_text ) ) {
+				$f = new Singular_Keyword( $this->helper, $post->ID );
+				$this->box_values->set( 'keywords_suggestion', str_replace( ',', ', ', $f->get_tags() ) );
+			}
 		}
-
-		if ( is_null( $this->box_values->get( 'description' ) ) ) {
-			$this->box_values->set( 'description_suggestion', $this->settings->get( 'frontpage_description_text' ) );
-		}
-
 		$this->set_current_page( 'post-edit' );
 		include $this->admin_dir . '/partials/postbox.php';
 	}
@@ -223,11 +225,11 @@ class Admin {
 		return $this->settings;
 	}
 
-	public function get_page_type(){
+	public function get_page_type() {
 		return $this->page_type;
 	}
 
-	public function get_message(){
+	public function get_message() {
 		return $this->message;
 	}
 }
