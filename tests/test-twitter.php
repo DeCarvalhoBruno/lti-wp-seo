@@ -15,7 +15,7 @@ class TwitterTest extends LTI_SEO_UnitTestCase {
 	public function testFrontpageTwitter() {
 
 		$settings = new Plugin_Settings( (object) array() );
-		$twitter  = new Frontpage_Twitter_Card( new \Lti\Seo\Helpers\Wordpress_Helper( $settings ) );
+		$twitter  = new Frontpage_Twitter_Card( new Wordpress_Helper( $settings ) );
 		ob_start();
 		$twitter->display_tags();
 		$out = new DOM( ob_get_clean() );

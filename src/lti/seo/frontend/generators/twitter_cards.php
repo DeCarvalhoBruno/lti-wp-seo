@@ -1,8 +1,6 @@
 <?php namespace Lti\Seo\Generators;
 
 use Lti\Seo\Helpers\ICanHelp;
-use Lti\Seo\Plugin\Plugin_Settings;
-
 
 class Twitter_Card extends GenericMetaTag {
 
@@ -59,8 +57,6 @@ class Twitter_Card extends GenericMetaTag {
 
 class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags {
 
-	protected $image_retrieval_mode = "fallback";
-
 	protected $number_images = - 1;
 
 	public function make_tags() {
@@ -77,7 +73,7 @@ class Frontpage_Twitter_Card extends Twitter_Card implements ICanMakeHeaderTags 
 		if ( ! empty( $description ) && ! is_null( $description ) ) {
 			$twitter['description'] = esc_attr( $description );
 		}
-		$twitter['image'] = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
+		$twitter['image'] = $this->helper->get_social_images( $this->number_images );
 
 		return compact( 'twitter' );
 
@@ -104,7 +100,7 @@ class Attachment_Twitter_Card extends Singular_Twitter_Card {
 
 }
 
-class Author_Gallery_Twitter_Card extends Singular_Twitter_Card {
+class Author_Twitter_Card extends Singular_Twitter_Card {
 
 }
 
@@ -118,8 +114,6 @@ class Archive_Twitter_Card extends Frontpage_Twitter_Card {
 }
 
 class Singular_Gallery_Twitter_Card extends Singular_Twitter_Card {
-
-	protected $image_retrieval_mode = "all";
 
 	protected $number_images = 4;
 

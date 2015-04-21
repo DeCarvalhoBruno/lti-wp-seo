@@ -1,6 +1,7 @@
 <?php namespace Lti\Seo\Test;
 
 use Lti\Seo\LTI_SEO;
+use Lti\Seo\Plugin\Postbox_Values;
 
 class LTI_SEO_UnitTestCase extends \WP_UnitTestCase {
 
@@ -66,6 +67,28 @@ class LTI_SEO_UnitTestCase extends \WP_UnitTestCase {
 		_cleanup_query_vars();
 
 		$GLOBALS['wp']->main($parts['query']);
+	}
+
+	public function add_featured_image( $post_id ) {
+
+		$img = "post-1_social.jpg";
+		$basename       = basename( $img );
+		$wp_upload_dir     = wp_upload_dir();
+		$source   = dirname( __FILE__ ) . '/images/'.$img;
+		$featured = $wp_upload_dir['path'].'/'.$img;
+		copy( $source, $featured );
+
+		$file = array(
+			'name'     => $basename,
+			'tmp_name' => $featured,
+		);
+		$attach_id  = media_handle_sideload( $file, $post_id );
+
+		return $attach_id;
+	}
+
+	public function set_post_box_values($postID, $values){
+		update_post_meta( $postID, 'lti_seo', new Postbox_Values( (object) $values ) );
 	}
 
 }

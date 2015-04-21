@@ -6,9 +6,6 @@
  *
  */
 ?>
-<!--<div id="lseo-header">-->
-<!--<div id="lseo-header-img"></div>-->
-
 <div id="lti_seo_wrapper">
 
 	<div id="lti-seo-header" class="lti-seo-header <?php echo ltipagetype() ?>">
@@ -269,7 +266,8 @@
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
-								<p><?php echo ltint( 'opt.hlp.frontpage_description' ); ?></p>
+								<p><?php echo ltint( 'opt.hlp.frontpage_description1' ); ?></p>
+								<p><?php echo ltint( 'opt.hlp.frontpage_description2' ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -278,12 +276,12 @@
 							<label for="frontpage_keyword"><?php echo ltint( 'opt.frontpage_keyword' ); ?>
 								<input type="checkbox" name="frontpage_keyword" data-toggle="seo-options"
 								       data-target="#frontpage_keyword_group"
-								       id="frontpage_keyword" <?php echo ltichk( 'frontpage_keyword' ); ?>/>
+								       id="frontpage_keyword" <?php echo ltichk( 'frontpage_keyword' );?>/>
 							</label>
 
 							<div id="frontpage_keyword_group">
 							<textarea name="frontpage_keyword_text"
-							          id="frontpage_keyword_text"><?php echo ltiopt( 'frontpage_keyword_text' ); ?></textarea>
+							          id="frontpage_keyword_text" placeholder="<?php echo ltint( 'opt.frontpage_keyword_ph' ); ?>"><?php echo ltiopt( 'frontpage_keyword_text' ); ?></textarea>
 							</div>
 						</div>
 						<div class="form-help-container">

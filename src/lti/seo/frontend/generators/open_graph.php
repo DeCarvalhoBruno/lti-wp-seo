@@ -10,10 +10,21 @@ class Open_Graph extends GenericMetaTag {
 
 		$meta = "";
 		foreach ( $this->tags as $tags => $tag ) {
-			foreach ( $tag as $subtag => $property ) {
-				if ( ! empty( $property ) ) {
-					$meta .= $this->generate_tag( $this->meta_tag_name_attribute, sprintf( '%s:%s', $tags, $subtag ),
-						$property );
+			foreach ( $tag as $subtag => $properties ) {
+				if ( is_array( $properties ) ) {
+					foreach ( $properties as $property ) {
+						if ( ! empty( $property ) ) {
+							$meta .= $this->generate_tag( $this->meta_tag_name_attribute,
+								sprintf( '%s:%s', $tags, $subtag ),
+								$property );
+						}
+					}
+				} else {
+					if ( ! empty( $properties ) ) {
+						$meta .= $this->generate_tag( $this->meta_tag_name_attribute,
+							sprintf( '%s:%s', $tags, $subtag ),
+							$properties );
+					}
 				}
 			}
 		}
@@ -56,7 +67,7 @@ class Frontpage_Open_Graph extends Open_Graph implements ICanMakeHeaderTags {
 		$og['url']         = esc_url_raw( home_url( '/' ) );
 		$og['description'] = esc_attr( $this->helper->get_description() );
 		$og['locale']      = esc_attr( get_bloginfo( 'language' ) );
-		$og['image']       = $this->helper->get_social_images( $this->image_retrieval_mode, $this->number_images );
+		$og['image']       = $this->helper->get_social_images( $this->number_images );
 
 		$this->tags = compact( 'og' );
 
@@ -74,23 +85,30 @@ class Singular_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeader
 		$article['published_time'] = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_date' ) ) );
 		$article['modified_time']  = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_modified' ) ) );
 		$profile                   = $this->helper->get_author_social_info( 'facebook' );
-		$ar['article'] = $article;
+		$ar['article']             = $article;
 		if ( ! empty( $profile['profile_id'] ) ) {
-			$ar['article']['author'] = $profile['profile_id'];
+			$ar['article']['author'] = $this->helper->get_author_url();
 		}
-		if ( ! empty( $profile['first_name'] ) ) {
-			$ar['profile']['first_name'] = $profile['first_name'];
-		}
-		if ( ! empty( $profile['last_name'] ) ) {
-			$ar['profile']['last_name'] = $profile['last_name'];
-		}
-		$publisher = $this->helper->get( 'facebook_publisher' );
 
+		$categories = $this->helper->get_categories();
+		if ( is_array( $categories ) && ! empty( $categories ) ) {
+			foreach ( $categories as $category ) {
+				$ar['article']['section'][] = $category;
+			}
+		}
+		$tags = $this->helper->get_tags();
+		if ( is_array( $tags ) && ! empty( $tags ) ) {
+			foreach ( $tags as $tag ) {
+				$ar['article']['tag'][] = $tag;
+			}
+		}
+
+		$publisher = $this->helper->get( 'facebook_publisher' );
 		if ( ! is_null( $publisher ) ) {
 			$article['publisher'] = esc_url_raw( $publisher );
 		}
 
-		$this->tags    = $ar;
+		$this->tags = $ar;
 
 		return Open_Graph::make_tags();
 	}
@@ -102,10 +120,10 @@ class Singular_Gallery_Open_Graph extends Singular_Open_Graph {
 
 class Author_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeaderTags {
 	public function make_tags() {
-		$ar                        = parent::make_tags();
-		unset($ar['og']['type']);
-		$ar['og']['type']            = 'profile';
-		$profile                   = $this->helper->get_author_social_info( 'facebook' );
+		$ar = parent::make_tags();
+		unset( $ar['og']['type'] );
+		$ar['og']['type'] = 'profile';
+		$profile          = $this->helper->get_author_social_info( 'facebook' );
 		if ( ! empty( $profile['first_name'] ) ) {
 			$ar['profile']['first_name'] = $profile['first_name'];
 		}
@@ -115,7 +133,8 @@ class Author_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeaderTa
 		if ( ! empty( $profile['profile_id'] ) ) {
 			$ar['fb']['profile_id'] = $profile['profile_id'];
 		}
-		$this->tags    = $ar;
+		$this->tags = $ar;
+
 		return Open_Graph::make_tags();
 	}
 }

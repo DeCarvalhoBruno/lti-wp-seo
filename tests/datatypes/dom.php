@@ -68,6 +68,10 @@ class DOM {
 		echo "\n\n";
 	}
 
+	public function has_no_output(){
+		return (empty($this->content)||is_null($this->content));
+	}
+
 	/**
 	 * @param string $content
 	 */

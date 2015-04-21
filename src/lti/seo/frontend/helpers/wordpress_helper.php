@@ -96,9 +96,9 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		}
 		switch ( $platform ) {
 			case 'facebook':
-				$info['first_name'] = get_user_meta( $author, "first_name" ,true);
-				$info['last_name'] = get_user_meta( $author, "last_name",true );
-				$info['profile_id']= get_user_meta( $author, "lti_facebook_id",true );
+				$info['first_name'] = get_user_meta( $author, "first_name", true );
+				$info['last_name']  = get_user_meta( $author, "last_name", true );
+				$info['profile_id'] = get_user_meta( $author, "lti_facebook_id", true );
 				break;
 			case 'twitter':
 				$info = get_user_meta( $author, "lti_twitter_username" );
@@ -256,7 +256,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return $this->shortlink;
 	}
 
-	public function get_social_images( $mode = "", $number = - 1 ) {
+	public function get_social_images( $number = - 1 ) {
 
 		/**
 		 * Allow filtering of the image size
@@ -381,12 +381,11 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				if ( empty( $keywords ) || is_null( $keywords ) ) {
 					$keywords = array();
 					if ( $this->settings->get( 'keyword_cat_based' ) === true ) {
-						$keywords = array_unique( $this->extract_array_object_value( get_the_category( $post_id ),
-							'cat_name' ) );
+						$keywords = array_unique( $this->get_categories() );
 					}
 					if ( $this->settings->get( 'keyword_tag_based' ) === true ) {
 						$keywords = array_unique( array_merge( $keywords,
-							$this->extract_array_object_value( get_the_tags( $post_id ), 'name' ) ) );
+							$this->get_tags() ) );
 					}
 				}
 			}
@@ -396,6 +395,16 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		}
 
 		return $keywords;
+	}
+
+	public function get_categories() {
+		return $this->extract_array_object_value( get_the_category( $this->post_id ),
+			'cat_name' );
+	}
+
+	public function get_tags() {
+		return $this->extract_array_object_value( get_the_tags( $this->post_id ),
+			'name' );
 	}
 
 	public function extract_array_object_value( $values, $field ) {
@@ -450,7 +459,9 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 					$this->page_description = get_bloginfo( 'description' );
 				}
 			} else {
-				$this->page_description = $this->get_post_meta_key( 'description' );
+				if ( $this->settings->get( 'description_support' ) == true ) {
+					$this->page_description = $this->get_post_meta_key( 'description' );
+				}
 			}
 		}
 
