@@ -3,7 +3,7 @@
 use Lti\Seo\Plugin\Fields;
 use Lti\Seo\Plugin\Postbox_Values;
 
-class Wordpress_Helper extends Helper implements ICanHelp {
+class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 
 	private $is_home_posts_page;
 	private $is_home_static_page;
@@ -32,6 +32,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 
 	public function init() {
 		$this->page_type();
+		$this->get_canonical_url();
 	}
 
 	public function get_site_name() {
@@ -195,6 +196,10 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		return $this->is_posts_page;
 	}
 
+	public function get_home_url(){
+		return home_url('/');
+	}
+
 	public function get_canonical_url() {
 		if ( is_null( $this->current_url ) ) {
 			$this->current_url = apply_filters( 'lti_seo_get_canonical_url', false );
@@ -206,7 +211,7 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				} elseif ( is_search() ) {
 					$link = get_search_link();
 				} elseif ( is_front_page() ) {
-					$link = home_url();
+					$link = home_url('/');
 				} elseif ( $this->is_posts_page() ) {
 					$link = get_permalink( get_option( 'page_for_posts' ) );
 				} elseif ( $this->page_type() == 'Catagax' ) {
@@ -239,7 +244,6 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 				$this->current_url = $link;
 			}
 		}
-
 		return $this->current_url;
 	}
 
@@ -466,6 +470,50 @@ class Wordpress_Helper extends Helper implements ICanHelp {
 		}
 
 		return esc_attr( $this->page_description );
+	}
+
+	public function get_social_urls()
+	{
+		$social_profiles = array(
+			'account_facebook',
+			'account_twitter',
+			'account_gplus',
+			'account_instagram',
+			'account_youtube',
+			'account_linkedin',
+			'account_myspace'
+		);
+		$profiles = array();
+		foreach ($social_profiles as $profile) {
+			$tmp = $this->get($profile);
+			if (!is_null($tmp) && !empty($tmp)) {
+				$profiles[] = $tmp;
+			}
+		}
+		return $profiles;
+	}
+
+	public function get_thing_name()
+	{
+		return $this->get('jsonld_type_name');
+	}
+
+	public function get_thing_logo()
+	{
+		return $this->get('jsonld_type_logo_url');
+	}
+
+	public function get_thing_alternate_name()
+	{
+		return $this->get('alternate_name');
+	}
+
+	public function get_current_url(){
+		return $this->current_url;
+	}
+
+	public function get_search_action_type(){
+		return 'Lti\Seo\Generators\WordpressSearchAction';
 	}
 
 }

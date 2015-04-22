@@ -1,5 +1,6 @@
 <?php namespace Lti\Seo;
 
+use Lti\Seo\Generators\JSON_LD;
 use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Plugin_Settings;
 
@@ -58,22 +59,29 @@ class Frontend {
 			$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
 		}
 
-echo $this->helper->page_type();
+		//echo $this->helper->page_type();
 
 		$this->hook_functionality( 'Robot' );
 
-		$jsonld_class = sprintf( $class_pattern, $this->helper->page_type(), "JSON_LD" );
-		if ( class_exists( $jsonld_class ) ) {
-			$json_ld = new $jsonld_class( $this->helper );
 
-			if ( $this->settings->get( 'jsonld_org_info' ) ) {
-				add_action( 'lti_seo_json_ld', array( $json_ld, 'json_entity' ) );
+		$json_ld = new JSON_LD( $this->helper );
+		if ( $this->settings->get( 'jsonld_org_info' ) ) {
+			$type = $this->settings->get( 'jsonld_entity_type' );
+			echo $type;
+			switch ( $type ) {
+				case "person":
+					add_action( 'lti_seo_json_ld', array( $json_ld, 'make_person' ) );
+					break;
+				case "organization":
+					add_action( 'lti_seo_json_ld', array( $json_ld, 'make_organization' ) );
+					break;
 			}
-			if ( $this->settings->get( 'jsonld_website_info' ) ) {
-				add_action( 'lti_seo_json_ld', array( $json_ld, 'website_tag' ) );
-			}
-			add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ), 90 );
 		}
+		if ( $this->settings->get( 'jsonld_website_info' ) ) {
+			add_action( 'lti_seo_json_ld', array( $json_ld, 'make_website' ) );
+		}
+
+		add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ), 90 );
 		$seo_comment = apply_filters( 'lti_seo_header_comment', 'SEO' );
 		if ( ! empty( $seo_comment ) ) {
 			echo sprintf( "<!-- %s -->" . PHP_EOL, $seo_comment );
