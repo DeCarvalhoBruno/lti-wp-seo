@@ -102,16 +102,12 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 				$info['profile_id'] = get_user_meta( $author, "lti_facebook_id", true );
 				break;
 			case 'twitter':
-				$info = get_user_meta( $author, "lti_twitter_username" );
-				if ( ! empty( $info ) && ! empty( $info[0] ) ) {
-					return array_shift( $info );
-				}
+				$info = get_user_meta( $author, "lti_twitter_username",true );
 				break;
 			case 'gplus':
-				$info = get_user_meta( $author, "lti_gplus_url" );
+				$info = get_user_meta( $author, "lti_gplus_url",true );
 				break;
 		}
-
 		return $info;
 	}
 

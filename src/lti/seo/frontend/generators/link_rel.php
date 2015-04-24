@@ -27,7 +27,6 @@ class Frontpage_Link_Rel extends Link_Rel implements ICanMakeHeaderTags {
 			$canonical = $this->helper->get_canonical_url();
 			if ( ! empty( $canonical ) ) {
 				$tags['canonical'] = $canonical;
-
 			}
 		}
 

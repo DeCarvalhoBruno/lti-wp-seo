@@ -39,8 +39,6 @@ class Frontend {
 	public function head() {
 		$this->helper->init();
 
-		$class_pattern = "Lti\\Seo\\Generators\\%s_%s";
-
 		$this->hook_functionality( 'Link_Rel' );
 
 		if ( $this->settings->get( 'description_support' ) == true || $this->settings->get( 'frontpage_description' ) == true ) {
@@ -67,7 +65,6 @@ class Frontend {
 		$json_ld = new JSON_LD( $this->helper );
 		if ( $this->settings->get( 'jsonld_org_info' ) ) {
 			$type = $this->settings->get( 'jsonld_entity_type' );
-			echo $type;
 			switch ( $type ) {
 				case "person":
 					add_action( 'lti_seo_json_ld', array( $json_ld, 'make_person' ) );
