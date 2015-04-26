@@ -26,7 +26,7 @@
 				<label for="lti_seo_keywords"><?php echo ltint('box.keywords'); ?></label>
 				<input type="text" name="lti_seo[keywords]" id="lti_seo_keywords"
 				       value="<?php echo ltiopt( 'keywords' ); ?>"/>
-				<?php if ( !is_null(ltiopt( 'keywords_suggestion' )) ) { ?>
+				<?php $kw = ltiopt( 'keywords_suggestion' ); if ( !is_null($kw)&&!empty($kw) ) {?>
 				<span id="keywords_suggestion_box"><?php echo ltint('box.keywords_suggestion'); ?>&nbsp;<span id="lti_seo_keywords_suggestion"><?php echo ltiopt( 'keywords_suggestion' ); ?></span><a
 					onclick="document.getElementById('lti_seo_keywords').setAttribute('value',document.getElementById('lti_seo_keywords_suggestion').textContent);">
 					<?php echo ltint('box.text_copy'); ?></a></span>

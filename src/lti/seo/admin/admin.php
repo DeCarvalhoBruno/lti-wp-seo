@@ -1,5 +1,6 @@
 <?php namespace Lti\Seo;
 
+use Lti\Seo\Generators\Robot;
 use Lti\Seo\Generators\Singular_Keyword;
 use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Plugin_Settings;
@@ -133,7 +134,6 @@ class Admin {
 
 	public function register_setting() {
 		Activator::activate();
-		//register_setting( 'general', 'lti_seo_options' );
 	}
 
 	public function validate_input( $data ) {
@@ -173,6 +173,11 @@ class Admin {
 
 		if ( empty( $this->box_values ) ) {
 			$this->box_values = new Postbox_Values( array() );
+			$robot = new Robot($this->helper);
+			$robot_settings = $robot->get_robot_setting('robot_support');
+			foreach($robot_settings as $setting){
+				$this->box_values->set('post_robot_'.$setting,true);
+			}
 		}
 
 		if ( $this->settings->get( 'keyword_support' ) == true ) {
@@ -214,7 +219,6 @@ class Admin {
 		if ( isset( $_POST['lti_seo'] ) ) {
 			update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $_POST['lti_seo'] ) );
 		}
-
 	}
 
 	public function set_current_page( $page ) {

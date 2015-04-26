@@ -313,6 +313,22 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 		return null;
 	}
 
+	public function get_social_image_url(){
+			$image_size = apply_filters( 'lti_seo_image_size_index', 'large' );
+		if ( ! is_null( $this->post_id ) ) {
+			$image_data = $this->get_img( get_post_thumbnail_id(), $image_size );
+
+		}else{
+			$img_id     = $this->get_custom_social_image();
+			$image_data = $this->get_img( $img_id, $image_size );
+		}
+
+		if(isset($image_data->url)){
+			return $image_data->url;
+		}
+		return "";
+	}
+
 	private function get_custom_social_image() {
 		$img_id = null;
 		if ( $this->page_type() == "Frontpage" ) {

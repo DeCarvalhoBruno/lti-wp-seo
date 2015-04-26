@@ -14,7 +14,7 @@ class Robot extends GenericMetaTag {
 		return $this->get_robot_setting( $this->setting, $this->prefix );
 	}
 
-	protected function get_robot_setting( $setting, $settings_prefix = "" ) {
+	public function get_robot_setting( $setting, $settings_prefix = "" ) {
 		$robots = array();
 
 		if ( $this->helper->get( $setting ) == true ) {

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lti-wp-seo\n"
 "POT-Creation-Date: 2015-04-21 12:23+0100\n"
-"PO-Revision-Date: 2015-04-21 12:23+0100\n"
+"PO-Revision-Date: 2015-04-26 20:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -254,7 +254,7 @@ msgstr "Global"
 
 #: ../src/lti/seo/admin/partials/options-page.php:125
 msgid "opt.robot.th3"
-msgstr "Posts and media"
+msgstr "Posts and pages"
 
 #: ../src/lti/seo/admin/partials/options-page.php:130
 msgid "opt.robot_noindex"
