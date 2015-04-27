@@ -16,6 +16,7 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 	private $post_id;
 	private $shortlink;
 	private $post_meta;
+	private $user_meta;
 
 	/**
 	 * @var \Lti\Seo\Plugin\Plugin_Settings
@@ -82,33 +83,72 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 	}
 
 	public function get_author_url() {
-		$url = esc_url_raw( get_author_posts_url( get_the_author_meta( 'ID',
+		$url = esc_url( get_author_posts_url( get_the_author_meta( 'ID',
 			$this->get_post_info( 'post_author' ) ) ) );
 
 		return $url;
 	}
 
-	public function get_author_social_info( $platform ) {
-		if ( $this->page_type() == "Author" ) {
-			$author = get_query_var( 'author' );
-		} else {
-			$author = get_the_author_meta( 'ID',
-				$this->get_post_info( 'post_author' ) );
-		}
+	public function get_author_social_info( $platform = '' ) {
+		$info = null;
 		switch ( $platform ) {
 			case 'facebook':
-				$info['first_name'] = get_user_meta( $author, "first_name", true );
-				$info['last_name']  = get_user_meta( $author, "last_name", true );
-				$info['profile_id'] = get_user_meta( $author, "lti_facebook_id", true );
+				$info['first_name'] = $this->get_user_meta_key( "first_name" );
+				$info['last_name']  = $this->get_user_meta_key( "last_name" );
+				$info['profile_id'] = $this->get_user_meta_key( "lti_facebook_id" );
 				break;
 			case 'twitter':
-				$info = get_user_meta( $author, "lti_twitter_username",true );
+				$info = $this->get_user_meta_key( "lti_twitter_username" );
 				break;
 			case 'gplus':
-				$info = get_user_meta( $author, "lti_gplus_url",true );
+				$info = $this->get_user_meta_key( "lti_gplus_url" );
+				break;
+			default:
+				$info                      = array();
+				$info['account_facebook']  = $this->get_user_meta_key( "lti_facebook_url" );
+				$info['account_twitter']   = 'https://twitter.com' . str_replace( '@', '/',
+						$this->get_user_meta_key( "lti_twitter_username" ) );
+				$info['account_gplus']     = $this->get_user_meta_key( "lti_gplus_url" );
+				$info['account_instagram'] = $this->get_user_meta_key( "lti_instagram_url" );
+				$info['account_youtube']   = $this->get_user_meta_key( "lti_youtube_url" );
+				$info['account_linkedin']  = $this->get_user_meta_key( "lti_linkedin_url" );
+				$info['account_myspace']   = $this->get_user_meta_key( "lti_myspace_url" );
 				break;
 		}
+
 		return $info;
+	}
+
+	public function get_user_meta() {
+		$author = null;
+		if ( is_null( $this->user_meta ) ) {
+			if ( $this->page_type() == "Author" ) {
+				$author = get_query_var( 'author' );
+			} elseif ( $this->page_type() == "Frontpage" ) {
+				$author = $this->settings->get( 'jsonld_type_wp_userid' );
+			} else {
+				$author = get_the_author_meta( 'ID',
+					$this->get_post_info( 'post_author' ) );
+			}
+			$this->user_meta = get_user_meta( $author );
+		}
+
+		return $this->user_meta;
+	}
+
+	public function get_user_meta_key( $key ) {
+		if ( is_null( $this->user_meta ) ) {
+			$this->get_user_meta();
+		}
+
+		if ( isset( $this->user_meta[ $key ] ) ) {
+			$value = array_shift( $this->user_meta[ $key ] );
+			if ( ! is_null( $value ) && ! empty( $value ) ) {
+				return $value;
+			}
+		}
+
+		return null;
 	}
 
 	public function page_type() {
@@ -118,6 +158,8 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 			} elseif ( is_singular() ) {
 				if ( is_attachment() ) {
 					$this->page_type = 'Attachment';
+				} elseif ( is_page() ) {
+					$this->page_type = 'Page';
 				} else {
 					$this->page_type = 'Singular';
 					$this->post_id   = $this->get_post_info( 'ID' );
@@ -192,8 +234,8 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 		return $this->is_posts_page;
 	}
 
-	public function get_home_url(){
-		return home_url('/');
+	public function get_home_url() {
+		return home_url( '/' );
 	}
 
 	public function get_canonical_url() {
@@ -207,7 +249,7 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 				} elseif ( is_search() ) {
 					$link = get_search_link();
 				} elseif ( is_front_page() ) {
-					$link = home_url('/');
+					$link = home_url( '/' );
 				} elseif ( $this->is_posts_page() ) {
 					$link = get_permalink( get_option( 'page_for_posts' ) );
 				} elseif ( $this->page_type() == 'Catagax' ) {
@@ -240,6 +282,7 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 				$this->current_url = $link;
 			}
 		}
+
 		return $this->current_url;
 	}
 
@@ -313,19 +356,20 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 		return null;
 	}
 
-	public function get_social_image_url(){
-			$image_size = apply_filters( 'lti_seo_image_size_index', 'large' );
+	public function get_social_image_url() {
+		$image_size = apply_filters( 'lti_seo_image_size_index', 'large' );
 		if ( ! is_null( $this->post_id ) ) {
 			$image_data = $this->get_img( get_post_thumbnail_id(), $image_size );
 
-		}else{
+		} else {
 			$img_id     = $this->get_custom_social_image();
 			$image_data = $this->get_img( $img_id, $image_size );
 		}
 
-		if(isset($image_data->url)){
+		if ( isset( $image_data->url ) ) {
 			return $image_data->url;
 		}
+
 		return "";
 	}
 
@@ -371,7 +415,7 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 			$image_data = new \stdClass();
 			$tmp        = wp_get_attachment_image_src( $img_id, $image_size );
 			if ( $tmp !== false ) {
-				$image_data->url                  = esc_url_raw( $tmp[0] );
+				$image_data->url                  = esc_url( $tmp[0] );
 				$image_data->properties           = array();
 				$image_data->properties['width']  = $tmp[1];
 				$image_data->properties['height'] = $tmp[2];
@@ -484,8 +528,7 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 		return esc_attr( $this->page_description );
 	}
 
-	public function get_social_urls()
-	{
+	public function get_social_urls() {
 		$social_profiles = array(
 			'account_facebook',
 			'account_twitter',
@@ -495,37 +538,55 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 			'account_linkedin',
 			'account_myspace'
 		);
-		$profiles = array();
-		foreach ($social_profiles as $profile) {
-			$tmp = $this->get($profile);
-			if (!is_null($tmp) && !empty($tmp)) {
-				$profiles[] = $tmp;
+		if ( $this->page_type() == 'Frontpage' ) {
+			$profiles = $this->get_author_social_info();
+		} else {
+			$profiles = array();
+			foreach ( $social_profiles as $profile ) {
+				$tmp = $this->get( $profile );
+				if ( ! is_null( $tmp ) && ! empty( $tmp ) ) {
+					$profiles[] = $tmp;
+				}
 			}
 		}
+
 		return $profiles;
 	}
 
-	public function get_thing_name()
-	{
-		return $this->get('jsonld_type_name');
+	public function get_schema_org_name() {
+		return $this->get( 'jsonld_type_name' );
 	}
 
-	public function get_thing_logo()
-	{
-		return $this->get('jsonld_type_logo_url');
+	public function get_schema_org_logo() {
+		return $this->get( 'jsonld_type_logo_url' );
 	}
 
-	public function get_thing_alternate_name()
-	{
-		return $this->get('alternate_name');
+	public function get_schema_org_alternate_name() {
+		return $this->get( 'jsonld_type_alternate_name' );
 	}
 
-	public function get_current_url(){
-		return $this->current_url;
+	public function get_schema_org_website() {
+		return $this->get( 'jsonld_type_website' );
 	}
 
-	public function get_search_action_type(){
+	public function get_search_action_type() {
 		return 'Lti\Seo\Generators\WordpressSearchAction';
+	}
+
+	public function get_schema_org_longitude() {
+		return $this->get_user_meta_key( 'lti_work_longitude' );
+	}
+
+	public function get_schema_org_latitude() {
+		return $this->get_user_meta_key( 'lti_work_latitude' );
+	}
+
+	public function get_schema_org_job_title() {
+		return $this->get_user_meta_key( 'lti_job_title' );
+	}
+
+	public function get_current_url() {
+		return $this->current_url;
 	}
 
 }

@@ -64,7 +64,7 @@ class Frontpage_Open_Graph extends Open_Graph implements ICanMakeHeaderTags {
 		$og['type']        = 'website';
 		$og['site_name']   = esc_attr( $this->helper->get_site_name() );
 		$og['title']       = esc_attr( $this->helper->get_title() );
-		$og['url']         = esc_url_raw( home_url( '/' ) );
+		$og['url']         = esc_url( home_url( '/' ) );
 		$og['description'] = esc_attr( $this->helper->get_description() );
 		$og['locale']      = esc_attr( get_bloginfo( 'language' ) );
 		$og['image']       = $this->helper->get_social_images( $this->number_images );
@@ -81,7 +81,7 @@ class Singular_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeader
 	public function make_tags() {
 		$ar                        = parent::make_tags();
 		$ar['og']['type']          = 'article';
-		$ar['og']['url']           = esc_url_raw( $this->helper->get_canonical_url() );
+		$ar['og']['url']           = esc_url( $this->helper->get_canonical_url() );
 		$article['published_time'] = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_date' ) ) );
 		$article['modified_time']  = esc_attr( lti_iso8601_date( $this->helper->get_post_info( 'post_modified' ) ) );
 		$profile                   = $this->helper->get_author_social_info( 'facebook' );
@@ -105,13 +105,17 @@ class Singular_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeader
 
 		$publisher = $this->helper->get( 'facebook_publisher' );
 		if ( ! is_null( $publisher ) ) {
-			$article['publisher'] = esc_url_raw( $publisher );
+			$article['publisher'] = esc_url( $publisher );
 		}
 
 		$this->tags = $ar;
 
 		return Open_Graph::make_tags();
 	}
+
+}
+
+class Page_Open_Graph extends Frontpage_Open_Graph {
 
 }
 

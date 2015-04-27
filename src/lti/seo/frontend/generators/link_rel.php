@@ -40,6 +40,10 @@ class NotFound_Link_Rel extends Frontpage_Link_Rel {
 
 }
 
+class Page_Link_Rel extends Frontpage_Link_Rel {
+
+}
+
 class Author_Link_Rel extends Link_Rel {
 	public function make_tags() {
 
@@ -47,7 +51,7 @@ class Author_Link_Rel extends Link_Rel {
 		$author = $this->helper->get( 'link_rel_author' );
 
 		if ( ! is_null( $author ) ) {
-			$tags['author'] = esc_url_raw($this->helper->get_author_social_info( 'gplus' ));
+			$tags['author'] = esc_url($this->helper->get_author_social_info( 'gplus' ));
 		}
 
 		$tags = apply_filters( 'lti_seo_link_rel', $tags );
@@ -73,12 +77,12 @@ class Singular_Link_Rel extends Link_Rel implements ICanMakeHeaderTags {
 		$author = $this->helper->get( 'link_rel_author' );
 
 		if ( ! is_null( $author ) ) {
-			$tags['author'] = esc_url_raw($this->helper->get_author_social_info( 'gplus' ));
+			$tags['author'] = esc_url($this->helper->get_author_social_info( 'gplus' ));
 		}
 
 		$publisher = $this->helper->get( 'link_rel_publisher' );
 		if ( ! is_null( $publisher ) ) {
-			$tags['publisher'] = esc_url_raw($this->helper->get( 'gplus_publisher' ));
+			$tags['publisher'] = esc_url($this->helper->get( 'gplus_publisher' ));
 		}
 
 		$tags = apply_filters( 'lti_seo_link_rel', $tags );

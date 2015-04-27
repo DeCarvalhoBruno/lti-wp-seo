@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-wp-seo\n"
-"POT-Creation-Date: 2015-04-21 12:23+0100\n"
-"PO-Revision-Date: 2015-04-26 20:17+0100\n"
+"POT-Creation-Date: 2015-04-27 16:06+0100\n"
+"PO-Revision-Date: 2015-04-27 20:49+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -18,53 +18,97 @@ msgstr ""
 "esc_html_x:1,2c;ltint\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/lti/seo/admin/admin.php:59
+#: ../src/lti/seo/admin/admin.php:60
 msgid "general.use_image"
 msgstr "Use image"
 
-#: ../src/lti/seo/admin/admin.php:63
+#: ../src/lti/seo/admin/admin.php:64
 msgid "admin.menu_title"
 msgstr "LTI SEO Settings"
 
-#: ../src/lti/seo/admin/admin.php:63
+#: ../src/lti/seo/admin/admin.php:64
 msgid "admin.menu_item"
 msgstr "LTI SEO"
 
-#: ../src/lti/seo/admin/admin.php:75
+#: ../src/lti/seo/admin/admin.php:76
 msgid "general_hlp_welcome"
 msgstr "Welcome!"
 
-#: ../src/lti/seo/admin/admin.php:80
+#: ../src/lti/seo/admin/admin.php:81
 msgid "general_hlp_general"
 msgstr "General tab"
 
-#: ../src/lti/seo/admin/admin.php:85
+#: ../src/lti/seo/admin/admin.php:86
 msgid "general_hlp_frontpage"
 msgstr "Front page tab"
 
-#: ../src/lti/seo/admin/admin.php:90
+#: ../src/lti/seo/admin/admin.php:91
 msgid "general_hlp_social"
 msgstr "Social tab"
 
-#: ../src/lti/seo/admin/admin.php:102
+#: ../src/lti/seo/admin/admin.php:103
 msgid "general.settings"
 msgstr "Settings"
 
-#: ../src/lti/seo/admin/admin.php:114
+#: ../src/lti/seo/admin/admin.php:115
 msgid "opt.msg.updated"
 msgstr "Plugin options have been updated"
 
-#: ../src/lti/seo/admin/admin.php:118
+#: ../src/lti/seo/admin/admin.php:119
 msgid "opt.msg.error_token"
 msgstr "Plugin options could not be saved (session error)."
 
-#: ../src/lti/seo/admin/admin.php:127
+#: ../src/lti/seo/admin/admin.php:128
 msgid "opt.msg.reset"
 msgstr "Plugin options have been reset"
 
 #: ../src/lti/seo/admin/admin.php:162
 msgid "admin.meta_box"
 msgstr "LTI SEO"
+
+#: ../src/lti/seo/admin/admin.php:253
+msgid "user.job_title"
+msgstr "Job title"
+
+#: ../src/lti/seo/admin/admin.php:254
+msgid "user.work_longitude"
+msgstr "Work Location (longitude)"
+
+#: ../src/lti/seo/admin/admin.php:255
+msgid "user.work_latitude"
+msgstr "Work location (latitude)"
+
+#: ../src/lti/seo/admin/admin.php:256 ../src/lti/seo/frontend/frontend.php:102
+msgid "user.twitter_username"
+msgstr "Twitter username"
+
+#: ../src/lti/seo/admin/admin.php:257 ../src/lti/seo/frontend/frontend.php:105
+msgid "user.facebook_id"
+msgstr "Facebook profile ID"
+
+#: ../src/lti/seo/admin/admin.php:258 ../src/lti/seo/frontend/frontend.php:108
+msgid "user.facebook_url"
+msgstr "Facebook profile URL"
+
+#: ../src/lti/seo/admin/admin.php:259 ../src/lti/seo/frontend/frontend.php:111
+msgid "user.gplus_url"
+msgstr "Google+ profile URL"
+
+#: ../src/lti/seo/admin/admin.php:260 ../src/lti/seo/frontend/frontend.php:114
+msgid "user.instagram_url"
+msgstr "Instagram profile URL"
+
+#: ../src/lti/seo/admin/admin.php:261 ../src/lti/seo/frontend/frontend.php:117
+msgid "user.youtube_url"
+msgstr "Youtube channel URL"
+
+#: ../src/lti/seo/admin/admin.php:262 ../src/lti/seo/frontend/frontend.php:120
+msgid "user.linkedin_url"
+msgstr "LinkedIn profile URL"
+
+#: ../src/lti/seo/admin/admin.php:273
+msgid "user.fields_title"
+msgstr "LTI SEO profile information"
 
 #: ../src/lti/seo/admin/partials/help_menu.php:9
 msgid "general_hlp_welcome_1"
@@ -173,39 +217,43 @@ msgid "opt.tab.frontpage"
 msgstr "Front page"
 
 #: ../src/lti/seo/admin/partials/options-page.php:28
+msgid "opt.tab.post"
+msgstr "Posts and pages"
+
+#: ../src/lti/seo/admin/partials/options-page.php:32
 msgid "opt.tab.social"
 msgstr "Social"
 
-#: ../src/lti/seo/admin/partials/options-page.php:45
+#: ../src/lti/seo/admin/partials/options-page.php:49
 msgid "opt.link_rel_support"
 msgstr "Link rel tags"
 
-#: ../src/lti/seo/admin/partials/options-page.php:53
+#: ../src/lti/seo/admin/partials/options-page.php:57
 msgid "opt.link_rel_canonical"
 msgstr "Canonical URL"
 
-#: ../src/lti/seo/admin/partials/options-page.php:57
+#: ../src/lti/seo/admin/partials/options-page.php:61
 msgid "opt.link_rel_publisher"
 msgstr "Publisher URL"
 
-#: ../src/lti/seo/admin/partials/options-page.php:61
+#: ../src/lti/seo/admin/partials/options-page.php:65
 msgid "opt.link_rel_author"
 msgstr "Author URL"
 
-#: ../src/lti/seo/admin/partials/options-page.php:71
+#: ../src/lti/seo/admin/partials/options-page.php:75
 msgid "opt.hlp.link_rel1"
 msgstr ""
 "With link rel attributes, relationships can be established between types of "
 "content. Wordpress ships with a number of default link rel attributes, and "
 "we're merely completementing the assortment by providing three more links."
 
-#: ../src/lti/seo/admin/partials/options-page.php:72
+#: ../src/lti/seo/admin/partials/options-page.php:76
 msgid "opt.hlp.link_rel2"
 msgstr ""
 "Wordpress creates canonical links for blog posts, and the canonical URL "
 "feature will try to create a canonical link for other types of pages."
 
-#: ../src/lti/seo/admin/partials/options-page.php:73
+#: ../src/lti/seo/admin/partials/options-page.php:77
 msgid "opt.hlp.link_rel3"
 msgstr ""
 "The author and publisher URLs use Google+ information to add extra link rel "
@@ -213,229 +261,220 @@ msgstr ""
 "profile, as well as the publisher field in this options page (\"Social\" "
 "tab, \"Google publisher URL\")."
 
-#: ../src/lti/seo/admin/partials/options-page.php:80
+#: ../src/lti/seo/admin/partials/options-page.php:84
 msgid "opt.keyword_support"
 msgstr "Keywords tag"
 
-#: ../src/lti/seo/admin/partials/options-page.php:88
+#: ../src/lti/seo/admin/partials/options-page.php:92
 msgid "opt.keyword_cat_based"
 msgstr "Based on categories"
 
-#: ../src/lti/seo/admin/partials/options-page.php:92
+#: ../src/lti/seo/admin/partials/options-page.php:96
 msgid "opt.keyword_tag_based"
 msgstr "Based on tags"
 
-#: ../src/lti/seo/admin/partials/options-page.php:101
+#: ../src/lti/seo/admin/partials/options-page.php:105
 msgid "opt.hlp.keyword"
 msgstr ""
 "A list of comma delimited words (i.e \"cats, dogs, elephants\") that will be "
 "added as suggestions as you edit your blog post. (Each post will feature a "
 "\"LTI SEO\" box)."
 
-#: ../src/lti/seo/admin/partials/options-page.php:107
+#: ../src/lti/seo/admin/partials/options-page.php:111
 msgid "opt.group.robots"
 msgstr "Robots tag"
 
-#: ../src/lti/seo/admin/partials/options-page.php:115
+#: ../src/lti/seo/admin/partials/options-page.php:119
 msgid "opt.group.robot_attr"
 msgstr "Attributes to apply"
 
-#: ../src/lti/seo/admin/partials/options-page.php:120
+#: ../src/lti/seo/admin/partials/options-page.php:124
 msgid "opt.robot.col2"
 msgstr "Scope"
 
-#: ../src/lti/seo/admin/partials/options-page.php:123
+#: ../src/lti/seo/admin/partials/options-page.php:127
 msgid "opt.robot.th1"
 msgstr "Type"
 
-#: ../src/lti/seo/admin/partials/options-page.php:124
+#: ../src/lti/seo/admin/partials/options-page.php:128
 msgid "opt.robot.th2"
 msgstr "Global"
 
-#: ../src/lti/seo/admin/partials/options-page.php:125
+#: ../src/lti/seo/admin/partials/options-page.php:129
 msgid "opt.robot.th3"
 msgstr "Posts and pages"
 
-#: ../src/lti/seo/admin/partials/options-page.php:130
+#: ../src/lti/seo/admin/partials/options-page.php:134
 msgid "opt.robot_noindex"
 msgstr "NOINDEX"
 
-#: ../src/lti/seo/admin/partials/options-page.php:139
+#: ../src/lti/seo/admin/partials/options-page.php:143
 msgid "opt.robot_nofollow"
 msgstr "NOFOLLOW"
 
-#: ../src/lti/seo/admin/partials/options-page.php:148
+#: ../src/lti/seo/admin/partials/options-page.php:152
 msgid "opt.robot_noodp"
 msgstr "NOODP"
 
-#: ../src/lti/seo/admin/partials/options-page.php:156
+#: ../src/lti/seo/admin/partials/options-page.php:160
 msgid "opt.robot_noydir"
 msgstr "NOYDIR"
 
-#: ../src/lti/seo/admin/partials/options-page.php:165
+#: ../src/lti/seo/admin/partials/options-page.php:169
 msgid "opt.robot_noarchive"
 msgstr "NOARCHIVE"
 
-#: ../src/lti/seo/admin/partials/options-page.php:174
+#: ../src/lti/seo/admin/partials/options-page.php:178
 msgid "opt.robot_nosnippet"
 msgstr "NOSNIPPET"
 
-#: ../src/lti/seo/admin/partials/options-page.php:187
+#: ../src/lti/seo/admin/partials/options-page.php:191
 msgid "opt.group.robot2"
 msgstr "Global attributes applied to:"
 
-#: ../src/lti/seo/admin/partials/options-page.php:190
+#: ../src/lti/seo/admin/partials/options-page.php:194
 msgid "opt.robot_date_based"
 msgstr "Date archives"
 
-#: ../src/lti/seo/admin/partials/options-page.php:194
+#: ../src/lti/seo/admin/partials/options-page.php:198
 msgid "opt.robot_cat_based"
 msgstr "Categories"
 
-#: ../src/lti/seo/admin/partials/options-page.php:198
+#: ../src/lti/seo/admin/partials/options-page.php:202
 msgid "opt.robot_tag_based"
 msgstr "Tags"
 
-#: ../src/lti/seo/admin/partials/options-page.php:202
+#: ../src/lti/seo/admin/partials/options-page.php:206
 msgid "opt.robot_tax_based"
 msgstr "Other taxonomies"
 
-#: ../src/lti/seo/admin/partials/options-page.php:206
+#: ../src/lti/seo/admin/partials/options-page.php:210
 msgid "opt.robot_author_based"
 msgstr "Author pages"
 
-#: ../src/lti/seo/admin/partials/options-page.php:210
+#: ../src/lti/seo/admin/partials/options-page.php:214
 msgid "opt.robot_search_based"
 msgstr "Searches"
 
-#: ../src/lti/seo/admin/partials/options-page.php:215
+#: ../src/lti/seo/admin/partials/options-page.php:219
 msgid "opt.robot_notfound_based"
 msgstr "\"Not found\" page"
 
-#: ../src/lti/seo/admin/partials/options-page.php:225
+#: ../src/lti/seo/admin/partials/options-page.php:229
 msgid "opt.hlp.robot1"
 msgstr ""
 "As it finds ticked boxes under the \"Global\" column, the plugin will add "
 "the selected robot attributes to each of the types selected below the table. "
 
-#: ../src/lti/seo/admin/partials/options-page.php:225
+#: ../src/lti/seo/admin/partials/options-page.php:229
 msgid "opt.hlp.robot2"
 msgstr ""
 "We separate robot attributes applied to posts from the rest of the site for "
 "more flexibility."
 
-#: ../src/lti/seo/admin/partials/options-page.php:232
-msgid "opt.description_support"
-msgstr "Description meta tag"
-
-#: ../src/lti/seo/admin/partials/options-page.php:240
-msgid "opt.hlp.description"
-msgstr ""
-"Enables a field in the LTI SEO meta box allowing you to specify a custom "
-"description for posts/pages."
-
-#: ../src/lti/seo/admin/partials/options-page.php:253
+#: ../src/lti/seo/admin/partials/options-page.php:242
 msgid "opt.frontpage_description"
 msgstr "Description"
 
-#: ../src/lti/seo/admin/partials/options-page.php:263
+#: ../src/lti/seo/admin/partials/options-page.php:252
 #: ../src/lti/seo/admin/partials/postbox.php:18
 msgid "general.char_count"
 msgstr "Character count:"
 
-#: ../src/lti/seo/admin/partials/options-page.php:269
+#: ../src/lti/seo/admin/partials/options-page.php:258
 msgid "opt.hlp.frontpage_description1"
 msgstr ""
 "Front page only: adds your own description meta tag. Search engine results "
 "will display around 160 characters."
 
-#: ../src/lti/seo/admin/partials/options-page.php:270
+#: ../src/lti/seo/admin/partials/options-page.php:259
 msgid "opt.hlp.frontpage_description2"
 msgstr ""
 "If the option is activated and no description is provided, will default to "
 "the site's tagline."
 
-#: ../src/lti/seo/admin/partials/options-page.php:276
+#: ../src/lti/seo/admin/partials/options-page.php:265
 msgid "opt.frontpage_keyword"
 msgstr "Keywords"
 
-#: ../src/lti/seo/admin/partials/options-page.php:284
+#: ../src/lti/seo/admin/partials/options-page.php:273
 msgid "opt.frontpage_keyword_ph"
 msgstr "i.e cats,dogs,turtles"
 
-#: ../src/lti/seo/admin/partials/options-page.php:289
+#: ../src/lti/seo/admin/partials/options-page.php:278
 msgid "opt.hlp.frontpage_keyword"
 msgstr "Front page only: adds your own comma separated set of keywords."
 
-#: ../src/lti/seo/admin/partials/options-page.php:295
+#: ../src/lti/seo/admin/partials/options-page.php:284
 msgid "opt.frontpage_robot"
 msgstr "Robots"
 
-#: ../src/lti/seo/admin/partials/options-page.php:304
+#: ../src/lti/seo/admin/partials/options-page.php:293
 msgid "opt.frontpage_robot_noindex"
 msgstr "NOINDEX"
 
-#: ../src/lti/seo/admin/partials/options-page.php:309
+#: ../src/lti/seo/admin/partials/options-page.php:298
 msgid "opt.frontpage_robot_nofollow"
 msgstr "NOFOLLOW"
 
-#: ../src/lti/seo/admin/partials/options-page.php:314
+#: ../src/lti/seo/admin/partials/options-page.php:303
 msgid "opt.frontpage_robot_noodp"
 msgstr "NOODP"
 
-#: ../src/lti/seo/admin/partials/options-page.php:319
+#: ../src/lti/seo/admin/partials/options-page.php:308
 msgid "opt.frontpage_robot_noydir"
 msgstr "NOYDIR"
 
-#: ../src/lti/seo/admin/partials/options-page.php:324
+#: ../src/lti/seo/admin/partials/options-page.php:313
 msgid "opt.frontpage_robot_noarchive"
 msgstr "NOARCHIVE"
 
-#: ../src/lti/seo/admin/partials/options-page.php:329
+#: ../src/lti/seo/admin/partials/options-page.php:318
 msgid "opt.frontpage_robot_nosnippet"
 msgstr "NOSNIPPET"
 
-#: ../src/lti/seo/admin/partials/options-page.php:340
+#: ../src/lti/seo/admin/partials/options-page.php:329
 msgid "opt.hlp.frontpage_robots"
 msgstr "Robot attributes to apply to the front page."
 
-#: ../src/lti/seo/admin/partials/options-page.php:345
+#: ../src/lti/seo/admin/partials/options-page.php:334
+#: ../src/lti/seo/admin/partials/options-page.php:495
 msgid "opt.json_ld"
 msgstr "JSON-LD"
 
-#: ../src/lti/seo/admin/partials/options-page.php:349
-msgid "opt.jsonld_org_info"
+#: ../src/lti/seo/admin/partials/options-page.php:338
+msgid "opt.jsonld_entity"
 msgstr "Person/Organization"
 
-#: ../src/lti/seo/admin/partials/options-page.php:360
+#: ../src/lti/seo/admin/partials/options-page.php:349
 msgid "opt.jsonld_entity_type"
 msgstr "Person"
 
-#: ../src/lti/seo/admin/partials/options-page.php:365
+#: ../src/lti/seo/admin/partials/options-page.php:354
 msgid "opt.jsonld_organization"
 msgstr "Organization"
 
-#: ../src/lti/seo/admin/partials/options-page.php:369
+#: ../src/lti/seo/admin/partials/options-page.php:358
 msgid "opt.jsonld_type_name"
 msgstr "Name"
 
-#: ../src/lti/seo/admin/partials/options-page.php:375
+#: ../src/lti/seo/admin/partials/options-page.php:364
 msgid "opt.jsonld_img"
 msgstr "Logo"
 
-#: ../src/lti/seo/admin/partials/options-page.php:382
-#: ../src/lti/seo/admin/partials/options-page.php:467
+#: ../src/lti/seo/admin/partials/options-page.php:371
+#: ../src/lti/seo/admin/partials/options-page.php:455
 #: ../src/lti/seo/admin/partials/postbox.php:49
 msgid "general.choose_img"
 msgstr "Choose image"
 
-#: ../src/lti/seo/admin/partials/options-page.php:385
-#: ../src/lti/seo/admin/partials/options-page.php:470
+#: ../src/lti/seo/admin/partials/options-page.php:374
+#: ../src/lti/seo/admin/partials/options-page.php:458
 #: ../src/lti/seo/admin/partials/postbox.php:52
 msgid "general.reset"
 msgstr "Reset"
 
-#: ../src/lti/seo/admin/partials/options-page.php:395
+#: ../src/lti/seo/admin/partials/options-page.php:384
 msgid "opt.hlp.jsonld"
 msgstr ""
 "Wraps schema.org attributes into JSON-LD markup, allowing search engine to "
@@ -443,85 +482,119 @@ msgstr ""
 "organization prominently in search results. The logo only applies to "
 "organizations."
 
-#: ../src/lti/seo/admin/partials/options-page.php:401
+#: ../src/lti/seo/admin/partials/options-page.php:390
 msgid "opt.group.social"
 msgstr "Social accounts"
 
-#: ../src/lti/seo/admin/partials/options-page.php:404
+#: ../src/lti/seo/admin/partials/options-page.php:393
 msgid "opt.account_facebook"
 msgstr "Facebook"
 
-#: ../src/lti/seo/admin/partials/options-page.php:408
+#: ../src/lti/seo/admin/partials/options-page.php:397
 msgid "opt.account_twitter"
 msgstr "Twitter"
 
-#: ../src/lti/seo/admin/partials/options-page.php:412
+#: ../src/lti/seo/admin/partials/options-page.php:401
 msgid "opt.account_gplus"
 msgstr "Google+"
 
-#: ../src/lti/seo/admin/partials/options-page.php:416
+#: ../src/lti/seo/admin/partials/options-page.php:405
 msgid "opt.account_instagram"
 msgstr "Instagram"
 
-#: ../src/lti/seo/admin/partials/options-page.php:420
+#: ../src/lti/seo/admin/partials/options-page.php:409
 msgid "opt.account_youtube"
 msgstr "YouTube"
 
-#: ../src/lti/seo/admin/partials/options-page.php:424
+#: ../src/lti/seo/admin/partials/options-page.php:413
 msgid "opt.account_linkedin"
 msgstr "LinkedIn"
 
-#: ../src/lti/seo/admin/partials/options-page.php:428
+#: ../src/lti/seo/admin/partials/options-page.php:417
 msgid "opt.account_myspace"
 msgstr "Myspace"
 
-#: ../src/lti/seo/admin/partials/options-page.php:436
+#: ../src/lti/seo/admin/partials/options-page.php:425
 msgid "opt.hlp.account_social"
 msgstr ""
 "A list of social accounts to be added to the organization/person entry for "
 "the site."
 
-#: ../src/lti/seo/admin/partials/options-page.php:442
-msgid "out.jsonld_website_info"
-msgstr "Website search"
+#: ../src/lti/seo/admin/partials/options-page.php:431
+msgid "out.jsonld_website"
+msgstr "Website"
 
-#: ../src/lti/seo/admin/partials/options-page.php:449
+#: ../src/lti/seo/admin/partials/options-page.php:438
 msgid "opt.help.jsonld_website"
 msgstr ""
 "Creates a schema.org WebSite entry (wrapped in JSON-LD) that features your "
 "wordpress site's search capabilities. (Search engines love company...)"
 
-#: ../src/lti/seo/admin/partials/options-page.php:455
+#: ../src/lti/seo/admin/partials/options-page.php:444
 msgid "opt.group.social_image"
 msgstr "Social media image"
 
-#: ../src/lti/seo/admin/partials/options-page.php:460
+#: ../src/lti/seo/admin/partials/options-page.php:448
 msgid "opt.frontpage_social_img"
 msgstr "Image"
 
-#: ../src/lti/seo/admin/partials/options-page.php:479
+#: ../src/lti/seo/admin/partials/options-page.php:467
 msgid "opt.hlp.frontpage_social"
 msgstr "Image file to be included in social media tags for the front page."
 
-#: ../src/lti/seo/admin/partials/options-page.php:494
+#: ../src/lti/seo/admin/partials/options-page.php:482
+msgid "opt.description_support"
+msgstr "Description meta tag"
+
+#: ../src/lti/seo/admin/partials/options-page.php:490
+msgid "opt.hlp.description"
+msgstr ""
+"Enables a field in the LTI SEO meta box allowing you to specify a custom "
+"description for posts/pages."
+
+#: ../src/lti/seo/admin/partials/options-page.php:499
+msgid "opt.jsonld_page"
+msgstr "Pages"
+
+#: ../src/lti/seo/admin/partials/options-page.php:506
+msgid "opt.hlp.jsonld_page"
+msgstr "JSON-LD for pages"
+
+#: ../src/lti/seo/admin/partials/options-page.php:512
+msgid "opt.jsonld_post"
+msgstr "Posts"
+
+#: ../src/lti/seo/admin/partials/options-page.php:519
+msgid "opt.hlp.jsonld_post"
+msgstr "JSON-LD for posts"
+
+#: ../src/lti/seo/admin/partials/options-page.php:525
+msgid "opt.jsonld_author"
+msgstr "Authors"
+
+#: ../src/lti/seo/admin/partials/options-page.php:532
+msgid "opt.hlp.jsonld_author"
+msgstr "JSON-LD for authors"
+
+#: ../src/lti/seo/admin/partials/options-page.php:547
 msgid "opt.open_graph_support"
 msgstr "Open Graph support"
 
-#: ../src/lti/seo/admin/partials/options-page.php:501
+#: ../src/lti/seo/admin/partials/options-page.php:554
 msgid "opt.facebook_publisher"
 msgstr "Facebook publisher URL"
 
-#: ../src/lti/seo/admin/partials/options-page.php:510
+#: ../src/lti/seo/admin/partials/options-page.php:563
 msgid "opt.hlp.open_graph1"
 msgstr "Adds the following open graph tags:"
 
-#: ../src/lti/seo/admin/partials/options-page.php:512
+#: ../src/lti/seo/admin/partials/options-page.php:565
 msgid "opt.hlp.open_graph2"
 msgstr ""
 "On the front page, adds type (set to website), site name, title, url, "
 "description (if provided), locale and image (if provided) tags."
 
-#: ../src/lti/seo/admin/partials/options-page.php:513
+#: ../src/lti/seo/admin/partials/options-page.php:566
 msgid "opt.hlp.open_graph3"
 msgstr ""
 "On posts, adds type (set to article), site name, title, url, description (if "
@@ -529,51 +602,51 @@ msgstr ""
 "timestamps as well as the facebook author (from the profile) and publisher "
 "information, if provided."
 
-#: ../src/lti/seo/admin/partials/options-page.php:522
+#: ../src/lti/seo/admin/partials/options-page.php:575
 msgid "opt.twitter_card_support"
 msgstr "Twitter Cards support"
 
-#: ../src/lti/seo/admin/partials/options-page.php:532
+#: ../src/lti/seo/admin/partials/options-page.php:585
 msgid "opt.twitter_card_summary"
 msgstr "Summary card"
 
-#: ../src/lti/seo/admin/partials/options-page.php:538
+#: ../src/lti/seo/admin/partials/options-page.php:591
 msgid "opt.twitter_card_large"
 msgstr "Summary card with large image"
 
-#: ../src/lti/seo/admin/partials/options-page.php:540
+#: ../src/lti/seo/admin/partials/options-page.php:593
 msgid "opt.twitter_publisher"
 msgstr "Twitter publisher username"
 
-#: ../src/lti/seo/admin/partials/options-page.php:550
+#: ../src/lti/seo/admin/partials/options-page.php:603
 msgid "opt.hlp.twitter_cards1"
 msgstr "Adds the following twitter card tags:"
 
-#: ../src/lti/seo/admin/partials/options-page.php:552
+#: ../src/lti/seo/admin/partials/options-page.php:605
 msgid "opt.hlp.twitter_cards2"
 msgstr ""
 "On all pages, will add card, site, title, url, description (if provided), "
 "creator and image (if provided) tags."
 
-#: ../src/lti/seo/admin/partials/options-page.php:553
+#: ../src/lti/seo/admin/partials/options-page.php:606
 msgid "opt.hlp.twitter_cards3"
 msgstr ""
 "On gallery type posts, will add a \"gallery\" card. A \"photo\" card will be "
 "added to image attachment pages."
 
-#: ../src/lti/seo/admin/partials/options-page.php:560
+#: ../src/lti/seo/admin/partials/options-page.php:613
 msgid "opt.gplus_publisher"
 msgstr "Google+ publisher URL"
 
-#: ../src/lti/seo/admin/partials/options-page.php:568
+#: ../src/lti/seo/admin/partials/options-page.php:621
 msgid "opt.hlp.gplus"
 msgstr "Used if the publisher link rel tag is enabled in the general tab."
 
-#: ../src/lti/seo/admin/partials/options-page.php:577
+#: ../src/lti/seo/admin/partials/options-page.php:630
 msgid "general.save_changes"
 msgstr "Save Changes"
 
-#: ../src/lti/seo/admin/partials/options-page.php:579
+#: ../src/lti/seo/admin/partials/options-page.php:632
 msgid "general.reset_defaults"
 msgstr "Reset to defaults"
 
@@ -625,25 +698,16 @@ msgstr "NOARCHIVE"
 msgid "box.post_robot_nosnippet"
 msgstr "NOSNIPPET"
 
-#: ../src/lti/seo/frontend/frontend.php:97
-msgid "user.twitter_username"
-msgstr "Twitter username (LTI)"
+#~ msgid "opt.jsonld_org_info"
+#~ msgstr "Person/Organization"
 
-#: ../src/lti/seo/frontend/frontend.php:100
-msgid "user.facebook_id"
-msgstr "Facebook profile ID (LTI)"
-
-#: ../src/lti/seo/frontend/frontend.php:103
-msgid "user.gplus_url"
-msgstr "Google+ profile URL (LTI)"
+#~ msgid "out.jsonld_website_info"
+#~ msgstr "Website search"
 
 #~ msgid "opt.hlp.frontpage_description"
 #~ msgstr ""
 #~ "Front page only: adds your own description meta tag. Search engine "
 #~ "results will display around 160 characters."
-
-#~ msgid "user.facebook_url"
-#~ msgstr "Facebook profile URL (LTI)"
 
 #~ msgid "opt.hlp.frontpage_social1"
 #~ msgstr ""

@@ -26,6 +26,10 @@ class Frontpage_Description extends Description implements ICanMakeHeaderTags {
 	}
 }
 
+class Page_Description extends Frontpage_Description {
+
+}
+
 class Singular_Description extends Description {
 	public function make_tags() {
 		if ( $this->helper->get( 'description_support' ) == true ) {

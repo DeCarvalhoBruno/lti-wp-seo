@@ -27,6 +27,10 @@ class Frontpage_Keyword extends Keyword implements ICanMakeHeaderTags {
 
 }
 
+class Page_Keyword extends Frontpage_Keyword {
+
+}
+
 class Singular_Keyword extends Keyword implements ICanMakeHeaderTags {
 
 	public function make_tags() {

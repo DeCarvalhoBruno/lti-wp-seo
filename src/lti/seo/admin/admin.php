@@ -27,6 +27,8 @@ class Admin {
 	 */
 	private $helper;
 
+	private $user_field_info;
+
 	public function __construct(
 		$plugin_name,
 		$version,
@@ -43,6 +45,20 @@ class Admin {
 		$this->plugin_dir_url = plugin_dir_url( $plugin_path . '/index.php' );
 		$this->settings       = $settings;
 		$this->helper         = $helper;
+
+		$this->user_field_info = array(
+			array( "lti_job_title", ltint( 'user.job_title' ), '' ),
+			array( "lti_work_longitude", ltint( 'user.work_longitude' ), '' ),
+			array( "lti_work_latitude", ltint( 'user.work_latitude' ), '' ),
+			array( "lti_twitter_username", ltint( 'user.twitter_username' ), '' ),
+			array( "lti_facebook_id", ltint( 'user.facebook_id' ), '' ),
+			array( "lti_facebook_url", ltint( 'user.facebook_url' ), '' ),
+			array( "lti_gplus_url", ltint( 'user.gplus_url' ), '' ),
+			array( "lti_instagram_url", ltint( 'user.instagram_url' ), '' ),
+			array( "lti_youtube_url", ltint( 'user.youtube_url' ), '' ),
+			array( "lti_linkedin_url", ltint( 'user.linkedin_url' ), '' ),
+			array( "lti_myspace_url", ltint( 'user.myspace_url' ), '' )
+		);
 	}
 
 	public function enqueue_styles() {
@@ -173,10 +189,10 @@ class Admin {
 
 		if ( empty( $this->box_values ) ) {
 			$this->box_values = new Postbox_Values( array() );
-			$robot = new Robot($this->helper);
-			$robot_settings = $robot->get_robot_setting('robot_support');
-			foreach($robot_settings as $setting){
-				$this->box_values->set('post_robot_'.$setting,true);
+			$robot            = new Robot( $this->helper );
+			$robot_settings   = $robot->get_robot_setting( 'robot_support' );
+			foreach ( $robot_settings as $setting ) {
+				$this->box_values->set( 'post_robot_' . $setting, true );
 			}
 		}
 
@@ -219,6 +235,45 @@ class Admin {
 		if ( isset( $_POST['lti_seo'] ) ) {
 			update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $_POST['lti_seo'] ) );
 		}
+	}
+
+	public function add_user_profile_fields() {
+
+	}
+
+	public function show_user_profile( $user ) {
+		$fields = array();
+		foreach ( $this->user_field_info as $field ) {
+			$fields[] = $this->user_profile_field( $user->ID, $field[0], $field[1], $field[2] );
+		}
+
+		echo sprintf( '
+		<h3>%s</h3>
+		<table class="form-table">
+			%s
+		</table>', ltint( "user.fields_title" ), implode( PHP_EOL, $fields ) );
+
+	}
+
+	private function user_profile_field( $userID, $field, $label, $description ) {
+		return sprintf( '<tr>
+				<th><label for="%1$s"><?php _e("Phone"); ?>%2$s</label></th>
+				<td>
+					<input type="text" name="%1$s" id="%1$s" class="regular-text"
+					       value="' . esc_attr( get_the_author_meta( $field, $userID ) ) . '" /><br />
+					<span class="description">%3$s</span>
+				</td>
+			</tr>', $field, $label, $description );
+	}
+
+	public function personal_options_update( $user_id ) {
+		if ( current_user_can( 'edit_user', $user_id ) ) {
+			foreach ( $this->user_field_info as $field ) {
+				update_user_meta( $user_id, $field[0], $_POST[ $field[0] ] );
+			}
+		}
+
+		return true;
 	}
 
 	public function set_current_page( $page ) {

@@ -65,6 +65,10 @@ class Frontpage_Robot extends Robot implements ICanMakeHeaderTags {
 
 }
 
+class Page_Robot extends Frontpage_Robot {
+
+}
+
 class Singular_Robot extends Robot {
 	protected $setting = 'robot_support';
 	protected $prefix = 'post_';

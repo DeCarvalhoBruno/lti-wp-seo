@@ -57,28 +57,14 @@ class Frontend {
 			$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
 		}
 
-		//echo $this->helper->page_type();
+//		echo $this->helper->page_type();
 
 		$this->hook_functionality( 'Robot' );
 
+		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, 'page_type' ) ), 'JSON_LD' );
+		$json_ld = new $class( $this->helper );
 
-		$json_ld = new JSON_LD( $this->helper );
-		if ( $this->settings->get( 'jsonld_org_info' ) ) {
-			$type = $this->settings->get( 'jsonld_entity_type' );
-			switch ( $type ) {
-				case "person":
-					add_action( 'lti_seo_json_ld', array( $json_ld, 'make_person' ) );
-					break;
-				case "organization":
-					add_action( 'lti_seo_json_ld', array( $json_ld, 'make_organization' ) );
-					break;
-			}
-		}
-		if ( $this->settings->get( 'jsonld_website_info' ) ) {
-			add_action( 'lti_seo_json_ld', array( $json_ld, 'make_website' ) );
-		}
-
-		add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ), 90 );
+		add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ) );
 		$seo_comment = apply_filters( 'lti_seo_header_comment', 'SEO' );
 		if ( ! empty( $seo_comment ) ) {
 			echo sprintf( "<!-- %s -->" . PHP_EOL, $seo_comment );
@@ -95,20 +81,6 @@ class Frontend {
 			$og = new $class( $this->helper );
 			add_action( 'lti_seo_head', array( $og, 'display_tags' ) );
 		}
-	}
-
-	public function user_contactmethods() {
-		if ( ! isset( $contactmethods['lti_twitter_username'] ) ) {
-			$contactmethods['lti_twitter_username'] = ltint( 'user.twitter_username' );
-		}
-		if ( ! isset( $contactmethods['lti_facebook_id'] ) ) {
-			$contactmethods['lti_facebook_id'] = ltint( 'user.facebook_id' );
-		}
-		if ( ! isset( $contactmethods['lti_gplus_url'] ) ) {
-			$contactmethods['lti_gplus_url'] = ltint( 'user.gplus_url' );
-		}
-
-		return $contactmethods;
 	}
 
 }

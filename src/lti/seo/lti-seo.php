@@ -93,6 +93,7 @@ class LTI_SEO {
 		require_once $this->file_path . 'frontend/frontend.php';
 		require_once $this->file_path . 'plugin/postbox.php';
 		require_once $this->file_path . 'frontend/helpers/wordpress_helper.php';
+		require_once $this->file_path . 'frontend/generators/schema_org.php';
 		require_once $this->file_path . 'frontend/generators/json_ld.php';
 		require_once $this->file_path . 'frontend/generators/generic_meta_tag.php';
 		require_once $this->file_path . 'frontend/generators/open_graph.php';
@@ -139,6 +140,13 @@ class LTI_SEO {
 		$this->loader->add_filter( 'plugin_action_links', $this->admin, 'plugin_actions', 10, 2 );
 		$this->loader->add_action( 'add_meta_boxes', $this->admin, 'add_meta_boxes' );
 		$this->loader->add_action( 'save_post', $this->admin, 'save_post', 10, 3 );
+
+		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
+			$this->loader->add_action( 'show_user_profile', $this->admin, 'show_user_profile' );
+			$this->loader->add_action( 'edit_user_profile', $this->admin, 'show_user_profile' );
+			$this->loader->add_action( 'personal_options_update', $this->admin, 'personal_options_update',10,1 );
+			$this->loader->add_action( 'edit_user_profile_update', $this->admin, 'personal_options_update',10,1 );
+		}
 	}
 
 	/**
@@ -165,9 +173,9 @@ class LTI_SEO {
 
 		$this->loader->add_action( 'wp_head', $this->frontend, 'head' );
 
-		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
-			$this->loader->add_filter( 'user_contactmethods', $this->frontend, 'user_contactmethods' );
-		}
+//		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
+//			$this->loader->add_filter( 'user_contactmethods', $this->frontend, 'user_contactmethods' );
+//		}
 	}
 
 	/**
