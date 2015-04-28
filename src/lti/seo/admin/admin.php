@@ -47,6 +47,7 @@ class Admin {
 		$this->helper         = $helper;
 
 		$this->user_field_info = array(
+			array( "lti_public_email", ltint( 'user.public_email' ), '' ),
 			array( "lti_job_title", ltint( 'user.job_title' ), '' ),
 			array( "lti_work_longitude", ltint( 'user.work_longitude' ), '' ),
 			array( "lti_work_latitude", ltint( 'user.work_latitude' ), '' ),
@@ -190,7 +191,7 @@ class Admin {
 		if ( empty( $this->box_values ) ) {
 			$this->box_values = new Postbox_Values( array() );
 			$robot            = new Robot( $this->helper );
-			$robot_settings   = $robot->get_robot_setting( 'robot_support' );
+			$robot_settings   = $robot->get_robot_setting( 'robot_support','post_' );
 			foreach ( $robot_settings as $setting ) {
 				$this->box_values->set( 'post_robot_' . $setting, true );
 			}

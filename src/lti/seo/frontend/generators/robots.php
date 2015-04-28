@@ -16,7 +16,6 @@ class Robot extends GenericMetaTag {
 
 	public function get_robot_setting( $setting, $settings_prefix = "" ) {
 		$robots = array();
-
 		if ( $this->helper->get( $setting ) == true ) {
 			if ( $this->helper->get( $settings_prefix . 'robot_noindex' ) == true ) {
 				$robots[] = 'noindex';
@@ -41,10 +40,8 @@ class Robot extends GenericMetaTag {
 	}
 
 	public function make_tags() {
-
 		$tags = $this->get_robot();
 		$tags = apply_filters( 'lti_seo_robots', $tags );
-
 		if ( is_array( $tags ) ) {
 			return implode( ',', $tags );
 		}

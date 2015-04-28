@@ -45,6 +45,10 @@ function ltimessage() {
 	return $admin->get_message();
 }
 
-function lti_iso8601_date( $mysqldate ) {
-	return mysql2date( 'c', $mysqldate );
+function lti_iso8601_date( $date ) {
+	return mysql2date( 'c', $date );
+}
+
+function lti_mysql_date_year($date){
+	return mysql2date( 'Y', $date );
 }

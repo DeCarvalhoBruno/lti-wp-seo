@@ -1,6 +1,5 @@
 <?php namespace Lti\Seo;
 
-use Lti\Seo\Generators\JSON_LD;
 use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Plugin_Settings;
 
@@ -57,22 +56,24 @@ class Frontend {
 			$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
 		}
 
-//		echo $this->helper->page_type();
+		//echo $this->helper->page_type();
 
 		$this->hook_functionality( 'Robot' );
 
 		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, 'page_type' ) ), 'JSON_LD' );
-		$json_ld = new $class( $this->helper );
+		if ( class_exists( $class ) ) {
+			$json_ld = new $class( $this->helper );
 
-		add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ) );
-		$seo_comment = apply_filters( 'lti_seo_header_comment', 'SEO' );
-		if ( ! empty( $seo_comment ) ) {
-			echo sprintf( "<!-- %s -->" . PHP_EOL, $seo_comment );
+			add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ) );
 		}
-		do_action( 'lti_seo_head' );
-		if ( ! empty( $seo_comment ) ) {
-			echo sprintf( "<!-- END %s -->" . PHP_EOL . PHP_EOL, $seo_comment );
-		}
+			$seo_comment = apply_filters( 'lti_seo_header_comment', 'SEO' );
+			if ( ! empty( $seo_comment ) ) {
+				echo sprintf( "<!-- %s -->" . PHP_EOL, $seo_comment );
+			}
+			do_action( 'lti_seo_head' );
+			if ( ! empty( $seo_comment ) ) {
+				echo sprintf( "<!-- END %s -->" . PHP_EOL . PHP_EOL, $seo_comment );
+			}
 	}
 
 	private function hook_functionality( $type, $format = 'page_type' ) {

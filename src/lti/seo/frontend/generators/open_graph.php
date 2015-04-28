@@ -66,7 +66,7 @@ class Frontpage_Open_Graph extends Open_Graph implements ICanMakeHeaderTags {
 		$og['title']       = esc_attr( $this->helper->get_title() );
 		$og['url']         = esc_url( home_url( '/' ) );
 		$og['description'] = esc_attr( $this->helper->get_description() );
-		$og['locale']      = esc_attr( get_bloginfo( 'language' ) );
+		$og['locale']      = get_locale();
 		$og['image']       = $this->helper->get_social_images( $this->number_images );
 
 		$this->tags = compact( 'og' );

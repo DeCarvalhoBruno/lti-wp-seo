@@ -364,6 +364,7 @@
     #lti_seo_wrapper .nav-tabs.nav-justified > .active > a:focus {
         border: 1px solid #dddddd;
     }
+
     @media (min-width: 768px) {
         #lti_seo_wrapper .nav-tabs.nav-justified > li > a {
             border-bottom: 1px solid #dddddd;
@@ -418,17 +419,7 @@
     #lti_seo_wrapper .nav-tabs-justified > .active > a:focus {
         border: 1px solid #dddddd;
     }
-    @media (min-width: 768px) {
-        #lti_seo_wrapper .nav-tabs-justified > li > a {
-            border-bottom: 1px solid #dddddd;
-            border-radius: 4px 4px 0 0;
-        }
-        #lti_seo_wrapper .nav-tabs-justified > .active > a,
-        #lti_seo_wrapper .nav-tabs-justified > .active > a:hover,
-        #lti_seo_wrapper .nav-tabs-justified > .active > a:focus {
-            border-bottom-color: #ffffff;
-        }
-    }
+
     #lti_seo_wrapper .tab-content > .tab-pane {
         display: none;
     }
@@ -480,9 +471,23 @@
     #lti_seo_wrapper .affix {
         position: fixed;
     }
+
+    #lti_seo_wrapper .hidden {
+        visibility: hidden;
+    }
 }
 
-@media (min-width: 782px) {
+@media (min-width: 768px) {
+    #lti_seo_wrapper .nav-tabs-justified > li > a {
+        border-bottom: 1px solid #dddddd;
+        border-radius: 4px 4px 0 0;
+    }
+    #lti_seo_wrapper .nav-tabs-justified > .active > a,
+    #lti_seo_wrapper .nav-tabs-justified > .active > a:hover,
+    #lti_seo_wrapper .nav-tabs-justified > .active > a:focus {
+        border-bottom-color: #ffffff;
+    }
+
     #flseo .form-group {
         width: 95%;
     }

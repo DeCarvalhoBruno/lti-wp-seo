@@ -351,67 +351,78 @@
 									<div class="input-group">
 										<label>
 											<input name="jsonld_entity_type"
-											       type="radio" <?php echo ltirad( 'jsonld_entity_type', 'person' ); ?>
-											       value="person"/><?php echo ltint( 'opt.jsonld_entity_type' ); ?>
+											       type="radio" <?php echo ltirad( 'jsonld_entity_type',
+												'Person' ); ?>
+											       value="Person"
+											       id="jsonld_entity_person"
+												/><?php echo ltint( 'opt.jsonld_entity_type' ); ?>
 										</label>
-										<label><input name="jsonld_entity_type"
-										              type="radio" <?php echo ltirad( 'jsonld_entity_type',
-												'organization' ); ?>
-										              value="organization"/><?php echo ltint( 'opt.jsonld_organization' ); ?>
-										</label>
-									</div>
-									<div class="input-group">
-										<label for="jsonld_type_name"><?php echo ltint( 'opt.jsonld_type_name' ); ?>
-											<input type="text" name="jsonld_type_name" id="jsonld_type_name"
-											       value="<?php echo ltiopt( 'jsonld_type_name' ); ?>"/>
-										</label>
-									</div>
-									<div class="input-group">
-										<label
-											for="jsonld_type_wp_userid"><?php echo ltint( 'opt.jsonld_type_wp_userid' ); ?></label>
-										<?php wp_dropdown_users( array(
-											'show_option_none' => 'None',
-											'selected'         => ltiopt( 'jsonld_type_wp_userid' ),
-											'who'              => 'authors',
-											'class'            => 'form-select',
-											'multi'            => true,
-											'name'             => 'jsonld_type_wp_userid',
-											'include_selected' => true,
-											'option_none_value'=>'None'
-										) ); ?>
-									</div>
-									<div class="input-group">
-										<label
-											for="jsonld_type_alternate_name"><?php echo ltint( 'opt.jsonld_type_alternate_name' ); ?>
-											<input type="text" name="jsonld_type_alternate_name"
-											       id="jsonld_type_alternate_name"
-											       value="<?php echo ltiopt( 'jsonld_type_alternate_name' ); ?>"/>
+										<label>
+											<input name="jsonld_entity_type"
+											       type="radio" <?php echo ltirad( 'jsonld_entity_type',
+												'Organization' ); ?>
+											       value="Organization"
+											       id="jsonld_entity_organization"
+												/><?php echo ltint( 'opt.jsonld_organization' ); ?>
 										</label>
 									</div>
-									<div class="input-group">
-										<label
-											for="jsonld_type_website"><?php echo ltint( 'opt.jsonld_type_website' ); ?>
-											<input type="text" name="jsonld_type_website" id="jsonld_type_website"
-											       value="<?php echo ltiopt( 'jsonld_type_website' ); ?>"/>
-										</label>
-									</div>
-									<div class="input-group file-selector">
-										<label for="jsonld_img"><?php echo ltint( 'opt.jsonld_img' ); ?></label>
-										<input id="jsonld_img" class="upload_image" type="text" readonly="readonly"
-										       name="jsonld_type_logo_url"
-										       value="<?php echo ltiopt( 'jsonld_type_logo_url' ); ?>"/>
-
-										<div class="btn-group">
-											<input id="jsonld_img_button" class="upload_image_button button-primary"
-											       type="button"
-											       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
-											<input id="jsonld_reset" class="button-primary"
-											       type="button"
-											       value="<?php echo ltint( 'general.reset' ); ?>"/>
+									<div id="jsonld_entity_organization_group">
+										<div class="input-group">
+											<label for="jsonld_type_name"><?php echo ltint( 'opt.jsonld_type_name' ); ?>
+												<input type="text" name="jsonld_type_name" id="jsonld_type_name"
+												       value="<?php echo ltiopt( 'jsonld_type_name' ); ?>"/>
+											</label>
 										</div>
-										<input id="jsonld_img_id" type="hidden"
-										       name="jsonld_type_logo_id"
-										       value="<?php echo ltiopt( 'jsonld_type_logo_id' ); ?>"/>
+										<div class="input-group">
+											<label
+												for="jsonld_type_alternate_name"><?php echo ltint( 'opt.jsonld_type_alternate_name' ); ?>
+												<input type="text" name="jsonld_type_alternate_name"
+												       id="jsonld_type_alternate_name"
+												       value="<?php echo ltiopt( 'jsonld_type_alternate_name' ); ?>"/>
+											</label>
+										</div>
+										<div class="input-group">
+											<label
+												for="jsonld_type_website_url"><?php echo ltint( 'opt.jsonld_type_website_url' ); ?>
+												<input type="text" name="jsonld_type_website_url"
+												       id="jsonld_type_website_url"
+												       value="<?php echo ltiopt( 'jsonld_type_website_url' ); ?>"/>
+											</label>
+										</div>
+										<div class="input-group file-selector">
+											<label for="jsonld_img"><?php echo ltint( 'opt.jsonld_img' ); ?></label>
+											<input id="jsonld_img" class="upload_image" type="text" readonly="readonly"
+											       name="jsonld_type_logo_url"
+											       value="<?php echo ltiopt( 'jsonld_type_logo_url' ); ?>"/>
+
+											<div class="btn-group">
+												<input id="jsonld_img_button" class="upload_image_button button-primary"
+												       type="button"
+												       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+												<input id="jsonld_reset" class="button-primary"
+												       type="button"
+												       value="<?php echo ltint( 'general.reset' ); ?>"/>
+											</div>
+											<input id="jsonld_img_id" type="hidden"
+											       name="jsonld_type_logo_id"
+											       value="<?php echo ltiopt( 'jsonld_type_logo_id' ); ?>"/>
+										</div>
+									</div>
+									<div id="jsonld_entity_person_group">
+										<div class="input-group">
+											<label
+												for="jsonld_type_wp_userid"><?php echo ltint( 'opt.jsonld_type_wp_userid' ); ?></label>
+											<?php wp_dropdown_users( array(
+												'show_option_none'  => 'None',
+												'selected'          => ltiopt( 'jsonld_type_wp_userid' ),
+												'who'               => 'authors',
+												'class'             => 'form-select',
+												'multi'             => true,
+												'name'              => 'jsonld_type_wp_userid',
+												'include_selected'  => true,
+												'option_none_value' => 'None'
+											) ); ?>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -468,6 +479,19 @@
 									<input type="checkbox" name="jsonld_website"
 									       id="jsonld_website" <?php echo ltichk( 'jsonld_website' ); ?>/>
 								</label>
+
+								<div class="input-group">
+									<label>
+										<input name="jsonld_website_type"
+										       type="radio" <?php echo ltirad( 'jsonld_website_type', 'WebSite' ); ?>
+										       value="WebSite"/><?php echo ltint( 'opt.jsonld_website_website' ); ?>
+									</label>
+									<label><input name="jsonld_website_type"
+									              type="radio" <?php echo ltirad( 'jsonld_website_type',
+											'Blog' ); ?>
+									              value="Blog"/><?php echo ltint( 'opt.jsonld_website_blog' ); ?>
+									</label>
+								</div>
 							</div>
 							<div class="form-help-container">
 								<div class="form-help">
@@ -549,8 +573,40 @@
 							<div class="input-group">
 								<label for="jsonld_post"><?php echo ltint( 'opt.jsonld_post' ); ?>
 									<input type="checkbox" name="jsonld_post"
-									       id="jsonld_post" <?php echo ltichk( 'jsonld_post' ); ?>/>
+									       id="jsonld_post" <?php echo ltichk( 'jsonld_post' ); ?>
+									       data-toggle="seo-options"
+									       data-target="#jsonld_post_group"/>
 								</label>
+
+								<div id="jsonld_post_group">
+									<div class="input-group">
+										<label>
+											<input name="jsonld_post_type"
+											       type="radio" <?php echo ltirad( 'jsonld_post_type', 'Article' ); ?>
+											       value="Article"/><?php echo ltint( 'opt.jsonld_post_article' ); ?>
+										</label>
+										<label><input name="jsonld_post_type"
+										              type="radio" <?php echo ltirad( 'jsonld_post_type',
+												'BlogPosting' ); ?>
+										              value="BlogPosting"/><?php echo ltint( 'opt.jsonld_post_blogposting' ); ?>
+										</label>
+										<label><input name="jsonld_post_type"
+										              type="radio" <?php echo ltirad( 'jsonld_post_type',
+												'NewsArticle' ); ?>
+										              value="NewsArticle"/><?php echo ltint( 'opt.jsonld_post_news' ); ?>
+										</label>
+										<label><input name="jsonld_post_type"
+										              type="radio" <?php echo ltirad( 'jsonld_post_type',
+												'ScholarlyArticle' ); ?>
+										              value="ScholarlyArticle"/><?php echo ltint( 'opt.jsonld_post_scholar' ); ?>
+										</label>
+										<label><input name="jsonld_post_type"
+										              type="radio" <?php echo ltirad( 'jsonld_post_type',
+												'TechArticle' ); ?>
+										              value="TechArticle"/><?php echo ltint( 'opt.jsonld_post_tech' ); ?>
+										</label>
+									</div>
+								</div>
 							</div>
 							<div class="form-help-container">
 								<div class="form-help">

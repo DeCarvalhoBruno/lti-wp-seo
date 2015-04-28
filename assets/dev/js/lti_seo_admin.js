@@ -50,10 +50,12 @@
         input.prototype.disable = function () {
             this.objectToLookIntoID.find('input').attr("disabled", "disabled");
             this.objectToLookIntoID.find('textarea').attr("disabled", "disabled");
+            this.objectToLookIntoID.find('select').attr("disabled", "disabled");
         };
         input.prototype.enable = function () {
             this.objectToLookIntoID.find('input').removeAttr("disabled");
             this.objectToLookIntoID.find('textarea').removeAttr("disabled");
+            this.objectToLookIntoID.find('select').removeAttr("disabled");
         };
 
         input.prototype.toggleDisabled = function () {
@@ -157,6 +159,35 @@
                     updateCount(tmp[0].attr('id'), tmp[0].val().length, tmp[1]);
                 });
             }
+        }
+        var postWordCount = $('#wp-word-count');
+        if (postWordCount.length) {
+            $('#post').on('submit', function () {
+                $('#lti_seo_word_count').val(postWordCount.find('.word-count').html());
+            });
+        }
+
+        var jsonld_entity_person = $('#jsonld_entity_person');
+        if (jsonld_entity_person.length) {
+            var jsonld_entity_organization = $('#jsonld_entity_organization');
+
+            if(jsonld_entity_person.attr('checked')=='checked'){
+                $('#jsonld_entity_organization_group').addClass('hidden');
+            }else{
+                $('#jsonld_entity_person_group').addClass('hidden');
+
+            }
+
+            jsonld_entity_person.on('click',function(){
+                $('#jsonld_entity_organization_group').addClass('hidden');
+                $('#jsonld_entity_person_group').removeClass('hidden');
+            });
+
+            jsonld_entity_organization.on('click',function(){
+                $('#jsonld_entity_organization_group').removeClass('hidden');
+                $('#jsonld_entity_person_group').addClass('hidden');
+            });
+
         }
     });
 })(jQuery);

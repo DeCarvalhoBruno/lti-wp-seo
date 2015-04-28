@@ -11,7 +11,8 @@ class Postbox_Fields {
 		array( 'post_robot_noarchive', 'Checkbox' ),
 		array( 'post_robot_nosnippet', 'Checkbox' ),
 		array( 'social_img_url', 'Url' ),
-		array( 'social_img_id', 'Text' )
+		array( 'social_img_id', 'Text' ),
+		array( 'word_count', 'Text' )
 	);
 }
 

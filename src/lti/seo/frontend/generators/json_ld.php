@@ -26,48 +26,12 @@ class JSON_LD {
 		do_action( 'lti_seo_json_ld' );
 	}
 
-	public function make_person() {
-		$this->json_ld_output( $this->maker->make( 'Person' ) );
-	}
-
-	public function make_organization() {
-		$this->json_ld_output( $this->maker->make( 'Organization' ) );
-	}
-
-	public function make_website() {
-		$this->json_ld_output( $this->maker->make( 'WebSite' ) );
-	}
-
-}
-
-class Frontpage_JSON_LD extends JSON_LD {
-
-	public function __construct( ICanHelpWithJSONLD $helper ) {
-		parent::__construct( $helper );
-
-		if ( $this->helper->get( 'jsonld_website' ) ) {
-			add_action( 'lti_seo_json_ld', array( $this, 'make_website' ) );
-		} else {
-			if ( $this->helper->get( 'jsonld_entity' ) ) {
-				$type = $this->helper->get( 'jsonld_entity_type' );
-				switch ( $type ) {
-					case "person":
-						add_action( 'lti_seo_json_ld', array( $this, 'make_person' ) );
-						break;
-					case "organization":
-						add_action( 'lti_seo_json_ld', array( $this, 'make_organization' ) );
-						break;
-				}
-			}
+	public function __call( $name, $arguments ) {
+		if ( strpos( $name, "make_" ) !== false ) {
+			$this->json_ld_output( $this->maker->make( substr( $name, 5 ) ) );
 		}
 	}
-
 }
-
-class Page_JSON_LD extends JSON_LD {
-
-}
-
 
 class JSON_LD_Maker {
 	/**
@@ -94,4 +58,80 @@ class JSON_LD_Maker {
 		return null;
 	}
 }
+
+class Frontpage_JSON_LD extends JSON_LD {
+
+	public function __construct( ICanHelpWithJSONLD $helper ) {
+		parent::__construct( $helper );
+
+		if ( $this->helper->get( 'jsonld_website' ) ) {
+			if ( $this->helper->get( 'jsonld_website_type' ) == "Blog" ) {
+				add_action( 'lti_seo_json_ld', array( $this, 'make_Blog' ) );
+			} else {
+				add_action( 'lti_seo_json_ld', array( $this, 'make_WebSite' ) );
+			}
+		} else {
+			if ( $this->helper->get( 'jsonld_entity' ) ) {
+				$type = $this->helper->get( 'jsonld_entity_type' );
+				switch ( $type ) {
+					case "Person":
+					case "Organization":
+						add_action( 'lti_seo_json_ld', array( $this, 'make_' . $type ) );
+				}
+			}
+		}
+	}
+
+}
+
+class Singular_JSON_LD extends JSON_LD {
+	public function __construct( ICanHelpWithJSONLD $helper ) {
+		parent::__construct( $helper );
+
+		if ( $this->helper->get( 'jsonld_post' ) ) {
+			$type = $this->helper->get( 'jsonld_post_type' );
+			switch ( $type ) {
+				case "Article":
+				case "BlogPosting":
+				case "NewsArticle":
+				case "ScholarlyArticle":
+				case "TechArticle":
+					add_action( 'lti_seo_json_ld', array( $this, 'make_' . $type ) );
+			}
+		}
+	}
+}
+
+class Author_JSON_LD extends JSON_LD {
+	public function __construct( ICanHelpWithJSONLD $helper ) {
+		parent::__construct( $helper );
+
+		if ( $this->helper->get( 'jsonld_author' ) ) {
+			add_action( 'lti_seo_json_ld', array( $this, 'make_Person' ) );
+		}
+	}
+}
+
+class Page_JSON_LD extends JSON_LD {
+	public function __construct( ICanHelpWithJSONLD $helper ) {
+		parent::__construct( $helper );
+
+		if ( $this->helper->get( 'jsonld_page' ) ) {
+			add_action( 'lti_seo_json_ld', array( $this, 'make_WebPage' ) );
+		}
+	}
+}
+
+class Search_JSON_LD extends JSON_LD {
+	public function __construct( ICanHelpWithJSONLD $helper ) {
+		parent::__construct( $helper );
+
+		if ( $this->helper->get( 'jsonld_page' ) ) {
+			add_action( 'lti_seo_json_ld', array( $this, 'make_SearchResultsPage' ) );
+		}
+	}
+}
+
+
+
 

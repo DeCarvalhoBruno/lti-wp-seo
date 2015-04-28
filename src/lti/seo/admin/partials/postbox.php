@@ -94,4 +94,5 @@
 		</div>
 	<?php } ?>
 
+	<input id="lti_seo_word_count" type="hidden" name="lti_seo[word_count]" value=""/>
 </div>
