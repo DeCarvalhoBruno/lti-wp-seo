@@ -10,6 +10,7 @@ interface ICanHelpWithJSONLD extends ICanHelp{
 	public function get_schema_org_post($setting);
 	public function get_schema_org_post_meta($setting);
 	public function get_schema_org_general($setting);
+	public function get_author_social_info();
 	public function get_search_action_type();
 	public function get_current_url();
 	public function date_conversion($value);

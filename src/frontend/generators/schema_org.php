@@ -4,7 +4,7 @@ use Lti\Seo\Helpers\ICanHelpWithJSONLD;
 
 class Thing {
 	/**
-	 * @var \Lti\Seo\Helpers\Wordpress_Helper
+	 * @var \Lti\Seo\Helpers\ICanHelpWithJSONLD
 	 */
 	protected static $helper;
 	protected $url;
@@ -12,7 +12,7 @@ class Thing {
 	protected $logo;
 	protected $description;
 	protected $alternateName;
-	protected $searchAction;
+	protected $potentialAction;
 	protected $sameAs;
 	protected static $type;
 
@@ -25,7 +25,6 @@ class Thing {
 				}
 			}
 		}
-
 	}
 
 	public function get_type() {
@@ -55,6 +54,16 @@ class Thing {
 		return $result;
 	}
 
+	protected function addPotentialAction(){
+		$class                 = static::$helper->get_search_action_type();
+		if(class_exists($class)){
+			$class_test = new \ReflectionClass($class);
+			if($class_test->implementsInterface('Lti\Seo\Generators\ICanSearch')){
+				$this->potentialAction = new $class(static::$helper);
+			}
+		}
+	}
+
 }
 
 class Action extends Thing {
@@ -74,7 +83,7 @@ interface ICanSearch {
 class WordpressSearchAction extends SearchAction implements ICanSearch {
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		$this->target        = sprintf( "%s?s={search_term}", $helper->get_current_url() );
@@ -92,16 +101,16 @@ class Person extends Thing {
 	protected static $type = 'Person';
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
-		static::$helper      = $helper;
-		$this->sameAs        = $helper->get_author_social_info();
-		$this->name          = $helper->get_schema_org_user( 'display_name' );
-		$this->url           = $helper->get_schema_org_user( 'user_url' );
-		$this->workLocation  = new Place( $helper );
-		$this->jobTitle      = $helper->get_schema_org_user_meta( 'job_title' );
-		$this->email         = $helper->get_schema_org_user_meta( 'public_email' );
+		static::$helper     = $helper;
+		$this->sameAs       = $helper->get_author_social_info();
+		$this->name         = $helper->get_schema_org_user( 'display_name' );
+		$this->url          = $helper->get_schema_org_user( 'user_url' );
+		$this->workLocation = new Place( $helper );
+		$this->jobTitle     = $helper->get_schema_org_user_meta( 'job_title' );
+		$this->email        = $helper->get_schema_org_user_meta( 'public_email' );
 	}
 
 }
@@ -111,7 +120,7 @@ class Organization extends Thing {
 	protected static $type = 'Organization';
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		static::$helper      = $helper;
@@ -135,7 +144,7 @@ abstract class CreativeWork extends Thing {
 	protected $inLanguage;
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		$this->url          = $helper->get_current_url();
@@ -165,13 +174,13 @@ class WebSite extends CreativeWork {
 	protected static $type = 'WebSite';
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		parent::__construct( $helper );
 		static::$helper        = $helper;
-		$class                 = $helper->get_search_action_type();
-		$this->potentialAction = new $class( $helper );
+
+		$this->addPotentialAction($helper);
 		$this->get_author_publisher();
 
 	}
@@ -186,13 +195,15 @@ class Blog extends CreativeWork {
 	protected $blogPosting;
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		parent::__construct( $helper );
-		static::$helper        = $helper;
-		$class                 = $helper->get_search_action_type();
-		$this->potentialAction = new $class( $helper );
+		static::$helper = $helper;
+		$class          = $helper->get_search_action_type();
+		if ( class_exists( $class ) ) {
+			$this->potentialAction = new $class( $helper );
+		}
 		$this->get_author_publisher();
 
 	}
@@ -203,7 +214,7 @@ class WebPage extends CreativeWork {
 	protected static $type = 'WebPage';
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		parent::__construct( $helper );
@@ -219,7 +230,7 @@ class Article extends CreativeWork {
 	protected $wordCount;
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		parent::__construct( $helper );
@@ -239,7 +250,7 @@ class Place extends Thing {
 	protected static $type = 'Place';
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		$this->geo = new GeoCoordinates( $helper );
@@ -252,7 +263,7 @@ class GeoCoordinates extends Thing {
 	protected static $type = 'GeoCoordinates';
 
 	/**
-	 * @param \Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param \Lti\Seo\Helpers\ICanHelpWithJSONLD $helper
 	 */
 	public function __construct( ICanHelpWithJSONLD $helper ) {
 		$this->longitude = $helper->get_schema_org_user_meta( 'work_longitude' );

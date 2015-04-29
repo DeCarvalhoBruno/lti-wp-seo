@@ -47,18 +47,18 @@ class Admin {
 		$this->helper         = $helper;
 
 		$this->user_field_info = array(
-			array( "lti_public_email", ltint( 'user.public_email' ), '' ),
-			array( "lti_job_title", ltint( 'user.job_title' ), '' ),
-			array( "lti_work_longitude", ltint( 'user.work_longitude' ), '' ),
-			array( "lti_work_latitude", ltint( 'user.work_latitude' ), '' ),
-			array( "lti_twitter_username", ltint( 'user.twitter_username' ), '' ),
-			array( "lti_facebook_id", ltint( 'user.facebook_id' ), '' ),
-			array( "lti_facebook_url", ltint( 'user.facebook_url' ), '' ),
-			array( "lti_gplus_url", ltint( 'user.gplus_url' ), '' ),
-			array( "lti_instagram_url", ltint( 'user.instagram_url' ), '' ),
-			array( "lti_youtube_url", ltint( 'user.youtube_url' ), '' ),
-			array( "lti_linkedin_url", ltint( 'user.linkedin_url' ), '' ),
-			array( "lti_myspace_url", ltint( 'user.myspace_url' ), '' )
+			array( "lti_public_email", 'user.public_email',  'hlp.user.public_email' ) ,
+			array( "lti_job_title", 'user.job_title',  'hlp.user.job_title' ) ,
+			array( "lti_work_longitude", 'user.work_longitude',  'hlp.user.work_longitude' ) ,
+			array( "lti_work_latitude", 'user.work_latitude',  'hlp.user.work_latitude' ) ,
+			array( "lti_twitter_username", 'user.twitter_username',  'hlp.user.twitter_username' ) ,
+			array( "lti_facebook_id", 'user.facebook_id',  'hlp.user.facebook_id' ) ,
+			array( "lti_facebook_url", 'user.facebook_url',  'hlp.user.facebook_url' ) ,
+			array( "lti_gplus_url", 'user.gplus_url',  'hlp.user.gplus_url' ) ,
+			array( "lti_instagram_url", 'user.instagram_url',  'hlp.user.instagram_url' ) ,
+			array( "lti_youtube_url", 'user.youtube_url',  'hlp.user.youtube_url' ) ,
+			array( "lti_linkedin_url", 'user.linkedin_url',  'hlp.user.linkedin_url' ) ,
+			array( "lti_myspace_url", 'user.myspace_url',  'hlp.user.myspace_url' )
 		);
 	}
 
@@ -191,7 +191,7 @@ class Admin {
 		if ( empty( $this->box_values ) ) {
 			$this->box_values = new Postbox_Values( array() );
 			$robot            = new Robot( $this->helper );
-			$robot_settings   = $robot->get_robot_setting( 'robot_support','post_' );
+			$robot_settings   = $robot->get_robot_setting( 'robot_support', 'post_' );
 			foreach ( $robot_settings as $setting ) {
 				$this->box_values->set( 'post_robot_' . $setting, true );
 			}
@@ -238,10 +238,6 @@ class Admin {
 		}
 	}
 
-	public function add_user_profile_fields() {
-
-	}
-
 	public function show_user_profile( $user ) {
 		$fields = array();
 		foreach ( $this->user_field_info as $field ) {
@@ -264,7 +260,7 @@ class Admin {
 					       value="' . esc_attr( get_the_author_meta( $field, $userID ) ) . '" /><br />
 					<span class="description">%3$s</span>
 				</td>
-			</tr>', $field, $label, $description );
+			</tr>', $field, ltint($label), ltint($description) );
 	}
 
 	public function personal_options_update( $user_id ) {

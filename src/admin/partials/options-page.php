@@ -251,7 +251,7 @@
 
 							<div id="description_group">
 							<textarea name="frontpage_description_text"
-							          id="frontpage_description_text"><?php echo ltiopt( 'frontpage_description_text' ); ?></textarea>
+							          id="frontpage_description_text" placeholder="<?php echo get_bloginfo('description');?>"><?php echo ltiopt( 'frontpage_description_text' ); ?></textarea>
 							<span id="wfrontpage_description_text"
 							      class="char-counter"><?php echo ltint( 'general.char_count' ); ?>&nbsp;<span
 									id="cfrontpage_description_text"></span></span>
@@ -415,7 +415,6 @@
 											<?php wp_dropdown_users( array(
 												'show_option_none'  => 'None',
 												'selected'          => ltiopt( 'jsonld_type_wp_userid' ),
-												'who'               => 'authors',
 												'class'             => 'form-select',
 												'multi'             => true,
 												'name'              => 'jsonld_type_wp_userid',
@@ -499,35 +498,35 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<h3><?php echo ltint( 'opt.group.social_image' ); ?></h3>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<h3><?php echo ltint( 'opt.group.social_image' ); ?></h3>
 
-								<div class="input-group file-selector">
-									<label
-										for="frontpage_social_img"><?php echo ltint( 'opt.frontpage_social_img' ); ?></label>
-									<input id="frontpage_social_img" type="text" name="frontpage_social_img_url"
-									       value="<?php echo ltiopt( 'frontpage_social_img_url' ); ?>"
-									       readonly="readonly"/>
+							<div class="input-group file-selector">
+								<label
+									for="frontpage_social_img"><?php echo ltint( 'opt.frontpage_social_img' ); ?></label>
+								<input id="frontpage_social_img" type="text" name="frontpage_social_img_url"
+								       value="<?php echo ltiopt( 'frontpage_social_img_url' ); ?>"
+								       readonly="readonly"/>
 
-									<div class="btn-group">
-										<input id="frontpage_social_img_button"
-										       class="button-primary upload_image_button"
-										       type="button"
-										       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
-										<input id="frontpage_social_reset" class="button-primary"
-										       type="button"
-										       value="<?php echo ltint( 'general.reset' ); ?>"/>
-									</div>
-									<input id="frontpage_social_img_id" type="hidden"
-									       name="frontpage_social_img_id"
-									       value="<?php echo ltiopt( 'frontpage_social_img_id' ); ?>"/>
+								<div class="btn-group">
+									<input id="frontpage_social_img_button"
+									       class="button-primary upload_image_button"
+									       type="button"
+									       value="<?php echo ltint( 'general.choose_img' ); ?>"/>
+									<input id="frontpage_social_reset" class="button-primary"
+									       type="button"
+									       value="<?php echo ltint( 'general.reset' ); ?>"/>
 								</div>
+								<input id="frontpage_social_img_id" type="hidden"
+								       name="frontpage_social_img_id"
+								       value="<?php echo ltiopt( 'frontpage_social_img_id' ); ?>"/>
 							</div>
-							<div class="form-help-container">
-								<div class="form-help">
-									<p><?php echo ltint( 'opt.hlp.frontpage_social' ); ?></p>
-								</div>
+						</div>
+						<div class="form-help-container">
+							<div class="form-help">
+								<p><?php echo ltint( 'opt.hlp.frontpage_social' ); ?></p>
 							</div>
 						</div>
 					</div>
@@ -610,7 +609,8 @@
 							</div>
 							<div class="form-help-container">
 								<div class="form-help">
-									<p><?php echo ltint( 'opt.hlp.jsonld_post' ); ?></p>
+									<p><?php echo ltint( 'opt.hlp.jsonld_post1' ); ?></p>
+									<p><?php echo ltint( 'opt.hlp.jsonld_post2' ); ?></p>
 								</div>
 							</div>
 						</div>
