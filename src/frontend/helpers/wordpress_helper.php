@@ -603,16 +603,18 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 				switch ( $setting ) {
 					case 'headline':
 						return $this->get_title();
-						break;
 					case 'keywords':
 						return implode( ',', $this->get_keywords() );
-						break;
 					case 'thumbnailUrl':
 						return $this->get_thumbnail_url();
-						break;
 					case 'inLanguage':
 						return $this->get_language();
-						break;
+					case 'datePublished':
+						return lti_iso8601_date($this->get_post_info( 'post_date' ));
+					case 'dateModified':
+						return lti_iso8601_date($this->get_post_info( 'post_modified' ));
+					case 'copyrightYear':
+						return lti_mysql_date_year($this->get_post_info( 'post_date' ));
 					case 'author':
 						if ( $this->get( 'jsonld_entity_support' ) == true ) {
 							$type = $this->get( 'jsonld_entity_type' );
@@ -691,41 +693,12 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		return $this->get( 'jsonld_type_' . $setting );
 	}
 
-	public function get_schema_org_post( $setting ) {
-		return $this->get_post_info( $setting );
-	}
-
-	public function get_schema_org_post_meta( $setting ) {
-		return $this->get_post_meta_key( $setting );
-	}
-
-	public function get_schema_org_general( $setting ) {
-		return call_user_func( array( $this, 'get_' . $setting ) );
-	}
-
 	public function get_search_action_type() {
 		return 'Lti\Seo\Generators\WordpressSearchAction';
-	}
-
-	public function get_schema_org_user_meta( $setting ) {
-		return $this->get_user_meta_key( 'lti_' . $setting );
-	}
-
-	public function get_schema_org_user( $setting ) {
-		return $this->get_user_key( $setting );
 	}
 
 	public function get_current_url() {
 		return $this->current_url;
 	}
-
-	public function date_conversion( $value ) {
-		return lti_iso8601_date( $value );
-	}
-
-	public function date_get_year( $value ) {
-		return lti_mysql_date_year( $value );
-	}
-
 
 }
