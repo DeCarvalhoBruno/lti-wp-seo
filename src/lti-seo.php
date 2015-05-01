@@ -1,5 +1,6 @@
 <?php namespace Lti\Seo;
 
+use Lti\Seo\Generators\JSON_LD;
 use Lti\Seo\Helpers\Wordpress_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 
@@ -85,15 +86,14 @@ class LTI_SEO {
 
 
 	private function load_dependencies() {
+		require_once $this->plugin_path . 'vendor/autoload.php';
 		require_once $this->file_path . 'helper.php';
-		require_once $this->file_path . 'frontend/helpers/generic_helper.php';
 		require_once $this->file_path . 'loader.php';
 		require_once $this->file_path . 'i18n.php';
 		require_once $this->file_path . 'admin/admin.php';
 		require_once $this->file_path . 'frontend/frontend.php';
 		require_once $this->file_path . 'plugin/postbox.php';
 		require_once $this->file_path . 'frontend/helpers/wordpress_helper.php';
-		require_once $this->file_path . 'frontend/generators/schema_org.php';
 		require_once $this->file_path . 'frontend/generators/json_ld.php';
 		require_once $this->file_path . 'frontend/generators/generic_meta_tag.php';
 		require_once $this->file_path . 'frontend/generators/open_graph.php';

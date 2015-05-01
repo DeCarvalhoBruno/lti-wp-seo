@@ -341,13 +341,13 @@
 
 						<div class="form-group">
 							<div class="input-group">
-								<label for="jsonld_entity"><?php echo ltint( 'opt.jsonld_entity' ); ?>
-									<input type="checkbox" name="jsonld_entity" data-toggle="seo-options"
-									       data-target="#jsonld_entity_group"
-									       id="jsonld_entity" <?php echo ltichk( 'jsonld_entity' ); ?>/>
+								<label for="jsonld_entity_support"><?php echo ltint( 'opt.jsonld_entity_support' ); ?>
+									<input type="checkbox" name="jsonld_entity_support" data-toggle="seo-options"
+									       data-target="#jsonld_entity_support_group"
+									       id="jsonld_entity_support" <?php echo ltichk( 'jsonld_entity_support' ); ?>/>
 								</label>
 
-								<div id="jsonld_entity_group">
+								<div id="jsonld_entity_support_group">
 									<div class="input-group">
 										<label>
 											<input name="jsonld_entity_type"
@@ -368,32 +368,32 @@
 									</div>
 									<div id="jsonld_entity_organization_group">
 										<div class="input-group">
-											<label for="jsonld_type_name"><?php echo ltint( 'opt.jsonld_type_name' ); ?>
-												<input type="text" name="jsonld_type_name" id="jsonld_type_name"
-												       value="<?php echo ltiopt( 'jsonld_type_name' ); ?>"/>
+											<label for="jsonld_org_name"><?php echo ltint( 'opt.jsonld_org_name' ); ?>
+												<input type="text" name="jsonld_org_name" id="jsonld_org_name"
+												       value="<?php echo ltiopt( 'jsonld_org_name' ); ?>"/>
 											</label>
 										</div>
 										<div class="input-group">
 											<label
-												for="jsonld_type_alternate_name"><?php echo ltint( 'opt.jsonld_type_alternate_name' ); ?>
-												<input type="text" name="jsonld_type_alternate_name"
-												       id="jsonld_type_alternate_name"
-												       value="<?php echo ltiopt( 'jsonld_type_alternate_name' ); ?>"/>
+												for="jsonld_org_alternate_name"><?php echo ltint( 'opt.jsonld_org_alternate_name' ); ?>
+												<input type="text" name="jsonld_org_alternate_name"
+												       id="jsonld_org_alternate_name"
+												       value="<?php echo ltiopt( 'jsonld_org_alternate_name' ); ?>"/>
 											</label>
 										</div>
 										<div class="input-group">
 											<label
-												for="jsonld_type_website_url"><?php echo ltint( 'opt.jsonld_type_website_url' ); ?>
-												<input type="text" name="jsonld_type_website_url"
-												       id="jsonld_type_website_url"
-												       value="<?php echo ltiopt( 'jsonld_type_website_url' ); ?>"/>
+												for="jsonld_org_website_url"><?php echo ltint( 'opt.jsonld_org_website_url' ); ?>
+												<input type="text" name="jsonld_org_website_url"
+												       id="jsonld_org_website_url"
+												       value="<?php echo ltiopt( 'jsonld_org_website_url' ); ?>"/>
 											</label>
 										</div>
 										<div class="input-group file-selector">
 											<label for="jsonld_img"><?php echo ltint( 'opt.jsonld_img' ); ?></label>
 											<input id="jsonld_img" class="upload_image" type="text" readonly="readonly"
-											       name="jsonld_type_logo_url"
-											       value="<?php echo ltiopt( 'jsonld_type_logo_url' ); ?>"/>
+											       name="jsonld_org_logo_url"
+											       value="<?php echo ltiopt( 'jsonld_org_logo_url' ); ?>"/>
 
 											<div class="btn-group">
 												<input id="jsonld_img_button" class="upload_image_button button-primary"
@@ -404,20 +404,20 @@
 												       value="<?php echo ltint( 'general.reset' ); ?>"/>
 											</div>
 											<input id="jsonld_img_id" type="hidden"
-											       name="jsonld_type_logo_id"
-											       value="<?php echo ltiopt( 'jsonld_type_logo_id' ); ?>"/>
+											       name="jsonld_org_logo_id"
+											       value="<?php echo ltiopt( 'jsonld_org_logo_id' ); ?>"/>
 										</div>
 									</div>
 									<div id="jsonld_entity_person_group">
 										<div class="input-group">
 											<label
-												for="jsonld_type_wp_userid"><?php echo ltint( 'opt.jsonld_type_wp_userid' ); ?></label>
+												for="jsonld_person_wp_userid"><?php echo ltint( 'opt.jsonld_person_wp_userid' ); ?></label>
 											<?php wp_dropdown_users( array(
 												'show_option_none'  => 'None',
-												'selected'          => ltiopt( 'jsonld_type_wp_userid' ),
+												'selected'          => ltiopt( 'jsonld_person_wp_userid' ),
 												'class'             => 'form-select',
 												'multi'             => true,
-												'name'              => 'jsonld_type_wp_userid',
+												'name'              => 'jsonld_person_wp_userid',
 												'include_selected'  => true,
 												'option_none_value' => 'None'
 											) ); ?>
@@ -474,9 +474,9 @@
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<label for="jsonld_website"><?php echo ltint( 'out.jsonld_website' ); ?>
-									<input type="checkbox" name="jsonld_website"
-									       id="jsonld_website" <?php echo ltichk( 'jsonld_website' ); ?>/>
+								<label for="jsonld_website_support"><?php echo ltint( 'out.jsonld_website_support' ); ?>
+									<input type="checkbox" name="jsonld_website_support"
+									       id="jsonld_website_support" <?php echo ltichk( 'jsonld_website_support' ); ?>/>
 								</label>
 
 								<div class="input-group">
@@ -557,9 +557,9 @@
 
 						<div class="form-group">
 							<div class="input-group">
-								<label for="jsonld_page"><?php echo ltint( 'opt.jsonld_page' ); ?>
-									<input type="checkbox" name="jsonld_page"
-									       id="jsonld_page" <?php echo ltichk( 'jsonld_page' ); ?>/>
+								<label for="jsonld_page_support"><?php echo ltint( 'opt.jsonld_page_support' ); ?>
+									<input type="checkbox" name="jsonld_page_support"
+									       id="jsonld_page_support" <?php echo ltichk( 'jsonld_page_support' ); ?>/>
 								</label>
 							</div>
 							<div class="form-help-container">
@@ -570,14 +570,14 @@
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<label for="jsonld_post"><?php echo ltint( 'opt.jsonld_post' ); ?>
-									<input type="checkbox" name="jsonld_post"
-									       id="jsonld_post" <?php echo ltichk( 'jsonld_post' ); ?>
+								<label for="jsonld_post_support"><?php echo ltint( 'opt.jsonld_post_support' ); ?>
+									<input type="checkbox" name="jsonld_post_support"
+									       id="jsonld_post_support" <?php echo ltichk( 'jsonld_post_support' ); ?>
 									       data-toggle="seo-options"
-									       data-target="#jsonld_post_group"/>
+									       data-target="#jsonld_post_support_group"/>
 								</label>
 
-								<div id="jsonld_post_group">
+								<div id="jsonld_post_support_group">
 									<div class="input-group">
 										<label>
 											<input name="jsonld_post_type"
@@ -616,9 +616,9 @@
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<label for="jsonld_author"><?php echo ltint( 'opt.jsonld_author' ); ?>
-									<input type="checkbox" name="jsonld_author"
-									       id="jsonld_author" <?php echo ltichk( 'jsonld_author' ); ?>/>
+								<label for="jsonld_author_support"><?php echo ltint( 'opt.jsonld_author_support' ); ?>
+									<input type="checkbox" name="jsonld_author_support"
+									       id="jsonld_author_support" <?php echo ltichk( 'jsonld_author_support' ); ?>/>
 								</label>
 							</div>
 							<div class="form-help-container">

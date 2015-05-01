@@ -3,7 +3,7 @@
 use Lti\Seo\Plugin\Fields;
 use Lti\Seo\Plugin\Postbox_Values;
 
-class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
+class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJSONLD {
 
 	private $is_home_posts_page;
 	private $is_home_static_page;
@@ -107,17 +107,21 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 				$info = $this->get_user_meta_key( "lti_gplus_url" );
 				break;
 			default:
-				$info = array_filter( array(
+
+				$twitter = $this->get_user_meta_key( "lti_twitter_username" );
+				if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
+					$twitter = 'https://twitter.com' . str_replace( '@', '/', $twitter );
+				}
+				$info = array_values( array_filter( array(
 						$this->get_user_meta_key( "lti_facebook_url" ),
-						'https://twitter.com' . str_replace( '@', '/',
-							$this->get_user_meta_key( "lti_twitter_username" ) ),
+						$twitter,
 						$this->get_user_meta_key( "lti_gplus_url" ),
 						$this->get_user_meta_key( "lti_instagram_url" ),
 						$this->get_user_meta_key( "lti_youtube_url" ),
 						$this->get_user_meta_key( "lti_linkedin_url" ),
 						$this->get_user_meta_key( "lti_myspace_url" )
 					)
-				);
+				) );
 				break;
 		}
 
@@ -130,7 +134,7 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 			if ( $this->page_type() == "Author" ) {
 				$author = get_query_var( 'author' );
 			} elseif ( $this->page_type() == "Frontpage" ) {
-				$author = $this->settings->get( 'jsonld_type_wp_userid' );
+				$author = $this->settings->get( 'jsonld_person_wp_userid' );
 			} else {
 				$author = get_the_author_meta( 'ID',
 					$this->get_post_info( 'post_author' ) );
@@ -589,6 +593,98 @@ class Wordpress_Helper extends Helper implements ICanHelp, ICanHelpWithJSONLD {
 		}
 
 		return $profiles;
+	}
+
+	public function get_schema_org( $setting ) {
+		//echo $this->schema;
+
+		switch ( $this->schema ) {
+			case "CreativeWork":
+				switch ( $setting ) {
+					case 'headline':
+						return $this->get_title();
+						break;
+					case 'keywords':
+						return implode( ',', $this->get_keywords() );
+						break;
+					case 'thumbnailUrl':
+						return $this->get_thumbnail_url();
+						break;
+					case 'inLanguage':
+						return $this->get_language();
+						break;
+					case 'author':
+						if ( $this->get( 'jsonld_entity_support' ) == true ) {
+							$type = $this->get( 'jsonld_entity_type' );
+
+							if ( $type == 'Person' ) {
+								return array(
+									'Person' => $this
+								);
+							}
+						}
+						break;
+					case 'publisher':
+						if ( $this->get( 'jsonld_entity_support' ) == true ) {
+							$type = $this->get( 'jsonld_entity_type' );
+							if ( $type == 'Organization' ) {
+								return array(
+									'Organization' => $this
+								);
+							}
+						}
+						break;
+				}
+				break;
+			case 'Person':
+				switch ( $setting ) {
+					case 'name':
+						return $this->get_user_key( 'display_name' );
+					case 'url':
+						return $this->get_user_key( 'user_url' );
+					case 'workLocation:longitude':
+						return $this->get_user_meta_key( 'lti_work_longitude' );
+					case 'workLocation:latitude':
+						return $this->get_user_meta_key( 'lti_work_latitude' );
+					case 'jobTitle':
+						return $this->get_user_meta_key( 'lti_job_title' );
+					case 'email':
+						return $this->get_user_meta_key( 'lti_public_email' );
+					case 'sameAs':
+						return $this->get_author_social_info();
+				}
+				break;
+			case 'Organization':
+				switch ( $setting ) {
+					case 'name':
+						return $this->get( 'jsonld_org_name' );
+					case 'url':
+						return $this->get( 'jsonld_org_website_url' );
+					case 'alternateName':
+						return $this->get( 'jsonld_org_alternate_name' );
+					case 'logo':
+						return $this->get( 'jsonld_org_logo_url' );
+					case 'sameAs':
+						return $this->get_social_urls();
+				}
+				break;
+			case 'Article':
+			case 'BlogPosting':
+			case 'NewsArticle':
+			case 'ScholarlyArticle':
+			case 'TechArticle':
+				switch ( $setting ) {
+					case 'articleSection':
+						return $this->get_categories();
+					case 'wordCount':
+						return $this->get_post_meta_key('word_count');
+					case 'Person:url':
+						return $this->get_user_key('user_url');
+				}
+
+				break;
+		}
+		return null;
 	}
 
 	public function get_schema_org_setting( $setting ) {

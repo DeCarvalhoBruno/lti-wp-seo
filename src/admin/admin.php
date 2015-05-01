@@ -47,18 +47,22 @@ class Admin {
 		$this->helper         = $helper;
 
 		$this->user_field_info = array(
-			array( "lti_public_email", 'user.public_email',  'hlp.user.public_email' ) ,
-			array( "lti_job_title", 'user.job_title',  'hlp.user.job_title' ) ,
-			array( "lti_work_longitude", 'user.work_longitude',  'hlp.user.work_longitude' ) ,
-			array( "lti_work_latitude", 'user.work_latitude',  'hlp.user.work_latitude' ) ,
-			array( "lti_twitter_username", 'user.twitter_username',  'hlp.user.twitter_username' ) ,
-			array( "lti_facebook_id", 'user.facebook_id',  'hlp.user.facebook_id' ) ,
-			array( "lti_facebook_url", 'user.facebook_url',  'hlp.user.facebook_url' ) ,
-			array( "lti_gplus_url", 'user.gplus_url',  'hlp.user.gplus_url' ) ,
-			array( "lti_instagram_url", 'user.instagram_url',  'hlp.user.instagram_url' ) ,
-			array( "lti_youtube_url", 'user.youtube_url',  'hlp.user.youtube_url' ) ,
-			array( "lti_linkedin_url", 'user.linkedin_url',  'hlp.user.linkedin_url' ) ,
-			array( "lti_myspace_url", 'user.myspace_url',  'hlp.user.myspace_url' )
+			array( "lti_public_email", ltint_po( 'user.public_email' ), ltint_po( 'hlp.user.public_email' ) ),
+			array( "lti_job_title", ltint_po( 'user.job_title' ), ltint_po( 'hlp.user.job_title' ) ),
+			array( "lti_work_longitude", ltint_po( 'user.work_longitude' ), ltint_po( 'hlp.user.work_longitude' ) ),
+			array( "lti_work_latitude", ltint_po( 'user.work_latitude' ), ltint_po( 'hlp.user.work_latitude' ) ),
+			array(
+				"lti_twitter_username",
+				ltint_po( 'user.twitter_username' ),
+				ltint_po( 'hlp.user.twitter_username' )
+			),
+			array( "lti_facebook_id", ltint_po( 'user.facebook_id' ), ltint_po( 'hlp.user.facebook_id' ) ),
+			array( "lti_facebook_url", ltint_po( 'user.facebook_url' ), ltint_po( 'hlp.user.facebook_url' ) ),
+			array( "lti_gplus_url", ltint_po( 'user.gplus_url' ), ltint_po( 'hlp.user.gplus_url' ) ),
+			array( "lti_instagram_url", ltint_po( 'user.instagram_url' ), ltint_po( 'hlp.user.instagram_url' ) ),
+			array( "lti_youtube_url", ltint_po( 'user.youtube_url' ), ltint_po( 'hlp.user.youtube_url' ) ),
+			array( "lti_linkedin_url", ltint_po( 'user.linkedin_url' ), ltint_po( 'hlp.user.linkedin_url' ) ),
+			array( "lti_myspace_url", ltint_po( 'user.myspace_url' ), ltint_po( 'hlp.user.myspace_url' ) )
 		);
 	}
 
@@ -249,7 +253,6 @@ class Admin {
 		<table class="form-table">
 			%s
 		</table>', ltint( "user.fields_title" ), implode( PHP_EOL, $fields ) );
-
 	}
 
 	private function user_profile_field( $userID, $field, $label, $description ) {
@@ -260,7 +263,7 @@ class Admin {
 					       value="' . esc_attr( get_the_author_meta( $field, $userID ) ) . '" /><br />
 					<span class="description">%3$s</span>
 				</td>
-			</tr>', $field, ltint($label), ltint($description) );
+			</tr>', $field, ltint( $label ), ltint( $description ) );
 	}
 
 	public function personal_options_update( $user_id ) {

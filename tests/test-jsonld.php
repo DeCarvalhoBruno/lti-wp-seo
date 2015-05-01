@@ -12,17 +12,19 @@ class JSONLDTest extends LTI_SEO_UnitTestCase {
 		$this->go_to( home_url( '/' ) );
 	}
 
-	public function testPerson() {
+	public function testOrganization() {
 
 		$settings = new Plugin_Settings((object)array());
-		$settings->set( 'jsonld_entity_type', 'person' );
-		$personName = 'PersonTest';
-		$settings->set( 'jsonld_type_name', $personName );
+		$settings->set( 'jsonld_entity_support', true );
+		$settings->set( 'jsonld_entity_type', 'Organization' );
+        $orgName = 'OrgTest';
+		$settings->set( 'jsonld_org_name', $orgName );
 		$helper = new Wordpress_Helper($settings);
 		$helper->init();
 		$json_ld = new JSON_LD($helper);
 		ob_start();
-		$json_ld->make_person();
+		$json_ld->make_Organization();
+
 		$output = new DOM(ob_get_clean());
 
 		$this->assertTrue($output->has('script[@type="application/ld+json"]'));
@@ -30,12 +32,10 @@ class JSONLDTest extends LTI_SEO_UnitTestCase {
 		$this->assertTrue($node instanceof \DOMNodeList && $node->length==1);
 
 		$string = json_decode($node->item(0)->nodeValue);
-		//$output->out();
 
 		$this->assertEquals($string->{'@context'},'http://schema.org');
-		$this->assertEquals($string->{'@type'},'Person');
-		//$this->assertEquals($string->url,home_url('/'));
-		//$this->assertEquals($string->name,$personName);
+		$this->assertEquals($string->{'@type'},'Organization');
+		$this->assertEquals($string->name,$orgName);
 
 	}
 
@@ -46,7 +46,7 @@ class JSONLDTest extends LTI_SEO_UnitTestCase {
 		$helper->init();
 		$json_ld = new JSON_LD($helper);
 		ob_start();
-		$json_ld->make_website();
+		$json_ld->make_WebSite();
 
 		$output = new DOM(ob_get_clean());
 

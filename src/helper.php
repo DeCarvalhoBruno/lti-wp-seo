@@ -12,6 +12,10 @@ function ltint( $text, $domain = 'lti-wp-seo' ) {
 	return __( $text, $domain );
 }
 
+function ltint_po($value){
+	return $value;
+}
+
 function ltiopt( $value ) {
 	$admin = \Lti\Seo\LTI_SEO::get_instance()->get_admin();
 	return esc_attr($admin->get_form_values()->get( $value ));

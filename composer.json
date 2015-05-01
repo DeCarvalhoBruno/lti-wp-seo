@@ -1,0 +1,6 @@
+{
+    "name": "lti/lti-wp-seo",
+    "require-dev": {
+        "lti/json-ld": "dev-master"
+    }
+}

@@ -7,10 +7,6 @@ class AdminTest extends LTI_SEO_UnitTestCase {
 		parent::setUp();
 	}
 
-	public function testHim(){
-
-	}
-
 	/**
 	 *
 	 * @covers \Lti\Seo\Admin::get_supported_post_types
