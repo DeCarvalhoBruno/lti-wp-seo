@@ -6,18 +6,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/DeCarvalhoBruno/json-ld.git",
-            "reference": "15a0bf4d3686a853020765d45bab1705421047fe"
+            "reference": "7f192891c2f435c6ad1c0c5b8f1ff91e9100cbc9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/DeCarvalhoBruno/json-ld/zipball/15a0bf4d3686a853020765d45bab1705421047fe",
-            "reference": "15a0bf4d3686a853020765d45bab1705421047fe",
+            "url": "https://api.github.com/repos/DeCarvalhoBruno/json-ld/zipball/7f192891c2f435c6ad1c0c5b8f1ff91e9100cbc9",
+            "reference": "7f192891c2f435c6ad1c0c5b8f1ff91e9100cbc9",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3"
         },
-        "time": "2015-05-01 07:44:10",
+        "time": "2015-05-01 19:44:58",
         "type": "library",
         "installation-source": "source",
         "autoload": {
