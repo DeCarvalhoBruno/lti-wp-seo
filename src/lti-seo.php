@@ -94,6 +94,7 @@ class LTI_SEO {
 		require_once $this->file_path . 'frontend/frontend.php';
 		require_once $this->file_path . 'plugin/postbox.php';
 		require_once $this->file_path . 'frontend/helpers/wordpress_helper.php';
+		require_once $this->file_path . 'frontend/generators/schema_org.php';
 		require_once $this->file_path . 'frontend/generators/json_ld.php';
 		require_once $this->file_path . 'frontend/generators/generic_meta_tag.php';
 		require_once $this->file_path . 'frontend/generators/open_graph.php';

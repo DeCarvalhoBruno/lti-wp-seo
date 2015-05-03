@@ -49,7 +49,7 @@ class Singular_JSON_LD extends Wordpress_JSON_LD {
 				case "NewsArticle":
 				case "ScholarlyArticle":
 				case "TechArticle":
-					add_action( 'lti_seo_json_ld', array( $this, 'make_' . $type ) );
+					add_action( 'lti_seo_json_ld', array( $this, 'make_WP_' . $type ) );
 			}
 		}
 	}

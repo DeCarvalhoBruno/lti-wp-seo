@@ -3,6 +3,10 @@
 use Lti\Seo\Plugin\Fields;
 use Lti\Seo\Plugin\Postbox_Values;
 
+interface ICanHelp
+{
+}
+
 class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJSONLD {
 
 	private $is_home_posts_page;
@@ -151,9 +155,12 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		}
 
 		if ( isset( $this->user_meta[ $key ] ) ) {
-			$value = array_shift( $this->user_meta[ $key ] );
-			if ( ! is_null( $value ) && ! empty( $value ) ) {
-				return $value;
+			$value = $this->user_meta[ $key ];
+			if(is_array($value)){
+				$this->user_meta[ $key ] = array_shift($value);
+			}
+			if ( ! is_null( $this->user_meta[ $key ] ) && ! empty( $this->user_meta[ $key ] ) ) {
+				return $this->user_meta[ $key ];
 			}
 		}
 
@@ -596,8 +603,6 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 	}
 
 	public function get_schema_org( $setting ) {
-		//echo $this->schema;
-
 		switch ( $this->schema ) {
 			case "CreativeWork":
 				switch ( $setting ) {

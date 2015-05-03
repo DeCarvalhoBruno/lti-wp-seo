@@ -5,8 +5,11 @@ class Open_Graph extends GenericMetaTag {
 	protected $meta_tag_name_attribute = "property";
 
 	public function display_tags() {
-		$img = $this->tags['og']['image'];
-		unset( $this->tags['og']['image'] );
+		$img = null;
+		if ( isset( $this->tags['og']['image'] ) ) {
+			$img = $this->tags['og']['image'];
+			unset( $this->tags['og']['image'] );
+		}
 
 		$meta = "";
 		foreach ( $this->tags as $tags => $tag ) {
@@ -124,9 +127,12 @@ class Singular_Gallery_Open_Graph extends Singular_Open_Graph {
 
 class Author_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeaderTags {
 	public function make_tags() {
-		$ar = parent::make_tags();
-		unset( $ar['og']['type'] );
+		$ar = array();
+
 		$ar['og']['type'] = 'profile';
+		$ar['og']['url'] = esc_url( $this->helper->get_canonical_url() );
+		$ar['og']['title'] = esc_attr( $this->helper->get_title() );
+
 		$profile          = $this->helper->get_author_social_info( 'facebook' );
 		if ( ! empty( $profile['first_name'] ) ) {
 			$ar['profile']['first_name'] = $profile['first_name'];

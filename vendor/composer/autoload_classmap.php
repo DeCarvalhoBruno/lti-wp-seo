@@ -29,6 +29,5 @@ return array(
     'Lti\\Seo\\Generators\\WebPage' => $vendorDir . '/lti/json-ld/src/Generators/schema_org.php',
     'Lti\\Seo\\Generators\\WebSite' => $vendorDir . '/lti/json-ld/src/Generators/schema_org.php',
     'Lti\\Seo\\Helpers\\Generic_Helper' => $vendorDir . '/lti/json-ld/src/Helpers/generic.php',
-    'Lti\\Seo\\Helpers\\ICanHelp' => $vendorDir . '/lti/json-ld/src/Helpers/generic.php',
     'Lti\\Seo\\Helpers\\ICanHelpWithJSONLD' => $vendorDir . '/lti/json-ld/src/Helpers/generic.php',
 );
