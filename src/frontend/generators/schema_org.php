@@ -27,6 +27,7 @@ class WP_Article extends Article {
 	}
 }
 
+
 class WP_BlogPosting extends WP_Article {
 	protected $realType = "BlogPosting";
 }

@@ -1,4 +1,4 @@
 /.idea
 /node_modules
 composer.lock
-/vendor/**/.git
+/vendor

@@ -87,4 +87,3 @@ class Search_JSON_LD extends Wordpress_JSON_LD {
 
 
 
-

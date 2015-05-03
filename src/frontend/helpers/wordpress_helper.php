@@ -705,5 +705,4 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 	public function get_current_url() {
 		return $this->current_url;
 	}
-
 }

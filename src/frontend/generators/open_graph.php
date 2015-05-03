@@ -119,7 +119,6 @@ class Singular_Open_Graph extends Frontpage_Open_Graph implements ICanMakeHeader
 }
 
 class Page_Open_Graph extends Frontpage_Open_Graph {
-
 }
 
 class Singular_Gallery_Open_Graph extends Singular_Open_Graph {
