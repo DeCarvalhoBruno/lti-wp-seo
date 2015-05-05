@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lti-wp-seo\n"
 "POT-Creation-Date: 2015-05-01 08:46+0100\n"
-"PO-Revision-Date: 2015-05-01 08:47+0100\n"
+"PO-Revision-Date: 2015-05-04 15:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -24,7 +24,7 @@ msgstr "Public e-mail address"
 
 #: ../src/admin/admin.php:50
 msgid "hlp.user.public_email"
-msgstr "Caution: this email address will be made public through header tags"
+msgstr "Caution: this email address could  be made public through header tags"
 
 #: ../src/admin/admin.php:51
 msgid "user.job_title"

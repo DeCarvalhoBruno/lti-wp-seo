@@ -110,6 +110,36 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 			case 'gplus':
 				$info = $this->get_user_meta_key( "lti_gplus_url" );
 				break;
+			case 'all_with_labels':
+				$twitter = $this->get_user_meta_key( "lti_twitter_username" );
+				if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
+					$twitter = 'https://twitter.com' . str_replace( '@', '/', $twitter );
+				}
+				$data = $this->get_user_meta_key( "lti_facebook_url" );
+				if ( ! is_null( $data ) && ! empty( $data ) ) {
+					$info['facebook'] = $data;
+				}
+				$data = $this->get_user_meta_key( "lti_gplus_url" );
+				if ( ! is_null( $data ) && ! empty( $data ) ) {
+					$info['gplus'] = $data;
+				}
+				$data = $this->get_user_meta_key( "lti_instagram_url" );
+				if ( ! is_null( $data ) && ! empty( $data ) ) {
+					$info['instagram'] = $data;
+				}
+				$data = $this->get_user_meta_key( "lti_youtube_url" );
+				if ( ! is_null( $data ) && ! empty( $data ) ) {
+					$info['youtube'] = $data;
+				}
+				$data = $this->get_user_meta_key( "lti_linkedin_url" );
+				if ( ! is_null( $data ) && ! empty( $data ) ) {
+					$info['linkedin'] = $data;
+				}
+				$data = $this->get_user_meta_key( "lti_public_email" );
+				if ( ! is_null( $data ) && ! empty( $data ) ) {
+					$info['email'] = 'mailto:' . $data . '?subject=%s&body=%s';
+				}
+				break;
 			default:
 
 				$twitter = $this->get_user_meta_key( "lti_twitter_username" );
