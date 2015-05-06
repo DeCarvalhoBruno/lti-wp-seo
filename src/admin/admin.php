@@ -257,7 +257,7 @@ class Admin {
 
 	private function user_profile_field( $userID, $field, $label, $description ) {
 		return sprintf( '<tr>
-				<th><label for="%1$s"><?php _e("Phone"); ?>%2$s</label></th>
+				<th><label for="%1$s">%2$s</label></th>
 				<td>
 					<input type="text" name="%1$s" id="%1$s" class="regular-text"
 					       value="' . esc_attr( get_the_author_meta( $field, $userID ) ) . '" /><br />

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lti-wp-seo\n"
 "POT-Creation-Date: 2015-05-01 08:46+0100\n"
-"PO-Revision-Date: 2015-05-04 15:07+0100\n"
+"PO-Revision-Date: 2015-05-06 20:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -32,7 +32,7 @@ msgstr "Job title"
 
 #: ../src/admin/admin.php:51
 msgid "hlp.user.job_title"
-msgstr "The job title of the person (for example, Financial Manager)."
+msgstr "Your job title (for example, Financial Manager)."
 
 #: ../src/admin/admin.php:52
 msgid "user.work_longitude"
@@ -148,7 +148,7 @@ msgstr "Settings"
 
 #: ../src/admin/admin.php:136
 msgid "opt.msg.updated"
-msgstr "Plugin options have been updated"
+msgstr "Plugin options have been updated."
 
 #: ../src/admin/admin.php:140
 msgid "opt.msg.error_token"
@@ -156,7 +156,7 @@ msgstr "Plugin options could not be saved (session error)."
 
 #: ../src/admin/admin.php:149
 msgid "opt.msg.reset"
-msgstr "Plugin options have been reset"
+msgstr "Plugin options have been reset."
 
 #: ../src/admin/admin.php:183
 msgid "admin.meta_box"
@@ -235,7 +235,7 @@ msgstr ""
 msgid "general_hlp_social_2"
 msgstr ""
 "The presence of these tags will ensure that your content will be featured on "
-"social networks as prominently as they'll allow."
+"social networks."
 
 #: ../src/admin/partials/help_menu.php:29
 msgid "general_hlp_social_3"
@@ -589,7 +589,7 @@ msgstr ""
 
 #: ../src/admin/partials/options-page.php:477
 msgid "out.jsonld_website_support"
-msgstr "Website"
+msgstr "Type of website"
 
 #: ../src/admin/partials/options-page.php:486
 msgid "opt.jsonld_website_website"
