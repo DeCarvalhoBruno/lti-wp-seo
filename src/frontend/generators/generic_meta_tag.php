@@ -14,13 +14,21 @@ interface ICanMakeHeaderTags {
 
 abstract class GenericMetaTag {
 
+	/**
+	 * @var array Where tags are placed before output
+	 */
 	protected $tags;
 
+	/**
+	 * @var int If needed, the post id
+	 */
 	protected $post_id;
 
+	/**
+	 * @var string The default name of the name attribute in meta tags
+	 */
 	protected $meta_tag_name_attribute = "name";
 
-	protected $image_retrieval_mode = "fallback";
 
 	protected $number_images = -1;
 

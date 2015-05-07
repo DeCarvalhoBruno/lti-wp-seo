@@ -1,5 +1,14 @@
 <?php namespace Lti\Seo\Plugin;
 
+/**
+ * Loads all the default plugin values
+ *
+ * An object of this type is inserted in the options database table
+ * whenever plugin settings are saved.
+ *
+ * Class Defaults
+ * @package Lti\Seo\Plugin
+ */
 class Defaults {
 	public $values;
 
@@ -90,13 +99,37 @@ class Defaults {
 	}
 }
 
+/**
+ * Defines default values for each field
+ *
+ * Class def
+ * @package Lti\Seo\Plugin
+ */
 class def {
 
+	/**
+	 * @var string Name of the setting, which will be used throughout the app
+	 */
 	public $name;
+	/**
+	 * @var string Type of value (text, radio...)
+	 */
 	public $type;
+	/**
+	 * @var mixed Value when initialized
+	 */
 	public $default_value;
+	/**
+	 * @var bool Whether the setting has knock on effects on postbox values.
+	 */
 	public $impacts_user_settings;
 
+	/**
+	 * @param $name
+	 * @param $type
+	 * @param null $default_value
+	 * @param bool $impacts_user_settings
+	 */
 	public function __construct( $name, $type, $default_value = null, $impacts_user_settings = false ) {
 		$this->name                  = $name;
 		$this->type                  = __NAMESPACE__ . "\\Field_" . $type;
@@ -105,7 +138,16 @@ class def {
 	}
 }
 
+/**
+ * Puts all settings together
+ *
+ * Class Plugin_Settings
+ * @package Lti\Seo\Plugin
+ */
 class Plugin_Settings {
+	/**
+	 * @param \stdClass $settings
+	 */
 	public function __construct( \stdClass $settings = null ) {
 
 		$defaults = new Defaults();
@@ -120,6 +162,8 @@ class Plugin_Settings {
 			}
 			$className = $value->type;
 
+
+			 //@TODO: why do we do this test?
 			if ( ! is_null( $value->default_value ) ) {
 				$this->{$value->name} = new $className( $storedValue, $value->default_value,
 					$value->impacts_user_settings );
@@ -150,6 +194,13 @@ class Plugin_Settings {
 		$this->{$key} = new $className( $value );
 	}
 
+	/**
+	 * Comparing two Plugin_Settings objects
+	 *
+	 * @param Plugin_Settings $values
+	 *
+	 * @return array $changed key-value array of the properties that changed
+	 */
 	public function compare( $values ) {
 		$changed       = array();
 		$currentValues = get_object_vars( $this );
@@ -164,7 +215,6 @@ class Plugin_Settings {
 		}
 
 		return $changed;
-
 	}
 }
 

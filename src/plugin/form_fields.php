@@ -1,5 +1,11 @@
 <?php namespace Lti\Seo\Plugin;
 
+/**
+ * Used to spot field types on forms and display values accordingly
+ *
+ * Class Fields
+ * @package Lti\Seo\Plugin
+ */
 abstract class Fields {
 	public $value;
 	public $isTracked;

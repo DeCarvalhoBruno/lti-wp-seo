@@ -2,9 +2,17 @@
     'use strict';
 
     $(document).ready(function () {
-        var Header = function(headerElem){
+
+        /**
+         * Sets messages in the admin screen header
+         * Triggered after updates and resets
+         *
+         * @param headerElem CSS class of the header element
+         * @constructor
+         */
+        var Header = function (headerElem) {
             this.elem = $(headerElem);
-            this.evalClass = function(elemClass){
+            this.evalClass = function (elemClass) {
                 var elem = this.elem;
                 if (elem.hasClass(elemClass)) {
                     setTimeout(
@@ -26,17 +34,23 @@
             seo_header.evalClass('lti_reset');
             seo_header.evalClass('lti_error');
 
-            $('#jsonld_reset').on('click',function(){
+            $('#jsonld_reset').on('click', function () {
                 $('#jsonld_img').val('');
                 $('#jsonld_img_id').val('');
             });
-            $('#frontpage_social_reset').on('click',function(){
+            $('#frontpage_social_reset').on('click', function () {
                 $('#frontpage_social_img').val('');
                 $('#frontpage_social_img_id').val('');
             });
         }
 
 
+        /**
+         * Allows to enable/disable groups of input fields
+         * when the user activates/deactivates certain features
+         *
+         * Targets a div through its id and disables/enables any input, textarea or select inside it.
+         */
         var input = function () {
             this.objectToLookIntoID = null;
             this.optionID = null;
@@ -76,6 +90,10 @@
             }
         };
 
+        /**
+         * When we initialize the page, we need to make sure groups of fields are disabled
+         * if the parent option is not ticked
+         */
         $('[data-toggle="seo-options"]').each(function () {
             var targetToDisable = $(this).attr('data-target');
             if (typeof targetToDisable != "undefined") {
@@ -85,11 +103,19 @@
             }
         });
 
-        $('#lti_social_reset').on('click',function(){
+        /**
+         * Triggered when clicking "reset" on image fields.
+         */
+        $('#lti_social_reset').on('click', function () {
             $('#lti_social_img').val('');
             $('#lti_social_img_id').val('');
         });
 
+        /**
+         * Handles tabbing feature
+         *
+         * @type {*|HTMLElement}
+         */
         var lti_seo_tabs = $('#lti_seo_tabs');
         if (lti_seo_tabs.length) {
             var hash = window.location.hash;
@@ -105,6 +131,7 @@
                 $(this).tab('show');
             });
 
+            //We make sure we come back to the last active tab before the page is reloaded
             $('#flseo').on('submit', function () {
                 var hash = window.location.hash;
                 if (hash) {
@@ -114,7 +141,11 @@
             });
         }
 
-        //Thank you http://www.webmaster-source.com/2013/02/06/using-the-wordpress-3-5-media-uploader-in-your-plugin-or-theme/
+        /**
+         * Activates Wordpress' media window for image selection
+         *
+         * Thank you http://www.webmaster-source.com/2013/02/06/using-the-wordpress-3-5-media-uploader-in-your-plugin-or-theme/
+         */
         $('.upload_image_button').click(function (e) {
             var target_id = $(this).attr('id').replace(/_button$/, '');
             e.preventDefault();
@@ -132,6 +163,13 @@
             custom_uploader.open();
         });
 
+        /**
+         * Updates character count fields below textareas
+         *
+         * @param target ID of the element to play with
+         * @param targetCharCount Character count to apply to the field
+         * @param targetMax Character count threshold
+         */
         var updateCount = function (target, targetCharCount, targetMax) {
             if (targetCharCount > targetMax) {
                 var targetID = $(this).attr('id');
@@ -139,11 +177,13 @@
             } else {
                 $('#w' + target).removeClass("danger");
             }
-            //console.log(targetCharCount+' '+targetMax);
-            //console.log( $('#c'+target).val());
             $('#c' + target).html(targetCharCount);
         };
 
+        /**
+         * Initializing fields with a character count
+         * @type {*[]}
+         */
         var fieldsWithCounter = [
             [$("#frontpage_description_text"), 160],
             [$("#lti_seo_description"), 160]
@@ -151,6 +191,9 @@
 
         var nbFields = fieldsWithCounter.length;
 
+        /**
+         * On keyup, we change the character count
+         */
         for (var i = 0; i < nbFields; i++) {
             if (fieldsWithCounter[i][0].length) {
                 var tmp = fieldsWithCounter[i];
@@ -160,6 +203,13 @@
                 });
             }
         }
+
+        /**
+         * Fetches word count for post types
+         * We use it in JSON-LD markup for articles
+         *
+         * @type {*|HTMLElement}
+         */
         var postWordCount = $('#wp-word-count');
         if (postWordCount.length) {
             $('#post').on('submit', function () {
@@ -167,23 +217,27 @@
             });
         }
 
+        /**
+         * Manages Person/Organization field groups in the Frontpage tab
+         * @type {*|HTMLElement}
+         */
         var jsonld_entity_person = $('#jsonld_entity_person');
         if (jsonld_entity_person.length) {
             var jsonld_entity_organization = $('#jsonld_entity_organization');
 
-            if(jsonld_entity_person.attr('checked')=='checked'){
+            if (jsonld_entity_person.attr('checked') == 'checked') {
                 $('#jsonld_entity_organization_group').addClass('hidden');
-            }else{
+            } else {
                 $('#jsonld_entity_person_group').addClass('hidden');
 
             }
 
-            jsonld_entity_person.on('click',function(){
+            jsonld_entity_person.on('click', function () {
                 $('#jsonld_entity_organization_group').addClass('hidden');
                 $('#jsonld_entity_person_group').removeClass('hidden');
             });
 
-            jsonld_entity_organization.on('click',function(){
+            jsonld_entity_organization.on('click', function () {
                 $('#jsonld_entity_organization_group').removeClass('hidden');
                 $('#jsonld_entity_person_group').addClass('hidden');
             });
@@ -191,6 +245,12 @@
         }
     });
 })(jQuery);
+
+/**
+ * We add the little bits of Twitter Bootstrap that we need to handle tabs in our admin screen
+ *
+ * @link http://getbootstrap.com/javascript/#tabs
+ */
 if ("undefined" == typeof jQuery)throw new Error("Bootstrap's JavaScript requires jQuery");
 +function (t) {
     "use strict";

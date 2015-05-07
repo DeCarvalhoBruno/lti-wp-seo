@@ -6,11 +6,30 @@ use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Plugin_Settings;
 use Lti\Seo\Plugin\Postbox_Values;
 
+/**
+ * Deals with everything that happens in the admin screen and postbox,
+ * and defines custom user profile fields
+ *
+ * Class Admin
+ * @package Lti\Seo
+ */
 class Admin {
 
+	/**
+	 * @var string Tracks page type so we can display error/warning messages
+	 */
 	private $page_type = 'edit';
+	/**
+	 * @var string Contains messages to be displayed after saves/resets
+	 */
 	private $message = '';
+	/**
+	 * @var string In case we forget our own name in the heat of the battle
+	 */
 	private $plugin_name;
+	/**
+	 * @var string Plugin version
+	 */
 	private $version;
 	/**
 	 * @var \Lti\Seo\Plugin\Plugin_Settings
@@ -20,15 +39,31 @@ class Admin {
 	 * @var \Lti\Seo\Plugin\Postbox_Values
 	 */
 	private $box_values;
+	/**
+	 * @var array Types of posts where a postbox has to be added
+	 */
 	private $unsupported_post_types = array( 'attachment' );
+	/**
+	 * @var string Helps defining what kind of settings to use (settings or postbox values)
+	 */
 	private $current_page = "options-general";
 	/**
 	 * @var \Lti\Seo\Helpers\Wordpress_Helper
 	 */
 	private $helper;
 
+	/**
+	 * @var array All the info about custom user profile fields
+	 */
 	private $user_field_info;
 
+	/**
+	 * @param $plugin_name
+	 * @param $version
+	 * @param Plugin_Settings $settings
+	 * @param $plugin_path
+	 * @param ICanHelp $helper
+	 */
 	public function __construct(
 		$plugin_name,
 		$version,
@@ -66,12 +101,19 @@ class Admin {
 		);
 	}
 
+	/**
+	 * Adding our CSS stylesheet
+	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_name, $this->plugin_dir_url . 'assets/dist/css/lti_seo_admin.css',
 			array( 'thickbox' ), $this->version,
 			'all' );
 	}
 
+	/**
+	 * Adding our JS
+	 * Defining translated values for javascript to use
+	 */
 	public function enqueue_scripts() {
 		wp_enqueue_media();
 		wp_enqueue_script( $this->plugin_name, $this->plugin_dir_url . 'assets/dist/js/lti_seo_admin.js',
@@ -81,6 +123,9 @@ class Admin {
 		wp_localize_script( $this->plugin_name, 'lti_seo_i8n', array( 'use_img' => ltint( 'general.use_image' ) ) );
 	}
 
+	/**
+	 * Adding "Help" button to the admin screen
+	 */
 	public function admin_menu() {
 		$page = add_options_page( ltint( 'admin.menu_title' ), ltint( 'admin.menu_item' ), 'manage_options',
 			'lti-seo-options',
@@ -88,6 +133,11 @@ class Admin {
 		add_action( 'load-' . $page, array( $this, 'wp_help_menu' ) );
 	}
 
+	/**
+	 * Defining tabs for the help menu
+	 *
+	 * @see Admin::admin_menu
+	 */
 	public function wp_help_menu() {
 		include $this->admin_dir . '/partials/help_menu.php';
 		$screen = get_current_screen();
@@ -118,6 +168,14 @@ class Admin {
 		);
 	}
 
+	/**
+	 * Adds a LTI SEO button to the WP "Settings" menu item in the admin sidebar
+	 *
+	 * @param $links
+	 * @param $file
+	 *
+	 * @return mixed
+	 */
 	public function plugin_actions( $links, $file ) {
 		if ( $file == 'lti-wp-seo/lti-wp-seo.php' && function_exists( "admin_url" ) ) {
 			array_unshift( $links,
@@ -127,6 +185,10 @@ class Admin {
 		return $links;
 	}
 
+	/**
+	 * Renders the admin view
+	 *
+	 */
 	public function options_page() {
 		if ( isset( $_POST['lti_seo_update'] ) ) {
 			if ( isset( $_POST['lti_seo_token'] ) ) {
@@ -157,6 +219,13 @@ class Admin {
 		Activator::activate();
 	}
 
+	/**
+	 * User input validation
+	 * Compares old values with new because some fields have a global impact,
+	 * including values that users set in postboxes
+	 *
+	 * @param $data
+	 */
 	public function validate_input( $data ) {
 		unset( $data['_wpnonce'], $data['option_page'], $data['_wp_http_referer'] );
 
@@ -174,6 +243,10 @@ class Admin {
 		update_option( 'lti_seo_options', $this->settings );
 	}
 
+	/**
+	 * Adds postboxes to posts
+	 *
+	 */
 	public function add_meta_boxes() {
 		$supported_post_types = $this->get_supported_post_types();
 
@@ -189,9 +262,18 @@ class Admin {
 		}
 	}
 
+	/**
+	 * Displays postbox values
+	 *
+	 * @param \WP_Post $post
+	 */
 	public function metadata_box( \WP_Post $post ) {
 		$this->box_values = get_post_meta( $post->ID, "lti_seo", true );
 
+		/**
+		 * When the post is created, we need to set robot values according to what was set
+		 * in the admin screen
+		 */
 		if ( empty( $this->box_values ) ) {
 			$this->box_values = new Postbox_Values( array() );
 			$robot            = new Robot( $this->helper );
@@ -201,6 +283,9 @@ class Admin {
 			}
 		}
 
+		/**
+		 * We add keyword suggestions if the field is empty
+		 */
 		if ( $this->settings->get( 'keyword_support' ) == true ) {
 			$keyword_text = $this->box_values->get( 'keywords' );
 			if ( is_null( $keyword_text ) || empty( $keyword_text ) ) {
@@ -212,6 +297,13 @@ class Admin {
 		include $this->admin_dir . '/partials/postbox.php';
 	}
 
+	/**
+	 * Determines what post types need a postbox
+	 * Only posts and pages are supported and we could have hardcoded the values,
+	 * but hey, we're extra mile kinda guys!
+	 *
+	 * @return array
+	 */
 	public function get_supported_post_types() {
 		$post_types = get_post_types( array( 'public' => true, 'show_ui' => true ) );
 
@@ -219,6 +311,9 @@ class Admin {
 	}
 
 	/**
+	 * Returns the proper settings to apply depending on whether we're in the settings screen
+	 * or editing a post/page.
+	 *
 	 * @return \Lti\Seo\Plugin\Plugin_Settings
 	 */
 	public function get_form_values() {
@@ -232,6 +327,8 @@ class Admin {
 
 
 	/**
+	 * Saves posts
+	 *
 	 * @param int $post_ID
 	 * @param \WP_Post $post
 	 * @param int $update
@@ -242,6 +339,11 @@ class Admin {
 		}
 	}
 
+	/**
+	 * Displays the group of custom user profile fields
+	 *
+	 * @param $user
+	 */
 	public function show_user_profile( $user ) {
 		$fields = array();
 		foreach ( $this->user_field_info as $field ) {
@@ -255,6 +357,16 @@ class Admin {
 		</table>', ltint( "user.fields_title" ), implode( PHP_EOL, $fields ) );
 	}
 
+	/**
+	 * Displays individual custom user fields
+	 *
+	 * @param int $userID
+	 * @param string $field
+	 * @param string $label
+	 * @param string $description Appears under the field
+	 *
+	 * @return string
+	 */
 	private function user_profile_field( $userID, $field, $label, $description ) {
 		return sprintf( '<tr>
 				<th><label for="%1$s">%2$s</label></th>
@@ -266,6 +378,12 @@ class Admin {
 			</tr>', $field, ltint( $label ), ltint( $description ) );
 	}
 
+	/**
+	 * Triggered when the user profile is saved
+	 *
+	 * @param int $user_id
+	 * @return bool
+	 */
 	public function personal_options_update( $user_id ) {
 		if ( current_user_can( 'edit_user', $user_id ) ) {
 			foreach ( $this->user_field_info as $field ) {

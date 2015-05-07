@@ -1,5 +1,14 @@
 <?php namespace Lti\Seo\Plugin;
 
+/**
+ * Settings for postbox fields
+ * An object of this type is inserted into the postmeta database table
+ * when posts are saved
+ *
+ *
+ * Class Postbox_Fields
+ * @package Lti\Seo\Plugin
+ */
 class Postbox_Fields {
 	public $values = array(
 		array( 'description', 'Text' ),

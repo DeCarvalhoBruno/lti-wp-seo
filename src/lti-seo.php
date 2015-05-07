@@ -4,6 +4,15 @@ use Lti\Seo\Generators\JSON_LD;
 use Lti\Seo\Helpers\Wordpress_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 
+/**
+ * Main plugin class, loads all the goods
+ *
+ * A static instance is kept for testing purposes, and for summoning the beast easily
+ * when working with the template.
+ *
+ * Class LTI_SEO
+ * @package Lti\Seo
+ */
 class LTI_SEO
 {
 
@@ -184,10 +193,6 @@ class LTI_SEO
             $this->helper );
 
         $this->loader->add_action( 'wp_head', $this->frontend, 'head' );
-
-//		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
-//			$this->loader->add_filter( 'user_contactmethods', $this->frontend, 'user_contactmethods' );
-//		}
     }
 
     /**

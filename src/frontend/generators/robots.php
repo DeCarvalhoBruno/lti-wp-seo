@@ -1,5 +1,11 @@
 <?php namespace Lti\Seo\Generators;
 
+/**
+ * Generates robot tags
+ *
+ * Class Robot
+ * @package Lti\Seo\Generators
+ */
 class Robot extends GenericMetaTag {
 	protected $setting;
 	protected $prefix;

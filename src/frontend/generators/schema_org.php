@@ -1,7 +1,19 @@
 <?php namespace Lti\Seo\Generators;
-
 use Lti\Seo\Helpers\ICanHelpWithJSONLD;
 
+/**
+ * These classes do anything wordpress specific when dealing with JSON-LD markup
+ *
+ * Relies on the lti/json-ld composer package
+ * @link https://packagist.org/packages/lti/json-ld
+ *
+ */
+
+
+/**
+ * Class WP_Article
+ * @package Lti\Seo\Generators
+ */
 class WP_Article extends Article {
 
 	protected $realType = "Article";

@@ -2,6 +2,12 @@
 
 use Lti\Seo\Helpers\ICanHelp;
 
+/**
+ * Generates twitter card tags
+ *
+ * Class Twitter_Card
+ * @package Lti\Seo\Generators
+ */
 class Twitter_Card extends GenericMetaTag {
 
 	protected $type = "summary";

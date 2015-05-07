@@ -1,7 +1,11 @@
 <?php namespace Lti\Seo\Generators;
 
-use Lti\Seo\Test\DescriptionTest;
-
+/**
+ * Handles meta description tags
+ *
+ * Class Description
+ * @package Lti\Seo\Generators
+ */
 class Description extends GenericMetaTag {
 
 	public function display_tags() {

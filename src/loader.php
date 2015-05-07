@@ -1,5 +1,11 @@
 <?php namespace Lti\Seo;
 
+/**
+ * Loads all wordpress hooks
+ *
+ * Class Loader
+ * @package Lti\Seo
+ */
 class Loader {
 
 	protected $actions;

@@ -4,6 +4,8 @@
  *
  * Admin View
  *
+ * @see \Lti\Seo\Admin::options_page
+ *
  */
 ?>
 <div id="lti_seo_wrapper">

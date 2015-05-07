@@ -2,6 +2,12 @@
 
 use Lti\Seo\Helpers\ICanHelpWithJSONLD;
 
+/**
+ * Hooks JSON-LD generators into Wordpress
+ *
+ * Class Wordpress_JSON_LD
+ * @package Lti\Seo\Generators
+ */
 class Wordpress_JSON_LD extends JSON_LD {
 	/**
 	 * @var ICanHelpWithJSONLD|\Lti\Seo\Helpers\Wordpress_Helper $helper

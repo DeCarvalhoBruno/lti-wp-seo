@@ -7,6 +7,13 @@ interface ICanHelp
 {
 }
 
+/**
+ * Does anything wordpress related on behalf on generators
+ * @TODO: find a way to specialize helpers more, this class could become humongous
+ *
+ * Class Wordpress_Helper
+ * @package Lti\Seo\Helpers
+ */
 class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJSONLD {
 
 	private $is_home_posts_page;
@@ -96,6 +103,13 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		return $url;
 	}
 
+	/**
+	 * Used by tag generators to fetch social profiles
+	 * Can also be used in themes to get author social profiles
+	 *
+	 * @param string $platform
+	 * @return null
+	 */
 	public function get_author_social_info( $platform = '' ) {
 		$info = null;
 		switch ( $platform ) {
@@ -114,6 +128,7 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 				$twitter = $this->get_user_meta_key( "lti_twitter_username" );
 				if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
 					$twitter = 'https://twitter.com' . str_replace( '@', '/', $twitter );
+					$info['twitter'] = $twitter;
 				}
 				$data = $this->get_user_meta_key( "lti_facebook_url" );
 				if ( ! is_null( $data ) && ! empty( $data ) ) {
@@ -200,7 +215,13 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 	public function get_user() {
 		$author = null;
 		if ( is_null( $this->user_id ) ) {
-			if ( $this->page_type() == "Author" ) {
+			if($this->page_type=="Frontpage"){
+				if($this->get('jsonld_entity_support')==true&&$this->get('jsonld_entity_type')=="Person"){
+					$this->user_id = $this->get('jsonld_person_wp_userid');
+				}else{
+					$this->user_id = null;
+				}
+			}else if ( $this->page_type() == "Author" ) {
 				$this->user_id = get_query_var( 'author' );
 			} else {
 				$this->user_id = get_the_author_meta( 'ID',

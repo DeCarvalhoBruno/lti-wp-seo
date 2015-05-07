@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Appears when we click on the help button. (Top-right of the admin screen)
+ *
+ * Class Lti_Seo_Help_Menu
+ *
+ * @see \Lti\Seo\Admin::wp_help_menu
+ */
 class Lti_Seo_Help_Menu {
 	public function __construct() {
 

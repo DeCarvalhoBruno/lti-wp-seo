@@ -1,5 +1,11 @@
 <?php namespace Lti\Seo\Generators;
 
+/**
+ * Generates open graph tags
+ *
+ * Class Open_Graph
+ * @package Lti\Seo\Generators
+ */
 class Open_Graph extends GenericMetaTag {
 
 	protected $meta_tag_name_attribute = "property";

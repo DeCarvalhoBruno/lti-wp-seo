@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-wp-seo\n"
-"POT-Creation-Date: 2015-05-01 08:46+0100\n"
-"PO-Revision-Date: 2015-05-06 20:27+0100\n"
+"POT-Creation-Date: 2015-05-07 19:52+0100\n"
+"PO-Revision-Date: 2015-05-07 20:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: fr_FR\n"
@@ -18,177 +18,177 @@ msgstr ""
 "esc_html_x:1,2c;ltint;ltint_po\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/admin/admin.php:50
+#: ../src/admin/admin.php:85
 msgid "user.public_email"
 msgstr "Adresse e-mail publique"
 
-#: ../src/admin/admin.php:50
+#: ../src/admin/admin.php:85
 msgid "hlp.user.public_email"
 msgstr ""
 "Attention : cette adresse e-mail pourrait être rendue publique dans des "
 "balises d'entête"
 
-#: ../src/admin/admin.php:51
+#: ../src/admin/admin.php:86
 msgid "user.job_title"
 msgstr "Profession"
 
-#: ../src/admin/admin.php:51
+#: ../src/admin/admin.php:86
 msgid "hlp.user.job_title"
 msgstr "Votre profession (Ex : gestionnaire financier)"
 
-#: ../src/admin/admin.php:52
+#: ../src/admin/admin.php:87
 msgid "user.work_longitude"
 msgstr "Lieu de travail (longitude)"
 
-#: ../src/admin/admin.php:52
+#: ../src/admin/admin.php:87
 msgid "hlp.user.work_longitude"
 msgstr "La longitude de votre lieu de travail. Exemple : -122.08585."
 
-#: ../src/admin/admin.php:53
+#: ../src/admin/admin.php:88
 msgid "user.work_latitude"
 msgstr "Lieu de travail (latitude)"
 
-#: ../src/admin/admin.php:53
+#: ../src/admin/admin.php:88
 msgid "hlp.user.work_latitude"
 msgstr "La latitude de votre lieu de travail. Exemple : 37.42242."
 
-#: ../src/admin/admin.php:56
+#: ../src/admin/admin.php:91
 msgid "user.twitter_username"
 msgstr "Nom d'utilisateur twitter"
 
-#: ../src/admin/admin.php:57
+#: ../src/admin/admin.php:92
 msgid "hlp.user.twitter_username"
 msgstr "Exemple : @nomutilisateur"
 
-#: ../src/admin/admin.php:59
+#: ../src/admin/admin.php:94
 msgid "user.facebook_id"
 msgstr "ID de profil facebook"
 
-#: ../src/admin/admin.php:59
+#: ../src/admin/admin.php:94
 msgid "hlp.user.facebook_id"
 msgstr "Identifiant numérique de profil facebook"
 
-#: ../src/admin/admin.php:60
+#: ../src/admin/admin.php:95
 msgid "user.facebook_url"
-msgstr "URL du profil facebook"
+msgstr "Adresse web du profil facebook"
 
-#: ../src/admin/admin.php:60
+#: ../src/admin/admin.php:95
 msgid "hlp.user.facebook_url"
 msgstr "Exemple : https://www.facebook.com/groups/LinguisticTeamInternational/"
 
-#: ../src/admin/admin.php:61
+#: ../src/admin/admin.php:96
 msgid "user.gplus_url"
-msgstr "URL du profil Google+"
+msgstr "Adresse web du profil Google+"
 
-#: ../src/admin/admin.php:61
+#: ../src/admin/admin.php:96
 msgid "hlp.user.gplus_url"
 msgstr "Exemple : https://plus.google.com/+LinguisticTeamInternationalOfficial"
 
-#: ../src/admin/admin.php:62
+#: ../src/admin/admin.php:97
 msgid "user.instagram_url"
-msgstr "URL du profil Instagram"
+msgstr "Adresse web du profil Instagram"
 
-#: ../src/admin/admin.php:62
+#: ../src/admin/admin.php:97
 msgid "hlp.user.instagram_url"
 msgstr "Exemple : https://instagram.com/username"
 
-#: ../src/admin/admin.php:63
+#: ../src/admin/admin.php:98
 msgid "user.youtube_url"
-msgstr "URL de la chaine YouTube"
+msgstr "Adresse web de la chaine YouTube"
 
-#: ../src/admin/admin.php:63
+#: ../src/admin/admin.php:98
 msgid "hlp.user.youtube_url"
 msgstr "Exemple : https://www.youtube.com/user/LinguisticTeamIntl"
 
-#: ../src/admin/admin.php:64
+#: ../src/admin/admin.php:99
 msgid "user.linkedin_url"
-msgstr "URL du profil LinkedIn"
+msgstr "Adresse web du profil LinkedIn"
 
-#: ../src/admin/admin.php:64
+#: ../src/admin/admin.php:99
 msgid "hlp.user.linkedin_url"
 msgstr "Exemple : https://linkedin.com/in/nomutilisateur"
 
-#: ../src/admin/admin.php:65
+#: ../src/admin/admin.php:100
 msgid "user.myspace_url"
-msgstr "URL du profil myspace"
+msgstr "Adresse web du profil myspace"
 
-#: ../src/admin/admin.php:65
+#: ../src/admin/admin.php:100
 msgid "hlp.user.myspace_url"
 msgstr "Exemple : https://myspace.com/1998called"
 
-#: ../src/admin/admin.php:81
+#: ../src/admin/admin.php:123
 msgid "general.use_image"
 msgstr "Utiliser l'image"
 
-#: ../src/admin/admin.php:85
+#: ../src/admin/admin.php:130
 msgid "admin.menu_title"
 msgstr "Paramètres LTI SEO"
 
-#: ../src/admin/admin.php:85
+#: ../src/admin/admin.php:130
 msgid "admin.menu_item"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:97
+#: ../src/admin/admin.php:147
 msgid "general_hlp_welcome"
 msgstr "Bienvenue !"
 
-#: ../src/admin/admin.php:102
+#: ../src/admin/admin.php:152
 msgid "general_hlp_general"
 msgstr "Onglet général"
 
-#: ../src/admin/admin.php:107
+#: ../src/admin/admin.php:157
 msgid "general_hlp_frontpage"
 msgstr "Onglet page d'accueil"
 
-#: ../src/admin/admin.php:112
+#: ../src/admin/admin.php:162
 msgid "general_hlp_social"
 msgstr "Onglet social"
 
-#: ../src/admin/admin.php:124
+#: ../src/admin/admin.php:182
 msgid "general.settings"
 msgstr "Paramètres"
 
-#: ../src/admin/admin.php:136
+#: ../src/admin/admin.php:198
 msgid "opt.msg.updated"
 msgstr "Les paramètres ont été mis à jour."
 
-#: ../src/admin/admin.php:140
+#: ../src/admin/admin.php:202
 msgid "opt.msg.error_token"
 msgstr "Les paramètres n'ont pas pu être mis à jour (erreur de session)."
 
-#: ../src/admin/admin.php:149
+#: ../src/admin/admin.php:211
 msgid "opt.msg.reset"
 msgstr "Les paramètres ont été réinitialisés."
 
-#: ../src/admin/admin.php:183
+#: ../src/admin/admin.php:256
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:255
+#: ../src/admin/admin.php:357
 msgid "user.fields_title"
 msgstr "LTI SEO profile information"
 
-#: ../src/admin/partials/help_menu.php:9
+#: ../src/admin/partials/help_menu.php:16
 msgid "general_hlp_welcome_1"
 msgstr ""
 "Bienvenue chez LTI SEO, votre companion pour les tâches d'optimisation de "
 "moteur de recherche ! Le but de cette extension est de fournir un maximum de "
 "fonctionnalités tout en étant aussi léger et discret que possible."
 
-#: ../src/admin/partials/help_menu.php:10
+#: ../src/admin/partials/help_menu.php:17
 msgid "general_hlp_welcome_2"
 msgstr ""
 "Par défaut, toutes les options sont désactivées et l'extension n'affiche que "
 "le commentaire permettant d'identifier la section SEO de l'entête."
 
-#: ../src/admin/partials/help_menu.php:11
+#: ../src/admin/partials/help_menu.php:18
 msgid "general_hlp_welcome_3"
 msgstr ""
 "Aussi, vous remarquerez : pas de publicités, nous allons droit à "
 "l'essentiel ! Malgré tout, votre retour d'expérience est plus que bienvenu, "
 "n'hésitez pas à nous contacter !"
 
-#: ../src/admin/partials/help_menu.php:15
+#: ../src/admin/partials/help_menu.php:22
 msgid "general_hlp_general_1"
 msgstr ""
 "Dans l'onglet \"général\", les paramètres sont définis pour tout le site. "
@@ -196,123 +196,123 @@ msgstr ""
 "peuvent être établies. Wordpress fournit un certain nombre de liens de ce "
 "type, nous nous contentons de complémenter l'assortiment."
 
-#: ../src/admin/partials/help_menu.php:16
+#: ../src/admin/partials/help_menu.php:23
 msgid "general_hlp_general_2"
 msgstr ""
 "Les mots clés ne sont probablement pas cruciaux pour l'optimisation de "
 "moteurs de recherche, mais cette option est accéssible pour chaque article."
 
-#: ../src/admin/partials/help_menu.php:17
+#: ../src/admin/partials/help_menu.php:24
 msgid "general_hlp_general_3"
 msgstr ""
 "L'option robots permettra de donner des instructions directes aux moteurs de "
 "recherche, merci de considérer toute modification avec attention."
 
-#: ../src/admin/partials/help_menu.php:18
+#: ../src/admin/partials/help_menu.php:25
 msgid "general_hlp_general_4"
 msgstr ""
 "Enfin, la balise de description est une information vitale qui sera affichée "
 "sous le titre de la page et invitera les utilisateurs à cliquer sur vos "
 "contenus."
 
-#: ../src/admin/partials/help_menu.php:22
+#: ../src/admin/partials/help_menu.php:29
 msgid "general_hlp_frontpage_1"
 msgstr ""
 "Nous avons essayé d'ajouter un maximum de fonctionnalités à cet onglet, la "
 "page d'accueil étant la page la plus importante de votre site."
 
-#: ../src/admin/partials/help_menu.php:23
+#: ../src/admin/partials/help_menu.php:30
 msgid "general_hlp_frontpage_2"
 msgstr ""
 "Vous trouverez les mêmes fonctionnalités dans cet onglet que dans l'onglet "
 "général, avec en plus les informations liées à l'espace de nommage schema."
 "org."
 
-#: ../src/admin/partials/help_menu.php:27
+#: ../src/admin/partials/help_menu.php:34
 msgid "general_hlp_social_1"
 msgstr ""
 "L'onglet général vous permet d'activer des balises open graph (utilisées par "
 "facebook et pinterest) et twitter card."
 
-#: ../src/admin/partials/help_menu.php:28
+#: ../src/admin/partials/help_menu.php:35
 msgid "general_hlp_social_2"
 msgstr ""
 "La présence de ces balises permettront de s'assurer que vos contenus seront "
 "mis en valeur sur les réseaux sociaux."
 
-#: ../src/admin/partials/help_menu.php:29
+#: ../src/admin/partials/help_menu.php:36
 msgid "general_hlp_social_3"
 msgstr ""
 "À propos des images : cette extension ajoutera l'image à la une en premier. "
 "Puis, les images en pièce jointe seront ajoutées. Finalement, l'image "
 "personnalisée de l'article sera ajoutée."
 
-#: ../src/admin/partials/help_menu.php:33
+#: ../src/admin/partials/help_menu.php:40
 msgid "general_hlp_about_us"
 msgstr "Plus d'informations :"
 
-#: ../src/admin/partials/help_menu.php:34
+#: ../src/admin/partials/help_menu.php:41
 msgid "general_hlp_dev_blog"
-msgstr "Article de notre blog développement (en anglais)"
+msgstr "Article de notre blog (en anglais)"
 
-#: ../src/admin/partials/help_menu.php:35
+#: ../src/admin/partials/help_menu.php:42
 msgid "general_hlp_contribute"
 msgstr "Contribuez :"
 
-#: ../src/admin/partials/help_menu.php:36
+#: ../src/admin/partials/help_menu.php:43
 msgid "general_hlp_github"
 msgstr "Projet Github"
 
-#: ../src/admin/partials/options-page.php:12
+#: ../src/admin/partials/options-page.php:14
 msgid "opt.title"
 msgstr "Paramètres LTI SEO"
 
-#: ../src/admin/partials/options-page.php:20
+#: ../src/admin/partials/options-page.php:22
 msgid "opt.tab.general"
 msgstr "Général"
 
-#: ../src/admin/partials/options-page.php:24
+#: ../src/admin/partials/options-page.php:26
 msgid "opt.tab.frontpage"
 msgstr "Page d'accueil"
 
-#: ../src/admin/partials/options-page.php:28
+#: ../src/admin/partials/options-page.php:30
 msgid "opt.tab.post"
 msgstr "Articles et pages"
 
-#: ../src/admin/partials/options-page.php:32
+#: ../src/admin/partials/options-page.php:34
 msgid "opt.tab.social"
 msgstr "Social"
 
-#: ../src/admin/partials/options-page.php:49
+#: ../src/admin/partials/options-page.php:51
 msgid "opt.link_rel_support"
 msgstr "Balises de liens \"rel\""
 
-#: ../src/admin/partials/options-page.php:57
+#: ../src/admin/partials/options-page.php:59
 msgid "opt.link_rel_canonical"
-msgstr "URL canonique"
+msgstr "Adresse web canonique"
 
-#: ../src/admin/partials/options-page.php:61
+#: ../src/admin/partials/options-page.php:63
 msgid "opt.link_rel_publisher"
-msgstr "URL de l'éditeur"
+msgstr "Adresse web de l'éditeur"
 
-#: ../src/admin/partials/options-page.php:65
+#: ../src/admin/partials/options-page.php:67
 msgid "opt.link_rel_author"
-msgstr "URL de l'auteur"
+msgstr "Adresse web de l'auteur"
 
-#: ../src/admin/partials/options-page.php:75
+#: ../src/admin/partials/options-page.php:77
 msgid "opt.hlp.link_rel1"
 msgstr ""
 "Grâce aux liens avec attribut \"rel\", des relations entre types de contenus "
 "peuvent être établies. Wordpress fournit un certain nombre de liens de ce "
 "type, nous nous contentons de complémenter l'assortiment."
 
-#: ../src/admin/partials/options-page.php:77
+#: ../src/admin/partials/options-page.php:79
 msgid "opt.hlp.link_rel2"
 msgstr ""
 "Wordpress crée des liens canoniques pour les articles et la fonctionnalité "
 "adresse web canonique pour tous les autres types de pages."
 
-#: ../src/admin/partials/options-page.php:78
+#: ../src/admin/partials/options-page.php:80
 msgid "opt.hlp.link_rel3"
 msgstr ""
 "Les URL d'auteur et d'éditeur utilisent des profils Google+ pour ajouter des "
@@ -320,19 +320,19 @@ msgstr ""
 "chaque profil utilisteur ainsi que l'URL de l'éditeur dans l'onglet \"Social"
 "\"."
 
-#: ../src/admin/partials/options-page.php:86
+#: ../src/admin/partials/options-page.php:88
 msgid "opt.keyword_support"
 msgstr "Balise \"mots clés\""
 
-#: ../src/admin/partials/options-page.php:94
+#: ../src/admin/partials/options-page.php:96
 msgid "opt.keyword_cat_based"
 msgstr "Utilisant les catégories"
 
-#: ../src/admin/partials/options-page.php:98
+#: ../src/admin/partials/options-page.php:100
 msgid "opt.keyword_tag_based"
 msgstr "Utilisant les étiquettes"
 
-#: ../src/admin/partials/options-page.php:107
+#: ../src/admin/partials/options-page.php:109
 msgid "opt.hlp.keyword"
 msgstr ""
 "A list of comma delimited words (i.e \"cats, dogs, elephants\") that will be "
@@ -342,214 +342,214 @@ msgstr ""
 "suggestion dans la fenêtre d'édition d'article (Un champ texte sera ajouté "
 "dans chaque article)."
 
-#: ../src/admin/partials/options-page.php:113
+#: ../src/admin/partials/options-page.php:115
 msgid "opt.group.robots"
 msgstr "Balises \"Robots\""
 
-#: ../src/admin/partials/options-page.php:121
+#: ../src/admin/partials/options-page.php:123
 msgid "opt.group.robot_attr"
 msgstr "Attributs à appliquer"
 
-#: ../src/admin/partials/options-page.php:126
+#: ../src/admin/partials/options-page.php:128
 msgid "opt.robot.col2"
 msgstr "Étendue"
 
-#: ../src/admin/partials/options-page.php:129
+#: ../src/admin/partials/options-page.php:131
 msgid "opt.robot.th1"
 msgstr "Type"
 
-#: ../src/admin/partials/options-page.php:130
+#: ../src/admin/partials/options-page.php:132
 msgid "opt.robot.th2"
 msgstr "Globale"
 
-#: ../src/admin/partials/options-page.php:131
+#: ../src/admin/partials/options-page.php:133
 msgid "opt.robot.th3"
 msgstr "Articles et pages"
 
-#: ../src/admin/partials/options-page.php:136
+#: ../src/admin/partials/options-page.php:138
 msgid "opt.robot_noindex"
 msgstr "NOINDEX"
 
-#: ../src/admin/partials/options-page.php:145
+#: ../src/admin/partials/options-page.php:147
 msgid "opt.robot_nofollow"
 msgstr "NOFOLLOW"
 
-#: ../src/admin/partials/options-page.php:154
+#: ../src/admin/partials/options-page.php:156
 msgid "opt.robot_noodp"
 msgstr "NOODP"
 
-#: ../src/admin/partials/options-page.php:162
+#: ../src/admin/partials/options-page.php:164
 msgid "opt.robot_noydir"
 msgstr "NOYDIR"
 
-#: ../src/admin/partials/options-page.php:171
+#: ../src/admin/partials/options-page.php:173
 msgid "opt.robot_noarchive"
 msgstr "NOARCHIVE"
 
-#: ../src/admin/partials/options-page.php:180
+#: ../src/admin/partials/options-page.php:182
 msgid "opt.robot_nosnippet"
 msgstr "NOSNIPPET"
 
-#: ../src/admin/partials/options-page.php:193
+#: ../src/admin/partials/options-page.php:195
 msgid "opt.group.robot2"
 msgstr "Attributs \"global\" appliqués à :"
 
-#: ../src/admin/partials/options-page.php:196
+#: ../src/admin/partials/options-page.php:198
 msgid "opt.robot_date_based"
 msgstr "Archives datées"
 
-#: ../src/admin/partials/options-page.php:200
+#: ../src/admin/partials/options-page.php:202
 msgid "opt.robot_cat_based"
 msgstr "Catégories"
 
-#: ../src/admin/partials/options-page.php:204
+#: ../src/admin/partials/options-page.php:206
 msgid "opt.robot_tag_based"
 msgstr "Étiquettes"
 
-#: ../src/admin/partials/options-page.php:208
+#: ../src/admin/partials/options-page.php:210
 msgid "opt.robot_tax_based"
 msgstr "Autres taxonomies"
 
-#: ../src/admin/partials/options-page.php:212
+#: ../src/admin/partials/options-page.php:214
 msgid "opt.robot_author_based"
 msgstr "Profils d'auteurs"
 
-#: ../src/admin/partials/options-page.php:216
+#: ../src/admin/partials/options-page.php:218
 msgid "opt.robot_search_based"
 msgstr "Recherches"
 
-#: ../src/admin/partials/options-page.php:221
+#: ../src/admin/partials/options-page.php:223
 msgid "opt.robot_notfound_based"
 msgstr "Page \"Pas trouvé\""
 
-#: ../src/admin/partials/options-page.php:231
+#: ../src/admin/partials/options-page.php:233
 msgid "opt.hlp.robot1"
 msgstr ""
 "Cette extension ajoutera les attributs \"robots\" à chaque type défini sous "
 "le tableau."
 
-#: ../src/admin/partials/options-page.php:233
+#: ../src/admin/partials/options-page.php:235
 msgid "opt.hlp.robot2"
 msgstr ""
 "Nous séparons les attributs robots appliqués aux articles aux autres pages "
 "pour plus de flexibilité."
 
-#: ../src/admin/partials/options-page.php:246
+#: ../src/admin/partials/options-page.php:248
 msgid "opt.frontpage_description"
 msgstr "Description"
 
-#: ../src/admin/partials/options-page.php:256
+#: ../src/admin/partials/options-page.php:258
 #: ../src/admin/partials/postbox.php:18
 msgid "general.char_count"
 msgstr "Nombre de caractères :"
 
-#: ../src/admin/partials/options-page.php:262
+#: ../src/admin/partials/options-page.php:264
 msgid "opt.hlp.frontpage_description1"
 msgstr ""
 "Page d'accueil seulement : ajoute une balise \"description\". Les résultats "
 "de moteurs de recherche afficheront environ 160 cacratères."
 
-#: ../src/admin/partials/options-page.php:264
+#: ../src/admin/partials/options-page.php:266
 msgid "opt.hlp.frontpage_description2"
 msgstr ""
 "Si le paramètre est activé et aucune description n'est fournie, l'extension "
 "utilisera le slogan de votre thème wordpress."
 
-#: ../src/admin/partials/options-page.php:270
+#: ../src/admin/partials/options-page.php:272
 msgid "opt.frontpage_keyword"
 msgstr "Mots clés"
 
-#: ../src/admin/partials/options-page.php:279
+#: ../src/admin/partials/options-page.php:281
 msgid "opt.frontpage_keyword_ph"
 msgstr "exemple : chat, chien, souris"
 
-#: ../src/admin/partials/options-page.php:284
+#: ../src/admin/partials/options-page.php:286
 msgid "opt.hlp.frontpage_keyword"
 msgstr ""
 "Page d'accueil seulement : ajoute une liste de mots clés personnalisée."
 
-#: ../src/admin/partials/options-page.php:290
+#: ../src/admin/partials/options-page.php:292
 msgid "opt.frontpage_robot"
 msgstr "Robots"
 
-#: ../src/admin/partials/options-page.php:299
+#: ../src/admin/partials/options-page.php:301
 msgid "opt.frontpage_robot_noindex"
 msgstr "NOINDEX"
 
-#: ../src/admin/partials/options-page.php:304
+#: ../src/admin/partials/options-page.php:306
 msgid "opt.frontpage_robot_nofollow"
 msgstr "NOFOLLOW"
 
-#: ../src/admin/partials/options-page.php:309
+#: ../src/admin/partials/options-page.php:311
 msgid "opt.frontpage_robot_noodp"
 msgstr "NOODP"
 
-#: ../src/admin/partials/options-page.php:314
+#: ../src/admin/partials/options-page.php:316
 msgid "opt.frontpage_robot_noydir"
 msgstr "NOYDIR"
 
-#: ../src/admin/partials/options-page.php:319
+#: ../src/admin/partials/options-page.php:321
 msgid "opt.frontpage_robot_noarchive"
 msgstr "NOARCHIVE"
 
-#: ../src/admin/partials/options-page.php:324
+#: ../src/admin/partials/options-page.php:326
 msgid "opt.frontpage_robot_nosnippet"
 msgstr "NOSNIPPET"
 
-#: ../src/admin/partials/options-page.php:335
+#: ../src/admin/partials/options-page.php:337
 msgid "opt.hlp.frontpage_robots"
 msgstr "Attributs \"robots\" à appliquer à la page d'accueil."
 
-#: ../src/admin/partials/options-page.php:340
-#: ../src/admin/partials/options-page.php:556
+#: ../src/admin/partials/options-page.php:342
+#: ../src/admin/partials/options-page.php:558
 msgid "opt.json_ld"
 msgstr "JSON-LD"
 
-#: ../src/admin/partials/options-page.php:344
+#: ../src/admin/partials/options-page.php:346
 msgid "opt.jsonld_entity_support"
 msgstr "Personne/Organisation"
 
-#: ../src/admin/partials/options-page.php:358
+#: ../src/admin/partials/options-page.php:360
 msgid "opt.jsonld_entity_type"
 msgstr "Personne"
 
-#: ../src/admin/partials/options-page.php:366
+#: ../src/admin/partials/options-page.php:368
 msgid "opt.jsonld_organization"
 msgstr "Organisation"
 
-#: ../src/admin/partials/options-page.php:371
+#: ../src/admin/partials/options-page.php:373
 msgid "opt.jsonld_org_name"
 msgstr "Nom"
 
-#: ../src/admin/partials/options-page.php:378
+#: ../src/admin/partials/options-page.php:380
 msgid "opt.jsonld_org_alternate_name"
 msgstr "Alias"
 
-#: ../src/admin/partials/options-page.php:386
+#: ../src/admin/partials/options-page.php:388
 msgid "opt.jsonld_org_website_url"
 msgstr "Adresse du site web"
 
-#: ../src/admin/partials/options-page.php:393
+#: ../src/admin/partials/options-page.php:395
 msgid "opt.jsonld_img"
 msgstr "Logo"
 
-#: ../src/admin/partials/options-page.php:401
-#: ../src/admin/partials/options-page.php:517
+#: ../src/admin/partials/options-page.php:403
+#: ../src/admin/partials/options-page.php:519
 #: ../src/admin/partials/postbox.php:49
 msgid "general.choose_img"
 msgstr "Choisir l'image"
 
-#: ../src/admin/partials/options-page.php:404
-#: ../src/admin/partials/options-page.php:520
+#: ../src/admin/partials/options-page.php:406
+#: ../src/admin/partials/options-page.php:522
 #: ../src/admin/partials/postbox.php:52
 msgid "general.reset"
 msgstr "Réinitialiser"
 
-#: ../src/admin/partials/options-page.php:414
+#: ../src/admin/partials/options-page.php:416
 msgid "opt.jsonld_person_wp_userid"
 msgstr "Nom d'utilisateur Wordpress"
 
-#: ../src/admin/partials/options-page.php:430
+#: ../src/admin/partials/options-page.php:432
 msgid "opt.hlp.jsonld"
 msgstr ""
 "Utilise des balises JSON-LD pour présenter des object définis dans l'espace "
@@ -558,214 +558,216 @@ msgstr ""
 "de recherche. Les informations d'organisation sont paramétrables ici ; les "
 "informations de personne utiliseront les données de profil."
 
-#: ../src/admin/partials/options-page.php:436
+#: ../src/admin/partials/options-page.php:438
 msgid "opt.group.social"
 msgstr "Réseaux sociaux de l'organisation"
 
-#: ../src/admin/partials/options-page.php:439
+#: ../src/admin/partials/options-page.php:441
 msgid "opt.account_facebook"
 msgstr "Facebook"
 
-#: ../src/admin/partials/options-page.php:443
+#: ../src/admin/partials/options-page.php:445
 msgid "opt.account_twitter"
 msgstr "Twitter"
 
-#: ../src/admin/partials/options-page.php:447
+#: ../src/admin/partials/options-page.php:449
 msgid "opt.account_gplus"
 msgstr "Google+"
 
-#: ../src/admin/partials/options-page.php:451
+#: ../src/admin/partials/options-page.php:453
 msgid "opt.account_instagram"
 msgstr "Instagram"
 
-#: ../src/admin/partials/options-page.php:455
+#: ../src/admin/partials/options-page.php:457
 msgid "opt.account_youtube"
 msgstr "YouTube"
 
-#: ../src/admin/partials/options-page.php:459
+#: ../src/admin/partials/options-page.php:461
 msgid "opt.account_linkedin"
 msgstr "LinkedIn"
 
-#: ../src/admin/partials/options-page.php:463
+#: ../src/admin/partials/options-page.php:465
 msgid "opt.account_myspace"
 msgstr "Myspace"
 
-#: ../src/admin/partials/options-page.php:471
+#: ../src/admin/partials/options-page.php:473
 msgid "opt.hlp.account_social"
 msgstr ""
 "Une liste de réseaux sociaux à ajouter aux information d'organisation pour "
 "le site wordpress."
 
-#: ../src/admin/partials/options-page.php:477
+#: ../src/admin/partials/options-page.php:479
 msgid "out.jsonld_website_support"
 msgstr "Type de site web"
 
-#: ../src/admin/partials/options-page.php:486
+#: ../src/admin/partials/options-page.php:488
 msgid "opt.jsonld_website_website"
 msgstr "Site Web"
 
-#: ../src/admin/partials/options-page.php:491
+#: ../src/admin/partials/options-page.php:493
 msgid "opt.jsonld_website_blog"
 msgstr "Blog"
 
-#: ../src/admin/partials/options-page.php:497
+#: ../src/admin/partials/options-page.php:499
 msgid "opt.help.jsonld_website"
 msgstr ""
-"Creates a schema.org WebSite/Blog entry that features your wordpress site's "
-"search capabilities."
+"Ajoute une entrée schema.org de type WebSite/Blog qui met en valeur les "
+"capacités de recherche de Wordpress."
 
-#: ../src/admin/partials/options-page.php:504
+#: ../src/admin/partials/options-page.php:506
 msgid "opt.group.social_image"
-msgstr "Social media image"
+msgstr "Image pour \"réseaux sociaux\""
 
-#: ../src/admin/partials/options-page.php:508
+#: ../src/admin/partials/options-page.php:510
 msgid "opt.frontpage_social_img"
 msgstr "Image"
 
-#: ../src/admin/partials/options-page.php:529
+#: ../src/admin/partials/options-page.php:531
 msgid "opt.hlp.frontpage_social"
-msgstr "Image file to be included in social media tags for the front page."
+msgstr ""
+"Image à inclure dans les balises \"réseaux sociaux\" de la page d'accueil."
 
-#: ../src/admin/partials/options-page.php:543
+#: ../src/admin/partials/options-page.php:545
 msgid "opt.description_support"
-msgstr "Description meta tag"
+msgstr "Balise description"
 
-#: ../src/admin/partials/options-page.php:551
+#: ../src/admin/partials/options-page.php:553
 msgid "opt.hlp.description"
 msgstr ""
-"Enables a field in the post editing area allowing you to specify a custom "
-"description for posts/pages."
+"Active un champ dans la fenêtre d'édition des articles permettant de "
+"personnaliser leur description."
 
-#: ../src/admin/partials/options-page.php:560
+#: ../src/admin/partials/options-page.php:562
 msgid "opt.jsonld_page_support"
 msgstr "Pages"
 
-#: ../src/admin/partials/options-page.php:567
+#: ../src/admin/partials/options-page.php:569
 msgid "opt.hlp.jsonld_page"
 msgstr ""
-"Adds schema.org information about pages (creation and modification date, "
-"copyright year, title and language)"
+"Ajoute des information schema.org au sujet des pages (dates de création/"
+"modification, l'année de copyright, le titre et la langue)."
 
-#: ../src/admin/partials/options-page.php:573
+#: ../src/admin/partials/options-page.php:575
 msgid "opt.jsonld_post_support"
 msgstr "Posts"
 
-#: ../src/admin/partials/options-page.php:585
+#: ../src/admin/partials/options-page.php:587
 msgid "opt.jsonld_post_article"
 msgstr "Article"
 
-#: ../src/admin/partials/options-page.php:590
+#: ../src/admin/partials/options-page.php:592
 msgid "opt.jsonld_post_blogposting"
-msgstr "Blog post"
+msgstr "Article de blog (Blog post)"
 
-#: ../src/admin/partials/options-page.php:595
+#: ../src/admin/partials/options-page.php:597
 msgid "opt.jsonld_post_news"
-msgstr "News"
+msgstr "Actualités (News)"
 
-#: ../src/admin/partials/options-page.php:600
+#: ../src/admin/partials/options-page.php:602
 msgid "opt.jsonld_post_scholar"
-msgstr "Scholarly article"
+msgstr "Article académique (Scholarly article)"
 
-#: ../src/admin/partials/options-page.php:605
+#: ../src/admin/partials/options-page.php:607
 msgid "opt.jsonld_post_tech"
-msgstr "Tech article"
+msgstr "Technologie (Tech article)"
 
-#: ../src/admin/partials/options-page.php:612
+#: ../src/admin/partials/options-page.php:614
 msgid "opt.hlp.jsonld_post1"
 msgstr ""
-"Adds schema.org information about the post, very similar to the info added "
-"when social media is turned on such as a description, title, thumbnail, "
-"creation and modification dates, etc."
+"Ajoute des informations schema.org au sujet de l'article, très similaire aux "
+"informations ajoutées lorsque les fonctionnalités \"réseaux sociaux\" sont "
+"activées telles que la description, le titre, la vignette, ainsi que les "
+"dates de création et de modification de l'article."
 
-#: ../src/admin/partials/options-page.php:613
+#: ../src/admin/partials/options-page.php:615
 msgid "opt.hlp.jsonld_post2"
-msgstr ""
-"The type of schema.org article object to be used for posts can also be "
-"selected here."
+msgstr "Le type d'article schema.org qui sera utilisé peut être choisi ici."
 
-#: ../src/admin/partials/options-page.php:619
+#: ../src/admin/partials/options-page.php:621
 msgid "opt.jsonld_author_support"
-msgstr "Authors"
+msgstr "Auteurs"
 
-#: ../src/admin/partials/options-page.php:626
+#: ../src/admin/partials/options-page.php:628
 msgid "opt.hlp.jsonld_author"
 msgstr ""
-"Adds schema.org information about the author, depending on the information "
-"provided within said user's profile."
+"Ajoute des information de l'espace de nommage schema.org au sujet de "
+"l'auteur, en fonction des informations fournies dans le profil utilisateur."
 
-#: ../src/admin/partials/options-page.php:641
+#: ../src/admin/partials/options-page.php:643
 msgid "opt.open_graph_support"
-msgstr "Open Graph support"
+msgstr "Support Open Graph"
 
-#: ../src/admin/partials/options-page.php:648
+#: ../src/admin/partials/options-page.php:650
 msgid "opt.facebook_publisher"
-msgstr "Facebook publisher URL"
-
-#: ../src/admin/partials/options-page.php:657
-msgid "opt.hlp.open_graph1"
-msgstr "Adds the following open graph tags:"
+msgstr "Adresse web de l'éditeur facebook"
 
 #: ../src/admin/partials/options-page.php:659
+msgid "opt.hlp.open_graph1"
+msgstr "Ajoute les balises open graph suivantes :"
+
+#: ../src/admin/partials/options-page.php:661
 msgid "opt.hlp.open_graph2"
 msgstr ""
 "On the front page, adds type (set to website), site name, title, url, "
-"description (if provided), locale and image (if provided) tags."
+"description (if provided), locale and image (if provided) tags.Sur la page "
+"d'accueil, ajoute le type (défini à \"website\"), site name, title, url, "
+"description (si fournie), locale et image (si fournie)."
 
-#: ../src/admin/partials/options-page.php:660
+#: ../src/admin/partials/options-page.php:662
 msgid "opt.hlp.open_graph3"
 msgstr ""
-"On posts, adds type (set to article), site name, title, url, description (if "
-"provided), locale and image (if provided) tags, plus published and modified "
-"timestamps as well as the facebook author (from the profile) and publisher "
-"information, if provided."
+"Pour les articles, ajoute des balises type (défini à article), site name, "
+"title, url, description (si fournie), locale et image (si fournie), ainsi "
+"que les dates de création et de modification de l'article."
 
-#: ../src/admin/partials/options-page.php:669
+#: ../src/admin/partials/options-page.php:671
 msgid "opt.twitter_card_support"
-msgstr "Twitter Cards support"
+msgstr "Support Twitter Cards"
 
-#: ../src/admin/partials/options-page.php:679
+#: ../src/admin/partials/options-page.php:681
 msgid "opt.twitter_card_summary"
-msgstr "Summary card"
-
-#: ../src/admin/partials/options-page.php:685
-msgid "opt.twitter_card_large"
-msgstr "Summary card with large image"
+msgstr "Carte de type \"summary\""
 
 #: ../src/admin/partials/options-page.php:687
-msgid "opt.twitter_publisher"
-msgstr "Twitter publisher username"
+msgid "opt.twitter_card_large"
+msgstr "Carte de type \"summary with large image\""
 
-#: ../src/admin/partials/options-page.php:697
-msgid "opt.hlp.twitter_cards1"
-msgstr "Adds the following twitter card tags:"
+#: ../src/admin/partials/options-page.php:689
+msgid "opt.twitter_publisher"
+msgstr "Nom d'utilisateur twitter"
 
 #: ../src/admin/partials/options-page.php:699
+msgid "opt.hlp.twitter_cards1"
+msgstr "Ajoute les balises twitter tag suivantes :"
+
+#: ../src/admin/partials/options-page.php:701
 msgid "opt.hlp.twitter_cards2"
 msgstr ""
-"On all pages, will add card, site, title, url, description (if provided), "
-"creator and image (if provided) tags."
+"Sur toutes les pages, ajoutera des balises card, site, url, description (si "
+"fourni), creator et image (si fournie)."
 
-#: ../src/admin/partials/options-page.php:700
+#: ../src/admin/partials/options-page.php:702
 msgid "opt.hlp.twitter_cards3"
 msgstr ""
-"On gallery type posts, will add a \"gallery\" card. A \"photo\" card will be "
-"added to image attachment pages."
+"Pour les articles de type gallerie, ajoutera une carte de type \"gallery\". "
+"Une carte \"photo\" sera ajoutée pour les pages dédiées aux médias image."
 
-#: ../src/admin/partials/options-page.php:707
+#: ../src/admin/partials/options-page.php:709
 msgid "opt.gplus_publisher"
-msgstr "Google+ publisher URL"
+msgstr "Adresse web de l'éditeur (Google+)"
 
-#: ../src/admin/partials/options-page.php:715
+#: ../src/admin/partials/options-page.php:717
 msgid "opt.hlp.gplus"
-msgstr "Used if the publisher link rel tag is enabled in the general tab."
-
-#: ../src/admin/partials/options-page.php:724
-msgid "general.save_changes"
-msgstr "Save Changes"
+msgstr ""
+"Utilisé si la balise de lien \"rel\" est activée dans l'onglet \"général\"."
 
 #: ../src/admin/partials/options-page.php:726
+msgid "general.save_changes"
+msgstr "Mettre à jour"
+
+#: ../src/admin/partials/options-page.php:728
 msgid "general.reset_defaults"
-msgstr "Reset to defaults"
+msgstr "Reinitialiser"
 
 #: ../src/admin/partials/postbox.php:15
 msgid "box.description"
@@ -773,7 +775,7 @@ msgstr "Description"
 
 #: ../src/admin/partials/postbox.php:26
 msgid "box.keywords"
-msgstr "Keywords"
+msgstr "Mots clés"
 
 #: ../src/admin/partials/postbox.php:30
 msgid "box.keywords_suggestion"
@@ -781,15 +783,15 @@ msgstr "Suggestion:"
 
 #: ../src/admin/partials/postbox.php:32
 msgid "box.text_copy"
-msgstr "(Copy)"
+msgstr "(Copier)"
 
 #: ../src/admin/partials/postbox.php:40
 msgid "box.meta_description"
-msgstr "Social media image"
+msgstr "Image pour réseaux sociaux"
 
 #: ../src/admin/partials/postbox.php:65
 msgid "box.group.robots"
-msgstr "Robots meta tag"
+msgstr "Balise meta \"Robots\""
 
 #: ../src/admin/partials/postbox.php:68
 msgid "box.post_robot_noindex"
