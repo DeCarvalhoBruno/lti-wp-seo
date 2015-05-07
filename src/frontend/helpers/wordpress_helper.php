@@ -53,7 +53,7 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 
 	public function get_title() {
 		if ( is_null( $this->page_title ) ) {
-			$this->page_title = wp_title( '|', false, 'right' );
+			$this->page_title = wp_title( '-', false, 'right' );
 		}
 
 		return $this->page_title;

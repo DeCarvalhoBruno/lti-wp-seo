@@ -56,8 +56,6 @@ class Frontend {
 			$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
 		}
 
-		//echo $this->helper->page_type();
-
 		$this->hook_functionality( 'Robot' );
 
 		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, 'page_type' ) ), 'JSON_LD' );
