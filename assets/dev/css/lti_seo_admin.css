@@ -173,13 +173,11 @@
     #flseo .input-group input[type="checkbox"] {
         float: right;
         margin:0.4em 5% 0 2%;
-        /*width: 5%;*/
     }
 
     #flseo .input-group input[type="radio"] {
         float: right;
         margin: 0.4em 15% 0 2%;
-        /*width: 5%;*/
     }
 
     #flseo .checkbox-group label {
@@ -248,13 +246,13 @@
         padding-bottom:10px;
     }
 
-
     #flseo .table input[type="checkbox"]{
         float: none;
         text-align: center;
-        width:100%;
-        border:0;
-        padding:0;
+        /*border:0;*/
+        /*padding:0;*/
+        width: 15px;
+        height: 15px;
     }
 
     #lti_seo_wrapper .nav {
@@ -557,13 +555,15 @@
 #plseo .input-group input[type="checkbox"] {
     float: right;
     margin:0.4em 25% 0 2%;
-    width: 5%;
+    width: 15px;
+    height: 15px;
 }
 
 #plseo .input-group input[type="radio"] {
     float: right;
     margin: 0.4em 25% 0 2%;
-    width: 5%;
+    width: 15px;
+    height: 15px;
 }
 
 #plseo .char-counter.danger {
