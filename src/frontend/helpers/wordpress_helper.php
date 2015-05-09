@@ -401,7 +401,7 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		 * @see get_intermediate_image_sizes()
 		 *
 		 */
-		$image_size = apply_filters( 'lti_seo_image_size_index', 'large' );
+		$image_size = apply_filters( 'lti_seo_image_size_index', 'medium' );
 
 		$data = array();
 
@@ -499,8 +499,12 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		if ( ! empty( $images ) ) {
 			$output = array();
 			foreach ( $images as $image ) {
-				//if($image->)
 				$output[ $image->ID ] = $this->get_img( $image->ID );
+			}
+			$thmb_id = get_post_thumbnail_id();
+			//we don't include the thumbnail image, it's inserted separately
+			if(isset($output[ $thmb_id])){
+				unset($output[ $thmb_id]);
 			}
 
 			return $output;

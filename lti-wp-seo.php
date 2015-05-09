@@ -3,20 +3,13 @@
 	/**
 	 * The plugin bootstrap file
 	 *
-	 * This file is read by WordPress to generate the plugin information in the plugin
-	 * admin area. This file also includes all of the dependencies used by the plugin,
-	 * registers the activation and deactivation functions, and defines a function
-	 * that starts the plugin.
-	 *
-	 * @link              http://example.com
-	 *
 	 * @wordpress-plugin
 	 * Plugin Name:       LTI Search Engine Optimization
-	 * Plugin URI:
+	 * Plugin URI:        http://dev.linguisticteam.org/lti-seo-help/
 	 * Description:       Search Engine Optimization
 	 * Version:           0.5.0
-	 * Author:            LTI
-	 * Author URI:        https://github.com/DeCarvalhoBruno
+	 * Author:            Bruno De Carvalho
+	 * Author URI:        http://dev.linguisticteam.org/author/brunodc/
 	 * License:           GPL-2.0+
 	 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 	 * Text Domain:       lti-wp-seo
@@ -29,9 +22,9 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'LTI_SEO_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'LTI_SEO_MAIN_CLASS_DIR', plugin_dir_path( __FILE__ ).'src/' );
-define( 'LTI_SEO_VERSION', '0.5.0');
-define( 'LTI_SEO_NAME', 'lti-wp-seo');
+define( 'LTI_SEO_MAIN_CLASS_DIR', plugin_dir_path( __FILE__ ) . 'src/' );
+define( 'LTI_SEO_VERSION', '0.5.0' );
+define( 'LTI_SEO_NAME', 'lti-wp-seo' );
 
 require_once( plugin_dir_path( __FILE__ ) . 'src/lti-seo.php' );
 
