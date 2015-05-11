@@ -11,7 +11,7 @@
 	 * Author URI:        http://info.linguisticteam.org/
 	 * License:           GPL-2.0+
 	 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
-	 * Text Domain:       lti-wp-seo
+	 * Text Domain:       lti-seo
 	 * Domain Path:       /languages/
 	 */
 
@@ -45,7 +45,7 @@ define( 'LTI_SEO_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'LTI_SEO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'LTI_SEO_MAIN_CLASS_DIR', plugin_dir_path( __FILE__ ) . 'src/' );
 define( 'LTI_SEO_VERSION', '0.5.0' );
-define( 'LTI_SEO_NAME', 'lti-wp-seo' );
+define( 'LTI_SEO_NAME', 'lti-seo' );
 
 require_once( plugin_dir_path( __FILE__ ) . 'src/lti-seo.php' );
 

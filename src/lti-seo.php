@@ -65,7 +65,7 @@ class LTI_SEO {
 		$this->file_path = plugin_dir_path( __FILE__ );
 		require_once $this->file_path . 'plugin/form_fields.php';
 		require_once $this->file_path . 'plugin/plugin.php';
-		$this->name        = 'lti-wp-seo';
+		$this->name        = LTI_SEO_NAME;
 		$this->plugin_path = LTI_SEO_PLUGIN_DIR;
 		$this->basename = LTI_SEO_PLUGIN_BASENAME;
 		$this->settings    = get_option( "lti_seo_options" );

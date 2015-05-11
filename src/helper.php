@@ -8,7 +8,7 @@
  *
  * @return string|void
  */
-function ltint( $text, $domain = 'lti-wp-seo' ) {
+function ltint( $text, $domain = 'lti-seo' ) {
 	return __( $text, $domain );
 }
 

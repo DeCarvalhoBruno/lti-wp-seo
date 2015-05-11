@@ -179,7 +179,7 @@ class Admin {
 	 * @return mixed
 	 */
 	public function plugin_actions( $links, $file ) {
-		if ( $file == 'lti-wp-seo/lti-wp-seo.php' && function_exists( "admin_url" ) ) {
+		if ( $file == 'lti-seo/lti-seo.php' && function_exists( "admin_url" ) ) {
 			array_unshift( $links,
 				'<a href="' . admin_url( 'options-general.php?page=lti-seo-options' ) . '">' . ltint( 'general.settings' ) . '</a>' );
 		}

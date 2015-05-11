@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: lti-wp-seo\n"
-"POT-Creation-Date: 2015-05-10 16:16+0100\n"
-"PO-Revision-Date: 2015-05-10 16:24+0100\n"
+"Project-Id-Version: lti-seo\n"
+"POT-Creation-Date: 2015-05-11 11:14+0100\n"
+"PO-Revision-Date: 2015-05-11 11:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: fr_FR\n"
@@ -170,11 +170,11 @@ msgstr "LTI SEO profile information"
 
 #: ../src/admin/admin.php:402
 msgid "admin.help"
-msgstr "Pade d'aide (En anglais)"
+msgstr "Pade d'aide (Anglais)"
 
 #: ../src/admin/admin.php:403
 msgid "admin.contribute"
-msgstr "Contribuez (En anglais)"
+msgstr "Contribuez (Anglais)"
 
 #: ../src/admin/partials/help_menu.php:16
 msgid "general_hlp_welcome_1"
@@ -261,7 +261,7 @@ msgstr "Plus d'informations :"
 
 #: ../src/admin/partials/help_menu.php:41
 msgid "general_hlp_dev_blog"
-msgstr "Article de notre blog (en anglais)"
+msgstr "Page d'aide (en anglais)"
 
 #: ../src/admin/partials/help_menu.php:42
 msgid "general_hlp_contribute"
@@ -827,85 +827,3 @@ msgid ""
 msgstr ""
 "Optimisation pour les moteurs de recherche en quelques clics : augmentez la "
 "visibilité de vos contenus."
-
-#~ msgid ""
-#~ "Optimize the visibility of your content in search engine results by "
-#~ "providing additional, automatically generated metadata information."
-#~ msgstr ""
-#~ "Optimisez la visibilité de vos contenus dans les résultats de recherche "
-#~ "en fournissant "
-
-#~ msgid ""
-#~ "Optimize the visibility of your content in search engines by providing "
-#~ "additional, automatically generated metadata information."
-#~ msgstr ""
-#~ "Optimisez la visibilité de vos contenus dans les moteurs de recherche"
-
-#~ msgid "opt.jsonld_entity"
-#~ msgstr "Person/Organization"
-
-#~ msgid "opt.jsonld_type_name"
-#~ msgstr "Name"
-
-#~ msgid "opt.jsonld_type_alternate_name"
-#~ msgstr "Name alias"
-
-#~ msgid "opt.jsonld_type_website_url"
-#~ msgstr "Website URL"
-
-#~ msgid "opt.jsonld_type_wp_userid"
-#~ msgstr "Wordpress user"
-
-#~ msgid "out.jsonld_website"
-#~ msgstr "Website/Blog"
-
-#~ msgid "opt.jsonld_page"
-#~ msgstr "Pages"
-
-#~ msgid "opt.jsonld_post"
-#~ msgstr "Posts"
-
-#~ msgid "opt.jsonld_author"
-#~ msgstr "Authors"
-
-#~ msgid "opt.hlp.jsonld_post"
-#~ msgstr ""
-#~ "Adds schema.org information about the post, very similar to the info "
-#~ "added when social media is turned on such as a description, title, "
-#~ "thumbnail, creation and modification dates, etc. The type of schema.org "
-#~ "article object to be used for posts can also be selected here."
-
-#~ msgid "opt.jsonld_org_info"
-#~ msgstr "Person/Organization"
-
-#~ msgid "out.jsonld_website_info"
-#~ msgstr "Website search"
-
-#~ msgid "opt.hlp.frontpage_description"
-#~ msgstr ""
-#~ "Front page only: adds your own description meta tag. Search engine "
-#~ "results will display around 160 characters."
-
-#~ msgid "opt.hlp.frontpage_social1"
-#~ msgstr ""
-#~ "Image file to be included in social media tags. This can be an image that "
-#~ "represents the site, and it will be added to each post along with the "
-#~ "other image you provided (if any) in the LTI SEO post box."
-
-#~ msgid "opt.hlp.frontpage_social2"
-#~ msgstr "The plugin will try to "
-
-#~ msgid "opt.hlp.twitter_cards"
-#~ msgstr "_"
-
-#~ msgid "opt.hlp.robot"
-#~ msgstr ""
-#~ "As it finds ticked boxes under the \"Global\" column, the plugin will add "
-#~ "the selected robot attributes to each of the types selected below the "
-#~ "table. We separate robot attributes applied to posts from the rest of the "
-#~ "site for more flexibility."
-
-#~ msgid "opt.hlp.link_rel"
-#~ msgstr ""
-#~ "Lets Wordpress generate a canonical URL for single pages, and will try to "
-#~ "generate one for other types of pages."

@@ -38,10 +38,8 @@ class Lti_Seo_Help_Menu {
 
 	public function sidebar() {
 		return '<p><strong>' . ltint( 'general_hlp_about_us' ) . '</strong></p>' .
-		       '<p><a href="http://dev.linguisticteam.org" target="_blank">' . ltint( 'general_hlp_dev_blog' ) . '</a></p>' .
+		       '<p><a href="http://dev.linguisticteam.org/lti-seo-help/" target="_blank">' . ltint( 'general_hlp_dev_blog' ) . '</a></p>' .
 		       '<p><strong>' . ltint( 'general_hlp_contribute' ) . '</strong></p>' .
 		       '<p><a href="https://github.com/DeCarvalhoBruno/lti-wp-seo" target="_blank">' . ltint( 'general_hlp_github' ) . '</a></p>';
 	}
-
-
 }

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: lti-wp-seo\n"
-"POT-Creation-Date: 2015-05-10 16:16+0100\n"
-"PO-Revision-Date: 2015-05-10 16:17+0100\n"
+"Project-Id-Version: lti-seo\n"
+"POT-Creation-Date: 2015-05-11 11:13+0100\n"
+"PO-Revision-Date: 2015-05-11 11:24+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -258,7 +258,7 @@ msgstr "More information:"
 
 #: ../src/admin/partials/help_menu.php:41
 msgid "general_hlp_dev_blog"
-msgstr "LTI blog article"
+msgstr "LTI SEO Help Page"
 
 #: ../src/admin/partials/help_menu.php:42
 msgid "general_hlp_contribute"

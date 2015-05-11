@@ -36,7 +36,7 @@ class i18n {
 		load_plugin_textdomain(
 			$this->domain,
 			false,
-			'lti-wp-seo/languages/'
+			'lti-seo/languages/'
 		);
 
 	}
