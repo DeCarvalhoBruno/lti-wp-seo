@@ -3,8 +3,7 @@
 use Lti\Seo\Plugin\Fields;
 use Lti\Seo\Plugin\Postbox_Values;
 
-interface ICanHelp
-{
+interface ICanHelp {
 }
 
 /**
@@ -45,6 +44,10 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		return $this->settings->get( $value );
 	}
 
+	/**
+	 * To make sure those methods have been called, they're used a lot.
+	 *
+	 */
 	public function init() {
 		$this->page_type();
 		$this->get_canonical_url();
@@ -108,6 +111,7 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 	 * Can also be used in themes to get author social profiles
 	 *
 	 * @param string $platform
+	 *
 	 * @return null
 	 */
 	public function get_author_social_info( $platform = '' ) {
@@ -127,7 +131,7 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 			case 'all_with_labels':
 				$twitter = $this->get_user_meta_key( "lti_twitter_username" );
 				if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
-					$twitter = 'https://twitter.com' . str_replace( '@', '/', $twitter );
+					$twitter         = 'https://twitter.com' . str_replace( '@', '/', $twitter );
 					$info['twitter'] = $twitter;
 				}
 				$data = $this->get_user_meta_key( "lti_facebook_url" );
@@ -182,6 +186,7 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		if ( is_null( $this->user_meta ) ) {
 			if ( $this->page_type() == "Author" ) {
 				$author = get_query_var( 'author' );
+				//In the front page, the author is set the wordpress user that's specified in the settings > front page > JSON-LD
 			} elseif ( $this->page_type() == "Frontpage" ) {
 				$author = $this->settings->get( 'jsonld_person_wp_userid' );
 			} else {
@@ -196,13 +201,14 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 
 	public function get_user_meta_key( $key ) {
 		if ( is_null( $this->user_meta ) ) {
+			//if we get all meta keys, wp returns an array of arrays
 			$this->get_user_meta();
 		}
 
 		if ( isset( $this->user_meta[ $key ] ) ) {
 			$value = $this->user_meta[ $key ];
-			if(is_array($value)){
-				$this->user_meta[ $key ] = array_shift($value);
+			if ( is_array( $value ) ) {
+				$this->user_meta[ $key ] = array_shift( $value );
 			}
 			if ( ! is_null( $this->user_meta[ $key ] ) && ! empty( $this->user_meta[ $key ] ) ) {
 				return $this->user_meta[ $key ];
@@ -215,13 +221,13 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 	public function get_user() {
 		$author = null;
 		if ( is_null( $this->user_id ) ) {
-			if($this->page_type=="Frontpage"){
-				if($this->get('jsonld_entity_support')==true&&$this->get('jsonld_entity_type')=="Person"){
-					$this->user_id = $this->get('jsonld_person_wp_userid');
-				}else{
+			if ( $this->page_type == "Frontpage" ) {
+				if ( $this->get( 'jsonld_entity_support' ) == true && $this->get( 'jsonld_entity_type' ) == "Person" ) {
+					$this->user_id = $this->get( 'jsonld_person_wp_userid' );
+				} else {
 					$this->user_id = null;
 				}
-			}else if ( $this->page_type() == "Author" ) {
+			} else if ( $this->page_type() == "Author" ) {
 				$this->user_id = get_query_var( 'author' );
 			} else {
 				$this->user_id = get_the_author_meta( 'ID',
@@ -331,6 +337,12 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		return home_url( '/' );
 	}
 
+	/**
+	 * Returns the canonical URL for the page
+	 * Not sure this returns accurate results.
+	 *
+	 * @return bool|mixed|null|string|void|\WP_Error
+	 */
 	public function get_canonical_url() {
 		if ( is_null( $this->current_url ) ) {
 			$this->current_url = apply_filters( 'lti_seo_get_canonical_url', false );
@@ -503,8 +515,8 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 			}
 			$thmb_id = get_post_thumbnail_id();
 			//we don't include the thumbnail image, it's inserted separately
-			if(isset($output[ $thmb_id])){
-				unset($output[ $thmb_id]);
+			if ( isset( $output[ $thmb_id ] ) ) {
+				unset( $output[ $thmb_id ] );
 			}
 
 			return $output;
@@ -670,11 +682,11 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 					case 'inLanguage':
 						return $this->get_language();
 					case 'datePublished':
-						return lti_iso8601_date($this->get_post_info( 'post_date' ));
+						return lti_iso8601_date( $this->get_post_info( 'post_date' ) );
 					case 'dateModified':
-						return lti_iso8601_date($this->get_post_info( 'post_modified' ));
+						return lti_iso8601_date( $this->get_post_info( 'post_modified' ) );
 					case 'copyrightYear':
-						return lti_mysql_date_year($this->get_post_info( 'post_date' ));
+						return lti_mysql_date_year( $this->get_post_info( 'post_date' ) );
 					case 'author':
 						if ( $this->get( 'jsonld_entity_support' ) == true ) {
 							$type = $this->get( 'jsonld_entity_type' );
@@ -739,13 +751,14 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 					case 'articleSection':
 						return $this->get_categories();
 					case 'wordCount':
-						return $this->get_post_meta_key('word_count');
+						return $this->get_post_meta_key( 'word_count' );
 					case 'Person:url':
-						return $this->get_user_key('user_url');
+						return $this->get_user_key( 'user_url' );
 				}
 
 				break;
 		}
+
 		return null;
 	}
 

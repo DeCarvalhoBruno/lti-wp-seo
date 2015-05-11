@@ -22,7 +22,6 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 		$this->assertEmpty($output);
 	}
 
-
 	public function testFrontpageRobots() {
 
 		$settings = new Plugin_Settings((object)array());

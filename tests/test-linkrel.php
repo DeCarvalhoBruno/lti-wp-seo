@@ -19,7 +19,6 @@ class LinkRelTest extends LTI_SEO_UnitTestCase {
 		$this->assertEmpty($output);
 	}
 
-
 	public function testFrontpageLinkRel() {
 
 		$settings = new Plugin_Settings((object)array());
@@ -31,6 +30,5 @@ class LinkRelTest extends LTI_SEO_UnitTestCase {
 		$output = ob_get_clean();
 		$this->assertTrue($this->hasContent($output,'//link[@rel="canonical"][@href]'));
 	}
-
 
 }

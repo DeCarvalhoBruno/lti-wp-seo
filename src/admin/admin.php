@@ -66,6 +66,7 @@ class Admin {
 	 */
 	public function __construct(
 		$plugin_name,
+		$plugin_basename,
 		$version,
 		Plugin_Settings $settings,
 		$plugin_path,
@@ -73,6 +74,7 @@ class Admin {
 	) {
 
 		$this->plugin_name    = $plugin_name;
+		$this->plugin_basename = $plugin_basename;
 		$this->version        = $version;
 		$this->admin_dir_url  = plugin_dir_url( __FILE__ );
 		$this->admin_dir      = dirname( __FILE__ );
@@ -382,6 +384,7 @@ class Admin {
 	 * Triggered when the user profile is saved
 	 *
 	 * @param int $user_id
+	 *
 	 * @return bool
 	 */
 	public function personal_options_update( $user_id ) {
@@ -392,6 +395,15 @@ class Admin {
 		}
 
 		return true;
+	}
+
+	public function plugin_row_meta( $links, $file ) {
+		if ( $file == $this->plugin_basename ) {
+			$links[] = '<a href="http://dev.linguisticteam.org/lti-seo-help/" target="_blank">' . ltint('admin.help') . '</a>';
+			$links[] = '<a href="https://github.com/DeCarvalhoBruno/lti-wp-seo" target="_blank">' . ltint('admin.contribute') . '</a>';
+		}
+
+		return $links;
 	}
 
 	public function set_current_page( $page ) {

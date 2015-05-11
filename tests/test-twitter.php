@@ -25,14 +25,6 @@ class TwitterTest extends LTI_SEO_UnitTestCase {
 		$this->assertTrue( $out->hasTagWithContent( 'meta', 'name', 'twitter:url', 'content', home_url( '/' ) ) );
 		$this->assertTrue( $out->hasTagWithContent( 'meta', 'name', 'twitter:description', 'content',
 			get_bloginfo( 'description' ) ) );
-
-
-		/*
-		 <meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content="Test Blog | Just another WordPress site" />
-		<meta name="twitter:url" content="" />
-		<meta name="twitter:description" content="Just another WordPress site" />
-		*/
 	}
 
 	public function testLargeImageSetting(){

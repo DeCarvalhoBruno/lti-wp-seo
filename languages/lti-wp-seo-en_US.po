@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-wp-seo\n"
-"POT-Creation-Date: 2015-05-07 20:41+0100\n"
-"PO-Revision-Date: 2015-05-07 20:41+0100\n"
+"POT-Creation-Date: 2015-05-10 16:16+0100\n"
+"PO-Revision-Date: 2015-05-10 16:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -18,153 +18,161 @@ msgstr ""
 "esc_html_x:1,2c;ltint;ltint_po\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/admin/admin.php:85
+#: ../src/admin/admin.php:87
 msgid "user.public_email"
 msgstr "Public e-mail address"
 
-#: ../src/admin/admin.php:85
+#: ../src/admin/admin.php:87
 msgid "hlp.user.public_email"
 msgstr "Caution: this email address could  be made public through header tags"
 
-#: ../src/admin/admin.php:86
+#: ../src/admin/admin.php:88
 msgid "user.job_title"
 msgstr "Job title"
 
-#: ../src/admin/admin.php:86
+#: ../src/admin/admin.php:88
 msgid "hlp.user.job_title"
 msgstr "Your job title (for example, Financial Manager)."
 
-#: ../src/admin/admin.php:87
+#: ../src/admin/admin.php:89
 msgid "user.work_longitude"
 msgstr "Work Location (longitude)"
 
-#: ../src/admin/admin.php:87
+#: ../src/admin/admin.php:89
 msgid "hlp.user.work_longitude"
 msgstr "The longitude of your work location. For example, -122.08585."
 
-#: ../src/admin/admin.php:88
+#: ../src/admin/admin.php:90
 msgid "user.work_latitude"
 msgstr "Work location (latitude)"
 
-#: ../src/admin/admin.php:88
+#: ../src/admin/admin.php:90
 msgid "hlp.user.work_latitude"
 msgstr "The latitude of your work location. For example, 37.42242."
 
-#: ../src/admin/admin.php:91
+#: ../src/admin/admin.php:93
 msgid "user.twitter_username"
 msgstr "Twitter username"
 
-#: ../src/admin/admin.php:92
+#: ../src/admin/admin.php:94
 msgid "hlp.user.twitter_username"
 msgstr "Example, @myusername"
 
-#: ../src/admin/admin.php:94
+#: ../src/admin/admin.php:96
 msgid "user.facebook_id"
 msgstr "Facebook profile ID"
 
-#: ../src/admin/admin.php:94
+#: ../src/admin/admin.php:96
 msgid "hlp.user.facebook_id"
 msgstr "Facebook numeric user ID."
 
-#: ../src/admin/admin.php:95
+#: ../src/admin/admin.php:97
 msgid "user.facebook_url"
 msgstr "Facebook profile URL"
 
-#: ../src/admin/admin.php:95
+#: ../src/admin/admin.php:97
 msgid "hlp.user.facebook_url"
 msgstr "Example, https://www.facebook.com/groups/LinguisticTeamInternational/"
 
-#: ../src/admin/admin.php:96
+#: ../src/admin/admin.php:98
 msgid "user.gplus_url"
 msgstr "Google+ profile URL"
 
-#: ../src/admin/admin.php:96
+#: ../src/admin/admin.php:98
 msgid "hlp.user.gplus_url"
 msgstr "Example, https://plus.google.com/+LinguisticTeamInternationalOfficial"
 
-#: ../src/admin/admin.php:97
+#: ../src/admin/admin.php:99
 msgid "user.instagram_url"
 msgstr "Instagram profile URL"
 
-#: ../src/admin/admin.php:97
+#: ../src/admin/admin.php:99
 msgid "hlp.user.instagram_url"
 msgstr "Example, https://instagram.com/username"
 
-#: ../src/admin/admin.php:98
+#: ../src/admin/admin.php:100
 msgid "user.youtube_url"
 msgstr "Youtube channel URL"
 
-#: ../src/admin/admin.php:98
+#: ../src/admin/admin.php:100
 msgid "hlp.user.youtube_url"
 msgstr "Example, https://www.youtube.com/user/LinguisticTeamIntl"
 
-#: ../src/admin/admin.php:99
+#: ../src/admin/admin.php:101
 msgid "user.linkedin_url"
 msgstr "LinkedIn profile URL"
 
-#: ../src/admin/admin.php:99
+#: ../src/admin/admin.php:101
 msgid "hlp.user.linkedin_url"
 msgstr "Example, https://linkedin.com/in/username"
 
-#: ../src/admin/admin.php:100
+#: ../src/admin/admin.php:102
 msgid "user.myspace_url"
 msgstr "Myspace profile URL"
 
-#: ../src/admin/admin.php:100
+#: ../src/admin/admin.php:102
 msgid "hlp.user.myspace_url"
 msgstr "Example, https://myspace.com/1998called"
 
-#: ../src/admin/admin.php:123
+#: ../src/admin/admin.php:125
 msgid "general.use_image"
 msgstr "Use image"
 
-#: ../src/admin/admin.php:130
+#: ../src/admin/admin.php:132
 msgid "admin.menu_title"
 msgstr "LTI SEO Settings"
 
-#: ../src/admin/admin.php:130
+#: ../src/admin/admin.php:132
 msgid "admin.menu_item"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:147
+#: ../src/admin/admin.php:149
 msgid "general_hlp_welcome"
 msgstr "Welcome!"
 
-#: ../src/admin/admin.php:152
+#: ../src/admin/admin.php:154
 msgid "general_hlp_general"
 msgstr "General tab"
 
-#: ../src/admin/admin.php:157
+#: ../src/admin/admin.php:159
 msgid "general_hlp_frontpage"
 msgstr "Front page tab"
 
-#: ../src/admin/admin.php:162
+#: ../src/admin/admin.php:164
 msgid "general_hlp_social"
 msgstr "Social tab"
 
-#: ../src/admin/admin.php:182
+#: ../src/admin/admin.php:184
 msgid "general.settings"
 msgstr "Settings"
 
-#: ../src/admin/admin.php:198
+#: ../src/admin/admin.php:200
 msgid "opt.msg.updated"
 msgstr "Plugin options have been updated."
 
-#: ../src/admin/admin.php:202
+#: ../src/admin/admin.php:204
 msgid "opt.msg.error_token"
 msgstr "Plugin options could not be saved (session error)."
 
-#: ../src/admin/admin.php:211
+#: ../src/admin/admin.php:213
 msgid "opt.msg.reset"
 msgstr "Plugin options have been reset."
 
-#: ../src/admin/admin.php:256
+#: ../src/admin/admin.php:258
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:357
+#: ../src/admin/admin.php:359
 msgid "user.fields_title"
 msgstr "LTI SEO profile information"
+
+#: ../src/admin/admin.php:402
+msgid "admin.help"
+msgstr "Help page"
+
+#: ../src/admin/admin.php:403
+msgid "admin.contribute"
+msgstr "Contribute"
 
 #: ../src/admin/partials/help_menu.php:16
 msgid "general_hlp_welcome_1"
@@ -806,71 +814,8 @@ msgstr "NOARCHIVE"
 msgid "box.post_robot_nosnippet"
 msgstr "NOSNIPPET"
 
-#~ msgid "opt.jsonld_entity"
-#~ msgstr "Person/Organization"
-
-#~ msgid "opt.jsonld_type_name"
-#~ msgstr "Name"
-
-#~ msgid "opt.jsonld_type_alternate_name"
-#~ msgstr "Name alias"
-
-#~ msgid "opt.jsonld_type_website_url"
-#~ msgstr "Website URL"
-
-#~ msgid "opt.jsonld_type_wp_userid"
-#~ msgstr "Wordpress user"
-
-#~ msgid "out.jsonld_website"
-#~ msgstr "Website/Blog"
-
-#~ msgid "opt.jsonld_page"
-#~ msgstr "Pages"
-
-#~ msgid "opt.jsonld_post"
-#~ msgstr "Posts"
-
-#~ msgid "opt.jsonld_author"
-#~ msgstr "Authors"
-
-#~ msgid "opt.hlp.jsonld_post"
-#~ msgstr ""
-#~ "Adds schema.org information about the post, very similar to the info "
-#~ "added when social media is turned on such as a description, title, "
-#~ "thumbnail, creation and modification dates, etc. The type of schema.org "
-#~ "article object to be used for posts can also be selected here."
-
-#~ msgid "opt.jsonld_org_info"
-#~ msgstr "Person/Organization"
-
-#~ msgid "out.jsonld_website_info"
-#~ msgstr "Website search"
-
-#~ msgid "opt.hlp.frontpage_description"
-#~ msgstr ""
-#~ "Front page only: adds your own description meta tag. Search engine "
-#~ "results will display around 160 characters."
-
-#~ msgid "opt.hlp.frontpage_social1"
-#~ msgstr ""
-#~ "Image file to be included in social media tags. This can be an image that "
-#~ "represents the site, and it will be added to each post along with the "
-#~ "other image you provided (if any) in the LTI SEO post box."
-
-#~ msgid "opt.hlp.frontpage_social2"
-#~ msgstr "The plugin will try to "
-
-#~ msgid "opt.hlp.twitter_cards"
-#~ msgstr "_"
-
-#~ msgid "opt.hlp.robot"
-#~ msgstr ""
-#~ "As it finds ticked boxes under the \"Global\" column, the plugin will add "
-#~ "the selected robot attributes to each of the types selected below the "
-#~ "table. We separate robot attributes applied to posts from the rest of the "
-#~ "site for more flexibility."
-
-#~ msgid "opt.hlp.link_rel"
-#~ msgstr ""
-#~ "Lets Wordpress generate a canonical URL for single pages, and will try to "
-#~ "generate one for other types of pages."
+#: ../src/extra-strings.php:2
+msgid ""
+"Search engine optimization made easy: make your content more visible in "
+"search engine results."
+msgstr ""

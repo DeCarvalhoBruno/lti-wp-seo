@@ -23,9 +23,4 @@ class HelperTest extends LTI_SEO_UnitTestCase {
 		$this->assertEquals(LTI_SEO_VERSION,$this->helper->get('version'));
 	}
 
-
-
-
-
-
 }

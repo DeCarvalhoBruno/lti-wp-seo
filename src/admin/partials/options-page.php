@@ -689,7 +689,7 @@
 								<label for="twitter_publisher"><?php echo ltint( 'opt.twitter_publisher' ); ?>
 									<input type="text" name="twitter_publisher" id="twitter_publisher"
 									       value="<?php echo ltiopt( 'twitter_publisher' ); ?>"
-									       placeholder="@publisher"/>
+									       placeholder="@publisher" required="required"/>
 								</label>
 							</div>
 

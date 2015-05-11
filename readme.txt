@@ -8,7 +8,7 @@ License: GNU General Public License, version 2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NHYSUNN8G6M52
 
-Optimize the visibility of your content in search engines by providing additional, automatically generated metadata information.
+Search engine optimization made easy: make your content more visible in search engine results.
 
 == Description ==
 
@@ -18,37 +18,21 @@ Available languages:
 - English
 - French
 
-= Yet another SEO plugin, why? =
-
-- We wanted to contribute a distraction-free, WYSIWYG plugin that goes straight to the point.
-- Provide a sturdy, testable object-oriented codebase that the community can contribute to.
-- Our main concern as a dev community is to automate our own processes, but we also want to show that we're willing to put ourselves out there and share awesome code!
-
-
-= How is that metadata useful? =
-
-A lot of the traffic over the internet goes through search engines, which send hoards of little crawler to sift through millions of pages every day.
-
-As the provider of content, you can help search engines understand what type of content you're featuring by providing not just code, but semantic information about the content. That information will allow search engines to unmistakably determine the context in which you want this data to be shared.
-
-Also, search engines that find relevant content on your sites are more likely to feature them prominently on search results, which is why we're referring to this process as search engine __optimization__.
-
-
-= What kind of data does it add? =
+= Metadata =
 The following information can be added, if the corresponding option is activated:
 - Link rel tags:
  - Canonical, helps search engine determine a single URL for specific content,
  - Author, allows search engine to link the author with their contributed content,
  - Publisher, helps identify the publisher of the content.
-- Keywords tag,
-- Robots tag:
+- Keywords meta tag,
+- Robots meta tag:
  - NOINDEX
  - NOFOLLOW
  - NOODP
  - NOYDIR
  - NOARCHIVE
  - NOSNIPPET
-- Description tag, featured in search results
+- Description meta tag, featured in search results
 - JSON-LD tags:
  - Front page:
   - Publisher (show as Organization : name, alias, logo image, website, social accounts),
@@ -68,7 +52,11 @@ The following information can be added, if the corresponding option is activated
 
 = Contribution =
 
-If you'd like to contribute code to this project or would like to help with translations, [check out the code](https://github.com/DeCarvalhoBruno/lti-wp-seo) and submit issues or pull requests, or get in touch with me directly.
+You can help us by:
+- Translating the plugin in your own language (get in touch with us for details),
+- Submitting bugs and feature requests in the github project's [issue tracker] (https://github.com/DeCarvalhoBruno/lti-wp-seo/issues),
+- Submitting code via [pull requests](https://github.com/DeCarvalhoBruno/lti-wp-seo/pulls),
+- [Visiting our blog](http://dev.linguisticteam.org) to interact with us and have awesome discussions around dev issues.
 
 == Installation ==
 
@@ -90,7 +78,21 @@ Configure the options by going to Settings->LTI SEO. Note that by default, no he
 
 == Frequently Asked Questions ==
 
-We'll add entries to this section as we get feedback from you.
+We'll more entries to this section as we get feedback from you.
+
+= Yet another SEO plugin, why? =
+
+- We wanted to contribute a distraction-free (no ads, no 'premium features'), WYSIWYG plugin.
+- Provide a sturdy, testable object-oriented codebase that the community can contribute to.
+- Our main concern as the [LTI](http://info.linguisticteam.org) developer community is to automate our own processes, but we also want to show that we're willing to put ourselves out there and share awesome code!
+
+= How is that metadata useful? =
+
+A lot of the traffic over the internet goes through search engines, which send hoards of little crawler to sift through millions of pages every day.
+
+As the provider of content, you can help search engines understand what type of content you're featuring by providing not just code, but semantic information about the content. That information will allow search engines to unmistakably determine the context in which you want this data to be shared.
+
+Also, search engines that find relevant content on your sites are more likely to feature them prominently on search results, which is why we're referring to this process as search engine optimization.
 
 
 == Changelog ==

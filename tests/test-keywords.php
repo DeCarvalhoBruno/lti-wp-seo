@@ -19,7 +19,6 @@ class KeywordsTest extends LTI_SEO_UnitTestCase {
 		$this->assertEmpty($output);
 	}
 
-
 	public function testFrontpageKeywords() {
 
 		$settings = new Plugin_Settings((object)array());
@@ -33,6 +32,5 @@ class KeywordsTest extends LTI_SEO_UnitTestCase {
 		$output = ob_get_clean();
 		$this->assertTrue($this->hasContent($output,sprintf('//meta[@name="keywords"][@content="%s"]',$testString)));
 	}
-
 
 }
