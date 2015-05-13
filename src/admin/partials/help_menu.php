@@ -21,7 +21,7 @@ class Lti_Seo_Help_Menu {
 	public function general_tab() {
 		return '<p>' . ltint( 'general_hlp_general_1' ) . '</p>' .
 		       '<p>' . ltint( 'general_hlp_general_2' ) . '</p>' .
-		       '<p>' . ltint( 'general_hlp_general_3' ) . '</p>' .'<br/>'.
+		       '<p>' . ltint( 'general_hlp_general_3' ) . '</p>' .
 		       '<p>' . ltint( 'general_hlp_general_4' ) . '</p>';
 	}
 
