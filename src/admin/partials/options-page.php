@@ -477,21 +477,25 @@
 						<div class="form-group">
 							<div class="input-group">
 								<label for="jsonld_website_support"><?php echo ltint( 'out.jsonld_website_support' ); ?>
-									<input type="checkbox" name="jsonld_website_support"
+									<input type="checkbox" name="jsonld_website_support" data-toggle="seo-options"
+									       data-target="#jsonld_website_group"
 									       id="jsonld_website_support" <?php echo ltichk( 'jsonld_website_support' ); ?>/>
 								</label>
 
-								<div class="input-group">
-									<label>
-										<input name="jsonld_website_type"
-										       type="radio" <?php echo ltirad( 'jsonld_website_type', 'WebSite' ); ?>
-										       value="WebSite"/><?php echo ltint( 'opt.jsonld_website_website' ); ?>
-									</label>
-									<label><input name="jsonld_website_type"
-									              type="radio" <?php echo ltirad( 'jsonld_website_type',
-											'Blog' ); ?>
-									              value="Blog"/><?php echo ltint( 'opt.jsonld_website_blog' ); ?>
-									</label>
+								<div id="jsonld_website_group">
+									<div class="input-group">
+										<label>
+											<input name="jsonld_website_type"
+											       type="radio" <?php echo ltirad( 'jsonld_website_type',
+												'WebSite' ); ?>
+											       value="WebSite"/><?php echo ltint( 'opt.jsonld_website_website' ); ?>
+										</label>
+										<label><input name="jsonld_website_type"
+										              type="radio" <?php echo ltirad( 'jsonld_website_type',
+												'Blog' ); ?>
+										              value="Blog"/><?php echo ltint( 'opt.jsonld_website_blog' ); ?>
+										</label>
+									</div>
 								</div>
 							</div>
 							<div class="form-help-container">
