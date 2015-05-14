@@ -1,4 +1,4 @@
-# Wordpress SEO Plugin [![Build Status](https://travis-ci.org/DeCarvalhoBruno/lti-wp-seo.svg)](https://travis-ci.org/DeCarvalhoBruno/lti-wp-seo)
+# Wordpress SEO Plugin [![Build Status](https://travis-ci.org/DeCarvalhoBruno/lti-wp-seo.svg)](https://travis-ci.org/DeCarvalhoBruno/lti-wp-seo) [![Code Climate](https://codeclimate.com/github/DeCarvalhoBruno/lti-wp-seo/badges/gpa.svg)](https://codeclimate.com/github/DeCarvalhoBruno/lti-wp-seo)
 
 **Note:** this is the development repository for the plugin. If you're installing the plugin on your please use the Wordpress plugin repository instead.
 
