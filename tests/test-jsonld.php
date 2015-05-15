@@ -2,6 +2,7 @@
 
 use Lti\Seo\Generators\JSON_LD;
 use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Helpers\Wordpress_Helper_JSONLD;
 use Lti\Seo\Plugin\Plugin_Settings;
 use Lti\Seo\Test\Datatype\DOM;
 
@@ -19,8 +20,9 @@ class JSONLDTest extends LTI_SEO_UnitTestCase {
 		$settings->set( 'jsonld_entity_type', 'Organization' );
         $orgName = 'OrgTest';
 		$settings->set( 'jsonld_org_name', $orgName );
-		$helper = new Wordpress_Helper($settings);
-		$helper->init();
+		$main_helper = new Wordpress_Helper($settings);
+		$main_helper->init();
+		$helper = new Wordpress_Helper_JSONLD($main_helper);
 		$json_ld = new JSON_LD($helper);
 		ob_start();
 		$json_ld->make_Organization();
@@ -42,8 +44,9 @@ class JSONLDTest extends LTI_SEO_UnitTestCase {
 	public function testWebsite(){
 		$settings = new Plugin_Settings((object)array());
 		$settings->set( 'jsonld_website_info', true );
-		$helper = new Wordpress_Helper($settings);
-		$helper->init();
+		$main_helper = new Wordpress_Helper($settings);
+		$main_helper->init();
+		$helper = new Wordpress_Helper_JSONLD($main_helper);
 		$json_ld = new JSON_LD($helper);
 		ob_start();
 		$json_ld->make_WebSite();

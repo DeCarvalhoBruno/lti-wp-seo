@@ -25,6 +25,7 @@ class DescriptionTest extends LTI_SEO_UnitTestCase {
 	public function testFrontpageDescription() {
 
 		$settings = new Plugin_Settings((object)array());
+		$settings->set( 'description_support', true );
 		$settings->set( 'frontpage_description', true );
 		$frontpage_description = "This is a test frontpage description";
 		$settings->set( 'frontpage_description_text', $frontpage_description );

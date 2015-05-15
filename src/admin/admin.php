@@ -211,7 +211,7 @@ class Admin {
 		} elseif ( isset( $post_variables['lti_seo_reset'] ) ) {
 			$this->settings = new Plugin_Settings();
 			update_option( 'lti_seo_options', $this->settings );
-			$this->helper->update_global_post_fields( array(), true );
+			$this->update_global_post_fields( array(), true );
 
 			$this->page_type = "lti_reset";
 			$this->message   = ltint( 'opt.msg.reset' );
@@ -242,7 +242,7 @@ class Admin {
 			$changed = $this->settings->compare( $oldSettings );
 
 			if ( ! empty( $changed ) ) {
-				$this->helper->update_global_post_fields( $changed );
+				$this->update_global_post_fields( $changed );
 			}
 		}
 
@@ -369,16 +369,20 @@ class Admin {
 	 *
 	 * @param int $post_ID
 	 * @param \WP_Post $post
-	 * @param int $update
-	 */
-	public function save_post( $post_ID, $post, $update ) {
-		$post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
-		if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
-			update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
-		}
-	}
+     * @param int $update
+     */
+    public function save_post( $post_ID, $post, $update ) {
+        $post_variables = $this->helper->filter_input( INPUT_POST, 'lti_seo' );
 
-	/**
+        if ( ! is_null( $post_variables ) ) {
+            $post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
+            if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
+                update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
+            }
+        }
+    }
+
+    /**
 	 * Displays the group of custom user profile fields
 	 *
 	 * @param $user
