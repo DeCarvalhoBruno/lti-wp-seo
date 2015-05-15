@@ -1,6 +1,7 @@
 <?php namespace Lti\Seo;
 
 use Lti\Seo\Helpers\ICanHelp;
+use Lti\Seo\Helpers\Wordpress_Helper_JSONLD;
 use Lti\Seo\Plugin\Plugin_Settings;
 
 
@@ -83,7 +84,7 @@ class Frontend {
 
 		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, 'page_type' ) ), 'JSON_LD' );
 		if ( class_exists( $class ) ) {
-			$json_ld = new $class( $this->helper );
+			$json_ld = new $class( new Wordpress_Helper_JSONLD($this->helper) );
 
 			add_action( 'lti_seo_head', array( $json_ld, 'json_ld' ) );
 		}

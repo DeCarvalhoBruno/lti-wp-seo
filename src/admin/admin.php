@@ -3,6 +3,7 @@
 use Lti\Seo\Generators\Robot;
 use Lti\Seo\Generators\Singular_Keyword;
 use Lti\Seo\Helpers\ICanHelp;
+use Lti\Seo\Plugin\Fields;
 use Lti\Seo\Plugin\Plugin_Settings;
 use Lti\Seo\Plugin\Postbox_Values;
 
@@ -59,6 +60,7 @@ class Admin {
 
 	/**
 	 * @param $plugin_name
+	 * @param $plugin_basename
 	 * @param $version
 	 * @param Plugin_Settings $settings
 	 * @param $plugin_path
@@ -73,15 +75,15 @@ class Admin {
 		ICanHelp $helper
 	) {
 
-		$this->plugin_name    = $plugin_name;
+		$this->plugin_name     = $plugin_name;
 		$this->plugin_basename = $plugin_basename;
-		$this->version        = $version;
-		$this->admin_dir_url  = plugin_dir_url( __FILE__ );
-		$this->admin_dir      = dirname( __FILE__ );
-		$this->plugin_dir     = $plugin_path;
-		$this->plugin_dir_url = plugin_dir_url( $plugin_path . '/index.php' );
-		$this->settings       = $settings;
-		$this->helper         = $helper;
+		$this->version         = $version;
+		$this->admin_dir_url   = plugin_dir_url( __FILE__ );
+		$this->admin_dir       = dirname( __FILE__ );
+		$this->plugin_dir      = $plugin_path;
+		$this->plugin_dir_url  = plugin_dir_url( $plugin_path . '/index.php' );
+		$this->settings        = $settings;
+		$this->helper          = $helper;
 
 		$this->user_field_info = array(
 			array( "lti_public_email", ltint_po( 'user.public_email' ), ltint_po( 'hlp.user.public_email' ) ),
@@ -192,10 +194,12 @@ class Admin {
 	 *
 	 */
 	public function options_page() {
-		if ( isset( $_POST['lti_seo_update'] ) ) {
-			if ( isset( $_POST['lti_seo_token'] ) ) {
-				if ( wp_verify_nonce( $_POST['lti_seo_token'], 'lti_seo_options' ) !== false ) {
-					$this->validate_input( $_POST );
+		$post_variables = $this->helper->filter_var_array( $_POST );
+
+		if ( isset( $post_variables['lti_seo_update'] ) ) {
+			if ( isset( $post_variables['lti_seo_token'] ) ) {
+				if ( wp_verify_nonce( $post_variables['lti_seo_token'], 'lti_seo_options' ) !== false ) {
+					$this->validate_input( $post_variables );
 					$this->page_type = "lti_update";
 					$this->message   = ltint( 'opt.msg.updated' );
 
@@ -204,7 +208,7 @@ class Admin {
 					$this->message   = ltint( "opt.msg.error_token" );
 				}
 			}
-		} elseif ( isset( $_POST['lti_seo_reset'] ) ) {
+		} elseif ( isset( $post_variables['lti_seo_reset'] ) ) {
 			$this->settings = new Plugin_Settings();
 			update_option( 'lti_seo_options', $this->settings );
 			$this->helper->update_global_post_fields( array(), true );
@@ -291,12 +295,44 @@ class Admin {
 		if ( $this->settings->get( 'keyword_support' ) == true ) {
 			$keyword_text = $this->box_values->get( 'keywords' );
 			if ( is_null( $keyword_text ) || empty( $keyword_text ) ) {
-				$f = new Singular_Keyword( $this->helper, $post->ID );
-				$this->box_values->set( 'keywords_suggestion', str_replace( ',', ', ', $f->get_tags() ) );
+				$keywords_single_page = new Singular_Keyword( $this->helper, $post->ID );
+				$this->box_values->set( 'keywords_suggestion', str_replace( ',', ', ', $keywords_single_page->get_tags() ) );
 			}
 		}
 		$this->set_current_page( 'post-edit' );
 		include $this->admin_dir . '/partials/postbox.php';
+	}
+
+	public function update_global_post_fields( $changed = array(), $reset = false ) {
+		/**
+		 * @var \wpdb $wpdb
+		 */
+		global $wpdb;
+		//@TODO: check whether this can be covered by some wp method
+		$sql = 'SELECT ' . $wpdb->posts . '.ID,' . $wpdb->postmeta . '.meta_value  FROM ' . $wpdb->posts . '
+				LEFT JOIN ' . $wpdb->postmeta . ' ON (' . $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id AND ' . $wpdb->postmeta . '.meta_key = "lti_seo")
+				WHERE ' . $wpdb->posts . '.post_type = "post" AND ' . $wpdb->posts . '.post_status!="auto-draft"';
+
+		$results = $wpdb->get_results( $sql );
+
+		if ( is_array( $results ) ) {
+			foreach ( $results as $result ) {
+				$postbox_values = $result->meta_value;
+				if ( ! is_null( $postbox_values ) && ! $reset ) {
+					$postbox_values = unserialize( $postbox_values );
+				} else {
+					$postbox_values = new Postbox_Values( new \stdClass() );
+				}
+
+				foreach ( $changed as $changedKey => $changedValue ) {
+					if ( isset( $postbox_values->{$changedKey} ) && $postbox_values->{$changedKey} instanceof Fields ) {
+						$postbox_values->{$changedKey}->value = $changedValue;
+					}
+				}
+
+				update_post_meta( $result->ID, 'lti_seo', $postbox_values );
+			}
+		}
 	}
 
 	/**
@@ -336,8 +372,9 @@ class Admin {
 	 * @param int $update
 	 */
 	public function save_post( $post_ID, $post, $update ) {
-		if ( isset( $_POST['lti_seo'] ) ) {
-			update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $_POST['lti_seo'] ) );
+		$post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
+		if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
+			update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
 		}
 	}
 
@@ -390,7 +427,7 @@ class Admin {
 	public function personal_options_update( $user_id ) {
 		if ( current_user_can( 'edit_user', $user_id ) ) {
 			foreach ( $this->user_field_info as $field ) {
-				update_user_meta( $user_id, $field[0], $_POST[ $field[0] ] );
+				update_user_meta( $user_id, $field[0], $this->helper->filter_input( INPUT_POST, $field[0] ) );
 			}
 		}
 
@@ -399,8 +436,8 @@ class Admin {
 
 	public function plugin_row_meta( $links, $file ) {
 		if ( $file == $this->plugin_basename ) {
-			$links[] = '<a href="http://dev.linguisticteam.org/lti-seo-help/" target="_blank">' . ltint('admin.help') . '</a>';
-			$links[] = '<a href="https://github.com/DeCarvalhoBruno/lti-wp-seo" target="_blank">' . ltint('admin.contribute') . '</a>';
+			$links[] = '<a href="http://dev.linguisticteam.org/lti-seo-help/" target="_blank">' . ltint( 'admin.help' ) . '</a>';
+			$links[] = '<a href="https://github.com/DeCarvalhoBruno/lti-wp-seo" target="_blank">' . ltint( 'admin.contribute' ) . '</a>';
 		}
 
 		return $links;

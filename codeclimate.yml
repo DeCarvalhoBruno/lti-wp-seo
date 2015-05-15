@@ -2,4 +2,6 @@ languages:
   JavaScript: true
   PHP: true
 exclude_paths:
-- "src/admin/partials/*"
+- src/admin/partials/*
+- tests/*
+- assets/*

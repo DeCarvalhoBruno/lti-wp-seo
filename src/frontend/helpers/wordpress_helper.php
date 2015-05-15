@@ -1,6 +1,5 @@
 <?php namespace Lti\Seo\Helpers;
 
-use Lti\Seo\Plugin\Fields;
 use Lti\Seo\Plugin\Postbox_Values;
 
 interface ICanHelp {
@@ -13,7 +12,7 @@ interface ICanHelp {
  * Class Wordpress_Helper
  * @package Lti\Seo\Helpers
  */
-class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJSONLD {
+class Wordpress_Helper implements ICanHelp {
 
 	private $is_home_posts_page;
 	private $is_home_static_page;
@@ -37,7 +36,7 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 	protected $settings;
 
 	public function __construct( $settings ) {
-		parent::__construct( $settings );
+		$this->settings = $settings;
 	}
 
 	public function get( $value ) {
@@ -128,54 +127,60 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 			case 'gplus':
 				$info = $this->get_user_meta_key( "lti_gplus_url" );
 				break;
-			case 'all_with_labels':
-				$twitter = $this->get_user_meta_key( "lti_twitter_username" );
-				if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
-					$twitter         = 'https://twitter.com' . str_replace( '@', '/', $twitter );
-					$info['twitter'] = $twitter;
-				}
-				$data = $this->get_user_meta_key( "lti_facebook_url" );
-				if ( ! is_null( $data ) && ! empty( $data ) ) {
-					$info['facebook'] = $data;
-				}
-				$data = $this->get_user_meta_key( "lti_gplus_url" );
-				if ( ! is_null( $data ) && ! empty( $data ) ) {
-					$info['gplus'] = $data;
-				}
-				$data = $this->get_user_meta_key( "lti_instagram_url" );
-				if ( ! is_null( $data ) && ! empty( $data ) ) {
-					$info['instagram'] = $data;
-				}
-				$data = $this->get_user_meta_key( "lti_youtube_url" );
-				if ( ! is_null( $data ) && ! empty( $data ) ) {
-					$info['youtube'] = $data;
-				}
-				$data = $this->get_user_meta_key( "lti_linkedin_url" );
-				if ( ! is_null( $data ) && ! empty( $data ) ) {
-					$info['linkedin'] = $data;
-				}
-				$data = $this->get_user_meta_key( "lti_public_email" );
-				if ( ! is_null( $data ) && ! empty( $data ) ) {
-					$info['email'] = 'mailto:' . $data . '?subject=%s&body=%s';
-				}
-				break;
-			default:
+		}
 
-				$twitter = $this->get_user_meta_key( "lti_twitter_username" );
-				if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
-					$twitter = 'https://twitter.com' . str_replace( '@', '/', $twitter );
-				}
-				$info = array_values( array_filter( array(
-						$this->get_user_meta_key( "lti_facebook_url" ),
-						$twitter,
-						$this->get_user_meta_key( "lti_gplus_url" ),
-						$this->get_user_meta_key( "lti_instagram_url" ),
-						$this->get_user_meta_key( "lti_youtube_url" ),
-						$this->get_user_meta_key( "lti_linkedin_url" ),
-						$this->get_user_meta_key( "lti_myspace_url" )
-					)
-				) );
-				break;
+		return $info;
+	}
+
+	public function get_all_author_social_info() {
+		$twitter = $this->get_user_meta_key( "lti_twitter_username" );
+		if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
+			$twitter = 'https://twitter.com' . str_replace( '@', '/', $twitter );
+		}
+		$info = array_values( array_filter( array(
+				$this->get_user_meta_key( "lti_facebook_url" ),
+				$twitter,
+				$this->get_user_meta_key( "lti_gplus_url" ),
+				$this->get_user_meta_key( "lti_instagram_url" ),
+				$this->get_user_meta_key( "lti_youtube_url" ),
+				$this->get_user_meta_key( "lti_linkedin_url" ),
+				$this->get_user_meta_key( "lti_myspace_url" )
+			)
+		) );
+
+		return $info;
+	}
+
+	public function get_author_social_info_with_labels() {
+		$info    = null;
+		$twitter = $this->get_user_meta_key( "lti_twitter_username" );
+		if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
+			$twitter         = 'https://twitter.com' . str_replace( '@', '/', $twitter );
+			$info['twitter'] = $twitter;
+		}
+		$data = $this->get_user_meta_key( "lti_facebook_url" );
+		if ( ! is_null( $data ) && ! empty( $data ) ) {
+			$info['facebook'] = $data;
+		}
+		$data = $this->get_user_meta_key( "lti_gplus_url" );
+		if ( ! is_null( $data ) && ! empty( $data ) ) {
+			$info['gplus'] = $data;
+		}
+		$data = $this->get_user_meta_key( "lti_instagram_url" );
+		if ( ! is_null( $data ) && ! empty( $data ) ) {
+			$info['instagram'] = $data;
+		}
+		$data = $this->get_user_meta_key( "lti_youtube_url" );
+		if ( ! is_null( $data ) && ! empty( $data ) ) {
+			$info['youtube'] = $data;
+		}
+		$data = $this->get_user_meta_key( "lti_linkedin_url" );
+		if ( ! is_null( $data ) && ! empty( $data ) ) {
+			$info['linkedin'] = $data;
+		}
+		$data = $this->get_user_meta_key( "lti_public_email" );
+		if ( ! is_null( $data ) && ! empty( $data ) ) {
+			$info['email'] = 'mailto:' . $data . '?subject=%s&body=%s';
 		}
 
 		return $info;
@@ -601,38 +606,6 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		return $vals;
 	}
 
-	public function update_global_post_fields( $changed = array(), $reset = false ) {
-		/**
-		 * @var \wpdb $wpdb
-		 */
-		global $wpdb;
-		//@TODO: check whether this can be covered by some wp method
-		$sql = 'SELECT ' . $wpdb->posts . '.ID,' . $wpdb->postmeta . '.meta_value  FROM ' . $wpdb->posts . '
-				LEFT JOIN ' . $wpdb->postmeta . ' ON (' . $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id AND ' . $wpdb->postmeta . '.meta_key = "lti_seo")
-				WHERE ' . $wpdb->posts . '.post_type = "post" AND ' . $wpdb->posts . '.post_status!="auto-draft"';
-
-		$results = $wpdb->get_results( $sql );
-
-		if ( is_array( $results ) ) {
-			foreach ( $results as $result ) {
-				$postbox_values = $result->meta_value;
-				if ( ! is_null( $postbox_values ) && ! $reset ) {
-					$postbox_values = unserialize( $postbox_values );
-				} else {
-					$postbox_values = new Postbox_Values( new \stdClass() );
-				}
-
-				foreach ( $changed as $changedKey => $changedValue ) {
-					if ( isset( $postbox_values->{$changedKey} ) && $postbox_values->{$changedKey} instanceof Fields ) {
-						$postbox_values->{$changedKey}->value = $changedValue;
-					}
-				}
-
-				update_post_meta( $result->ID, 'lti_seo', $postbox_values );
-			}
-		}
-	}
-
 	public function get_description() {
 		if ( is_null( $this->page_description ) ) {
 			if ( $this->page_type() === "Frontpage" ) {
@@ -673,108 +646,28 @@ class Wordpress_Helper extends Generic_Helper implements ICanHelp, ICanHelpWithJ
 		return $profiles;
 	}
 
-	public function get_schema_org( $setting ) {
-		switch ( $this->schema ) {
-			case "CreativeWork":
-				switch ( $setting ) {
-					case 'headline':
-						return $this->get_title();
-					case 'keywords':
-						return implode( ',', $this->get_keywords() );
-					case 'thumbnailUrl':
-						return $this->get_thumbnail_url();
-					case 'inLanguage':
-						return $this->get_language();
-					case 'datePublished':
-						return lti_iso8601_date( $this->get_post_info( 'post_date' ) );
-					case 'dateModified':
-						return lti_iso8601_date( $this->get_post_info( 'post_modified' ) );
-					case 'copyrightYear':
-						return lti_mysql_date_year( $this->get_post_info( 'post_date' ) );
-					case 'author':
-						if ( $this->get( 'jsonld_entity_support' ) == true ) {
-							$type = $this->get( 'jsonld_entity_type' );
-
-							if ( $type == 'Person' ) {
-								return array(
-									'Person' => $this
-								);
-							}
-						}
-						break;
-					case 'publisher':
-						if ( $this->get( 'jsonld_entity_support' ) == true ) {
-							$type = $this->get( 'jsonld_entity_type' );
-							if ( $type == 'Organization' ) {
-								return array(
-									'Organization' => $this
-								);
-							}
-						}
-						break;
-				}
-				break;
-			case 'Person':
-				switch ( $setting ) {
-					case 'name':
-						return $this->get_user_key( 'display_name' );
-					case 'url':
-						return $this->get_user_key( 'user_url' );
-					case 'workLocation:longitude':
-						return $this->get_user_meta_key( 'lti_work_longitude' );
-					case 'workLocation:latitude':
-						return $this->get_user_meta_key( 'lti_work_latitude' );
-					case 'jobTitle':
-						return $this->get_user_meta_key( 'lti_job_title' );
-					case 'email':
-						return $this->get_user_meta_key( 'lti_public_email' );
-					case 'sameAs':
-						return $this->get_author_social_info();
-				}
-				break;
-			case 'Organization':
-				switch ( $setting ) {
-					case 'name':
-						return $this->get( 'jsonld_org_name' );
-					case 'url':
-						return $this->get( 'jsonld_org_website_url' );
-					case 'alternateName':
-						return $this->get( 'jsonld_org_alternate_name' );
-					case 'logo':
-						return $this->get( 'jsonld_org_logo_url' );
-					case 'sameAs':
-						return $this->get_social_urls();
-				}
-				break;
-			case 'Article':
-			case 'BlogPosting':
-			case 'NewsArticle':
-			case 'ScholarlyArticle':
-			case 'TechArticle':
-				switch ( $setting ) {
-					case 'articleSection':
-						return $this->get_categories();
-					case 'wordCount':
-						return $this->get_post_meta_key( 'word_count' );
-					case 'Person:url':
-						return $this->get_user_key( 'user_url' );
-				}
-
-				break;
-		}
-
-		return null;
-	}
-
-	public function get_schema_org_setting( $setting ) {
-		return $this->get( 'jsonld_type_' . $setting );
-	}
-
-	public function get_search_action_type() {
-		return 'Lti\Seo\Generators\WordpressSearchAction';
-	}
-
 	public function get_current_url() {
 		return $this->current_url;
+	}
+
+	public function get_settings() {
+		return $this->settings;
+	}
+
+	/**
+	 * Wrapper for the built-in filter_input function
+	 *
+	 * @param $type
+	 * @param $variable_name
+	 * @param int $filter
+	 *
+	 * @return mixed
+	 */
+	public function filter_input( $type, $variable_name, $filter = FILTER_DEFAULT ) {
+		return filter_input( $type, $variable_name, $filter );
+	}
+
+	public function filter_var_array($data, $filter = FILTER_SANITIZE_STRING){
+		return filter_var_array($data, $filter);
 	}
 }
