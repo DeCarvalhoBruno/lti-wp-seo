@@ -117,7 +117,6 @@
 								       data-target="#robot_chk_group"
 								       id="robot_support" <?php echo ltichk( 'robot_support' ); ?>/>
 							</label>
-
 							<div id="robot_chk_group">
 								<div class="input-group">
 									<label><?php echo ltint( 'opt.group.robot_attr' ); ?></label>
@@ -230,6 +229,18 @@
 						</div>
 						<div class="form-help-container">
 							<div class="form-help">
+								<?php
+								if ( get_option( 'blog_public' ) != 1 ):
+									?>
+									<div class="help-warning">
+										<?php
+										echo ltint( 'opt.hlp.robot0' );
+										?>
+									</div>
+								<?php
+								endif;
+								?>
+
 								<p><?php echo ltint( 'opt.hlp.robot1' ); ?></p>
 
 								<p><?php echo ltint( 'opt.hlp.robot2' ); ?></p>

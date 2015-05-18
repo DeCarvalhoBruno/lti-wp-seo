@@ -255,6 +255,11 @@
         height: 15px;
     }
 
+    #flseo .form-help-container .help-warning {
+        color: #c90000;
+        font-weight: bold;
+    }
+
     #lti_seo_wrapper .nav {
         margin: 0;
         padding: 0;
