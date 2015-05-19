@@ -25,7 +25,7 @@ class LTI_SEO {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @var      string $plugin_name The string used to uniquely identify this plugin.
+	 * @var      string The string used to uniquely identify this plugin.
 	 */
 	protected $LTI_SEO;
 
@@ -52,6 +52,10 @@ class LTI_SEO {
 	public $admin;
 	public $frontend;
 	private $helper;
+	/**
+	 * @var \Lti\Seo\User
+	 */
+	private $user;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -101,19 +105,20 @@ class LTI_SEO {
 		require_once $this->file_path . 'loader.php';
 		require_once $this->file_path . 'i18n.php';
 		require_once $this->file_path . 'admin/admin.php';
+		require_once $this->file_path . 'user.php';
 		require_once $this->file_path . 'frontend/frontend.php';
 		require_once $this->file_path . 'plugin/postbox.php';
-		require_once $this->file_path . 'frontend/helpers/wordpress_helper.php';
-		require_once $this->file_path . 'frontend/helpers/jsonld_helper.php';
-		require_once $this->file_path . 'frontend/generators/schema_org.php';
-		require_once $this->file_path . 'frontend/generators/json_ld.php';
-		require_once $this->file_path . 'frontend/generators/generic_meta_tag.php';
-		require_once $this->file_path . 'frontend/generators/open_graph.php';
-		require_once $this->file_path . 'frontend/generators/twitter_cards.php';
-		require_once $this->file_path . 'frontend/generators/keywords.php';
-		require_once $this->file_path . 'frontend/generators/description.php';
-		require_once $this->file_path . 'frontend/generators/robots.php';
-		require_once $this->file_path . 'frontend/generators/link_rel.php';
+		require_once $this->file_path . 'helpers/wordpress_helper.php';
+		require_once $this->file_path . 'helpers/jsonld_helper.php';
+		require_once $this->file_path . 'generators/schema_org.php';
+		require_once $this->file_path . 'generators/json_ld.php';
+		require_once $this->file_path . 'generators/generic_meta_tag.php';
+		require_once $this->file_path . 'generators/open_graph.php';
+		require_once $this->file_path . 'generators/twitter_cards.php';
+		require_once $this->file_path . 'generators/keywords.php';
+		require_once $this->file_path . 'generators/description.php';
+		require_once $this->file_path . 'generators/robots.php';
+		require_once $this->file_path . 'generators/link_rel.php';
 		require_once $this->file_path . 'activator.php';
 		$this->loader = new Loader();
 		$this->helper = new Wordpress_Helper( $this->settings );
@@ -155,10 +160,11 @@ class LTI_SEO {
 		$this->loader->add_action( 'save_post', $this->admin, 'save_post', 10, 3 );
 
 		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
-			$this->loader->add_action( 'show_user_profile', $this->admin, 'show_user_profile' );
-			$this->loader->add_action( 'edit_user_profile', $this->admin, 'show_user_profile' );
-			$this->loader->add_action( 'personal_options_update', $this->admin, 'personal_options_update', 10, 1 );
-			$this->loader->add_action( 'edit_user_profile_update', $this->admin, 'personal_options_update', 10, 1 );
+			$this->user = new User($this->settings,$this->helper);
+			$this->loader->add_action( 'show_user_profile', $this->user, 'show_user_profile' );
+			$this->loader->add_action( 'edit_user_profile', $this->user, 'show_user_profile' );
+			$this->loader->add_action( 'personal_options_update', $this->user, 'personal_options_update', 10, 1 );
+			$this->loader->add_action( 'edit_user_profile_update', $this->user, 'personal_options_update', 10, 1 );
 		}
 	}
 

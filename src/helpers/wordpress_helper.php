@@ -6,7 +6,7 @@ interface ICanHelp {
 }
 
 /**
- * Does anything wordpress related on behalf on generators
+ * Does anything wordpress related on behalf of generators
  * @TODO: find a way to specialize helpers more, this class could become humongous
  *
  * Class Wordpress_Helper

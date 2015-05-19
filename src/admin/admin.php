@@ -54,11 +54,6 @@ class Admin {
 	private $helper;
 
 	/**
-	 * @var array All the info about custom user profile fields
-	 */
-	private $user_field_info;
-
-	/**
 	 * @param $plugin_name
 	 * @param $plugin_basename
 	 * @param $version
@@ -84,25 +79,6 @@ class Admin {
 		$this->plugin_dir_url  = plugin_dir_url( $plugin_path . '/index.php' );
 		$this->settings        = $settings;
 		$this->helper          = $helper;
-
-		$this->user_field_info = array(
-			array( "lti_public_email", ltint_po( 'user.public_email' ), ltint_po( 'hlp.user.public_email' ) ),
-			array( "lti_job_title", ltint_po( 'user.job_title' ), ltint_po( 'hlp.user.job_title' ) ),
-			array( "lti_work_longitude", ltint_po( 'user.work_longitude' ), ltint_po( 'hlp.user.work_longitude' ) ),
-			array( "lti_work_latitude", ltint_po( 'user.work_latitude' ), ltint_po( 'hlp.user.work_latitude' ) ),
-			array(
-				"lti_twitter_username",
-				ltint_po( 'user.twitter_username' ),
-				ltint_po( 'hlp.user.twitter_username' )
-			),
-			array( "lti_facebook_id", ltint_po( 'user.facebook_id' ), ltint_po( 'hlp.user.facebook_id' ) ),
-			array( "lti_facebook_url", ltint_po( 'user.facebook_url' ), ltint_po( 'hlp.user.facebook_url' ) ),
-			array( "lti_gplus_url", ltint_po( 'user.gplus_url' ), ltint_po( 'hlp.user.gplus_url' ) ),
-			array( "lti_instagram_url", ltint_po( 'user.instagram_url' ), ltint_po( 'hlp.user.instagram_url' ) ),
-			array( "lti_youtube_url", ltint_po( 'user.youtube_url' ), ltint_po( 'hlp.user.youtube_url' ) ),
-			array( "lti_linkedin_url", ltint_po( 'user.linkedin_url' ), ltint_po( 'hlp.user.linkedin_url' ) ),
-			array( "lti_myspace_url", ltint_po( 'user.myspace_url' ), ltint_po( 'hlp.user.myspace_url' ) )
-		);
 	}
 
 	/**
@@ -296,7 +272,8 @@ class Admin {
 			$keyword_text = $this->box_values->get( 'keywords' );
 			if ( is_null( $keyword_text ) || empty( $keyword_text ) ) {
 				$keywords_single_page = new Singular_Keyword( $this->helper, $post->ID );
-				$this->box_values->set( 'keywords_suggestion', str_replace( ',', ', ', $keywords_single_page->get_tags() ) );
+				$this->box_values->set( 'keywords_suggestion',
+					str_replace( ',', ', ', $keywords_single_page->get_tags() ) );
 			}
 		}
 		$this->set_current_page( 'post-edit' );
@@ -363,80 +340,24 @@ class Admin {
 		return $this->settings;
 	}
 
-
 	/**
 	 * Saves posts
 	 *
 	 * @param int $post_ID
 	 * @param \WP_Post $post
-     * @param int $update
-     */
-    public function save_post( $post_ID, $post, $update ) {
-        $post_variables = $this->helper->filter_input( INPUT_POST, 'lti_seo' );
-
-        if ( ! is_null( $post_variables ) ) {
-            $post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
-            if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
-                update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
-            }
-        }
-    }
-
-    /**
-	 * Displays the group of custom user profile fields
-	 *
-	 * @param $user
+	 * @param int $update
 	 */
-	public function show_user_profile( $user ) {
-		$fields = array();
-		foreach ( $this->user_field_info as $field ) {
-			$fields[] = $this->user_profile_field( $user->ID, $field[0], $field[1], $field[2] );
-		}
+	public function save_post( $post_ID, $post, $update ) {
+		$post_variables = $this->helper->filter_input( INPUT_POST, 'lti_seo' );
 
-		echo sprintf( '
-		<h3>%s</h3>
-		<table class="form-table">
-			%s
-		</table>', ltint( "user.fields_title" ), implode( PHP_EOL, $fields ) );
-	}
-
-	/**
-	 * Displays individual custom user fields
-	 *
-	 * @param int $userID
-	 * @param string $field
-	 * @param string $label
-	 * @param string $description Appears under the field
-	 *
-	 * @return string
-	 */
-	private function user_profile_field( $userID, $field, $label, $description ) {
-		return sprintf( '<tr>
-				<th><label for="%1$s">%2$s</label></th>
-				<td>
-					<input type="text" name="%1$s" id="%1$s" class="regular-text"
-					       value="' . esc_attr( get_the_author_meta( $field, $userID ) ) . '" /><br />
-					<span class="description">%3$s</span>
-				</td>
-			</tr>', $field, ltint( $label ), ltint( $description ) );
-	}
-
-	/**
-	 * Triggered when the user profile is saved
-	 *
-	 * @param int $user_id
-	 *
-	 * @return bool
-	 */
-	public function personal_options_update( $user_id ) {
-		if ( current_user_can( 'edit_user', $user_id ) ) {
-			foreach ( $this->user_field_info as $field ) {
-				update_user_meta( $user_id, $field[0], $this->helper->filter_input( INPUT_POST, $field[0] ) );
+		if ( ! is_null( $post_variables ) ) {
+			$post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
+			if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
+				update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
 			}
 		}
-
-		return true;
 	}
+
 
 	public function plugin_row_meta( $links, $file ) {
 		if ( $file == $this->plugin_basename ) {
