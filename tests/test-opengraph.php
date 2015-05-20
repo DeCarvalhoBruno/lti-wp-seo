@@ -2,7 +2,7 @@
 
 use Lti\Seo\Generators\Frontpage_Open_Graph;
 use Lti\Seo\Generators\Singular_Open_Graph;
-use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Helpers\LTI_SEO_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 use Lti\Seo\Test\Datatype\DOM;
 
@@ -17,7 +17,7 @@ class OpenGraphTest extends LTI_SEO_UnitTestCase {
 	public function testFrontpage() {
 
 		$settings   = new Plugin_Settings( (object) array() );
-		$open_graph = new Frontpage_Open_Graph( new Wordpress_Helper( $settings ) );
+		$open_graph = new Frontpage_Open_Graph( new LTI_SEO_Helper( $settings ) );
 		ob_start();
 		$open_graph->display_tags();
 		$out = new DOM( ob_get_clean() );
@@ -44,7 +44,7 @@ class OpenGraphTest extends LTI_SEO_UnitTestCase {
 
 		$settings   = new Plugin_Settings( (object) array() );
 		$settings->set( 'description_support', true );
-		$open_graph = new Singular_Open_Graph( new Wordpress_Helper( $settings ) );
+		$open_graph = new Singular_Open_Graph( new LTI_SEO_Helper( $settings ) );
 		ob_start();
 		$open_graph->display_tags();
 		$out = new DOM( ob_get_clean() );

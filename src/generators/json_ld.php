@@ -10,7 +10,7 @@ use Lti\Seo\Helpers\ICanHelpWithJSONLD;
  */
 class Wordpress_JSON_LD extends JSON_LD {
 	/**
-	 * @var ICanHelpWithJSONLD|\Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @var ICanHelpWithJSONLD|\Lti\Seo\Helpers\LTI_SEO_Helper $helper
 	 */
 	protected $helper;
 

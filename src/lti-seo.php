@@ -1,6 +1,6 @@
 <?php namespace Lti\Seo;
 
-use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Helpers\LTI_SEO_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 
 /**
@@ -109,6 +109,7 @@ class LTI_SEO {
 		require_once $this->file_path . 'frontend/frontend.php';
 		require_once $this->file_path . 'plugin/postbox.php';
 		require_once $this->file_path . 'helpers/wordpress_helper.php';
+		require_once $this->file_path . 'helpers/lti_seo_helper.php';
 		require_once $this->file_path . 'helpers/jsonld_helper.php';
 		require_once $this->file_path . 'generators/schema_org.php';
 		require_once $this->file_path . 'generators/json_ld.php';
@@ -121,13 +122,13 @@ class LTI_SEO {
 		require_once $this->file_path . 'generators/link_rel.php';
 		require_once $this->file_path . 'activator.php';
 		$this->loader = new Loader();
-		$this->helper = new Wordpress_Helper( $this->settings );
+		$this->helper = new LTI_SEO_Helper( $this->settings );
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the lti-seo_i18n class in order to set the domain and to register the hook
+	 * Uses the i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @access   private

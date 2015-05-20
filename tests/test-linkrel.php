@@ -1,7 +1,7 @@
 <?php namespace Lti\Seo\Test;
 
 use Lti\Seo\Generators\Frontpage_Link_Rel;
-use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Helpers\LTI_SEO_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 
 class LinkRelTest extends LTI_SEO_UnitTestCase {
@@ -12,7 +12,7 @@ class LinkRelTest extends LTI_SEO_UnitTestCase {
 	}
 
 	public function testLinkRelDisabled(){
-		$link_rel = new Frontpage_Link_Rel(new Wordpress_Helper(new Plugin_Settings((object)array())));
+		$link_rel = new Frontpage_Link_Rel(new LTI_SEO_Helper(new Plugin_Settings((object)array())));
 		ob_start();
 		$link_rel->display_tags();
 		$output = ob_get_clean();
@@ -23,7 +23,7 @@ class LinkRelTest extends LTI_SEO_UnitTestCase {
 
 		$settings = new Plugin_Settings((object)array());
 		$settings->set( 'link_rel_canonical', true );
-		$link_rel = new Frontpage_Link_Rel(new Wordpress_Helper($settings));
+		$link_rel = new Frontpage_Link_Rel(new LTI_SEO_Helper($settings));
 		ob_start();
 		$link_rel->display_tags();
 

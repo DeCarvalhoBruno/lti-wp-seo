@@ -33,7 +33,7 @@ abstract class GenericMetaTag {
 	protected $number_images = -1;
 
 	/**
-	 * @var ICanHelp|\Lti\Seo\Helpers\Wordpress_Helper
+	 * @var ICanHelp|\Lti\Seo\Helpers\LTI_SEO_Helper
 	 */
 	protected $helper;
 

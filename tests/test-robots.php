@@ -3,7 +3,7 @@
 
 use Lti\Seo\Generators\Frontpage_Robot;
 use Lti\Seo\Generators\Singular_Robot;
-use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Helpers\LTI_SEO_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 use Lti\Seo\Plugin\Postbox_Values;
 
@@ -15,7 +15,7 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 	}
 
 	public function testRobotsDisabled(){
-		$robots = new Frontpage_Robot(new Wordpress_Helper(new Plugin_Settings((object)array())));
+		$robots = new Frontpage_Robot(new LTI_SEO_Helper(new Plugin_Settings((object)array())));
 		ob_start();
 		$robots->display_tags();
 		$output = ob_get_clean();
@@ -33,7 +33,7 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 		$settings->set( 'frontpage_robot_noarchive', true );
 		$settings->set( 'frontpage_robot_nosnippet', true );
 
-		$robots = new Frontpage_Robot(new Wordpress_Helper($settings));
+		$robots = new Frontpage_Robot(new LTI_SEO_Helper($settings));
 		ob_start();
 		$robots->display_tags();
 		$output = ob_get_clean();
@@ -54,7 +54,7 @@ class RobotsTest extends LTI_SEO_UnitTestCase {
 		update_post_meta( $postID, 'lti_seo', new Postbox_Values( (object) $postbox_settings ) );
 
 		$this->go_to(get_permalink($postID));
-		$helper = new Wordpress_Helper(new Plugin_Settings(new \stdClass()));
+		$helper = new LTI_SEO_Helper(new Plugin_Settings(new \stdClass()));
 		$helper->init();
 		$robots = new Singular_Robot($helper);
 		ob_start();

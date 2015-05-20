@@ -1,7 +1,7 @@
 <?php namespace Lti\Seo\Test;
 
 use Lti\Seo\Generators\Frontpage_Twitter_Card;
-use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Helpers\LTI_SEO_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 use Lti\Seo\Test\Datatype\DOM;
 
@@ -15,7 +15,7 @@ class TwitterTest extends LTI_SEO_UnitTestCase {
 	public function testFrontpageTwitter() {
 
 		$settings = new Plugin_Settings( (object) array() );
-		$twitter  = new Frontpage_Twitter_Card( new Wordpress_Helper( $settings ) );
+		$twitter  = new Frontpage_Twitter_Card( new LTI_SEO_Helper( $settings ) );
 		ob_start();
 		$twitter->display_tags();
 		$out = new DOM( ob_get_clean() );
@@ -30,7 +30,7 @@ class TwitterTest extends LTI_SEO_UnitTestCase {
 	public function testLargeImageSetting(){
 		$settings = new Plugin_Settings( (object) array() );
 		$settings->set( 'twitter_card_type', 'summary_large_image' );
-		$twitter  = new Frontpage_Twitter_Card( new Wordpress_Helper( $settings ) );
+		$twitter  = new Frontpage_Twitter_Card( new LTI_SEO_Helper( $settings ) );
 		ob_start();
 		$twitter->display_tags();
 		$out = new DOM( ob_get_clean() );

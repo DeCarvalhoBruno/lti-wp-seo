@@ -24,7 +24,7 @@ class Frontend {
 	private $settings;
 
 	/**
-	 * @var ICanHelp|\Lti\Seo\Helpers\Wordpress_Helper
+	 * @var ICanHelp|\Lti\Seo\Helpers\LTI_SEO_Helper
 	 */
 	private $helper;
 

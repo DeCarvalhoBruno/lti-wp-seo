@@ -1,5 +1,5 @@
 === LTI SEO ===
-Contributors: decarvalho_bruno
+Contributors: lti, decarvalho_bruno
 Tags: open-source, SEO, meta, google, twitter, facebook, pinterest, social media, webmaster, search engine optimization, moteur, recherche, json-ld, rich snippets, meta tags, optimisation, schema.org, open graph, réseaux, sociaux, robots
 Requires at least: 4
 Tested up to: 4.2.2

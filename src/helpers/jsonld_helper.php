@@ -4,7 +4,7 @@ class Wordpress_Helper_JSONLD extends JSONLD_Helper implements ICanHelpWithJSONL
 
 	protected $schema;
 	/**
-	 * @var \Lti\Seo\Helpers\Wordpress_Helper
+	 * @var \Lti\Seo\Helpers\LTI_SEO_Helper
 	 */
 	protected $helper;
 
@@ -76,7 +76,7 @@ class Schema_Router {
 	protected $jsonld_helper;
 
 	/**
-	 * @param ICanHelp|\Lti\Seo\Helpers\Wordpress_Helper $helper
+	 * @param ICanHelp|\Lti\Seo\Helpers\LTI_SEO_Helper $helper
 	 * @param ICanHelpWithJSONLD $jsonld
 	 */
 	public function __construct( ICanHelp $helper, ICanHelpWithJSONLD $jsonld = null ) {

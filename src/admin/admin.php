@@ -49,7 +49,7 @@ class Admin {
 	 */
 	private $current_page = "options-general";
 	/**
-	 * @var \Lti\Seo\Helpers\Wordpress_Helper
+	 * @var \Lti\Seo\Helpers\LTI_SEO_Helper
 	 */
 	private $helper;
 

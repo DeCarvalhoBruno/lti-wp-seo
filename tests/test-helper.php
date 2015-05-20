@@ -1,18 +1,18 @@
 <?php namespace Lti\Seo\Test;
 
-use Lti\Seo\Helpers\Wordpress_Helper;
+use Lti\Seo\Helpers\LTI_SEO_Helper;
 use Lti\Seo\Plugin\Plugin_Settings;
 
 class HelperTest extends LTI_SEO_UnitTestCase {
 	/**
-	 * @var \Lti\Seo\Helpers\Wordpress_Helper
+	 * @var \Lti\Seo\Helpers\LTI_SEO_Helper
 	 */
 	private $helper;
 
 	public function setUp(){
 		parent::setUp();
 		$this->go_to( home_url( '/' ) );
-		$this->helper = new Wordpress_Helper(new Plugin_Settings((object)array()));
+		$this->helper = new LTI_SEO_Helper(new Plugin_Settings((object)array()));
 	}
 
 	public function testInit(){
