@@ -23,7 +23,13 @@ abstract class Fields {
 class Field_Checkbox extends Fields {
 	public function __construct( $value, $default = false, $isTracked = false ) {
 		$this->isTracked = $isTracked;
-		$this->value     = ( $value === true || (int) $value === 1 || $value === "true" || $value === 'on' ) ? true : $default;
+		if ( $value === true || (int) $value === 1 || $value === "true" || $value === 'on' ) {
+			$this->value = true;
+		} else if ( $value === false ) {
+			$this->value = false;
+		} else {
+			$this->value = $default;
+		}
 	}
 }
 

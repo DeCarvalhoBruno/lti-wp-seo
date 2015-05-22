@@ -15,53 +15,53 @@ class Defaults {
 	public function __construct() {
 		$this->values = array(
 			new def( "version", 'Text', LTI_SEO_VERSION ),
-			new def( 'link_rel_support', 'Checkbox' ),
-			new def( 'link_rel_canonical', 'Checkbox' ),
-			new def( 'link_rel_author', 'Checkbox' ),
-			new def( 'link_rel_publisher', 'Checkbox' ),
-			new def( 'keyword_support', 'Checkbox' ),
-			new def( 'keyword_tag_based', 'Checkbox' ),
-			new def( 'keyword_cat_based', 'Checkbox' ),
-			new def( 'robot_support', 'Checkbox' ),
+			new def( 'link_rel_support', 'Checkbox',false ),
+			new def( 'link_rel_canonical', 'Checkbox',false ),
+			new def( 'link_rel_author', 'Checkbox',false ),
+			new def( 'link_rel_publisher', 'Checkbox',false ),
+			new def( 'keyword_support', 'Checkbox',false ),
+			new def( 'keyword_tag_based', 'Checkbox',false ),
+			new def( 'keyword_cat_based', 'Checkbox' ,false),
+			new def( 'robot_support', 'Checkbox',false ),
 			new def( 'post_robot_noindex', 'Checkbox', false, true ),
 			new def( 'post_robot_nofollow', 'Checkbox', false, true ),
 			new def( 'post_robot_noodp', 'Checkbox', false, true ),
 			new def( 'post_robot_noydir', 'Checkbox', false, true ),
 			new def( 'post_robot_noarchive', 'Checkbox', false, true ),
 			new def( 'post_robot_nosnippet', 'Checkbox', false, true ),
-			new def( 'robot_noindex', 'Checkbox' ),
-			new def( 'robot_nofollow', 'Checkbox' ),
-			new def( 'robot_noodp', 'Checkbox' ),
-			new def( 'robot_noydir', 'Checkbox' ),
-			new def( 'robot_noarchive', 'Checkbox' ),
-			new def( 'robot_nosnippet', 'Checkbox' ),
-			new def( 'robot_date_based', 'Checkbox' ),
-			new def( 'robot_cat_based', 'Checkbox' ),
-			new def( 'robot_tag_based', 'Checkbox' ),
-			new def( 'robot_tax_based', 'Checkbox' ),
-			new def( 'robot_author_based', 'Checkbox' ),
-			new def( 'robot_search_based', 'Checkbox' ),
-			new def( 'robot_notfound_based', 'Checkbox' ),
-			new def( 'description_support', 'Checkbox' ),
-			new def( 'open_graph_support', 'Checkbox' ),
+			new def( 'robot_noindex', 'Checkbox',false ),
+			new def( 'robot_nofollow', 'Checkbox',false ),
+			new def( 'robot_noodp', 'Checkbox',false ),
+			new def( 'robot_noydir', 'Checkbox',false ),
+			new def( 'robot_noarchive', 'Checkbox',false ),
+			new def( 'robot_nosnippet', 'Checkbox',false ),
+			new def( 'robot_date_based', 'Checkbox',false ),
+			new def( 'robot_cat_based', 'Checkbox' ,false),
+			new def( 'robot_tag_based', 'Checkbox',false ),
+			new def( 'robot_tax_based', 'Checkbox' ,false),
+			new def( 'robot_author_based', 'Checkbox' ,false),
+			new def( 'robot_search_based', 'Checkbox' ,false),
+			new def( 'robot_notfound_based', 'Checkbox',false ),
+			new def( 'description_support', 'Checkbox' ,false),
+			new def( 'open_graph_support', 'Checkbox' ,false),
 			new def( 'facebook_publisher', 'Url' ),
-			new def( 'frontpage_description', 'Checkbox' ),
+			new def( 'frontpage_description', 'Checkbox' ,false),
 			new def( 'frontpage_description_text', 'Text' ),
-			new def( 'frontpage_robot', 'Checkbox' ),
-			new def( 'frontpage_robot_noindex', 'Checkbox' ),
-			new def( 'frontpage_robot_nofollow', 'Checkbox' ),
-			new def( 'frontpage_robot_noodp', 'Checkbox' ),
-			new def( 'frontpage_robot_noydir', 'Checkbox' ),
-			new def( 'frontpage_robot_noarchive', 'Checkbox' ),
-			new def( 'frontpage_robot_nosnippet', 'Checkbox' ),
-			new def( 'frontpage_keyword', 'Checkbox' ),
+			new def( 'frontpage_robot', 'Checkbox',false ),
+			new def( 'frontpage_robot_noindex', 'Checkbox',false ),
+			new def( 'frontpage_robot_nofollow', 'Checkbox' ,false),
+			new def( 'frontpage_robot_noodp', 'Checkbox' ,false),
+			new def( 'frontpage_robot_noydir', 'Checkbox',false ),
+			new def( 'frontpage_robot_noarchive', 'Checkbox',false ),
+			new def( 'frontpage_robot_nosnippet', 'Checkbox',false ),
+			new def( 'frontpage_keyword', 'Checkbox' ,false),
 			new def( 'frontpage_keyword_text', 'Text' ),
 			new def( 'frontpage_social_img_url', 'Url' ),
 			new def( 'frontpage_social_img_id', 'Text' ),
-			new def( 'jsonld_website_support', 'Checkbox' ),
+			new def( 'jsonld_website_support', 'Checkbox',false ),
 			new def( 'jsonld_website_type', 'Radio',
 				array( 'default' => 'WebSite', 'choice' => array( 'WebSite', 'Blog' ) ) ),
-			new def( 'jsonld_entity_support', 'Checkbox' ),
+			new def( 'jsonld_entity_support', 'Checkbox',false ),
 			new def(
 				'jsonld_entity_type',
 				'Radio',
@@ -156,19 +156,22 @@ class Plugin_Settings {
 		 * @var def $value
 		 */
 		foreach ( $defaults->values as $value ) {
-			$storedValue = null;
+			$storedValue = false;
 			if ( isset( $settings->{$value->name} ) ) {
 				$storedValue = $settings->{$value->name};
 			}
 			$className = $value->type;
 
-
-			 //@TODO: why do we do this test?
-			if ( ! is_null( $value->default_value ) ) {
+			//Settings is null when we reset to defaults
+			//In that case, we need to set the value to null so that checkboxes pick up their default values instead
+			//of being initialized to false
+			if($settings == null){
+				$this->{$value->name} = new $className( null, $value->default_value,
+					$value->impacts_user_settings );
+			}else{
 				$this->{$value->name} = new $className( $storedValue, $value->default_value,
 					$value->impacts_user_settings );
-			} else {
-				$this->{$value->name} = new $className( $storedValue, null, $value->impacts_user_settings );
+
 			}
 		}
 	}
