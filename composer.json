@@ -1,11 +1,17 @@
 {
     "name": "lti/lti-wp-seo",
     "require-dev": {
-        "lti/json-ld": "dev-master"
+        "lti/json-ld": "dev-master",
+        "google/apiclient": "~1.1"
     },
   "scripts": {
     "post-install-cmd": [
       "composer dump-autoload --optimize"
     ]
+  },
+  "autoload": {
+    "psr-4": {
+      "Lti\\Seo\\": "src/"
+    }
   }
 }

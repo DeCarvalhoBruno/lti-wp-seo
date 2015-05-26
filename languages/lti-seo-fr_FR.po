@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-18 14:44+0100\n"
-"PO-Revision-Date: 2015-05-18 14:47+0100\n"
+"POT-Creation-Date: 2015-05-26 15:54+0100\n"
+"PO-Revision-Date: 2015-05-26 15:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: fr_FR\n"
@@ -18,161 +18,59 @@ msgstr ""
 "esc_html_x:1,2c;ltint;ltint_po\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/admin/admin.php:89
-msgid "user.public_email"
-msgstr "Adresse e-mail publique"
-
-#: ../src/admin/admin.php:89
-msgid "hlp.user.public_email"
-msgstr ""
-"Attention : cette adresse e-mail pourrait être rendue publique dans des "
-"balises d'entête"
-
-#: ../src/admin/admin.php:90
-msgid "user.job_title"
-msgstr "Profession"
-
-#: ../src/admin/admin.php:90
-msgid "hlp.user.job_title"
-msgstr "Votre profession (Ex : gestionnaire financier)"
-
-#: ../src/admin/admin.php:91
-msgid "user.work_longitude"
-msgstr "Lieu de travail (longitude)"
-
-#: ../src/admin/admin.php:91
-msgid "hlp.user.work_longitude"
-msgstr "La longitude de votre lieu de travail. Exemple : -122.08585."
-
-#: ../src/admin/admin.php:92
-msgid "user.work_latitude"
-msgstr "Lieu de travail (latitude)"
-
-#: ../src/admin/admin.php:92
-msgid "hlp.user.work_latitude"
-msgstr "La latitude de votre lieu de travail. Exemple : 37.42242."
-
-#: ../src/admin/admin.php:95
-msgid "user.twitter_username"
-msgstr "Nom d'utilisateur twitter"
-
-#: ../src/admin/admin.php:96
-msgid "hlp.user.twitter_username"
-msgstr "Exemple : @nomutilisateur"
-
-#: ../src/admin/admin.php:98
-msgid "user.facebook_id"
-msgstr "ID de profil facebook"
-
-#: ../src/admin/admin.php:98
-msgid "hlp.user.facebook_id"
-msgstr "Identifiant numérique de profil facebook"
-
-#: ../src/admin/admin.php:99
-msgid "user.facebook_url"
-msgstr "Adresse web du profil facebook"
-
-#: ../src/admin/admin.php:99
-msgid "hlp.user.facebook_url"
-msgstr "Exemple : https://www.facebook.com/groups/LinguisticTeamInternational/"
-
-#: ../src/admin/admin.php:100
-msgid "user.gplus_url"
-msgstr "Adresse web du profil Google+"
-
-#: ../src/admin/admin.php:100
-msgid "hlp.user.gplus_url"
-msgstr "Exemple : https://plus.google.com/+LinguisticTeamInternationalOfficial"
-
-#: ../src/admin/admin.php:101
-msgid "user.instagram_url"
-msgstr "Adresse web du profil Instagram"
-
-#: ../src/admin/admin.php:101
-msgid "hlp.user.instagram_url"
-msgstr "Exemple : https://instagram.com/username"
-
-#: ../src/admin/admin.php:102
-msgid "user.youtube_url"
-msgstr "Adresse web de la chaine YouTube"
-
-#: ../src/admin/admin.php:102
-msgid "hlp.user.youtube_url"
-msgstr "Exemple : https://www.youtube.com/user/LinguisticTeamIntl"
-
 #: ../src/admin/admin.php:103
-msgid "user.linkedin_url"
-msgstr "Adresse web du profil LinkedIn"
-
-#: ../src/admin/admin.php:103
-msgid "hlp.user.linkedin_url"
-msgstr "Exemple : https://linkedin.com/in/nomutilisateur"
-
-#: ../src/admin/admin.php:104
-msgid "user.myspace_url"
-msgstr "Adresse web du profil myspace"
-
-#: ../src/admin/admin.php:104
-msgid "hlp.user.myspace_url"
-msgstr "Exemple : https://myspace.com/1998called"
-
-#: ../src/admin/admin.php:127
 msgid "general.use_image"
 msgstr "Utiliser l'image"
 
-#: ../src/admin/admin.php:134
+#: ../src/admin/admin.php:112
 msgid "admin.menu_title"
 msgstr "Paramètres LTI SEO"
 
-#: ../src/admin/admin.php:134
+#: ../src/admin/admin.php:112
 msgid "admin.menu_item"
-msgstr "LTI SEO"
+msgstr "SEO"
 
-#: ../src/admin/admin.php:151
+#: ../src/admin/admin.php:127
 msgid "general_hlp_welcome"
 msgstr "Bienvenue !"
 
-#: ../src/admin/admin.php:156
+#: ../src/admin/admin.php:132
 msgid "general_hlp_general"
 msgstr "Onglet général"
 
-#: ../src/admin/admin.php:161
+#: ../src/admin/admin.php:137
 msgid "general_hlp_frontpage"
 msgstr "Onglet page d'accueil"
 
-#: ../src/admin/admin.php:166
+#: ../src/admin/admin.php:142
 msgid "general_hlp_social"
 msgstr "Onglet social"
 
-#: ../src/admin/admin.php:186
+#: ../src/admin/admin.php:162
 msgid "general.settings"
 msgstr "Paramètres"
 
-#: ../src/admin/admin.php:204
+#: ../src/admin/admin.php:183
 msgid "opt.msg.updated"
 msgstr "Les paramètres ont été mis à jour."
 
-#: ../src/admin/admin.php:208
+#: ../src/admin/admin.php:187
 msgid "opt.msg.error_token"
 msgstr "Les paramètres n'ont pas pu être mis à jour (erreur de session)."
 
-#: ../src/admin/admin.php:217
+#: ../src/admin/admin.php:196
 msgid "opt.msg.reset"
 msgstr "Les paramètres ont été réinitialisés."
 
-#: ../src/admin/admin.php:262
+#: ../src/admin/admin.php:241
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:400
-msgid "user.fields_title"
-msgstr "LTI SEO profile information"
-
-#: ../src/admin/admin.php:443
+#: ../src/admin/admin.php:367
 msgid "admin.help"
 msgstr "Pade d'aide (Anglais)"
 
-#: ../src/admin/admin.php:444
+#: ../src/admin/admin.php:368
 msgid "admin.contribute"
 msgstr "Contribuez (Anglais)"
 
@@ -834,3 +732,121 @@ msgid ""
 msgstr ""
 "Optimisation pour les moteurs de recherche en quelques clics : augmentez la "
 "visibilité de vos contenus."
+
+#: ../src/lti-seo.php:203
+msgid "admin.footer.feedback"
+msgstr "Des retours de votre part seraient très appréciés !"
+
+#: ../src/lti-seo.php:203
+msgid "admin.footer.review"
+msgstr "Laissez-nous un commentaire."
+
+#: ../src/lti-seo.php:212
+msgid "general.changelog"
+msgstr "Journal des modifications"
+
+#: ../src/lti-seo.php:212
+msgid "general.version"
+msgstr "Version"
+
+#: ../src/user.php:32
+msgid "user.public_email"
+msgstr "Adresse e-mail publique"
+
+#: ../src/user.php:32
+msgid "hlp.user.public_email"
+msgstr ""
+"Attention : cette adresse e-mail pourrait être rendue publique dans des "
+"balises d'entête"
+
+#: ../src/user.php:33
+msgid "user.job_title"
+msgstr "Profession"
+
+#: ../src/user.php:33
+msgid "hlp.user.job_title"
+msgstr "Votre profession (Ex : gestionnaire financier)"
+
+#: ../src/user.php:34
+msgid "user.work_longitude"
+msgstr "Lieu de travail (longitude)"
+
+#: ../src/user.php:34
+msgid "hlp.user.work_longitude"
+msgstr "La longitude de votre lieu de travail. Exemple : -122.08585."
+
+#: ../src/user.php:35
+msgid "user.work_latitude"
+msgstr "Lieu de travail (latitude)"
+
+#: ../src/user.php:35
+msgid "hlp.user.work_latitude"
+msgstr "La latitude de votre lieu de travail. Exemple : 37.42242."
+
+#: ../src/user.php:38
+msgid "user.twitter_username"
+msgstr "Nom d'utilisateur twitter"
+
+#: ../src/user.php:39
+msgid "hlp.user.twitter_username"
+msgstr "Exemple : @nomutilisateur"
+
+#: ../src/user.php:41
+msgid "user.facebook_id"
+msgstr "ID de profil facebook"
+
+#: ../src/user.php:41
+msgid "hlp.user.facebook_id"
+msgstr "Identifiant numérique de profil facebook"
+
+#: ../src/user.php:42
+msgid "user.facebook_url"
+msgstr "Adresse web du profil facebook"
+
+#: ../src/user.php:42
+msgid "hlp.user.facebook_url"
+msgstr "Exemple : https://www.facebook.com/groups/LinguisticTeamInternational/"
+
+#: ../src/user.php:43
+msgid "user.gplus_url"
+msgstr "Adresse web du profil Google+"
+
+#: ../src/user.php:43
+msgid "hlp.user.gplus_url"
+msgstr "Exemple : https://plus.google.com/+LinguisticTeamInternationalOfficial"
+
+#: ../src/user.php:44
+msgid "user.instagram_url"
+msgstr "Adresse web du profil Instagram"
+
+#: ../src/user.php:44
+msgid "hlp.user.instagram_url"
+msgstr "Exemple : https://instagram.com/username"
+
+#: ../src/user.php:45
+msgid "user.youtube_url"
+msgstr "Adresse web de la chaine YouTube"
+
+#: ../src/user.php:45
+msgid "hlp.user.youtube_url"
+msgstr "Exemple : https://www.youtube.com/user/LinguisticTeamIntl"
+
+#: ../src/user.php:46
+msgid "user.linkedin_url"
+msgstr "Adresse web du profil LinkedIn"
+
+#: ../src/user.php:46
+msgid "hlp.user.linkedin_url"
+msgstr "Exemple : https://linkedin.com/in/nomutilisateur"
+
+#: ../src/user.php:47
+msgid "user.myspace_url"
+msgstr "Adresse web du profil myspace"
+
+#: ../src/user.php:47
+msgid "hlp.user.myspace_url"
+msgstr "Exemple : https://myspace.com/1998called"
+
+#: ../src/user.php:66
+msgid "user.fields_title"
+msgstr "LTI SEO informations de profil"

@@ -95,6 +95,7 @@ class Defaults {
 			new def( 'account_youtube', 'Url' ),
 			new def( 'account_linkedin', 'Url' ),
 			new def( 'account_myspace', 'Url' ),
+			new def( 'google_access_token', 'Text' )
 		);
 	}
 }
@@ -218,6 +219,12 @@ class Plugin_Settings {
 		}
 
 		return $changed;
+	}
+
+	public function remove( $key ) {
+		if ( isset( $this->{$key} ) ) {
+			unset( $this->{$key} );
+		}
 	}
 }
 

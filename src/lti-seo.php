@@ -56,6 +56,7 @@ class LTI_SEO {
 	 * @var \Lti\Seo\User
 	 */
 	private $user;
+	public static $is_plugin_page = false;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -67,11 +68,9 @@ class LTI_SEO {
 	 */
 	public function __construct() {
 		$this->file_path = plugin_dir_path( __FILE__ );
-		require_once $this->file_path . 'plugin/form_fields.php';
-		require_once $this->file_path . 'plugin/plugin.php';
 		$this->name        = LTI_SEO_NAME;
 		$this->plugin_path = LTI_SEO_PLUGIN_DIR;
-		$this->basename = LTI_SEO_PLUGIN_BASENAME;
+		$this->basename    = LTI_SEO_PLUGIN_BASENAME;
 		$this->settings    = get_option( "lti_seo_options" );
 
 		if ( $this->settings === false || empty( $this->settings ) ) {
@@ -80,6 +79,7 @@ class LTI_SEO {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		static::$is_plugin_page = ( filter_input( INPUT_GET, 'page' ) == 'lti-seo-options' );
 	}
 
 	public static function get_instance() {
@@ -100,27 +100,9 @@ class LTI_SEO {
 
 
 	private function load_dependencies() {
-		require_once $this->plugin_path . 'vendor/autoload.php';
 		require_once $this->file_path . 'helper.php';
-		require_once $this->file_path . 'loader.php';
-		require_once $this->file_path . 'i18n.php';
-		require_once $this->file_path . 'admin/admin.php';
-		require_once $this->file_path . 'user.php';
-		require_once $this->file_path . 'frontend/frontend.php';
 		require_once $this->file_path . 'plugin/postbox.php';
-		require_once $this->file_path . 'helpers/wordpress_helper.php';
-		require_once $this->file_path . 'helpers/lti_seo_helper.php';
-		require_once $this->file_path . 'helpers/jsonld_helper.php';
-		require_once $this->file_path . 'generators/schema_org.php';
-		require_once $this->file_path . 'generators/json_ld.php';
-		require_once $this->file_path . 'generators/generic_meta_tag.php';
-		require_once $this->file_path . 'generators/open_graph.php';
-		require_once $this->file_path . 'generators/twitter_cards.php';
-		require_once $this->file_path . 'generators/keywords.php';
-		require_once $this->file_path . 'generators/description.php';
-		require_once $this->file_path . 'generators/robots.php';
-		require_once $this->file_path . 'generators/link_rel.php';
-		require_once $this->file_path . 'activator.php';
+
 		$this->loader = new Loader();
 		$this->helper = new LTI_SEO_Helper( $this->settings );
 	}
@@ -159,9 +141,11 @@ class LTI_SEO {
 		$this->loader->add_filter( 'plugin_action_links', $this->admin, 'plugin_actions', 10, 2 );
 		$this->loader->add_action( 'add_meta_boxes', $this->admin, 'add_meta_boxes' );
 		$this->loader->add_action( 'save_post', $this->admin, 'save_post', 10, 3 );
+		$this->loader->add_filter( 'admin_footer_text', $this, 'admin_footer_text' );
+		$this->loader->add_filter( 'update_footer', $this, 'update_footer', 15 );
 
 		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
-			$this->user = new User($this->settings,$this->helper);
+			$this->user = new User( $this->settings, $this->helper );
 			$this->loader->add_action( 'show_user_profile', $this->user, 'show_user_profile' );
 			$this->loader->add_action( 'edit_user_profile', $this->user, 'show_user_profile' );
 			$this->loader->add_action( 'personal_options_update', $this->user, 'personal_options_update', 10, 1 );
@@ -187,11 +171,29 @@ class LTI_SEO {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-
 		$this->frontend = new Frontend( $this->name, $this->version, $this->settings,
 			$this->helper );
 
 		$this->loader->add_action( 'wp_head', $this->frontend, 'head' );
+	}
+
+	public function admin_footer_text( $text ) {
+		if ( ! static::$is_plugin_page ) {
+			return $text;
+		}
+
+		return sprintf( '<em>%s <a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/%s#postform">%s</a></em>',
+			ltint( 'admin.footer.feedback' ), LTI_SEO_NAME, ltint( 'admin.footer.review' ) );
+	}
+
+	public function update_footer($text) {
+		if ( ! static::$is_plugin_page ) {
+			return $text;
+		}
+
+		return sprintf( '<a target="_blank" title="%s" href="https://wordpress.org/plugins/%s/changelog/">%s %s</a>, %s',
+			lsmint( 'general.changelog' ), LTI_SEO_NAME, lsmint( 'general.version' ), LTI_SEO_VERSION, $text );
+
 	}
 
 	/**
@@ -233,12 +235,10 @@ class LTI_SEO {
 	}
 
 	public static function activate() {
-		require_once LTI_SEO_MAIN_CLASS_DIR . 'activator.php';
 		Activator::activate();
 	}
 
 	public static function deactivate() {
-		require_once LTI_SEO_MAIN_CLASS_DIR . 'deactivator.php';
 		Deactivator::deactivate();
 	}
 

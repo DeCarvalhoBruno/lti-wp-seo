@@ -1,6 +1,6 @@
 /*****************************************************************************************************
                                     PLUGIN OPTIONS
-                                        options-general.php?page=lti-seo-options
+                                        admin.php?page=lti-seo-options
 ******************************************************************************************************/
 
 @media (min-width: 300px) {
@@ -28,6 +28,11 @@
 
     .lti-seo-header.lti_error {
         background-color: #c90000;
+    }
+
+    p.error_msg {
+        color: #c90000;
+        font-weight: bold;
     }
 
     .lti-seo-message {
@@ -112,6 +117,28 @@
         white-space: pre-wrap;
     }
 
+
+    #flseo .btn-group {
+        text-align: center;
+    }
+
+    #flseo .input-group .btn-group input[type="text"]{
+        display:inline;
+        width:60%;
+        vertical-align: middle;
+    }
+
+    #flseo .input-group input[type="button"] {
+        margin: 10px auto;
+        background-color: #1aa55f;
+        border: 1px solid #16894f;
+        color: #ffffff;
+        box-shadow: none;
+        white-space: pre-wrap;
+        text-align:center;
+    }
+
+
     #flseo .input-group .input-group.file-selector .btn-group {
         text-align:center
     }
@@ -149,6 +176,11 @@
         display: block;
         font-weight: bold;
         font-size: 1.2em;
+    }
+
+    /* Avoid collapsing of those big ass radio & checkbox styles */
+    #flseo .input-group label {
+        min-height:30px;
     }
 
     #flseo label >input {
@@ -481,6 +513,11 @@
 }
 
 @media (min-width: 768px) {
+
+    #flseo .input-group label {
+        min-height:1em;
+    }
+
     #lti_seo_wrapper .nav-tabs-justified > li > a {
         border-bottom: 1px solid #dddddd;
         border-radius: 4px 4px 0 0;

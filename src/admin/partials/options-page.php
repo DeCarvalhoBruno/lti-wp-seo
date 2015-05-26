@@ -33,10 +33,14 @@
 				<a href="#tab_social" aria-controls="tab_social" role="tab"
 				   data-toggle="tab"><?php echo ltint( 'opt.tab.social' ); ?></a>
 			</li>
+			<li role="presentation">
+				<a href="#tab_google" aria-controls="tab_google" role="tab"
+				   data-toggle="tab"><?php echo ltint( 'opt.tab.google' ); ?></a>
+			</li>
 		</ul>
 
 		<form id="flseo" accept-charset="utf-8" method="POST"
-		      action="<?php echo admin_url( 'options-general.php?page=lti-seo-options' ); ?>">
+		      action="<?php echo $this->get_admin_slug() ?>">
 			<?php echo wp_nonce_field( 'lti_seo_options', 'lti_seo_token' ); ?>
 			<div class="tab-content">
 				<?php
@@ -733,6 +737,73 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<?php
+				/***********************************************************************************************
+				 *                             GOOGLE TAB
+				 ***********************************************************************************************/
+				?>
+				<?php if ( $this->can_send_curl_requests ): ?>
+				<div role="tabpanel" class="tab-pane" id="tab_google">
+					<?php
+					/***********************************************************************************************
+					 *                              NOT AUTHENTICATED YET
+					 ***********************************************************************************************/
+					/**
+					 * @var $this \Lti\Seo\Admin
+					 */
+					if ( ! $this->google_connector->is_authenticated() ): ?>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="btn-group">
+									<input id="btn-get-google-auth" class="button-primary" type="button"
+									       value="<?php echo lsmint( 'btn.google.get_auth' ); ?>"/>
+									<input id="google_auth_url" type="hidden"
+									       value="<?php echo esc_url( $this->google_connector->get_authentication_url() ); ?>"/>
+								</div>
+
+								<div class="btn-group">
+									<input type="text" name="google_auth_token"
+									       id="google_auth_token" <?php echo lsmopt( 'google_auth_token' ); ?>/>
+									<input id="btn-google-log-in" class="button-primary" type="submit"
+									       name="lti_seo_google_auth"
+									       value="<?php echo lsmint( 'btn.google.log_in' ); ?>"/>
+								</div>
+								<?php if ( ! is_null( $this->google_error ) ): ?>
+									<p class="error_msg"><?php echo $this->google_error['error']; ?></p>
+									<p class="error_msg"><?php echo $this->google_error['google_response']; ?></p>
+								<?php endif; ?>
+							</div>
+							<div class="form-help-container">
+								<div class="form-help">
+									<p></p>
+								</div>
+							</div>
+						</div>
+					<?php
+					/***********************************************************************************************
+					 *                           AUTHENTICATED
+					 ***********************************************************************************************/
+					else:
+						$webmaster = $this->google_connector->init_service( 'http://dev.linguisticteam.org',
+							'http://dev.linguisticteam.org/sitemap.xml' );
+						$webmaster->request_site_info();
+						?>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="btn-group">
+									<input id="btn-log-out" class="button-primary" type="submit" name="lti_seo_google_logout"
+									       value="<?php echo lsmint( 'btn.google.log-out' ); ?>"/>
+								</div>
+							</div>
+							<div class="form-help-container">
+								<div class="form-help">
+									<p></p>
+								</div>
+							</div>
+						</div>
+					<?php endif; ?>
+				<?php endif; ?>
 				</div>
 			</div>
 			<div class="form-group-submit">
