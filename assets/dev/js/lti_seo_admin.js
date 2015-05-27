@@ -243,6 +243,38 @@
             });
 
         }
+
+        /**
+         * General > Google > "Get authentication code" button
+         * Opens a google authorization window that generates an access token that we need to use the google api
+         */
+        $('#btn-get-google-auth').click(function (e) {
+            e.preventDefault();
+            var auth_url = $('#google_auth_url').val();
+            if (typeof auth_url == "string" && auth_url.length > 0) {
+                window.open(auth_url,
+                    '',
+                    'top=' + (screen.height / 2 - 580 / 2) + ',left=' + (screen.width / 2 - 640 / 2) + ',width=640,height=580,resizable=0,scrollbars=0,menubar=0,toolbar=0,status=1,location=0'
+                );
+
+            }
+        });
+
+        /**
+         * General > Google > "Log in" button
+         * Triggers form submission, see #flsm submit event handler
+         *
+         */
+        $('#btn-google-log-in').click(function (e) {
+            var auth_token = $('#google_auth_token');
+            if (auth_token.length > 0) {
+                if (auth_token.val().length == 0) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
+
     });
 })(jQuery);
 

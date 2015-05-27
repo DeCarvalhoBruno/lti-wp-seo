@@ -121,6 +121,7 @@
 								       data-target="#robot_chk_group"
 								       id="robot_support" <?php echo ltichk( 'robot_support' ); ?>/>
 							</label>
+
 							<div id="robot_chk_group">
 								<div class="input-group">
 									<label><?php echo ltint( 'opt.group.robot_attr' ); ?></label>
@@ -268,7 +269,8 @@
 
 							<div id="description_group">
 							<textarea name="frontpage_description_text"
-							          id="frontpage_description_text" placeholder="<?php echo get_bloginfo('description');?>"><?php echo ltiopt( 'frontpage_description_text' ); ?></textarea>
+							          id="frontpage_description_text"
+							          placeholder="<?php echo get_bloginfo( 'description' ); ?>"><?php echo ltiopt( 'frontpage_description_text' ); ?></textarea>
 							<span id="wfrontpage_description_text"
 							      class="char-counter"><?php echo ltint( 'general.char_count' ); ?>&nbsp;<span
 									id="cfrontpage_description_text"></span></span>
@@ -631,6 +633,7 @@
 							<div class="form-help-container">
 								<div class="form-help">
 									<p><?php echo ltint( 'opt.hlp.jsonld_post1' ); ?></p>
+
 									<p><?php echo ltint( 'opt.hlp.jsonld_post2' ); ?></p>
 								</div>
 							</div>
@@ -742,58 +745,69 @@
 				/***********************************************************************************************
 				 *                             GOOGLE TAB
 				 ***********************************************************************************************/
-				?>
-				<?php if ( $this->can_send_curl_requests ): ?>
+				/**
+				 * @var $this \Lti\Seo\Admin
+				 */
+				if ($this->google->can_send_curl_requests): ?>
 				<div role="tabpanel" class="tab-pane" id="tab_google">
-					<?php
-					/***********************************************************************************************
-					 *                              NOT AUTHENTICATED YET
-					 ***********************************************************************************************/
-					/**
-					 * @var $this \Lti\Seo\Admin
-					 */
-					if ( ! $this->google_connector->is_authenticated() ): ?>
-						<div class="form-group">
+					<div class="form-group">
+						<?php
+						/***********************************************************************************************
+						 *                              NOT AUTHENTICATED YET
+						 ***********************************************************************************************/
+
+						if ( ! $this->google->helper->is_authenticated() ): ?>
 							<div class="input-group">
 								<div class="btn-group">
 									<input id="btn-get-google-auth" class="button-primary" type="button"
-									       value="<?php echo lsmint( 'btn.google.get_auth' ); ?>"/>
+									       value="<?php echo ltint( 'btn.google.get_auth' ); ?>"/>
 									<input id="google_auth_url" type="hidden"
-									       value="<?php echo esc_url( $this->google_connector->get_authentication_url() ); ?>"/>
+									       value="<?php echo esc_url( $this->google->helper->get_authentication_url() ); ?>"/>
 								</div>
 
 								<div class="btn-group">
 									<input type="text" name="google_auth_token"
-									       id="google_auth_token" <?php echo lsmopt( 'google_auth_token' ); ?>/>
+									       id="google_auth_token"/>
 									<input id="btn-google-log-in" class="button-primary" type="submit"
 									       name="lti_seo_google_auth"
-									       value="<?php echo lsmint( 'btn.google.log_in' ); ?>"/>
+									       value="<?php echo ltint( 'btn.google.log_in' ); ?>"/>
 								</div>
-								<?php if ( ! is_null( $this->google_error ) ): ?>
-									<p class="error_msg"><?php echo $this->google_error['error']; ?></p>
-									<p class="error_msg"><?php echo $this->google_error['google_response']; ?></p>
-								<?php endif; ?>
 							</div>
 							<div class="form-help-container">
 								<div class="form-help">
 									<p></p>
 								</div>
 							</div>
-						</div>
-					<?php
-					/***********************************************************************************************
-					 *                           AUTHENTICATED
-					 ***********************************************************************************************/
-					else:
-						$webmaster = $this->google_connector->init_service( 'http://dev.linguisticteam.org',
-							'http://dev.linguisticteam.org/sitemap.xml' );
-						$webmaster->request_site_info();
-						?>
-						<div class="form-group">
+						<?php
+						/***********************************************************************************************
+						 *                           AUTHENTICATED
+						 ***********************************************************************************************/
+						else:
+							$site = $this->google->get_site_info();
+							?>
 							<div class="input-group">
 								<div class="btn-group">
-									<input id="btn-log-out" class="button-primary" type="submit" name="lti_seo_google_logout"
-									       value="<?php echo lsmint( 'btn.google.log-out' ); ?>"/>
+									<?php if ( $site->is_listed === true ): ?>
+										<?php if ( $site->site->is_site_unverified_user() ): ?>
+											<input id="btn-verify" class="button-primary" type="submit"
+											       name="lti_seo_google_verify"
+											       value="<?php echo ltint( 'btn.google.verify' ); ?>"/>
+										<?php else: ?>
+											<p><strong><?php echo ltint( 'msg.google.verified' ); ?></strong></p>
+											<p>
+												<a href="<?php echo $this->google->helper->get_site_console_url( esc_url( 'http://dev.linguisticteam.org' ),
+													get_locale() ); ?>"
+												   target="_blank"><?php echo ltint( 'msg.google.go_to_console' ); ?></a>
+											</p>
+										<?php endif; ?>
+									<?php else: ?>
+										<input id="btn-verify" class="button-primary" type="submit"
+										       name="lti_seo_google_add"
+										       value="<?php echo ltint( 'btn.google.add' ); ?>"/>
+									<?php endif; ?>
+									<input id="btn-log-out" class="button-primary" type="submit"
+									       name="lti_seo_google_logout"
+									       value="<?php echo ltint( 'btn.google.log-out' ); ?>"/>
 								</div>
 							</div>
 							<div class="form-help-container">
@@ -801,9 +815,15 @@
 									<p></p>
 								</div>
 							</div>
-						</div>
-					<?php endif; ?>
-				<?php endif; ?>
+						<?php endif; ?>
+						<?php endif; ?>
+						<?php if ( ! is_null( $this->google->error ) ): ?>
+							<div class="google_errors">
+							<p class="error_msg"><?php echo $this->google->error['error']; ?></p>
+							<p class="error_msg"><?php echo $this->google->error['google_response']; ?></p>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
 			</div>
 			<div class="form-group-submit">

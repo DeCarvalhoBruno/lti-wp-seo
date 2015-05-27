@@ -2,7 +2,7 @@
     "name": "lti/lti-wp-seo",
     "require-dev": {
         "lti/json-ld": "dev-master",
-        "google/apiclient": "~1.1"
+        "lti/google": "dev-master"
     },
   "scripts": {
     "post-install-cmd": [

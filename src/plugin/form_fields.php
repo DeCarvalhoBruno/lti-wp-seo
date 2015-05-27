@@ -72,3 +72,15 @@ class Field_Url extends Fields {
 	}
 
 }
+
+class Field_Html extends Fields {
+	public function __construct( $value, $default = "", $isTracked = false ) {
+		$this->isTracked = $isTracked;
+		if ( $value) {
+			$this->value = $value;
+		} else {
+			$this->value = $default;
+		}
+	}
+
+}

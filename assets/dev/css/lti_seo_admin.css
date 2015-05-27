@@ -117,9 +117,13 @@
         white-space: pre-wrap;
     }
 
-
-    #flseo .btn-group {
+    #flseo #tab_google .btn-group {
+        margin: 20px 0;
         text-align: center;
+    }
+
+    #flseo .google_errors {
+        clear:both;
     }
 
     #flseo .input-group .btn-group input[type="text"]{

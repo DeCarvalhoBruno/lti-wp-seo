@@ -133,16 +133,13 @@ class LTI_SEO {
 		$this->admin = new Admin( $this->name, $this->basename, $this->version, $this->settings, $this->plugin_path,
 			$this->helper );
 
-		$this->loader->add_action( 'admin_init', $this->admin, 'register_setting' );
+		$this->loader->add_action( 'admin_init', $this, 'activate' );
 		$this->loader->add_filter( 'plugin_row_meta', $this->admin, 'plugin_row_meta', 10, 2 );
-		$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_scripts' );
+
 		$this->loader->add_action( 'admin_menu', $this->admin, 'admin_menu' );
 		$this->loader->add_filter( 'plugin_action_links', $this->admin, 'plugin_actions', 10, 2 );
 		$this->loader->add_action( 'add_meta_boxes', $this->admin, 'add_meta_boxes' );
 		$this->loader->add_action( 'save_post', $this->admin, 'save_post', 10, 3 );
-		$this->loader->add_filter( 'admin_footer_text', $this, 'admin_footer_text' );
-		$this->loader->add_filter( 'update_footer', $this, 'update_footer', 15 );
 
 		if ( apply_filters( 'lti_seo_allow_profile_social_settings', true ) ) {
 			$this->user = new User( $this->settings, $this->helper );
@@ -150,6 +147,13 @@ class LTI_SEO {
 			$this->loader->add_action( 'edit_user_profile', $this->user, 'show_user_profile' );
 			$this->loader->add_action( 'personal_options_update', $this->user, 'personal_options_update', 10, 1 );
 			$this->loader->add_action( 'edit_user_profile_update', $this->user, 'personal_options_update', 10, 1 );
+		}
+
+		if ( LTI_Seo::$is_plugin_page ) {
+			$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_styles' );
+			$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_scripts' );
+			$this->loader->add_filter( 'admin_footer_text', $this, 'admin_footer_text' );
+			$this->loader->add_filter( 'update_footer', $this, 'update_footer', 15 );
 		}
 	}
 
@@ -241,6 +245,4 @@ class LTI_SEO {
 	public static function deactivate() {
 		Deactivator::deactivate();
 	}
-
-
 }
