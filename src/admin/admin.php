@@ -90,7 +90,7 @@ class Admin {
 		if ( ! LTI_Seo::$is_plugin_page ) {
 			return;
 		}
-		$this->google = new Admin_Google( $this );
+		$this->google = new Admin_Google( $this, $this->helper );
 
 	}
 
@@ -310,6 +310,7 @@ class Admin {
 		if ( empty( $this->box_values ) ) {
 			$this->box_values = new Postbox_Values( array() );
 			$robot            = new Robot( $this->helper );
+			//We get an array of robot settings that we copy as box values
 			$robot_settings   = $robot->get_robot_setting( 'robot_support', 'post_' );
 			foreach ( $robot_settings as $setting ) {
 				$this->box_values->set( 'post_robot_' . $setting, true );
@@ -322,9 +323,12 @@ class Admin {
 		if ( $this->settings->get( 'keyword_support' ) == true ) {
 			$keyword_text = $this->box_values->get( 'keywords' );
 			if ( is_null( $keyword_text ) || empty( $keyword_text ) ) {
-				$keywords_single_page = new Singular_Keyword( $this->helper, $post->ID );
+				$keywords = $this->helper->get_keywords();
+				if(!empty($keywords)){
 				$this->box_values->set( 'keywords_suggestion',
-					str_replace( ',', ', ', $keywords_single_page->get_tags() ) );
+					implode(',',$keywords) );
+
+				}
 			}
 		}
 		$this->set_current_page( 'post-edit' );
@@ -400,13 +404,13 @@ class Admin {
 	 */
 	public function save_post( $post_ID, $post, $update ) {
 		$post_variables = $this->helper->filter_input( INPUT_POST, 'lti_seo' );
-
-		if ( ! is_null( $post_variables ) ) {
-			$post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
-			if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
-				update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
-			}
-		}
+//
+//		if ( ! is_null( $post_variables ) ) {
+//			$post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
+//			if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
+//				update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
+//			}
+//		}
 	}
 
 	public function plugin_row_meta( $links, $file ) {

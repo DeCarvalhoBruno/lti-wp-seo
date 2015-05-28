@@ -67,7 +67,7 @@ class LTI_SEO {
 	 *
 	 */
 	public function __construct() {
-		$this->file_path = plugin_dir_path( __FILE__ );
+		$this->file_path   = plugin_dir_path( __FILE__ );
 		$this->name        = LTI_SEO_NAME;
 		$this->plugin_path = LTI_SEO_PLUGIN_DIR;
 		$this->basename    = LTI_SEO_PLUGIN_BASENAME;
@@ -149,9 +149,12 @@ class LTI_SEO {
 			$this->loader->add_action( 'edit_user_profile_update', $this->user, 'personal_options_update', 10, 1 );
 		}
 
-		if ( LTI_Seo::$is_plugin_page ) {
+		if ( (isset($GLOBALS['pagenow'])&&$GLOBALS['pagenow'] === 'post.php') || LTI_SEO::$is_plugin_page ) {
 			$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_styles' );
 			$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_scripts' );
+		}
+
+		if ( LTI_Seo::$is_plugin_page ) {
 			$this->loader->add_filter( 'admin_footer_text', $this, 'admin_footer_text' );
 			$this->loader->add_filter( 'update_footer', $this, 'update_footer', 15 );
 		}
@@ -190,7 +193,7 @@ class LTI_SEO {
 			ltint( 'admin.footer.feedback' ), LTI_SEO_NAME, ltint( 'admin.footer.review' ) );
 	}
 
-	public function update_footer($text) {
+	public function update_footer( $text ) {
 		if ( ! static::$is_plugin_page ) {
 			return $text;
 		}
