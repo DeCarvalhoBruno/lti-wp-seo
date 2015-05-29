@@ -149,7 +149,7 @@ class LTI_SEO {
 			$this->loader->add_action( 'edit_user_profile_update', $this->user, 'personal_options_update', 10, 1 );
 		}
 
-		if ( (isset($GLOBALS['pagenow'])&&$GLOBALS['pagenow'] === 'post.php') || LTI_SEO::$is_plugin_page ) {
+		if ( ( isset( $GLOBALS['pagenow'] ) && ( $GLOBALS['pagenow'] === 'post.php' || $GLOBALS['pagenow'] === 'post-new.php' ) ) || LTI_SEO::$is_plugin_page ) {
 			$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_styles' );
 			$this->loader->add_action( 'admin_enqueue_scripts', $this->admin, 'enqueue_scripts' );
 		}

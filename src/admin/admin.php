@@ -1,7 +1,6 @@
 <?php namespace Lti\Seo;
 
 use Lti\Seo\Generators\Robot;
-use Lti\Seo\Generators\Singular_Keyword;
 use Lti\Seo\Helpers\ICanHelp;
 use Lti\Seo\Plugin\Fields;
 use Lti\Seo\Plugin\Plugin_Settings;
@@ -90,7 +89,7 @@ class Admin {
 		if ( ! LTI_Seo::$is_plugin_page ) {
 			return;
 		}
-		$this->google = new Admin_Google( $this, $this->helper );
+		$this->google = new Admin_Google( $this, $this->helper);
 
 	}
 
@@ -264,9 +263,13 @@ class Admin {
 				}
 			}
 
+			$this->page_type = "lti_update";
+
 			if ( method_exists( $this->google, $update_type ) ) {
-				$this->google->helper->init_site_service( 'http://caprica.linguisticteam.org' );
+				$this->google->helper->init_site_service( $this->helper->get_home_url() );
 				call_user_func( array( $this->google, $update_type ), $data );
+			}else{
+				$this->message   = ltint( "opt.msg.update_ok" );
 			}
 
 			update_option( 'lti_seo_options', $this->settings );
@@ -311,7 +314,7 @@ class Admin {
 			$this->box_values = new Postbox_Values( array() );
 			$robot            = new Robot( $this->helper );
 			//We get an array of robot settings that we copy as box values
-			$robot_settings   = $robot->get_robot_setting( 'robot_support', 'post_' );
+			$robot_settings = $robot->get_robot_setting( 'robot_support', 'post_' );
 			foreach ( $robot_settings as $setting ) {
 				$this->box_values->set( 'post_robot_' . $setting, true );
 			}
@@ -324,9 +327,9 @@ class Admin {
 			$keyword_text = $this->box_values->get( 'keywords' );
 			if ( is_null( $keyword_text ) || empty( $keyword_text ) ) {
 				$keywords = $this->helper->get_keywords();
-				if(!empty($keywords)){
-				$this->box_values->set( 'keywords_suggestion',
-					implode(',',$keywords) );
+				if ( ! empty( $keywords ) ) {
+					$this->box_values->set( 'keywords_suggestion',
+						implode( ',', $keywords ) );
 
 				}
 			}
@@ -436,6 +439,10 @@ class Admin {
 
 	public function get_message() {
 		return $this->message;
+	}
+
+	public function set_message( $message ) {
+		$this->message = $message;
 	}
 
 	public function get_setting( $setting ) {

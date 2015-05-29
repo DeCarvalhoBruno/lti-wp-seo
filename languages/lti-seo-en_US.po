@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-27 20:24+0100\n"
-"PO-Revision-Date: 2015-05-27 20:24+0100\n"
+"POT-Creation-Date: 2015-05-29 21:39+0100\n"
+"PO-Revision-Date: 2015-05-29 21:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -18,79 +18,83 @@ msgstr ""
 "esc_html_x:1,2c;ltint;ltint_po\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/admin/admin.php:116
+#: ../src/admin/admin.php:115
 msgid "general.use_image"
 msgstr "Use image"
 
-#: ../src/admin/admin.php:126
+#: ../src/admin/admin.php:125
 msgid "admin.menu_title"
 msgstr "LTI SEO Settings"
 
-#: ../src/admin/admin.php:126
+#: ../src/admin/admin.php:125
 msgid "admin.menu_item"
 msgstr "SEO"
 
-#: ../src/admin/admin.php:142
+#: ../src/admin/admin.php:141
 msgid "general_hlp_welcome"
 msgstr "Welcome!"
 
-#: ../src/admin/admin.php:147
+#: ../src/admin/admin.php:146
 msgid "general_hlp_general"
 msgstr "General tab"
 
-#: ../src/admin/admin.php:152
+#: ../src/admin/admin.php:151
 msgid "general_hlp_frontpage"
 msgstr "Front page tab"
 
-#: ../src/admin/admin.php:157
+#: ../src/admin/admin.php:156
 msgid "general_hlp_social"
 msgstr "Social tab"
 
-#: ../src/admin/admin.php:177
+#: ../src/admin/admin.php:176
 msgid "general.settings"
 msgstr "Settings"
 
-#: ../src/admin/admin.php:224
+#: ../src/admin/admin.php:223
 msgid "opt.msg.reset"
 msgstr "Plugin options have been reset."
 
-#: ../src/admin/admin.php:275
+#: ../src/admin/admin.php:272
+msgid "opt.msg.update_ok"
+msgstr "Plugin options have been updated."
+
+#: ../src/admin/admin.php:278
 msgid "opt.msg.error_token"
 msgstr "Plugin options could not be saved (session error)."
 
-#: ../src/admin/admin.php:289
+#: ../src/admin/admin.php:292
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:414
+#: ../src/admin/admin.php:421
 msgid "admin.help"
 msgstr "Help page"
 
-#: ../src/admin/admin.php:415
+#: ../src/admin/admin.php:422
 msgid "admin.contribute"
 msgstr "Contribute"
 
-#: ../src/admin/google.php:52
+#: ../src/admin/google.php:58
 msgid "msg.google_logged_in"
-msgstr "Google authentication OK."
+msgstr "Google authentication successful."
 
-#: ../src/admin/google.php:55
+#: ../src/admin/google.php:61
 msgid "err.google_auth_failure"
 msgstr "Authentication failed, Google returned the following error:"
 
-#: ../src/admin/google.php:64
+#: ../src/admin/google.php:70
 msgid "google.msg.logout"
-msgstr "Google logout OK."
+msgstr "Google logout successful."
 
-#: ../src/admin/google.php:73
+#: ../src/admin/google.php:79
 msgid "err.google_add_failure"
 msgstr "Site submission failed, Google returned the following error:"
 
-#: ../src/admin/google.php:79
+#: ../src/admin/google.php:86
 msgid "msg.google_added"
 msgstr "Site submission and verification complete."
 
-#: ../src/admin/google.php:91
+#: ../src/admin/google.php:98
 msgid "err.google_verify_failure"
 msgstr "Site verification failed, Google returned the following error:"
 
@@ -779,11 +783,11 @@ msgid ""
 "search engine results."
 msgstr ""
 
-#: ../src/lti-seo.php:190
+#: ../src/lti-seo.php:193
 msgid "admin.footer.feedback"
 msgstr "Some feedback would be greatly appreciated, thank you!"
 
-#: ../src/lti-seo.php:190
+#: ../src/lti-seo.php:193
 msgid "admin.footer.review"
 msgstr "Write a review."
 

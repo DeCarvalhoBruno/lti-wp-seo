@@ -795,7 +795,7 @@
 										<?php else: ?>
 											<p><strong><?php echo ltint( 'msg.google.verified' ); ?></strong></p>
 											<p>
-												<a href="<?php echo $this->google->helper->get_site_console_url( esc_url( 'http://dev.linguisticteam.org' ),
+												<a href="<?php echo $this->google->helper->get_site_console_url( esc_url( $this->helper->get_home_url() ),
 													get_locale() ); ?>"
 												   target="_blank"><?php echo ltint( 'msg.google.go_to_console' ); ?></a>
 											</p>

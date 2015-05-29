@@ -1,6 +1,7 @@
 <?php namespace Lti\Seo;
 
 use Lti\Google\Google_Helper;
+use Lti\Seo\Helpers\ICanHelp;
 
 class Admin_Google {
 	public $can_send_curl_requests;
@@ -11,14 +12,19 @@ class Admin_Google {
 	 */
 	public $helper;
 
-	public function __construct( Admin $admin ) {
+	/**
+	 * @param Admin $admin
+	 * @param ICanHelp|\Lti\Seo\Helpers\Wordpress_Helper $wp_helper
+	 */
+	public function __construct( Admin $admin, ICanHelp $wp_helper ) {
+		$this->wp_helper              = $wp_helper;
 		$this->admin                  = $admin;
 		$this->can_send_curl_requests = function_exists( 'curl_version' );
 		if ( $this->can_send_curl_requests === true ) {
 			$this->helper = new Google_Helper( array(
 				'https://www.googleapis.com/auth/webmasters',
 				'https://www.googleapis.com/auth/siteverification',
-			),  LTI_SEO_NAME );
+			), LTI_SEO_NAME );
 
 			$access_token = $this->admin->get_setting( 'google_access_token' );
 			if ( ! is_null( $access_token ) && ! empty( $access_token ) ) {
@@ -32,7 +38,7 @@ class Admin_Google {
 	}
 
 	public function get_site_info() {
-		$this->helper->init_site_service( 'http://caprica.linguisticteam.org' );
+		$this->helper->init_site_service( $this->wp_helper->get_home_url() );
 		$obj       = new \stdClass();
 		$obj->site = $this->helper->get_site_service();
 		try {
@@ -49,7 +55,7 @@ class Admin_Google {
 		try {
 			$this->admin->set_setting( 'google_access_token',
 				$this->helper->authenticate( $post_variables['google_auth_token'] ) );
-			$this->message = ltint( 'msg.google_logged_in' );
+			$this->admin->set_message( ltint( 'msg.google_logged_in' ) );
 		} catch ( \Google_Auth_Exception $e ) {
 			$this->error = array(
 				'error'           => ltint( 'err.google_auth_failure' ),
@@ -61,7 +67,7 @@ class Admin_Google {
 
 	public function google_logout() {
 		$this->admin->remove_setting( 'google_access_token' );
-		$this->message = ltint( 'google.msg.logout' );
+		$this->admin->set_message( ltint( 'google.msg.logout' ) );
 		$this->helper->revoke_token();
 	}
 
@@ -77,7 +83,7 @@ class Admin_Google {
 			return null;
 		}
 		$this->google_verify();
-		$this->message = ltint( 'msg.google_added' );
+		$this->admin->set_message( ltint( 'msg.google_added' ) );
 
 	}
 
