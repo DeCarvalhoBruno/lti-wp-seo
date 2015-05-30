@@ -199,7 +199,7 @@ class LTI_SEO {
 		}
 
 		return sprintf( '<a target="_blank" title="%s" href="https://wordpress.org/plugins/%s/changelog/">%s %s</a>, %s',
-			lsmint( 'general.changelog' ), LTI_SEO_NAME, lsmint( 'general.version' ), LTI_SEO_VERSION, $text );
+			ltint( 'general.changelog' ), LTI_SEO_NAME, ltint( 'general.version' ), LTI_SEO_VERSION, $text );
 
 	}
 

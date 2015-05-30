@@ -262,7 +262,7 @@
 
         /**
          * General > Google > "Log in" button
-         * Triggers form submission, see #flsm submit event handler
+         * Triggers form submission, see #flseo submit event handler
          *
          */
         $('#btn-google-log-in').click(function (e) {

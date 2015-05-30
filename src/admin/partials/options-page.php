@@ -767,7 +767,7 @@
 
 								<div class="btn-group">
 									<input type="text" name="google_auth_token"
-									       id="google_auth_token"/>
+									       id="google_auth_token" placeholder="<?php echo ltint( 'in.google.cp_token' ); ?>"/>
 									<input id="btn-google-log-in" class="button-primary" type="submit"
 									       name="lti_seo_google_auth"
 									       value="<?php echo ltint( 'btn.google.log_in' ); ?>"/>
@@ -789,7 +789,7 @@
 								<div class="btn-group">
 									<?php if ( $site->is_listed === true ): ?>
 										<?php if ( $site->site->is_site_unverified_user() ): ?>
-											<input id="btn-verify" class="button-primary" type="submit"
+											<input id="btn-verify" class="button-primary btn-verify" type="submit"
 											       name="lti_seo_google_verify"
 											       value="<?php echo ltint( 'btn.google.verify' ); ?>"/>
 										<?php else: ?>
@@ -801,7 +801,7 @@
 											</p>
 										<?php endif; ?>
 									<?php else: ?>
-										<input id="btn-verify" class="button-primary" type="submit"
+										<input id="btn-verify" class="button-primary btn-add" type="submit"
 										       name="lti_seo_google_add"
 										       value="<?php echo ltint( 'btn.google.add' ); ?>"/>
 									<?php endif; ?>

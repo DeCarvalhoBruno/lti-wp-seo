@@ -407,13 +407,13 @@ class Admin {
 	 */
 	public function save_post( $post_ID, $post, $update ) {
 		$post_variables = $this->helper->filter_input( INPUT_POST, 'lti_seo' );
-//
-//		if ( ! is_null( $post_variables ) ) {
-//			$post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
-//			if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
-//				update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
-//			}
-//		}
+
+		if ( ! is_null( $post_variables ) ) {
+			$post_variables = $this->helper->filter_var_array( $_POST['lti_seo'] );
+			if ( ! is_null( $post_variables ) && ! empty( $post_variables ) ) {
+				update_post_meta( $post_ID, 'lti_seo', new Postbox_Values( (object) $post_variables ) );
+			}
+		}
 	}
 
 	public function plugin_row_meta( $links, $file ) {

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-29 21:39+0100\n"
-"PO-Revision-Date: 2015-05-29 21:41+0100\n"
+"POT-Creation-Date: 2015-05-30 15:43+0100\n"
+"PO-Revision-Date: 2015-05-30 16:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -697,6 +697,10 @@ msgstr "Used if the publisher link rel tag is enabled in the general tab."
 msgid "btn.google.get_auth"
 msgstr "Get authentication code"
 
+#: ../src/admin/partials/options-page.php:770
+msgid "in.google.cp_token"
+msgstr "Copy/Paste the code here."
+
 #: ../src/admin/partials/options-page.php:773
 msgid "btn.google.log_in"
 msgstr "Log in"
@@ -785,11 +789,19 @@ msgstr ""
 
 #: ../src/lti-seo.php:193
 msgid "admin.footer.feedback"
-msgstr "Some feedback would be greatly appreciated, thank you!"
+msgstr "Some feedback would be greatly appreciated!"
 
 #: ../src/lti-seo.php:193
 msgid "admin.footer.review"
 msgstr "Write a review."
+
+#: ../src/lti-seo.php:202
+msgid "general.changelog"
+msgstr "Changelog"
+
+#: ../src/lti-seo.php:202
+msgid "general.version"
+msgstr "Version"
 
 #: ../src/user.php:32
 msgid "user.public_email"
@@ -902,9 +914,3 @@ msgstr "LTI SEO profile information"
 
 #~ msgid "opt.msg.updated"
 #~ msgstr "Plugin options have been updated."
-
-#~ msgid "general.changelog"
-#~ msgstr "Changelog"
-
-#~ msgid "general.version"
-#~ msgstr "Version"

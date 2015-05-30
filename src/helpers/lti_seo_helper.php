@@ -18,17 +18,17 @@ class LTI_SEO_Helper extends Wordpress_Helper {
 		}
 
 		$accounts = array(
-			'lti_facebook_url'=>'facebook',
-			'lti_gplus_url'=>'gplus',
-			'lti_instagram_url'=>'instagram',
-			'lti_youtube_url'=>'youtube',
-			'lti_linkedin_url'=>'linkedin',
+			'lti_facebook_url'  => 'facebook',
+			'lti_gplus_url'     => 'gplus',
+			'lti_instagram_url' => 'instagram',
+			'lti_youtube_url'   => 'youtube',
+			'lti_linkedin_url'  => 'linkedin',
 		);
 
-		foreach ($accounts as $htmlClassName => $account){
+		foreach ( $accounts as $htmlClassName => $account ) {
 			$data = $this->get_user_meta_key( $htmlClassName );
 			if ( ! is_null( $data ) && ! empty( $data ) ) {
-				$info[$account] = $data;
+				$info[ $account ] = $data;
 			}
 		}
 
@@ -259,15 +259,16 @@ class LTI_SEO_Helper extends Wordpress_Helper {
 		$info = null;
 		switch ( $platform ) {
 			case 'facebook':
-				$info['first_name'] = $this->get_user_meta_key( "first_name" );
-				$info['last_name']  = $this->get_user_meta_key( "last_name" );
-				$info['profile_id'] = $this->get_user_meta_key( "lti_facebook_id" );
+				$info['first_name']  = $this->get_user_meta_key( 'first_name' );
+				$info['last_name']   = $this->get_user_meta_key( 'last_name' );
+				$info['profile_url'] = $this->get_user_meta_key( 'lti_facebook_url' );
+				$info['profile_id'] = $this->get_user_meta_key( 'lti_facebook_id' );
 				break;
 			case 'twitter':
-				$info = $this->get_user_meta_key( "lti_twitter_username" );
+				$info = $this->get_user_meta_key( 'lti_twitter_username' );
 				break;
 			case 'gplus':
-				$info = $this->get_user_meta_key( "lti_gplus_url" );
+				$info = $this->get_user_meta_key( 'lti_gplus_url' );
 				break;
 		}
 
@@ -275,18 +276,18 @@ class LTI_SEO_Helper extends Wordpress_Helper {
 	}
 
 	public function get_all_author_social_info() {
-		$twitter = $this->get_user_meta_key( "lti_twitter_username" );
+		$twitter = $this->get_user_meta_key( 'lti_twitter_username' );
 		if ( ! is_null( $twitter ) && ! empty( $twitter ) ) {
 			$twitter = 'https://twitter.com' . str_replace( '@', '/', $twitter );
 		}
 		$info = array_values( array_filter( array(
-				$this->get_user_meta_key( "lti_facebook_url" ),
+				$this->get_user_meta_key( 'lti_facebook_url' ),
 				$twitter,
-				$this->get_user_meta_key( "lti_gplus_url" ),
-				$this->get_user_meta_key( "lti_instagram_url" ),
-				$this->get_user_meta_key( "lti_youtube_url" ),
-				$this->get_user_meta_key( "lti_linkedin_url" ),
-				$this->get_user_meta_key( "lti_myspace_url" )
+				$this->get_user_meta_key( 'lti_gplus_url' ),
+				$this->get_user_meta_key( 'lti_instagram_url' ),
+				$this->get_user_meta_key( 'lti_youtube_url' ),
+				$this->get_user_meta_key( 'lti_linkedin_url' ),
+				$this->get_user_meta_key( 'lti_myspace_url' )
 			)
 		) );
 

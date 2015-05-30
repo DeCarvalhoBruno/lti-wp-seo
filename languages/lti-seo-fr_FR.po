@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-27 20:25+0100\n"
-"PO-Revision-Date: 2015-05-27 20:31+0100\n"
+"POT-Creation-Date: 2015-05-30 15:43+0100\n"
+"PO-Revision-Date: 2015-05-30 15:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: fr_FR\n"
@@ -18,84 +18,87 @@ msgstr ""
 "esc_html_x:1,2c;ltint;ltint_po\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/admin/admin.php:116
+#: ../src/admin/admin.php:115
 msgid "general.use_image"
 msgstr "Utiliser l'image"
 
-#: ../src/admin/admin.php:126
+#: ../src/admin/admin.php:125
 msgid "admin.menu_title"
 msgstr "Paramètres LTI SEO"
 
-#: ../src/admin/admin.php:126
+#: ../src/admin/admin.php:125
 msgid "admin.menu_item"
 msgstr "SEO"
 
-#: ../src/admin/admin.php:142
+#: ../src/admin/admin.php:141
 msgid "general_hlp_welcome"
 msgstr "Bienvenue !"
 
-#: ../src/admin/admin.php:147
+#: ../src/admin/admin.php:146
 msgid "general_hlp_general"
 msgstr "Onglet général"
 
-#: ../src/admin/admin.php:152
+#: ../src/admin/admin.php:151
 msgid "general_hlp_frontpage"
 msgstr "Onglet page d'accueil"
 
-#: ../src/admin/admin.php:157
+#: ../src/admin/admin.php:156
 msgid "general_hlp_social"
 msgstr "Onglet social"
 
-#: ../src/admin/admin.php:177
+#: ../src/admin/admin.php:176
 msgid "general.settings"
 msgstr "Paramètres"
 
-#: ../src/admin/admin.php:224
+#: ../src/admin/admin.php:223
 msgid "opt.msg.reset"
 msgstr "Les paramètres ont été réinitialisés."
 
-#: ../src/admin/admin.php:275
+#: ../src/admin/admin.php:272
+msgid "opt.msg.update_ok"
+msgstr "Les paramètres ont été mis à jour."
+
+#: ../src/admin/admin.php:278
 msgid "opt.msg.error_token"
 msgstr "Les paramètres n'ont pas pu être mis à jour (erreur de session)."
 
-#: ../src/admin/admin.php:289
+#: ../src/admin/admin.php:292
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:414
+#: ../src/admin/admin.php:421
 msgid "admin.help"
 msgstr "Pade d'aide (Anglais)"
 
-#: ../src/admin/admin.php:415
+#: ../src/admin/admin.php:422
 msgid "admin.contribute"
 msgstr "Contribuez (Anglais)"
 
-#: ../src/admin/google.php:52
+#: ../src/admin/google.php:58
 msgid "msg.google_logged_in"
 msgstr "Connexion à Google OK."
 
-#: ../src/admin/google.php:55
+#: ../src/admin/google.php:61
 msgid "err.google_auth_failure"
 msgstr "La connexion a échoué, Google a retourné l'erreur suivante :"
 
-#: ../src/admin/google.php:64
+#: ../src/admin/google.php:70
 msgid "google.msg.logout"
 msgstr "Déconnexion de Google OK."
 
-#: ../src/admin/google.php:73
+#: ../src/admin/google.php:79
 msgid "err.google_add_failure"
 msgstr ""
 "L'ajout du site internet a échoué, Google a retourné l'erreur suivante :"
 
-#: ../src/admin/google.php:79
+#: ../src/admin/google.php:86
 msgid "msg.google_added"
-msgstr "Ajout et vérification du site internet terminés."
+msgstr "Ajout et vérification du site terminés."
 
-#: ../src/admin/google.php:91
+#: ../src/admin/google.php:98
 msgid "err.google_verify_failure"
 msgstr ""
-"La vérification du site internet à échoué, Google a retourné l'erreur "
-"suivante :"
+"La vérification du site a échoué, Google a retourné l'erreur suivante :"
 
 #: ../src/admin/partials/help_menu.php:16
 msgid "general_hlp_welcome_1"
@@ -129,7 +132,7 @@ msgstr ""
 msgid "general_hlp_general_2"
 msgstr ""
 "Les mots clés ne sont probablement pas cruciaux pour l'optimisation de "
-"moteurs de recherche, mais cette option est accéssible pour chaque article."
+"moteurs de recherche, mais cette option est accessible pour chaque article."
 
 #: ../src/admin/partials/help_menu.php:24
 msgid "general_hlp_general_3"
@@ -140,8 +143,8 @@ msgstr ""
 #: ../src/admin/partials/help_menu.php:25
 msgid "general_hlp_general_4"
 msgstr ""
-"Enfin, la balise de description est une information vitale qui sera affichée "
-"sous le titre de la page et invitera les utilisateurs à cliquer sur vos "
+"Enfin, la balise de description sera affichée sous le titre de la page dans "
+"les résultats de recherche et invitera les utilisateurs à cliquer sur vos "
 "contenus."
 
 #: ../src/admin/partials/help_menu.php:29
@@ -242,8 +245,8 @@ msgstr ""
 #: ../src/admin/partials/options-page.php:83
 msgid "opt.hlp.link_rel2"
 msgstr ""
-"Wordpress crée des liens canoniques pour les articles et la fonctionnalité "
-"adresse web canonique pour tous les autres types de pages."
+"Wordpress crée des liens canoniques pour les articles et nous nous assurons "
+"qu'ils sont également créés pour les autres pages du site."
 
 #: ../src/admin/partials/options-page.php:84
 msgid "opt.hlp.link_rel3"
@@ -700,6 +703,10 @@ msgstr ""
 msgid "btn.google.get_auth"
 msgstr "Obtenir code d'authentification"
 
+#: ../src/admin/partials/options-page.php:770
+msgid "in.google.cp_token"
+msgstr "Copiez/Collez le code ici."
+
 #: ../src/admin/partials/options-page.php:773
 msgid "btn.google.log_in"
 msgstr "Connexion"
@@ -788,13 +795,21 @@ msgstr ""
 "Optimisation pour les moteurs de recherche en quelques clics : augmentez la "
 "visibilité de vos contenus."
 
-#: ../src/lti-seo.php:190
+#: ../src/lti-seo.php:193
 msgid "admin.footer.feedback"
 msgstr "Des retours de votre part seraient très appréciés !"
 
-#: ../src/lti-seo.php:190
+#: ../src/lti-seo.php:193
 msgid "admin.footer.review"
 msgstr "Laissez-nous un commentaire."
+
+#: ../src/lti-seo.php:202
+msgid "general.changelog"
+msgstr "Journal des modifications"
+
+#: ../src/lti-seo.php:202
+msgid "general.version"
+msgstr "Version"
 
 #: ../src/user.php:32
 msgid "user.public_email"
@@ -900,9 +915,3 @@ msgstr "LTI SEO informations de profil"
 
 #~ msgid "opt.msg.updated"
 #~ msgstr "Les paramètres ont été mis à jour."
-
-#~ msgid "general.changelog"
-#~ msgstr "Journal des modifications"
-
-#~ msgid "general.version"
-#~ msgstr "Version"

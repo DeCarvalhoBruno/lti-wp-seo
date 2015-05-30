@@ -90,7 +90,11 @@ class Singular_Twitter_Card extends Frontpage_Twitter_Card {
 	public function make_tags() {
 		$ar                       = parent::make_tags();
 		$ar['twitter']['url']     = esc_url( $this->helper->get_shortlink() );
-		$ar['twitter']['creator'] = $this->helper->get_author_social_info( "twitter" );
+
+		$creator = $this->helper->get_author_social_info( "twitter" );
+		if(!empty($creator)){
+			$ar['twitter']['creator'] = $this->helper->get_author_social_info( "twitter" );
+		}
 
 		return $ar;
 	}
