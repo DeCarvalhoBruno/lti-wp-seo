@@ -259,7 +259,6 @@ class Wordpress_Helper implements ICanHelp {
 	}
 
 	public static function get_home_url() {
-		return 'http://dev.linguisticteam.org/';
 		return home_url( '/' );
 	}
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-30 15:43+0100\n"
-"PO-Revision-Date: 2015-05-30 15:52+0100\n"
+"POT-Creation-Date: 2015-05-31 20:24+0100\n"
+"PO-Revision-Date: 2015-05-31 21:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: fr_FR\n"
@@ -18,59 +18,63 @@ msgstr ""
 "esc_html_x:1,2c;ltint;ltint_po\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/admin/admin.php:115
+#: ../src/admin/admin.php:116
 msgid "general.use_image"
 msgstr "Utiliser l'image"
 
-#: ../src/admin/admin.php:125
+#: ../src/admin/admin.php:129
 msgid "admin.menu_title"
 msgstr "Paramètres LTI SEO"
 
-#: ../src/admin/admin.php:125
+#: ../src/admin/admin.php:129
 msgid "admin.menu_item"
 msgstr "SEO"
 
-#: ../src/admin/admin.php:141
+#: ../src/admin/admin.php:145
 msgid "general_hlp_welcome"
 msgstr "Bienvenue !"
 
-#: ../src/admin/admin.php:146
+#: ../src/admin/admin.php:150
 msgid "general_hlp_general"
 msgstr "Onglet général"
 
-#: ../src/admin/admin.php:151
+#: ../src/admin/admin.php:155
 msgid "general_hlp_frontpage"
 msgstr "Onglet page d'accueil"
 
-#: ../src/admin/admin.php:156
+#: ../src/admin/admin.php:160
 msgid "general_hlp_social"
 msgstr "Onglet social"
 
-#: ../src/admin/admin.php:176
+#: ../src/admin/admin.php:165
+msgid "general_hlp_google"
+msgstr "Onglet google"
+
+#: ../src/admin/admin.php:185
 msgid "general.settings"
 msgstr "Paramètres"
 
-#: ../src/admin/admin.php:223
+#: ../src/admin/admin.php:232
 msgid "opt.msg.reset"
 msgstr "Les paramètres ont été réinitialisés."
 
-#: ../src/admin/admin.php:272
+#: ../src/admin/admin.php:281
 msgid "opt.msg.update_ok"
 msgstr "Les paramètres ont été mis à jour."
 
-#: ../src/admin/admin.php:278
+#: ../src/admin/admin.php:287
 msgid "opt.msg.error_token"
 msgstr "Les paramètres n'ont pas pu être mis à jour (erreur de session)."
 
-#: ../src/admin/admin.php:292
+#: ../src/admin/admin.php:301
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:421
+#: ../src/admin/admin.php:430
 msgid "admin.help"
 msgstr "Pade d'aide (Anglais)"
 
-#: ../src/admin/admin.php:422
+#: ../src/admin/admin.php:431
 msgid "admin.contribute"
 msgstr "Contribuez (Anglais)"
 
@@ -117,8 +121,7 @@ msgstr ""
 msgid "general_hlp_welcome_3"
 msgstr ""
 "Aussi, vous remarquerez : pas de publicités, nous allons droit à "
-"l'essentiel ! Malgré tout, votre retour d'expérience est plus que bienvenu, "
-"n'hésitez pas à nous contacter !"
+"l'essentiel !"
 
 #: ../src/admin/partials/help_menu.php:22
 msgid "general_hlp_general_1"
@@ -179,19 +182,32 @@ msgstr ""
 "Puis, les images en pièce jointe seront ajoutées. Finalement, l'image "
 "personnalisée de l'article sera ajoutée."
 
+#: ../src/admin/partials/help_menu.php:39
+msgid "general_hlp_google_1"
+msgstr ""
+"L'onglet Google permet d'intéragir avec leur console d'administration de "
+"sites web."
+
 #: ../src/admin/partials/help_menu.php:40
+msgid "general_hlp_google_2"
+msgstr ""
+"Durant le processus de vérification de votre site, ce plugin se charge "
+"d'ajouter la balise appropriée dans l'entête de la page d'accueil pour que "
+"Google puisse effectuer sa vérification."
+
+#: ../src/admin/partials/help_menu.php:44
 msgid "general_hlp_about_us"
 msgstr "Plus d'informations :"
 
-#: ../src/admin/partials/help_menu.php:41
+#: ../src/admin/partials/help_menu.php:45
 msgid "general_hlp_dev_blog"
 msgstr "Page d'aide (en anglais)"
 
-#: ../src/admin/partials/help_menu.php:42
+#: ../src/admin/partials/help_menu.php:46
 msgid "general_hlp_contribute"
 msgstr "Contribuez :"
 
-#: ../src/admin/partials/help_menu.php:43
+#: ../src/admin/partials/help_menu.php:47
 msgid "general_hlp_github"
 msgstr "Projet Github"
 
@@ -703,39 +719,114 @@ msgstr ""
 msgid "btn.google.get_auth"
 msgstr "Obtenir code d'authentification"
 
-#: ../src/admin/partials/options-page.php:770
+#: ../src/admin/partials/options-page.php:771
 msgid "in.google.cp_token"
 msgstr "Copiez/Collez le code ici."
 
-#: ../src/admin/partials/options-page.php:773
+#: ../src/admin/partials/options-page.php:774
 msgid "btn.google.log_in"
 msgstr "Connexion"
 
-#: ../src/admin/partials/options-page.php:794
-msgid "btn.google.verify"
-msgstr "Verifier le site"
+#: ../src/admin/partials/options-page.php:779
+msgid "hlp.google.log_in"
+msgstr ""
+"Google fournit un outil très utile, la console de recherche (Search console) "
+"qui vous permet de superviser la façon dont le moteur de recherche analyse "
+"vos contenus. Nous vous recommandons d'utiliser cet outil, qui par ailleurs "
+"est gratuit !"
 
-#: ../src/admin/partials/options-page.php:796
+#: ../src/admin/partials/options-page.php:781
+msgid "hlp.google.log_in1"
+msgstr ""
+"Merci de suivre les étapes suivantes afin d'intéragir avec Google à travers "
+"Wordpress :"
+
+#: ../src/admin/partials/options-page.php:783
+msgid "hlp.google.log_in2"
+msgstr ""
+"Cliquez sur \"Obtenir code d'authentification\". Une fenêtre popup s'ouvrira "
+"et Google se chargera de vous authentifier. Choisissez le compte à utiliser "
+"avec attention, car ce compte sera considéré comme le propriétaire du site "
+"(un paramètre qui pourra être changé plus tard)."
+
+#: ../src/admin/partials/options-page.php:784
+msgid "hlp.google.log_in3"
+msgstr ""
+"Google affichera une longue série de chiffres et de lettres qui constituent "
+"notre clé d'authentification. Copiez cette chaîne de caractères, fermez la "
+"fenêtre popup, et collez le code dans le champ texte à gauche du bouton "
+"\"Connexion\". Cliquez sur \"Connexion\". La page s'actualise, et Wordpress "
+"peut désormais interagir avec Google."
+
+#: ../src/admin/partials/options-page.php:801
+msgid "btn.google.verify"
+msgstr "Vérifier le site"
+
+#: ../src/admin/partials/options-page.php:803
 msgid "msg.google.verified"
 msgstr "Ce site internet est listé et vérifié auprès de la console Google."
 
-#: ../src/admin/partials/options-page.php:800
+#: ../src/admin/partials/options-page.php:807
 msgid "msg.google.go_to_console"
 msgstr "Console d'administration Google"
 
-#: ../src/admin/partials/options-page.php:806
+#: ../src/admin/partials/options-page.php:813
 msgid "btn.google.add"
 msgstr "Ajouter et vérifier le site"
 
-#: ../src/admin/partials/options-page.php:810
+#: ../src/admin/partials/options-page.php:817
 msgid "btn.google.log-out"
 msgstr "Déconnexion"
 
-#: ../src/admin/partials/options-page.php:832
+#: ../src/admin/partials/options-page.php:822
+msgid "hlp.google.logged_in"
+msgstr ""
+"En fonction du statut de votre site Wordpress, vous pourrez accomplir les "
+"taches suivantes :"
+
+#: ../src/admin/partials/options-page.php:824
+msgid "hlp.google.logged_in1"
+msgstr ""
+"Ajouter et vérifier le site : ajoute le site Wordpress à la console et le "
+"vérifie."
+
+#: ../src/admin/partials/options-page.php:824
+msgid "hlp.google.logged_in2"
+msgstr ""
+"Il se peut que la vérification du site échoue la première fois, car Google "
+"tente d'effectuer ses vérifications avant que nous ayons le temps de "
+"sauvegarder la clé d'authentification dans la base de données. Essayez à "
+"nouveau !"
+
+#: ../src/admin/partials/options-page.php:825
+msgid "hlp.google.logged_in3"
+msgstr ""
+"Vérifier le site : le site est déjà présent dans la console, mais n'a pas "
+"encore été vérifié."
+
+#: ../src/admin/partials/options-page.php:826
+msgid "hlp.google.logged_in4"
+msgstr "Déconnexion : terminer cette session auprès de Google."
+
+#: ../src/admin/partials/options-page.php:826
+msgid "hlp.google.logged_in5"
+msgstr ""
+"Note : cette opération ne vous déconnecte pas de votre compte Google, elle "
+"permet simplement de clore la session ouverte lorsque nous avons copié/collé "
+"le code d'authentification."
+
+#: ../src/admin/partials/options-page.php:828
+msgid "hlp.google.logged_in6"
+msgstr ""
+"Lorsque cette page se charge, il se peut que vous constatiez des lenteurs du "
+"fait du processus d'authentification auprès de Google ; au quel cas, nous "
+"vous conseillons de vous déconnecter dès que le site a été vérifié."
+
+#: ../src/admin/partials/options-page.php:846
 msgid "general.save_changes"
 msgstr "Mettre à jour"
 
-#: ../src/admin/partials/options-page.php:834
+#: ../src/admin/partials/options-page.php:848
 msgid "general.reset_defaults"
 msgstr "Reinitialiser"
 

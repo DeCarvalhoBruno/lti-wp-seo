@@ -767,7 +767,8 @@
 
 								<div class="btn-group">
 									<input type="text" name="google_auth_token"
-									       id="google_auth_token" placeholder="<?php echo ltint( 'in.google.cp_token' ); ?>"/>
+									       id="google_auth_token"
+									       placeholder="<?php echo ltint( 'in.google.cp_token' ); ?>"/>
 									<input id="btn-google-log-in" class="button-primary" type="submit"
 									       name="lti_seo_google_auth"
 									       value="<?php echo ltint( 'btn.google.log_in' ); ?>"/>
@@ -775,7 +776,13 @@
 							</div>
 							<div class="form-help-container">
 								<div class="form-help">
-									<p></p>
+									<p><?php echo ltint( 'hlp.google.log_in' ); ?></p>
+
+									<p><?php echo ltint( 'hlp.google.log_in1' ); ?></p>
+									<ol>
+										<li><?php echo ltint( 'hlp.google.log_in2' ); ?></li>
+										<li><?php echo ltint( 'hlp.google.log_in3' ); ?></li>
+									</ol>
 								</div>
 							</div>
 						<?php
@@ -812,15 +819,22 @@
 							</div>
 							<div class="form-help-container">
 								<div class="form-help">
-									<p></p>
+									<p><?php echo ltint( 'hlp.google.logged_in' ); ?></p>
+									<ul>
+										<li><p><?php echo ltint( 'hlp.google.logged_in1' ); ?></p><p><strong><?php echo ltint( 'hlp.google.logged_in2' ); ?></strong></p></li>
+										<li><?php echo ltint( 'hlp.google.logged_in3' ); ?></li>
+										<li><p><?php echo ltint( 'hlp.google.logged_in4' ); ?></p><p><strong><?php echo ltint( 'hlp.google.logged_in5' ); ?></strong></p></li>
+									</ul>
+									<?php echo ltint( 'hlp.google.logged_in6' ); ?>
 								</div>
 							</div>
 						<?php endif; ?>
 						<?php endif; ?>
 						<?php if ( ! is_null( $this->google->error ) ): ?>
 							<div class="google_errors">
-							<p class="error_msg"><?php echo $this->google->error['error']; ?></p>
-							<p class="error_msg"><?php echo $this->google->error['google_response']; ?></p>
+								<p class="error_msg"><?php echo $this->google->error['error']; ?></p>
+
+								<p class="error_msg"><?php echo $this->google->error['google_response']; ?></p>
 							</div>
 						<?php endif; ?>
 					</div>

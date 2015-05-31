@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-30 15:43+0100\n"
-"PO-Revision-Date: 2015-05-30 16:01+0100\n"
+"POT-Creation-Date: 2015-05-31 16:01+0100\n"
+"PO-Revision-Date: 2015-05-31 16:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -18,59 +18,63 @@ msgstr ""
 "esc_html_x:1,2c;ltint;ltint_po\n"
 "X-Poedit-SearchPath-0: ../src\n"
 
-#: ../src/admin/admin.php:115
+#: ../src/admin/admin.php:116
 msgid "general.use_image"
 msgstr "Use image"
 
-#: ../src/admin/admin.php:125
+#: ../src/admin/admin.php:129
 msgid "admin.menu_title"
 msgstr "LTI SEO Settings"
 
-#: ../src/admin/admin.php:125
+#: ../src/admin/admin.php:129
 msgid "admin.menu_item"
 msgstr "SEO"
 
-#: ../src/admin/admin.php:141
+#: ../src/admin/admin.php:145
 msgid "general_hlp_welcome"
 msgstr "Welcome!"
 
-#: ../src/admin/admin.php:146
+#: ../src/admin/admin.php:150
 msgid "general_hlp_general"
 msgstr "General tab"
 
-#: ../src/admin/admin.php:151
+#: ../src/admin/admin.php:155
 msgid "general_hlp_frontpage"
 msgstr "Front page tab"
 
-#: ../src/admin/admin.php:156
+#: ../src/admin/admin.php:160
 msgid "general_hlp_social"
 msgstr "Social tab"
 
-#: ../src/admin/admin.php:176
+#: ../src/admin/admin.php:165
+msgid "general_hlp_google"
+msgstr "Google tab"
+
+#: ../src/admin/admin.php:185
 msgid "general.settings"
 msgstr "Settings"
 
-#: ../src/admin/admin.php:223
+#: ../src/admin/admin.php:232
 msgid "opt.msg.reset"
 msgstr "Plugin options have been reset."
 
-#: ../src/admin/admin.php:272
+#: ../src/admin/admin.php:281
 msgid "opt.msg.update_ok"
 msgstr "Plugin options have been updated."
 
-#: ../src/admin/admin.php:278
+#: ../src/admin/admin.php:287
 msgid "opt.msg.error_token"
 msgstr "Plugin options could not be saved (session error)."
 
-#: ../src/admin/admin.php:292
+#: ../src/admin/admin.php:301
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:421
+#: ../src/admin/admin.php:430
 msgid "admin.help"
 msgstr "Help page"
 
-#: ../src/admin/admin.php:422
+#: ../src/admin/admin.php:431
 msgid "admin.contribute"
 msgstr "Contribute"
 
@@ -113,9 +117,7 @@ msgstr ""
 
 #: ../src/admin/partials/help_menu.php:18
 msgid "general_hlp_welcome_3"
-msgstr ""
-"Also you'll notice: no ads, no begging for your money, just the goods! We do "
-"expect you to engage with us though, your feedback is more than welcome!"
+msgstr "Also you'll notice: no ads, no begging for your money, just the goods!"
 
 #: ../src/admin/partials/help_menu.php:22
 msgid "general_hlp_general_1"
@@ -176,19 +178,31 @@ msgstr ""
 "Then, it'll look for attached images on the blog post and add them. Finally, "
 "it'll add the custom image you specified in the LTI SEO post box."
 
+#: ../src/admin/partials/help_menu.php:39
+msgid "general_hlp_google_1"
+msgstr ""
+"In the Google tab, you can interact with Google to have your site added and "
+"verified on the very useful Search console."
+
 #: ../src/admin/partials/help_menu.php:40
+msgid "general_hlp_google_2"
+msgstr ""
+"During the verification process, this plugin takes care of adding the "
+"appropriate meta tag in your site's header so Google can verify it."
+
+#: ../src/admin/partials/help_menu.php:44
 msgid "general_hlp_about_us"
 msgstr "More information:"
 
-#: ../src/admin/partials/help_menu.php:41
+#: ../src/admin/partials/help_menu.php:45
 msgid "general_hlp_dev_blog"
 msgstr "LTI SEO Help Page"
 
-#: ../src/admin/partials/help_menu.php:42
+#: ../src/admin/partials/help_menu.php:46
 msgid "general_hlp_contribute"
 msgstr "Contribute:"
 
-#: ../src/admin/partials/help_menu.php:43
+#: ../src/admin/partials/help_menu.php:47
 msgid "general_hlp_github"
 msgstr "Github repo"
 
@@ -697,39 +711,108 @@ msgstr "Used if the publisher link rel tag is enabled in the general tab."
 msgid "btn.google.get_auth"
 msgstr "Get authentication code"
 
-#: ../src/admin/partials/options-page.php:770
+#: ../src/admin/partials/options-page.php:771
 msgid "in.google.cp_token"
 msgstr "Copy/Paste the code here."
 
-#: ../src/admin/partials/options-page.php:773
+#: ../src/admin/partials/options-page.php:774
 msgid "btn.google.log_in"
 msgstr "Log in"
 
-#: ../src/admin/partials/options-page.php:794
+#: ../src/admin/partials/options-page.php:779
+msgid "hlp.google.log_in"
+msgstr ""
+"Google provides a very useful tool called the Search console that will allow "
+"you to monitor and review how the google search engine sees your content. We "
+"highly recommend you use it, it's a free tool!"
+
+#: ../src/admin/partials/options-page.php:781
+msgid "hlp.google.log_in1"
+msgstr ""
+"To interact with the google search console via Wordpress, please follow "
+"these steps:"
+
+#: ../src/admin/partials/options-page.php:783
+msgid "hlp.google.log_in2"
+msgstr ""
+"Click on \"get authentication code\". A popup opens and Google takes care of "
+"logging you in. Choose the account to be used carefully because that account "
+"will be marked as owner of the website (which can be changed later)."
+
+#: ../src/admin/partials/options-page.php:784
+msgid "hlp.google.log_in3"
+msgstr ""
+"Google will display a long string of digits and letters that makes up our "
+"authentication key. Copy that string, close the popup, and paste the code "
+"into the text field next to the \"Log In\" button. Click on the \"Log In\" "
+"button. The page refreshes, and Wordpress can now interact with Google."
+
+#: ../src/admin/partials/options-page.php:801
 msgid "btn.google.verify"
 msgstr "Verify site"
 
-#: ../src/admin/partials/options-page.php:796
+#: ../src/admin/partials/options-page.php:803
 msgid "msg.google.verified"
 msgstr "This website is listed in the google search console and is verified."
 
-#: ../src/admin/partials/options-page.php:800
+#: ../src/admin/partials/options-page.php:807
 msgid "msg.google.go_to_console"
 msgstr "Search console dashboard"
 
-#: ../src/admin/partials/options-page.php:806
+#: ../src/admin/partials/options-page.php:813
 msgid "btn.google.add"
 msgstr "Add and verify site"
 
-#: ../src/admin/partials/options-page.php:810
+#: ../src/admin/partials/options-page.php:817
 msgid "btn.google.log-out"
 msgstr "Log out"
 
-#: ../src/admin/partials/options-page.php:832
+#: ../src/admin/partials/options-page.php:822
+msgid "hlp.google.logged_in"
+msgstr ""
+"Depending on your Wordpress site's status, you'll be able to accomplish the "
+"following:"
+
+#: ../src/admin/partials/options-page.php:824
+msgid "hlp.google.logged_in1"
+msgstr ""
+"Add and verify site: adds this site to the search console and verifies it."
+
+#: ../src/admin/partials/options-page.php:824
+msgid "hlp.google.logged_in2"
+msgstr ""
+"The site verification may fail on the first trial because Google tries to "
+"verify the site before we have time to save our verification token in the "
+"database. Just try again!"
+
+#: ../src/admin/partials/options-page.php:825
+msgid "hlp.google.logged_in3"
+msgstr ""
+"Verify site: the site is already present in the console but hasn't been "
+"verified yet."
+
+#: ../src/admin/partials/options-page.php:826
+msgid "hlp.google.logged_in4"
+msgstr "Log out: end this Google session."
+
+#: ../src/admin/partials/options-page.php:826
+msgid "hlp.google.logged_in5"
+msgstr ""
+"Note: this doesn't disconnect you from your Google account, it only closes "
+"the session we initiated earlier by providing an authentication code."
+
+#: ../src/admin/partials/options-page.php:828
+msgid "hlp.google.logged_in6"
+msgstr ""
+"When you load this admin page, the plugin initiates an authentication "
+"process with Google which may slow things down, so we recommend you log out "
+"when the site is confirmed as verified."
+
+#: ../src/admin/partials/options-page.php:846
 msgid "general.save_changes"
 msgstr "Save Changes"
 
-#: ../src/admin/partials/options-page.php:834
+#: ../src/admin/partials/options-page.php:848
 msgid "general.reset_defaults"
 msgstr "Reset to defaults"
 
