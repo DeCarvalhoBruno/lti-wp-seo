@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-31 20:24+0100\n"
-"PO-Revision-Date: 2015-05-31 21:25+0100\n"
+"POT-Creation-Date: 2015-06-01 14:42+0100\n"
+"PO-Revision-Date: 2015-06-01 14:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: fr_FR\n"
@@ -54,27 +54,27 @@ msgstr "Onglet google"
 msgid "general.settings"
 msgstr "Paramètres"
 
-#: ../src/admin/admin.php:232
+#: ../src/admin/admin.php:231
 msgid "opt.msg.reset"
 msgstr "Les paramètres ont été réinitialisés."
 
-#: ../src/admin/admin.php:281
+#: ../src/admin/admin.php:280
 msgid "opt.msg.update_ok"
 msgstr "Les paramètres ont été mis à jour."
 
-#: ../src/admin/admin.php:287
+#: ../src/admin/admin.php:286
 msgid "opt.msg.error_token"
 msgstr "Les paramètres n'ont pas pu être mis à jour (erreur de session)."
 
-#: ../src/admin/admin.php:301
+#: ../src/admin/admin.php:302
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:430
+#: ../src/admin/admin.php:432
 msgid "admin.help"
 msgstr "Pade d'aide (Anglais)"
 
-#: ../src/admin/admin.php:431
+#: ../src/admin/admin.php:433
 msgid "admin.contribute"
 msgstr "Contribuez (Anglais)"
 
@@ -90,16 +90,20 @@ msgstr "La connexion a échoué, Google a retourné l'erreur suivante :"
 msgid "google.msg.logout"
 msgstr "Déconnexion de Google OK."
 
-#: ../src/admin/google.php:79
+#: ../src/admin/google.php:77
+msgid "msg.google_added"
+msgstr "Ajout du site terminée."
+
+#: ../src/admin/google.php:80
 msgid "err.google_add_failure"
 msgstr ""
 "L'ajout du site internet a échoué, Google a retourné l'erreur suivante :"
 
-#: ../src/admin/google.php:86
-msgid "msg.google_added"
-msgstr "Ajout et vérification du site terminés."
+#: ../src/admin/google.php:100
+msgid "msg.google_verified"
+msgstr "Le site est listé, vérification terminée."
 
-#: ../src/admin/google.php:98
+#: ../src/admin/google.php:103
 msgid "err.google_verify_failure"
 msgstr ""
 "La vérification du site a échoué, Google a retourné l'erreur suivante :"
@@ -491,13 +495,13 @@ msgstr "Logo"
 
 #: ../src/admin/partials/options-page.php:420
 #: ../src/admin/partials/options-page.php:540
-#: ../src/admin/partials/postbox.php:49
+#: ../src/admin/partials/postbox.php:53
 msgid "general.choose_img"
 msgstr "Choisir l'image"
 
 #: ../src/admin/partials/options-page.php:423
 #: ../src/admin/partials/options-page.php:543
-#: ../src/admin/partials/postbox.php:52
+#: ../src/admin/partials/postbox.php:56
 msgid "general.reset"
 msgstr "Réinitialiser"
 
@@ -790,14 +794,6 @@ msgstr ""
 "Ajouter et vérifier le site : ajoute le site Wordpress à la console et le "
 "vérifie."
 
-#: ../src/admin/partials/options-page.php:824
-msgid "hlp.google.logged_in2"
-msgstr ""
-"Il se peut que la vérification du site échoue la première fois, car Google "
-"tente d'effectuer ses vérifications avant que nous ayons le temps de "
-"sauvegarder la clé d'authentification dans la base de données. Essayez à "
-"nouveau !"
-
 #: ../src/admin/partials/options-page.php:825
 msgid "hlp.google.logged_in3"
 msgstr ""
@@ -834,47 +830,47 @@ msgstr "Reinitialiser"
 msgid "box.description"
 msgstr "Description"
 
-#: ../src/admin/partials/postbox.php:26
+#: ../src/admin/partials/postbox.php:27
 msgid "box.keywords"
 msgstr "Mots clés"
 
-#: ../src/admin/partials/postbox.php:30
+#: ../src/admin/partials/postbox.php:32
 msgid "box.keywords_suggestion"
 msgstr "Suggestion:"
 
-#: ../src/admin/partials/postbox.php:32
+#: ../src/admin/partials/postbox.php:35
 msgid "box.text_copy"
 msgstr "(Copier)"
 
-#: ../src/admin/partials/postbox.php:40
+#: ../src/admin/partials/postbox.php:43
 msgid "box.meta_description"
 msgstr "Image pour réseaux sociaux"
 
-#: ../src/admin/partials/postbox.php:65
+#: ../src/admin/partials/postbox.php:69
 msgid "box.group.robots"
 msgstr "Balise meta \"Robots\""
 
-#: ../src/admin/partials/postbox.php:68
+#: ../src/admin/partials/postbox.php:72
 msgid "box.post_robot_noindex"
 msgstr "NOINDEX"
 
-#: ../src/admin/partials/postbox.php:72
+#: ../src/admin/partials/postbox.php:76
 msgid "box.post_robot_nofollow"
 msgstr "NOFOLLOW"
 
-#: ../src/admin/partials/postbox.php:76
+#: ../src/admin/partials/postbox.php:80
 msgid "box.post_robot_noodp"
 msgstr "NOODP"
 
-#: ../src/admin/partials/postbox.php:80
+#: ../src/admin/partials/postbox.php:84
 msgid "box.post_robot_noydir"
 msgstr "NOYDIR"
 
-#: ../src/admin/partials/postbox.php:84
+#: ../src/admin/partials/postbox.php:88
 msgid "box.post_robot_noarchive"
 msgstr "NOARCHIVE"
 
-#: ../src/admin/partials/postbox.php:88
+#: ../src/admin/partials/postbox.php:92
 msgid "box.post_robot_nosnippet"
 msgstr "NOSNIPPET"
 
@@ -900,7 +896,7 @@ msgstr "Journal des modifications"
 
 #: ../src/lti-seo.php:202
 msgid "general.version"
-msgstr "Version"
+msgstr "Version de l'extension"
 
 #: ../src/user.php:32
 msgid "user.public_email"
@@ -1003,6 +999,3 @@ msgstr "Exemple : https://myspace.com/1998called"
 #: ../src/user.php:66
 msgid "user.fields_title"
 msgstr "LTI SEO informations de profil"
-
-#~ msgid "opt.msg.updated"
-#~ msgstr "Les paramètres ont été mis à jour."

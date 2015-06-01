@@ -59,11 +59,11 @@ class Frontend {
 
 		$this->hook_functionality( 'Link_Rel' );
 
-		if ( $this->settings->get( 'description_support' ) == true || $this->settings->get( 'frontpage_description' ) == true ) {
+		if ( $this->settings->get( 'description_support' ) === true || $this->settings->get( 'frontpage_description' ) === true ) {
 			$this->hook_functionality( 'Description' );
 		}
 
-		if ( $this->settings->get( 'keyword_support' ) == true || $this->settings->get( 'frontpage_keyword' ) == true ) {
+		if ( $this->settings->get( 'keyword_support' ) === true || $this->settings->get( 'frontpage_keyword' ) === true ) {
 			$this->hook_functionality( 'Keyword' );
 		}
 
@@ -71,11 +71,11 @@ class Frontend {
 		 * Open Graph and Twitter tag generators need the type of page (singular, frontpage)
 		 * plus the post format (gallery, aside, etc.) so they can parse the images within the post
 		 */
-		if ( $this->settings->get( 'open_graph_support' ) == true ) {
+		if ( $this->settings->get( 'open_graph_support' ) === true ) {
 			$this->hook_functionality( 'Open_Graph', 'page_post_format' );
 		}
 
-		if ( $this->settings->get( 'twitter_card_support' ) == true ) {
+		if ( $this->settings->get( 'twitter_card_support' ) === true ) {
 			$this->hook_functionality( 'Twitter_Card', 'page_post_format' );
 		}
 
@@ -121,8 +121,8 @@ class Frontend {
 	private function hook_functionality( $type, $format = 'page_type' ) {
 		$class = sprintf( $this->class_pattern, call_user_func( array( $this->helper, $format ) ), $type );
 		if ( class_exists( $class ) ) {
-			$og = new $class( $this->helper );
-			add_action( 'lti_seo_head', array( $og, 'display_tags' ) );
+			$class_to_use = new $class( $this->helper );
+			add_action( 'lti_seo_head', array( $class_to_use, 'display_tags' ) );
 		}
 	}
 

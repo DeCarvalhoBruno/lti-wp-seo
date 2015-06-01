@@ -821,7 +821,7 @@
 								<div class="form-help">
 									<p><?php echo ltint( 'hlp.google.logged_in' ); ?></p>
 									<ul>
-										<li><p><?php echo ltint( 'hlp.google.logged_in1' ); ?></p><p><strong><?php echo ltint( 'hlp.google.logged_in2' ); ?></strong></p></li>
+										<li><p><?php echo ltint( 'hlp.google.logged_in1' ); ?></p></li>
 										<li><?php echo ltint( 'hlp.google.logged_in3' ); ?></li>
 										<li><p><?php echo ltint( 'hlp.google.logged_in4' ); ?></p><p><strong><?php echo ltint( 'hlp.google.logged_in5' ); ?></strong></p></li>
 									</ul>

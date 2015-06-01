@@ -6,9 +6,9 @@
 	 * @wordpress-plugin
 	 * Plugin Name:       LTI SEO
 	 * Description:       Search engine optimization made easy: make your content more visible in search engine results.
-	 * Version:           0.5.0
+	 * Version:           0.6.0
 	 * Author:            Linguistic Team International
-	 * Author URI:        http://info.linguisticteam.org/
+	 * Author URI:        http://dev.linguisticteam.org/
 	 * License:           GPL-2.0+
 	 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 	 * Text Domain:       lti-seo
@@ -44,7 +44,7 @@ if ( ! function_exists( 'add_filter' ) ) {
 $plugin_dir_path = plugin_dir_path( __FILE__ );
 define( 'LTI_SEO_PLUGIN_DIR', $plugin_dir_path );
 define( 'LTI_SEO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'LTI_SEO_VERSION', '0.5.0' );
+define( 'LTI_SEO_VERSION', '0.6.0' );
 define( 'LTI_SEO_NAME', 'lti-seo' );
 
 require_once $plugin_dir_path. 'vendor/autoload.php';

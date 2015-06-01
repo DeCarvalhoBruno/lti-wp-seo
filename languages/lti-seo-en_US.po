@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lti-seo\n"
-"POT-Creation-Date: 2015-05-31 16:01+0100\n"
-"PO-Revision-Date: 2015-05-31 16:06+0100\n"
+"POT-Creation-Date: 2015-06-01 14:42+0100\n"
+"PO-Revision-Date: 2015-06-01 14:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: LTI <linguisticteam@gmail.com>\n"
 "Language: en_US\n"
@@ -54,27 +54,27 @@ msgstr "Google tab"
 msgid "general.settings"
 msgstr "Settings"
 
-#: ../src/admin/admin.php:232
+#: ../src/admin/admin.php:231
 msgid "opt.msg.reset"
 msgstr "Plugin options have been reset."
 
-#: ../src/admin/admin.php:281
+#: ../src/admin/admin.php:280
 msgid "opt.msg.update_ok"
 msgstr "Plugin options have been updated."
 
-#: ../src/admin/admin.php:287
+#: ../src/admin/admin.php:286
 msgid "opt.msg.error_token"
 msgstr "Plugin options could not be saved (session error)."
 
-#: ../src/admin/admin.php:301
+#: ../src/admin/admin.php:302
 msgid "admin.meta_box"
 msgstr "LTI SEO"
 
-#: ../src/admin/admin.php:430
+#: ../src/admin/admin.php:432
 msgid "admin.help"
 msgstr "Help page"
 
-#: ../src/admin/admin.php:431
+#: ../src/admin/admin.php:433
 msgid "admin.contribute"
 msgstr "Contribute"
 
@@ -90,15 +90,19 @@ msgstr "Authentication failed, Google returned the following error:"
 msgid "google.msg.logout"
 msgstr "Google logout successful."
 
-#: ../src/admin/google.php:79
+#: ../src/admin/google.php:77
+msgid "msg.google_added"
+msgstr "Site submission complete."
+
+#: ../src/admin/google.php:80
 msgid "err.google_add_failure"
 msgstr "Site submission failed, Google returned the following error:"
 
-#: ../src/admin/google.php:86
-msgid "msg.google_added"
-msgstr "Site submission and verification complete."
+#: ../src/admin/google.php:100
+msgid "msg.google_verified"
+msgstr "Site is listed, verification complete."
 
-#: ../src/admin/google.php:98
+#: ../src/admin/google.php:103
 msgid "err.google_verify_failure"
 msgstr "Site verification failed, Google returned the following error:"
 
@@ -485,13 +489,13 @@ msgstr "Logo"
 
 #: ../src/admin/partials/options-page.php:420
 #: ../src/admin/partials/options-page.php:540
-#: ../src/admin/partials/postbox.php:49
+#: ../src/admin/partials/postbox.php:53
 msgid "general.choose_img"
 msgstr "Choose image"
 
 #: ../src/admin/partials/options-page.php:423
 #: ../src/admin/partials/options-page.php:543
-#: ../src/admin/partials/postbox.php:52
+#: ../src/admin/partials/postbox.php:56
 msgid "general.reset"
 msgstr "Reset"
 
@@ -778,13 +782,6 @@ msgid "hlp.google.logged_in1"
 msgstr ""
 "Add and verify site: adds this site to the search console and verifies it."
 
-#: ../src/admin/partials/options-page.php:824
-msgid "hlp.google.logged_in2"
-msgstr ""
-"The site verification may fail on the first trial because Google tries to "
-"verify the site before we have time to save our verification token in the "
-"database. Just try again!"
-
 #: ../src/admin/partials/options-page.php:825
 msgid "hlp.google.logged_in3"
 msgstr ""
@@ -820,47 +817,47 @@ msgstr "Reset to defaults"
 msgid "box.description"
 msgstr "Description"
 
-#: ../src/admin/partials/postbox.php:26
+#: ../src/admin/partials/postbox.php:27
 msgid "box.keywords"
 msgstr "Keywords"
 
-#: ../src/admin/partials/postbox.php:30
+#: ../src/admin/partials/postbox.php:32
 msgid "box.keywords_suggestion"
 msgstr "Suggestion:"
 
-#: ../src/admin/partials/postbox.php:32
+#: ../src/admin/partials/postbox.php:35
 msgid "box.text_copy"
 msgstr "(Copy)"
 
-#: ../src/admin/partials/postbox.php:40
+#: ../src/admin/partials/postbox.php:43
 msgid "box.meta_description"
 msgstr "Social media image"
 
-#: ../src/admin/partials/postbox.php:65
+#: ../src/admin/partials/postbox.php:69
 msgid "box.group.robots"
 msgstr "Robots meta tag"
 
-#: ../src/admin/partials/postbox.php:68
+#: ../src/admin/partials/postbox.php:72
 msgid "box.post_robot_noindex"
 msgstr "NOINDEX"
 
-#: ../src/admin/partials/postbox.php:72
+#: ../src/admin/partials/postbox.php:76
 msgid "box.post_robot_nofollow"
 msgstr "NOFOLLOW"
 
-#: ../src/admin/partials/postbox.php:76
+#: ../src/admin/partials/postbox.php:80
 msgid "box.post_robot_noodp"
 msgstr "NOODP"
 
-#: ../src/admin/partials/postbox.php:80
+#: ../src/admin/partials/postbox.php:84
 msgid "box.post_robot_noydir"
 msgstr "NOYDIR"
 
-#: ../src/admin/partials/postbox.php:84
+#: ../src/admin/partials/postbox.php:88
 msgid "box.post_robot_noarchive"
 msgstr "NOARCHIVE"
 
-#: ../src/admin/partials/postbox.php:88
+#: ../src/admin/partials/postbox.php:92
 msgid "box.post_robot_nosnippet"
 msgstr "NOSNIPPET"
 
@@ -985,15 +982,3 @@ msgstr "Example, https://myspace.com/1998called"
 #: ../src/user.php:66
 msgid "user.fields_title"
 msgstr "LTI SEO profile information"
-
-#~ msgid "opt.msg.google_logged_in"
-#~ msgstr "Google authentication OK."
-
-#~ msgid "opt.err.google_auth_failure"
-#~ msgstr "Authentication failed, google returned the following error:"
-
-#~ msgid "btn.google.delete"
-#~ msgstr "Delete site"
-
-#~ msgid "opt.msg.updated"
-#~ msgstr "Plugin options have been updated."
