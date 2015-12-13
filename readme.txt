@@ -1,8 +1,8 @@
 === LTI SEO ===
 Contributors: lti, decarvalho_bruno
-Tags: open-source, SEO, meta, google, twitter, facebook, pinterest, social media, webmaster, search engine optimization, moteur, recherche, json-ld, rich snippets, meta tags, optimisation, schema.org, open graph, réseaux, sociaux, robots
+Tags: SEO, meta, google, twitter, facebook, pinterest, social media, webmaster, search engine optimization, moteur, recherche, json-ld, rich snippets, meta tags, optimisation, schema.org, open graph, réseaux, sociaux, robots, admin, plugin
 Requires at least: 4
-Tested up to: 4.2.2
+Tested up to: 4.4
 Stable tag: 0.6.0
 License: GNU General Public License, version 2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -76,7 +76,7 @@ Also, the package can be downloaded manually and unzipped in the /wp-content/plu
 
 When resources have been copied, the plugin can be activated by looking for a "LTI SEO" entry in the plugins page and clicking on **"Activate"**.
 
-Configure the options through Settings->LTI SEO. Note that **by default, no header tags are added to the page**. LTI SEO will only add content that you activate in the LTI SEO options page.
+Configure the options by locating our logo at the bottom of the admin sidebar. Note that **by default, no header tags are added to the page**. LTI SEO will only add content that you activate in the LTI SEO options page.
 
 Clicking on the **"Deactivate"** button will disable the user profile fields and the post editing box information associated with the plugin. The **"Delete"** button will remove any LTI SEO related field in the database.
 

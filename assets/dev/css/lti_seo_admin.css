@@ -116,12 +116,18 @@
         box-shadow: none;
         white-space: pre-wrap;
         vertical-align: middle;
+        text-shadow: none;
     }
 
     #flseo #tab_google .btn-group {
         margin: 20px 0;
         text-align: center;
     }
+
+    #flseo #tab_google .button-primary {
+        text-shadow: none;
+    }
+
 
     #flseo .google_errors {
         clear:both;
