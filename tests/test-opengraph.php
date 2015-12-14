@@ -25,7 +25,6 @@ class OpenGraphTest extends LTI_SEO_UnitTestCase {
 		$this->assertTrue( $out->hasTagWithContent( 'meta', 'property', 'og:type', 'content', 'website' ) );
 		$this->assertTrue( $out->hasTagWithContent( 'meta', 'property', 'og:site_name', 'content',
 			get_bloginfo( 'name' ) ) );
-		$this->assertTrue( $out->hasTag( 'meta', 'property', 'og:title', 'content' ) );
 		$this->assertTrue( $out->hasTagWithContent( 'meta', 'property', 'og:url', 'content', home_url( '/' ) ) );
 		$this->assertTrue( $out->hasTagWithContent( 'meta', 'property', 'og:description', 'content',
 			get_bloginfo( 'description' ) ) );
